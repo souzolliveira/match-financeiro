@@ -1,0 +1,91 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400 normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Medium.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+  font-display: swap;
+  font-weight: bold;
+}
+
+:root {
+  --spacing-tiny: 8px;
+  --spacing-small: 16px;
+  --spacing-base: 24px;
+  --spacing-large: 48px;
+  --spacing-huge: 64px;
+
+  --subtle-radius: 2px;
+  --medium-radius: 4px;
+  --no-radius: 0;
+  --full-radius: 50%;
+
+  --zindex-tab: 1;
+  --zindex-hover: 100;
+  --zindex-header: 1000;
+  --zindex-page: 1000;
+  --zindex-dropdown: 4000;
+  --zindex-modal: 5000;
+  --zindex-modal-btn: 6000;
+  --zindex-loader: 8000;
+  --zindex-notification: 9000;
+  --zindex-tooltip: 9000;
+
+  --subtle-drop-shadow: 0 2px 2px rgba(0, 0, 0, 0.16);
+  --medium-drop-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+  --long-drop-shadow: 0 8px 8px rgba(0, 0, 0, 0.16);
+  --distant-drop-shadow: 0 16px 16px rgba(0, 0, 0, 0.16);
+  --subtle-inner-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
+
+  --color-info: #218bda;
+  --color-success: #00a53a;
+  --color-alert: #f2bd1b;
+  --color-warning: #f27f1b;
+  --color-danger: #eb3c3c;
+}
+
+[data-theme='light'] {
+}
+
+[data-theme='dark'] {
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  outline-color: var(--active-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+}
