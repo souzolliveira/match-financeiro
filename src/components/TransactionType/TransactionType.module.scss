@@ -1,11 +1,11 @@
-.calendar {
+.transactionType {
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 50%;
   transition: 600ms ease-out;
 
-  .calendar__label {
+  .transactionType__label {
     color: var(--gold-darker);
     font-size: 16px;
     font-weight: 500;
@@ -13,10 +13,8 @@
     margin-bottom: var(--spacing-small);
   }
 
-  &.hidden {
-    position: fixed;
-    top: 200%;
-    transition: 600ms ease-out;
+  .transactionType__buttons {
+    display: flex;
   }
 
   &.selected {

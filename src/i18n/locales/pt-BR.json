@@ -3,10 +3,12 @@
   "NAVBAR.TRANSACTIONS": "Transações",
   "NAVBAR.STATS": "Stats",
   "NAVBAR.BUDGET": "Budget",
-  "TRANSACTION.SUBMIT": "Adicionar transação",
+
+  "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
   "CALENDAR.LABEL": "Informe a data:",
   "CATEGORIES.LABEL": "Selecione a categoria:",
   "SUBCATEGORIES.LABEL": "Selecione a subcategoria:",
   "VALUE.LABEL": "Informe o valor:",
-  "OBSERVATION.LABEL": "Alguma observação?"
+  "OBSERVATION.LABEL": "Alguma observação?",
+  "TRANSACTION.SUBMIT": "Adicionar transação"
 }

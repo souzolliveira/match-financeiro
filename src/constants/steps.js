@@ -1,4 +1,5 @@
 const steps = {
+  TYPE: 'TYPE',
   DATE: 'DATE',
   CATEGORY: 'CATEGORY',
   SUBCATEGORY: 'SUBCATEGORY',
