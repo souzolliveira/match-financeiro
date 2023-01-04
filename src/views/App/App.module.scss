@@ -1,3 +1,5 @@
 .app {
-  height: 100vh
+  height: var(--app-height);
+  width: 360px;
+  background-color: var(--gold-lightest);
 }

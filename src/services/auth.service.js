@@ -1,14 +1,15 @@
 import handleResponse from 'helpers/handleResponse';
+
 import api from './conf.service';
 
-function authenticate(username, password, handleError) {
+function signIn({ email, password, handleError }) {
   return api
     .post(
-      '/session',
-      JSON.stringify({
-        username,
+      '/sign-in',
+      {
+        email,
         password,
-      }),
+      },
       {
         headers: { 'Content-Type': 'application/json' },
       }
@@ -18,13 +19,8 @@ function authenticate(username, password, handleError) {
     .catch(handleError);
 }
 
-function logout(sessionGuid, handleError) {
-  return api.delete(`/session/${sessionGuid}`).then(handleResponse).catch(handleError);
-}
-
 const authenticateService = {
-  authenticate,
-  logout,
+  signIn,
 };
 
 export default authenticateService;

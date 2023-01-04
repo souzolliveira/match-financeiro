@@ -7,6 +7,7 @@ import './i18n/i18n';
 
 // Main styles
 import './styles/index.css';
+import './styles/tooltip.css';
 
 // Views
 import App from './views/App/App';

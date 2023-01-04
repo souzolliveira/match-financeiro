@@ -4,6 +4,7 @@ import Close from '../Icons/close.svg';
 import Info from '../Icons/info.svg';
 import Success from '../Icons/success.svg';
 import Warning from '../Icons/warning.svg';
+
 import styles from './Toast.module.scss';
 
 const Toast = ({ id, content, type, timeout, removeToast }) => {

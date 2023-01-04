@@ -1,0 +1,35 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  transition: 600ms ease-out;
+
+  .categories__label {
+    color: var(--gold-darker);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    margin-bottom: var(--spacing-small);
+  }
+
+  .categories__items {
+    display: flex;
+
+    .categories__button {
+      margin-right: var(--spacing-small);
+    }
+  }
+
+  &.hidden {
+    position: fixed;
+    top: 200%;
+    transition: 600ms ease-out;
+  }
+
+  &.selected {
+    position: fixed;
+    top: -200%;
+    transition: 600ms ease-in;
+  }
+}

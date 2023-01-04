@@ -2,14 +2,21 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { AuthProvider } from 'hooks/useAuth';
-import { NotificationProvider } from 'hooks/useNotification';
 import useLocale from 'hooks/useLocale';
+import { NotificationProvider } from 'hooks/useNotification';
 import useTheme from 'hooks/useTheme';
 
-import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
+import Budget from 'views/Budget/Budget';
+import Home from 'views/Home/Home';
 import Login from 'views/Login/Login';
-import NoConnection from 'views/NoConnection/NoConnection';
 import Register from 'views/Register/Register';
+import Stats from 'views/Stats/Stats';
+import Transactions from 'views/Transactions/Transactions';
+
+import Navbar from 'components/Navbar/Navbar';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
+
+import styles from './App.module.scss';
 
 const App = () => {
   useLocale();
@@ -32,13 +39,19 @@ const App = () => {
     <Router basename='/'>
       <NotificationProvider>
         <AuthProvider>
-          <Routes>
-            <Route exact path='/' element={<PrivateRoute />}>
-              <Route exact path='/' element={<NoConnection />} />
-            </Route>
-            <Route exact path='/register' element={<Register />} />
-            <Route exact path='/login' element={<Login />} />
-          </Routes>
+          <Navbar />
+          <div className={styles.app}>
+            <Routes>
+              <Route exact path='/' element={<PrivateRoute />}>
+                <Route exact path='/' element={<Home />} />
+                <Route exact path='/transactions' element={<Transactions />} />
+                <Route exact path='/stats' element={<Stats />} />
+                <Route exact path='/budget' element={<Budget />} />
+              </Route>
+              <Route exact path='/register' element={<Register />} />
+              <Route exact path='/login' element={<Login />} />
+            </Routes>
+          </div>
         </AuthProvider>
       </NotificationProvider>
     </Router>

@@ -1,15 +1,16 @@
 import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
+import useNetwork from 'hooks/useNetwork';
+import { useNotification } from 'hooks/useNotification';
 import authenticateService from 'services/auth.service';
 import api from 'services/conf.service';
 
-import useNetwork from 'hooks/useNetwork';
-import { useNotification } from 'hooks/useNotification';
-
 export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const { addToast } = useNotification();
   const { t } = useTranslation();
   const [data, setData] = useState(() => {
@@ -56,31 +57,36 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  const signOut = useCallback(() => {
-    setIsSigningOut(true);
-    authenticateService
-      .logout(data?.sessionGuid, handleError)
-      .then(() => {
-        localStorage.removeItem('@match-financeiro:session');
-        setData(null);
-      })
-      .catch(error => {
-        throw error;
-      })
-      .finally(() => {
-        setIsSigningOut(false);
-      });
-  }, [data, handleError]);
+  // const signOut = useCallback(() => {
+  //   setIsSigningOut(true);
+  //   authenticateService
+  //     .signut(data?.sessionGuid, handleError)
+  //     .then(() => {
+  //       localStorage.removeItem('@match-financeiro:session');
+  //       setData(null);
+  //     })
+  //     .catch(error => {
+  //       throw error;
+  //     })
+  //     .finally(() => {
+  //       setIsSigningOut(false);
+  //     });
+  // }, [data, handleError]);
 
   const signIn = useCallback(
-    async ({ username, password }) => {
+    async ({ email, password }) => {
       try {
         setIsSigningIn(true);
-        const response = await authenticateService.authenticate(username?.toLowerCase(), password, handleError);
+        const response = await authenticateService.signIn({
+          email: email?.toLowerCase(),
+          password,
+          handleError,
+        });
         const sessionGuid = response?.session_guid;
         if (sessionGuid) {
           localStorage.setItem('@match-financeiro:session', JSON.stringify(response));
           api.defaults.headers.session_guid = sessionGuid;
+          navigate('/');
         }
         setData({ sessionGuid });
         setIsSigningIn(false);
@@ -92,14 +98,12 @@ export const AuthProvider = ({ children }) => {
         });
       }
     },
-    [addToast, handleError, t]
+    [addToast, handleError, navigate, t]
   );
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ session: data, signIn, signOut, isSigningIn, isSigningOut, handleError }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ session: data, signIn, isSigningIn, isSigningOut, handleError }}>{children}</AuthContext.Provider>
   );
 };
 

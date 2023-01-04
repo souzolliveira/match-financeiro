@@ -1,0 +1,34 @@
+.input {
+  direction: var(--direction);
+  color: var(--primary-color);
+  background: var(--input-bg);
+  border-radius: var(--subtle-radius);
+  box-shadow: var(--subtle-inner-shadow);
+  border: var(--input-border);
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+  padding: var(--spacing-tiny);
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: var(--input-border-hover);
+  }
+
+  &:disabled {
+    cursor: no-drop;
+  }
+}
+
+.sm {
+  width: 80px;
+}
+
+.md {
+  width: 180px;
+}
+
+.lg {
+  width: 320px;
+}

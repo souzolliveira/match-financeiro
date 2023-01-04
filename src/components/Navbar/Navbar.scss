@@ -1,0 +1,35 @@
+.navbar {
+  align-items: center;
+  background-color: var(--gold);
+  bottom: 0;
+  display: flex;
+  height: var(--navbar-height);
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  width: 100%;
+
+  .navbar__navlink {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 21px;
+    padding: 0 var(--spacing-base);
+
+    &.navbar__navlink__active {
+      color: red;
+    }
+
+    &.active {
+      color: red;
+    }
+
+    .active {
+      color: red;
+    }
+  }
+
+  &.active {
+    color: red;
+  }
+}
