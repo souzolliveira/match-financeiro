@@ -11,7 +11,7 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
   const { t } = useTranslation();
   const { hidden } = useHiddenStep({ target: steps.VALUE, step });
 
-  const [intermediateValue, setIntermediateValue] = useState(0);
+  const [intermediateValue, setIntermediateValue] = useState('');
 
   const handleChange = e => {
     setIntermediateValue(e.target.value);
