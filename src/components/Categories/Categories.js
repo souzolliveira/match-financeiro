@@ -24,7 +24,13 @@ const Categories = ({ categories, selectedCategory, setSelectedCategory, step, s
       <div className={styles.categories__items}>
         {categories.map((item, index) => {
           return (
-            <Button key={index} size='lg' className={styles.categories__button} onClick={() => handleChange(item.category_name)}>
+            <Button
+              key={index}
+              type='button'
+              size='lg'
+              className={styles.categories__button}
+              onClick={() => handleChange(item.category_name)}
+            >
               {item.category_name}
             </Button>
           );

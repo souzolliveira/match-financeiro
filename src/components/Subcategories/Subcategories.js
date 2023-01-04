@@ -24,7 +24,13 @@ const Subcategories = ({ subcategories, selectedSubcategory, setSelectedSubcateg
       <div className={styles.subcategories__items}>
         {subcategories.map((item, index) => {
           return (
-            <Button key={index} size='lg' className={styles.subcategories__button} onClick={() => handleChange(item.subcategory_name)}>
+            <Button
+              key={index}
+              type='button'
+              size='lg'
+              className={styles.subcategories__button}
+              onClick={() => handleChange(item.subcategory_name)}
+            >
               {item.subcategory_name}
             </Button>
           );
