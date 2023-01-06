@@ -1,34 +1,57 @@
 .transaction {
+  align-items: center;
   display: flex;
+  justify-content: space-between;
   padding: var(--spacing-small) var(--spacing-base);
   width: 100%;
 
   .transaction__type {
     align-items: center;
+    background-color: var(--gold-lightest);
+    border-radius: var(--full-radius);
     display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
   }
 
   .transaction__infos {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: calc(100% - 40px - var(--spacing-small));
 
     .transaction__header {
-      display: flex;
+      color: var(--gold-darkest);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-md);
+      margin-bottom: var(--spacing-tiny);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
     }
 
     .transaction__main {
+      color: var(--gold-darker);
       display: flex;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-simple);
       justify-content: space-between;
       width: 100%;
     }
   }
 
   &:nth-of-type(odd) {
-    background-color: red;
+    background-color: var(--gold-light);
   }
 
   &:nth-of-type(even) {
-    background-color: blue;
+    background-color: var(--gold-lighter);
+  }
+
+  &:hover {
+    background-color: var(--gold);
   }
 }
