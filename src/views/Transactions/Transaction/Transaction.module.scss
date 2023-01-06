@@ -1,0 +1,34 @@
+.transaction {
+  display: flex;
+  padding: var(--spacing-small) var(--spacing-base);
+  width: 100%;
+
+  .transaction__type {
+    align-items: center;
+    display: flex;
+  }
+
+  .transaction__infos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .transaction__header {
+      display: flex;
+    }
+
+    .transaction__main {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  &:nth-of-type(odd) {
+    background-color: red;
+  }
+
+  &:nth-of-type(even) {
+    background-color: blue;
+  }
+}
