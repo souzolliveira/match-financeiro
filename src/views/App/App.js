@@ -39,8 +39,8 @@ const App = () => {
     <Router basename='/'>
       <NotificationProvider>
         <AuthProvider>
-          <Navbar />
           <div className={styles.app}>
+            <Navbar />
             <Routes>
               <Route exact path='/' element={<PrivateRoute />}>
                 <Route exact path='/' element={<Home />} />
