@@ -76,7 +76,6 @@
 }
 
 body {
-  align-items: center;
   background-color: var(--gold-lightest);
   display: flex;
   flex-direction: column;
