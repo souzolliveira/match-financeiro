@@ -26,6 +26,23 @@
   --spacing-large: 48px;
   --spacing-huge: 64px;
 
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 19px;
+
+  --font-weight-thin: 300;
+  --font-weight-normal: normal;
+  --font-weight-semibold: 700;
+  --font-weight-bold: 900;
+
+  --line-height-simple: 1;
+  --line-height-xs: 1.125;
+  --line-height-sm: 1.2;
+  --line-height-md: 1.333;
+  --line-height-lg: 1.5;
+  --line-height-gold: 1.618;
+
   --subtle-radius: 2px;
   --medium-radius: 4px;
   --no-radius: 0;
@@ -79,6 +96,7 @@ body {
   background-color: var(--gold-lightest);
   display: flex;
   flex-direction: column;
+  font-family: 'Roboto';
   justify-content: center;
   height: var(--app-height);
   margin: 0;
