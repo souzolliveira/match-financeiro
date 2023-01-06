@@ -33,10 +33,10 @@ function createTransaction({
 }
 
 function listTransactions({ handleError }) {
-  return (api.get(`/transaction`),
-  {
-    headers: authHeader(),
-  })
+  return api
+    .get(`/transactions`, {
+      headers: authHeader(),
+    })
     .then(handleResponse)
     .then(data => data.data)
     .catch(handleError);
