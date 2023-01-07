@@ -20,12 +20,15 @@
 }
 
 :root {
+  --spacing-nano: 4px;
   --spacing-tiny: 8px;
   --spacing-small: 16px;
   --spacing-base: 24px;
   --spacing-large: 48px;
   --spacing-huge: 64px;
 
+  --font-size-xxxs: 8px;
+  --font-size-xxs: 10px;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
@@ -45,6 +48,7 @@
 
   --subtle-radius: 2px;
   --medium-radius: 4px;
+  --large-radius: 8px;
   --no-radius: 0;
   --full-radius: 50%;
 
@@ -88,7 +92,7 @@
 }
 
 :root {
-  --navbar-height: 60px;
+  --navbar-height: var(--spacing-huge);
   --app-height: calc(100vh - var(--navbar-height));
 }
 

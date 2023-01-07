@@ -1,31 +1,55 @@
 .navbar {
-  align-items: center;
   background-color: var(--gold);
   bottom: 0;
   display: flex;
   height: var(--navbar-height);
-  justify-content: center;
+  justify-content: space-around;
   left: 0;
   position: fixed;
   width: 100%;
 
   .navbar__navlink {
-    color: green;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 21px;
-    padding: 0 var(--spacing-base);
+    align-items: center;
+    border-radius: 0 0 var(--large-radius) var(--large-radius);
+    color: white;
+    display: flex;
+    fill: white;
+    flex-direction: column;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
+    height: fit-content;
+    justify-content: center;
+    line-height: var(--line-height-simple);
+    min-width: calc(30% - var(--spacing-small));
+    padding: var(--spacing-tiny) var(--spacing-base);
+    position: relative;
 
-    &.navbar__navlink__active {
-      color: red;
+    :first-child {
+      margin-bottom: var(--spacing-nano);
+    }
+
+    & > svg > path {
+      fill: white;
     }
 
     &.active {
-      color: red;
-    }
+      background-color: var(--gold-lightest);
+      box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8), inset 2px 0px 4px rgba(0, 0, 0, 0.2);
+      color: var(--color-highlight);
 
-    .active {
-      color: red;
+      & > svg > path {
+        fill: var(--color-highlight);
+      }
+
+      &::after {
+        background-color: var(--gold-lightest);
+        content: '';
+        height: var(--spacing-tiny);
+        position: absolute;
+        top: 0;
+        left: var(--spacing-nano);
+        width: calc(100% - 12px);
+      }
     }
   }
 
