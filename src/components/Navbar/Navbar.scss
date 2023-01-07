@@ -10,20 +10,17 @@
 
   .navbar__navlink {
     align-items: center;
-    border-radius: 0 0 var(--large-radius) var(--large-radius);
-    box-shadow: -4px -2px 4px rgba(255, 255, 255, 0.4), 4px 4px 4px rgba(0, 0, 0, 0.2);
+    border-bottom: 4px solid transparent;
     color: white;
     display: flex;
     fill: white;
     flex-direction: column;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-normal);
-    height: fit-content;
+    height: 100%;
     justify-content: center;
     line-height: var(--line-height-simple);
-    min-width: calc(30% - var(--spacing-small));
-    padding: var(--spacing-tiny) var(--spacing-base);
-    position: relative;
+    width: 100%;
 
     :first-child {
       margin-bottom: var(--spacing-nano);
@@ -35,31 +32,11 @@
 
     &.active {
       background-color: var(--gold-lightest);
-      box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.8), inset 2px 0px 4px rgba(0, 0, 0, 0.2);
+      border-top: 4px solid var(--color-highlight);
       color: var(--color-highlight);
 
       & > svg > path {
         fill: var(--color-highlight);
-      }
-
-      &::before {
-        background-color: var(--gold-lightest);
-        content: '';
-        height: var(--spacing-tiny);
-        position: absolute;
-        top: calc(-1 * var(--spacing-tiny));
-        left: 0;
-        width: 100%;
-      }
-
-      &::after {
-        background-color: var(--gold-lightest);
-        content: '';
-        height: var(--spacing-tiny);
-        position: absolute;
-        top: calc(-1 * var(--spacing-nano));
-        left: var(--spacing-nano);
-        width: calc(100% - 12px);
       }
     }
   }
