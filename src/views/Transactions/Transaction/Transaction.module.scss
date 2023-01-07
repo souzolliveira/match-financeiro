@@ -1,5 +1,6 @@
 .transaction {
   align-items: center;
+  box-shadow: var(--subtle-drop-shadow);
   display: flex;
   justify-content: space-between;
   padding: var(--spacing-small) var(--spacing-base);
