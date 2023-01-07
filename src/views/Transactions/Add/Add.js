@@ -29,6 +29,8 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
   const [transactionValue, setTransactionValue] = useState(0);
   const [transactionObservation, setTransactionObservation] = useState('');
 
+  const [showForms, setShowForms] = useState(false);
+
   const fetchCategories = async () => {
     await categoryService
       .listCategory({ transactionType, handleError })
@@ -80,49 +82,62 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
       .catch()
       .finally(() => {
         fetchTransactions();
-        setIsAddTransactionFormOpened(false);
-        setTransactionType('');
-        setStep(steps.TYPE);
-        setSelectedCategory('');
-        setSelectedSubcategory('');
-        setTransactionDate('');
-        setTransactionValue('');
-        setTransactionObservation('');
+        setShowForms(false);
+        setTimeout(() => {
+          setIsAddTransactionFormOpened(false);
+          setTransactionType('');
+          setStep(steps.TYPE);
+          setSelectedCategory('');
+          setSelectedSubcategory('');
+          setTransactionDate('');
+          setTransactionValue('');
+          setTransactionObservation('');
+        }, [100]);
       });
   };
 
+  useEffect(() => {
+    if (showForms)
+      setTimeout(() => {
+        setIsAddTransactionFormOpened(true);
+      }, [200]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showForms]);
+
   return (
     <>
-      <form className={`${styles.add} ${isAddTransactionFormOpened ? '' : styles.hidden}`} onSubmit={e => handleSubmit(e)}>
-        <TransactionType transactionType={transactionType} setTransactionType={setTransactionType} setStep={setStep} />
-        <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} step={step} setStep={setStep} />
-        <Categories
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          step={step}
-          setStep={setStep}
-        />
-        <Subcategories
-          subcategories={subcategories}
-          selectedSubcategory={selectedSubcategory}
-          setSelectedSubcategory={setSelectedSubcategory}
-          step={step}
-          setStep={setStep}
-        />
-        <Value transactionValue={transactionValue} setTransactionValue={setTransactionValue} step={step} setStep={setStep} />
-        <Observation
-          transactionObservation={transactionObservation}
-          setTransactionObservation={setTransactionObservation}
-          step={step}
-          setStep={setStep}
-        />
-        <Confirm step={step} />
-      </form>
+      {showForms && (
+        <form className={`${styles.add} ${isAddTransactionFormOpened ? '' : styles.hidden}`} onSubmit={e => handleSubmit(e)}>
+          <TransactionType transactionType={transactionType} setTransactionType={setTransactionType} setStep={setStep} />
+          <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} step={step} setStep={setStep} />
+          <Categories
+            categories={categories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            step={step}
+            setStep={setStep}
+          />
+          <Subcategories
+            subcategories={subcategories}
+            selectedSubcategory={selectedSubcategory}
+            setSelectedSubcategory={setSelectedSubcategory}
+            step={step}
+            setStep={setStep}
+          />
+          <Value transactionValue={transactionValue} setTransactionValue={setTransactionValue} step={step} setStep={setStep} />
+          <Observation
+            transactionObservation={transactionObservation}
+            setTransactionObservation={setTransactionObservation}
+            step={step}
+            setStep={setStep}
+          />
+          <Confirm step={step} />
+        </form>
+      )}
       <button
         type='button'
         className={`${styles.add__button} ${isAddTransactionFormOpened ? styles.add__button__isopened : ''}`}
-        onClick={() => setIsAddTransactionFormOpened(true)}
+        onClick={() => setShowForms(true)}
       >
         +
       </button>
