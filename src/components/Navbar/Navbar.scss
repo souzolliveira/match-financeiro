@@ -11,6 +11,7 @@
   .navbar__navlink {
     align-items: center;
     border-radius: 0 0 var(--large-radius) var(--large-radius);
+    box-shadow: -4px -2px 4px rgba(255, 255, 255, 0.4), 4px 4px 4px rgba(0, 0, 0, 0.2);
     color: white;
     display: flex;
     fill: white;
@@ -41,19 +42,25 @@
         fill: var(--color-highlight);
       }
 
+      &::before {
+        background-color: var(--gold-lightest);
+        content: '';
+        height: var(--spacing-tiny);
+        position: absolute;
+        top: calc(-1 * var(--spacing-tiny));
+        left: 0;
+        width: 100%;
+      }
+
       &::after {
         background-color: var(--gold-lightest);
         content: '';
         height: var(--spacing-tiny);
         position: absolute;
-        top: 0;
+        top: calc(-1 * var(--spacing-nano));
         left: var(--spacing-nano);
         width: calc(100% - 12px);
       }
     }
-  }
-
-  &.active {
-    color: red;
   }
 }
