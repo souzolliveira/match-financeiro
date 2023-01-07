@@ -16,7 +16,7 @@ import Value from 'components/Value/Value';
 
 import styles from './Add.module.scss';
 
-const Add = () => {
+const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchTransactions }) => {
   const { handleError } = useAuth();
 
   const [transactionType, setTransactionType] = useState('');
@@ -78,35 +78,55 @@ const Add = () => {
         console.log(data);
       })
       .catch()
-      .finally();
+      .finally(() => {
+        fetchTransactions();
+        setIsAddTransactionFormOpened(false);
+        setTransactionType('');
+        setStep(steps.TYPE);
+        setSelectedCategory('');
+        setSelectedSubcategory('');
+        setTransactionDate('');
+        setTransactionValue('');
+        setTransactionObservation('');
+      });
   };
+
   return (
-    <form className={styles.transactions} onSubmit={e => handleSubmit(e)}>
-      <TransactionType transactionType={transactionType} setTransactionType={setTransactionType} setStep={setStep} />
-      <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} step={step} setStep={setStep} />
-      <Categories
-        categories={categories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        step={step}
-        setStep={setStep}
-      />
-      <Subcategories
-        subcategories={subcategories}
-        selectedSubcategory={selectedSubcategory}
-        setSelectedSubcategory={setSelectedSubcategory}
-        step={step}
-        setStep={setStep}
-      />
-      <Value transactionValue={transactionValue} setTransactionValue={setTransactionValue} step={step} setStep={setStep} />
-      <Observation
-        transactionObservation={transactionObservation}
-        setTransactionObservation={setTransactionObservation}
-        step={step}
-        setStep={setStep}
-      />
-      <Confirm step={step} />
-    </form>
+    <>
+      <form className={`${styles.add} ${isAddTransactionFormOpened ? '' : styles.hidden}`} onSubmit={e => handleSubmit(e)}>
+        <TransactionType transactionType={transactionType} setTransactionType={setTransactionType} setStep={setStep} />
+        <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} step={step} setStep={setStep} />
+        <Categories
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          step={step}
+          setStep={setStep}
+        />
+        <Subcategories
+          subcategories={subcategories}
+          selectedSubcategory={selectedSubcategory}
+          setSelectedSubcategory={setSelectedSubcategory}
+          step={step}
+          setStep={setStep}
+        />
+        <Value transactionValue={transactionValue} setTransactionValue={setTransactionValue} step={step} setStep={setStep} />
+        <Observation
+          transactionObservation={transactionObservation}
+          setTransactionObservation={setTransactionObservation}
+          step={step}
+          setStep={setStep}
+        />
+        <Confirm step={step} />
+      </form>
+      <button
+        type='button'
+        className={`${styles.add__button} ${isAddTransactionFormOpened ? styles.add__button__isopened : ''}`}
+        onClick={() => setIsAddTransactionFormOpened(true)}
+      >
+        +
+      </button>
+    </>
   );
 };
 

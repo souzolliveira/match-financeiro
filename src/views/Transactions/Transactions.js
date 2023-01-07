@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from 'hooks/useAuth';
 import transactionService from 'services/transaction.service';
 
+import Add from './Add/Add';
 import Transaction from './Transaction/Transaction';
 
 import styles from './Transactions.module.scss';
@@ -11,6 +12,8 @@ const Transactions = () => {
   const { handleError } = useAuth();
 
   const [transactions, setTransactions] = useState([]);
+
+  const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
 
   const fetchTransactions = async () => {
     await transactionService
@@ -38,6 +41,11 @@ const Transactions = () => {
           );
         })}
       </ul>
+      <Add
+        isAddTransactionFormOpened={isAddTransactionFormOpened}
+        setIsAddTransactionFormOpened={setIsAddTransactionFormOpened}
+        fetchTransactions={fetchTransactions}
+      />
     </div>
   );
 };
