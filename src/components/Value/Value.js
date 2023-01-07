@@ -18,6 +18,7 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
   };
 
   const handleApply = value => {
+    setIntermediateValue('');
     setTransactionValue(value);
     setStep(steps.OBSERVATION);
   };
