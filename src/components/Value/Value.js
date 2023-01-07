@@ -21,12 +21,14 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
     setIntermediateValue('');
     setTransactionValue(value);
     setStep(steps.OBSERVATION);
+    const valueInput = document.getElementById('transaction-observation');
+    if (valueInput) valueInput.focus();
   };
 
   return (
     <div className={`${styles.value} ${hidden ? styles.hidden : ''} ${transactionValue ? styles.selected : ''}`}>
       <span className={styles.value__label}>{t('VALUE.LABEL')}</span>
-      <input type='number' name='transaction-value' value={intermediateValue} onChange={e => handleChange(e)} />
+      <input id='transaction-value' name='transaction-value' type='number' value={intermediateValue} onChange={e => handleChange(e)} />
       <button type='button' onClick={() => handleApply(intermediateValue)}>
         &gt;
       </button>

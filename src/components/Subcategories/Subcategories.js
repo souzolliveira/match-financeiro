@@ -16,6 +16,8 @@ const Subcategories = ({ subcategories, selectedSubcategory, setSelectedSubcateg
   const handleChange = subcategory => {
     setSelectedSubcategory(subcategory);
     setStep(steps.VALUE);
+    const valueInput = document.getElementById('transaction-value');
+    if (valueInput) valueInput.focus();
   };
 
   return (

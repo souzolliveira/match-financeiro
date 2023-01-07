@@ -26,7 +26,13 @@ const Observation = ({ transactionObservation, setTransactionObservation, step, 
   return (
     <div className={`${styles.observation} ${hidden ? styles.hidden : ''} ${transactionObservation ? styles.selected : ''}`}>
       <span className={styles.observation__label}>{t('OBSERVATION.LABEL')}</span>
-      <input type='text' name='transaction-observation' value={intermediateValue} onChange={e => handleChange(e)} />
+      <input
+        id='transaction-observation'
+        name='transaction-observation'
+        type='text'
+        value={intermediateValue}
+        onChange={e => handleChange(e)}
+      />
       <button type='button' onClick={() => handleApply(intermediateValue)}>
         &gt;
       </button>
