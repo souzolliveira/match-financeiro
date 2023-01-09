@@ -22,10 +22,10 @@ const TransactionType = ({ transactionType, setTransactionType, setStep }) => {
       <span className={styles.transactionType__label}>{t('TRANSACTION_TYPE.LABEL')}</span>
       <div className={styles.transactionType__buttons}>
         <Button type='button' size='lg' kind='secondary' onClick={() => handleChange(transactionTypes.INCOME)}>
-          {transactionTypes.INCOME}
+          {t(`TRANSACTION_TYPE.${transactionTypes.INCOME}`)}
         </Button>
         <Button type='button' size='lg' kind='secondary' onClick={() => handleChange(transactionTypes.EXPENSE)}>
-          {transactionTypes.EXPENSE}
+          {t(`TRANSACTION_TYPE.${transactionTypes.EXPENSE}`)}
         </Button>
       </div>
     </div>
