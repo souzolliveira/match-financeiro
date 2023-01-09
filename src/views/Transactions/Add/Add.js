@@ -6,9 +6,11 @@ import categoryService from 'services/category.service';
 import subcategoryService from 'services/subcategory.service';
 import transactionService from 'services/transaction.service';
 
+import Button from 'components/Button/Button';
 import Calendar from 'components/Calendar/Calendar';
 import Categories from 'components/Categories/Categories';
 import Confirm from 'components/Confirm/Confirm';
+import Icon from 'components/Icon/Icon';
 import Observation from 'components/Observation/Observation';
 import Subcategories from 'components/Subcategories/Subcategories';
 import TransactionType from 'components/TransactionType/TransactionType';
@@ -65,6 +67,17 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transactionType, selectedCategory]);
 
+  const cleanForms = () => {
+    setIsAddTransactionFormOpened(false);
+    setTransactionType('');
+    setStep(steps.TYPE);
+    setSelectedCategory('');
+    setSelectedSubcategory('');
+    setTransactionDate('');
+    setTransactionValue('');
+    setTransactionObservation('');
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     await transactionService
@@ -84,14 +97,7 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
         fetchTransactions();
         setShowForms(false);
         setTimeout(() => {
-          setIsAddTransactionFormOpened(false);
-          setTransactionType('');
-          setStep(steps.TYPE);
-          setSelectedCategory('');
-          setSelectedSubcategory('');
-          setTransactionDate('');
-          setTransactionValue('');
-          setTransactionObservation('');
+          cleanForms();
         }, [100]);
       });
   };
@@ -106,6 +112,19 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
 
   return (
     <>
+      {showForms && (
+        <Button
+          type='button'
+          kind='outline'
+          className={`${styles.add__close} ${isAddTransactionFormOpened ? '' : styles.hidden}`}
+          onClick={() => {
+            setShowForms(false);
+            cleanForms();
+          }}
+        >
+          <Icon name='close' width={24} height={24} fill='var(--gold-darkest)' />
+        </Button>
+      )}
       {showForms && (
         <form className={`${styles.add} ${isAddTransactionFormOpened ? '' : styles.hidden}`} onSubmit={e => handleSubmit(e)}>
           <TransactionType transactionType={transactionType} setTransactionType={setTransactionType} setStep={setStep} />
@@ -134,13 +153,14 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
           <Confirm step={step} />
         </form>
       )}
-      <button
+      <Button
         type='button'
+        kind='primary'
         className={`${styles.add__button} ${isAddTransactionFormOpened ? styles.add__button__isopened : ''}`}
         onClick={() => setShowForms(true)}
       >
-        +
-      </button>
+        <Icon name='plus' width={24} height={24} fill='var(--gold-lightest)' />
+      </Button>
     </>
   );
 };
