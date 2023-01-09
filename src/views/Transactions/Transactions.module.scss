@@ -1,9 +1,11 @@
 .transactions {
   height: 100%;
+  padding: var(--spacing-base);
   position: relative;
   width: 100%;
 
   .transactions__list {
+    border-radius: var(--medium-radius);
     display: flex;
     flex-direction: column;
     height: 100%;
