@@ -15,6 +15,7 @@
 
   .transactionType__buttons {
     display: flex;
+    gap: var(--spacing-small);
   }
 
   &.selected {

@@ -30,6 +30,7 @@ const Subcategories = ({ subcategories, selectedSubcategory, setSelectedSubcateg
               key={index}
               type='button'
               size='lg'
+              kind='secondary'
               className={styles.subcategories__button}
               onClick={() => handleChange(item.subcategory_name)}
             >

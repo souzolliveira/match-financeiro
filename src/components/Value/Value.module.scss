@@ -13,6 +13,15 @@
     margin-bottom: var(--spacing-small);
   }
 
+  .value__inputcontainer {
+    display: flex;
+    gap: var(--spacing-small);
+
+    & > button {
+      width: 36px;
+    }
+  }
+
   &.hidden {
     position: fixed;
     top: 200%;

@@ -28,6 +28,7 @@ const Categories = ({ categories, selectedCategory, setSelectedCategory, step, s
               key={index}
               type='button'
               size='lg'
+              kind='secondary'
               className={styles.categories__button}
               onClick={() => handleChange(item.category_name)}
             >

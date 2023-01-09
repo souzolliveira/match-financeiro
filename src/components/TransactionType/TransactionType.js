@@ -20,11 +20,11 @@ const TransactionType = ({ transactionType, setTransactionType, setStep }) => {
   return (
     <div className={`${styles.transactionType} ${transactionType ? styles.selected : ''}`}>
       <span className={styles.transactionType__label}>{t('TRANSACTION_TYPE.LABEL')}</span>
-      <div className={styles.buttons}>
-        <Button type='button' size='lg' onClick={() => handleChange(transactionTypes.INCOME)}>
+      <div className={styles.transactionType__buttons}>
+        <Button type='button' size='lg' kind='secondary' onClick={() => handleChange(transactionTypes.INCOME)}>
           {transactionTypes.INCOME}
         </Button>
-        <Button type='button' size='lg' onClick={() => handleChange(transactionTypes.EXPENSE)}>
+        <Button type='button' size='lg' kind='secondary' onClick={() => handleChange(transactionTypes.EXPENSE)}>
           {transactionTypes.EXPENSE}
         </Button>
       </div>
