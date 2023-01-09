@@ -3,6 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { useAuth } from 'hooks/useAuth';
 
+import Header from 'components/Header/Header';
 import Navbar from 'components/Navbar/Navbar';
 
 const PrivateRoute = () => {
@@ -10,6 +11,7 @@ const PrivateRoute = () => {
 
   return session ? (
     <>
+      <Header />
       <Outlet />
       <Navbar />
     </>

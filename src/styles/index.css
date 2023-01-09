@@ -92,8 +92,9 @@
 }
 
 :root {
+  --header-height: var(--spacing-huge);
   --navbar-height: var(--spacing-huge);
-  --app-height: calc(100vh - var(--navbar-height));
+  --app-height: calc(100vh - 2 * var(--navbar-height));
 }
 
 body {

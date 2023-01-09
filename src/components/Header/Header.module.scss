@@ -1,0 +1,14 @@
+.header {
+  background-color: var(--gold);
+  background-image: url('../../assets//logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-shadow: var(--subtle-drop-shadow);
+  height: var(--header-height);
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: var(--zindex-header);
+}
