@@ -1,13 +1,13 @@
 .input {
-  direction: var(--direction);
-  color: var(--primary-color);
-  background: var(--input-bg);
+  background: var(--gold-light);
+  border: 1px solid var(--gold-darker);
   border-radius: var(--subtle-radius);
   box-shadow: var(--subtle-inner-shadow);
-  border: var(--input-border);
-  font-size: 14px;
-  line-height: 16px;
+  color: var(--gold-darker);
+  font-size: var(--font-size-md);
+  height: 36px;
   letter-spacing: 0.25px;
+  line-height: var(--line-height-xs);
   padding: var(--spacing-tiny);
 
   &:hover,
@@ -19,16 +19,4 @@
   &:disabled {
     cursor: no-drop;
   }
-}
-
-.sm {
-  width: 80px;
-}
-
-.md {
-  width: 180px;
-}
-
-.lg {
-  width: 320px;
 }

@@ -1,16 +1,15 @@
-/* eslint-disable jsx-a11y/no-autofocus */
 import React from 'react';
 
 import styles from './Input.module.scss';
 
 const Input = ({
+  id,
   defaultValue,
   type,
   name,
   value,
   className,
   placeholder,
-  size,
   width,
   maxLength,
   min,
@@ -21,10 +20,10 @@ const Input = ({
   onBlur,
   onKeyUp,
   disabled,
-  autoFocus,
 }) => {
   return (
     <input
+      id={id}
       defaultValue={defaultValue}
       type={type}
       name={name}
@@ -38,10 +37,9 @@ const Input = ({
       onInput={onInput}
       onBlur={onBlur}
       onKeyUp={onKeyUp}
-      className={`${className} ${styles.input} ${size ? styles[size] : ''}`}
+      className={`${className} ${styles.input}`}
       style={width ? { width } : null}
       disabled={disabled}
-      autoFocus={!!autoFocus}
     />
   );
 };
