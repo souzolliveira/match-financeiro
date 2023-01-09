@@ -4,7 +4,13 @@
   "NAVBAR.STATS": "Stats",
   "NAVBAR.BUDGET": "Budget",
 
+  "LOGIN.EMAIL": "Email",
+  "LOGIN.PASSWORD": "Senha",
+  "LOGIN.SUBMIT": "Login",
+
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
+  "TRANSACTION_TYPE.EXPENSE": "Despeza",
+  "TRANSACTION_TYPE.INCOME": "Receita",
   "CALENDAR.LABEL": "Informe a data:",
   "CATEGORIES.LABEL": "Selecione a categoria:",
   "SUBCATEGORIES.LABEL": "Selecione a subcategoria:",
