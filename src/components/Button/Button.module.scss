@@ -1,4 +1,6 @@
 .btn {
+  border-radius: var(--medium-radius);
+  box-shadow: var(--subtle-drop-shadow);
   box-sizing: border-box;
   cursor: pointer;
   text-align: center;
@@ -39,8 +41,6 @@
   &.outline {
     background-color: transparent;
     border: 2px solid var(--gold-dark);
-    border-radius: var(--full-radius);
-    box-shadow: var(--subtle-drop-shadow);
     color: var(--gold);
   }
 }
@@ -51,7 +51,6 @@
   font-size: 12px;
   line-height: 14px;
   letter-spacing: 0.5px;
-  border-radius: 12px;
 }
 
 .btn-md {
@@ -60,7 +59,6 @@
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 1.25px;
-  border-radius: 18px;
 }
 
 .btn-lg {
@@ -69,5 +67,4 @@
   font-size: 18px;
   line-height: 21px;
   letter-spacing: 0.2px;
-  border-radius: 24px;
 }
