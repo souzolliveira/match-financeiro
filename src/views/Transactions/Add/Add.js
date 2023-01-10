@@ -131,10 +131,12 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
           <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} step={step} setStep={setStep} />
           <Categories
             categories={categories}
+            fetchCategories={fetchCategories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
             step={step}
             setStep={setStep}
+            transactionType={transactionType}
           />
           <Subcategories
             subcategories={subcategories}

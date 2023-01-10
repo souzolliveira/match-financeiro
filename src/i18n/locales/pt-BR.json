@@ -13,8 +13,12 @@
   "TRANSACTION_TYPE.INCOME": "Receita",
   "CALENDAR.LABEL": "Informe a data:",
   "CATEGORIES.LABEL": "Selecione a categoria:",
+  "CATEGORIES.CREATE": "Criar categoria",
   "SUBCATEGORIES.LABEL": "Selecione a subcategoria:",
+  "SUBCATEGORIES.CREATE": "Criar subcategoria",
   "VALUE.LABEL": "Informe o valor:",
   "OBSERVATION.LABEL": "Alguma observação?",
-  "TRANSACTION.SUBMIT": "Adicionar transação"
+  "TRANSACTION.SUBMIT": "Adicionar transação",
+
+  "CREATE": "Criar"
 }

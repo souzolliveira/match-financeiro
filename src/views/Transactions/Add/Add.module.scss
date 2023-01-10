@@ -7,6 +7,7 @@
   position: absolute;
   top: 0;
   transition: opacity ease-out 300ms;
+  width: 100%;
   z-index: var(--zindex-modal-content);
 
   &.hidden {
