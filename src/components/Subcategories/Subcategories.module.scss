@@ -1,9 +1,12 @@
 .subcategories {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  justify-content: center;
   position: fixed;
-  top: 50%;
+  top: 0;
   transition: 600ms ease-out;
+  width: calc(100% - 2 * var(--spacing-base));
 
   .subcategories__label {
     color: var(--gold-darker);
@@ -15,21 +18,18 @@
 
   .subcategories__items {
     display: flex;
-
-    .subcategories__button {
-      margin-right: var(--spacing-small);
-    }
+    gap: var(--spacing-small);
   }
 
   &.hidden {
     position: fixed;
-    top: 200%;
+    top: 100%;
     transition: 600ms ease-out;
   }
 
   &.selected {
     position: fixed;
-    top: -200%;
+    top: -100%;
     transition: 600ms ease-in;
   }
 }
