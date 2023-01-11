@@ -89,12 +89,11 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
         transactionValue,
         transactionObservation,
       })
-      .then(data => {
-        console.log(data);
+      .then(() => {
+        fetchTransactions();
       })
       .catch()
       .finally(() => {
-        fetchTransactions();
         setShowForms(false);
         setTimeout(() => {
           cleanForms();
