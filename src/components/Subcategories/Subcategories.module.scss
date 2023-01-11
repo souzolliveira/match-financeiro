@@ -1,10 +1,10 @@
 .subcategories {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 2 * (44px + 24px));
   justify-content: center;
   position: fixed;
-  top: 0;
+  top: calc(44px + 24px);
   transition: 600ms ease-out;
   width: calc(100% - 2 * var(--spacing-base));
 
@@ -18,7 +18,18 @@
 
   .subcategories__items {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--spacing-small);
+
+    .subcategories__button {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+
+      :first-child {
+        margin-right: var(--spacing-tiny);
+      }
+    }
   }
 
   &.hidden {
@@ -31,5 +42,69 @@
     position: fixed;
     top: -100%;
     transition: 600ms ease-in;
+  }
+
+  .subcategories__modal {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-small);
+    width: 100%;
+
+    .subcategories__label {
+      margin-bottom: var(--spacing-nano);
+    }
+
+    .subcategories__input {
+      margin-bottom: var(--spacing-small);
+    }
+
+    .subcategories__costing {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-nano);
+      justify-content: space-around;
+      margin-bottom: var(--spacing-small);
+
+      .subcategories__radiocontainer {
+        align-items: center;
+        display: flex;
+
+        .subcategories__input {
+          height: 0;
+          margin: 0;
+          opacity: 0;
+          visibility: hidden;
+          width: 0;
+        }
+
+        .subcategories__input:checked + .subcategories__radio::before {
+          background: var(--color-success);
+          border: 2px solid var(--color-success);
+        }
+
+        .subcategories__radio {
+          align-items: center;
+          color: var(--gold-darker);
+          cursor: pointer;
+          display: flex;
+          font-size: var(--font-size-lg);
+          font-weight: var(--font-weight-normal);
+          line-height: var(--line-height-xs);
+          margin: 0;
+          margin-left: var(--spacing-tiny);
+        }
+
+        .subcategories__radio::before {
+          display: inline-block;
+          content: '';
+          height: 12px;
+          width: 12px;
+          margin-right: var(--spacing-tiny);
+          border: 2px solid var(--gold-darker);
+          border-radius: var(--full-radius);
+          transition: all 0.25s linear;
+        }
+      }
+    }
   }
 }

@@ -56,9 +56,10 @@
   --zindex-hover: 100;
   --zindex-header: 1000;
   --zindex-page: 1000;
+  --zindex-overlay: 2000;
+  --zindex-overlay-content: 3000;
   --zindex-dropdown: 4000;
   --zindex-modal: 5000;
-  --zindex-modal-content: 6000;
   --zindex-loader: 8000;
   --zindex-notification: 9000;
   --zindex-tooltip: 9000;
@@ -129,7 +130,7 @@ body {
 
 * {
   box-sizing: border-box;
-  outline-color: var(--active-color);
+  outline-color: var(--color-success);
 }
 
 h1,

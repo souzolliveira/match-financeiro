@@ -139,11 +139,14 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
             transactionType={transactionType}
           />
           <Subcategories
+            category={selectedCategory}
+            fetchSubcategories={fetchSubcategories}
             subcategories={subcategories}
             selectedSubcategory={selectedSubcategory}
             setSelectedSubcategory={setSelectedSubcategory}
             step={step}
             setStep={setStep}
+            transactionType={transactionType}
           />
           <Value transactionValue={transactionValue} setTransactionValue={setTransactionValue} step={step} setStep={setStep} />
           <Observation

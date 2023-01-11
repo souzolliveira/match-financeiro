@@ -8,7 +8,7 @@
   top: 0;
   transition: opacity ease-out 300ms;
   width: 100%;
-  z-index: var(--zindex-modal-content);
+  z-index: var(--zindex-overlay-content);
 
   &.hidden {
     opacity: 0;
@@ -30,7 +30,7 @@
   top: var(--spacing-base);
   transition: opacity ease-out 600ms;
   transition-delay: 300ms;
-  z-index: var(--zindex-modal-content);
+  z-index: var(--zindex-overlay-content);
 
   &.hidden {
     opacity: 0;
@@ -54,7 +54,7 @@
   right: var(--spacing-small);
   transition: background-color ease-out 600ms;
   width: var(--spacing-large);
-  z-index: var(--zindex-modal);
+  z-index: var(--zindex-overlay);
 
   &.add__button__isopened {
     background-color: var(--gold-lightest);
