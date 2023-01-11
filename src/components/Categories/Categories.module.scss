@@ -1,10 +1,10 @@
 .categories {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 2 * (44px + 24px));
   justify-content: center;
   position: fixed;
-  top: 0;
+  top: calc(44px + 24px);
   transition: 600ms ease-out;
   width: calc(100% - 2 * var(--spacing-base));
 
@@ -44,11 +44,18 @@
     transition: 600ms ease-in;
   }
 
-  .categories__add {
+  .categories__modal {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-tiny);
     padding: var(--spacing-small);
     width: 100%;
+
+    span {
+      margin-bottom: var(--spacing-nano);
+    }
+
+    input {
+      margin-bottom: var(--spacing-small);
+    }
   }
 }

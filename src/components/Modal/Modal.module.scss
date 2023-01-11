@@ -18,7 +18,7 @@
   }
 
   .modal__card {
-    background: var(--gold);
+    background: var(--gold-lightest);
     border: 1px solid var(--gold-dark);
     border-radius: var(--medium-radius);
     box-sizing: border-box;
@@ -44,7 +44,7 @@
     width: 100%;
 
     .modal__title {
-      color: var(--secondary-color);
+      color: var(--gold-darker);
       font-size: 20px;
       font-weight: 500;
       line-height: 24px;

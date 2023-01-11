@@ -22,7 +22,7 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
   const [categoryName, setCategoryName] = useState('');
 
-  const handleChange = category => {
+  const handleSelectCategory = category => {
     setSelectedCategory(category);
     setCategoryName('');
     setStep(steps.SUBCATEGORY);
@@ -52,7 +52,7 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
               size='lg'
               kind='secondary'
               className={styles.categories__button}
-              onClick={() => handleChange(item.category_name)}
+              onClick={() => handleSelectCategory(item.category_name)}
             >
               {item.category_name}
             </Button>
@@ -65,8 +65,6 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
           className={styles.categories__button}
           onClick={() => {
             setIsAddCategoryModalVisible(true);
-            const valueInput = document.getElementById('new-category-input');
-            if (valueInput) valueInput.focus();
           }}
         >
           <Icon name='plus' width={18} height={18} fill='var(--gold-darker)' />
@@ -81,7 +79,8 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
         visible={isAddCategoryModalVisible}
         width='300px'
       >
-        <div className={styles.categories__add}>
+        <div className={styles.categories__modal}>
+          <span className={styles.categories__label}>{t('CATEGORIES.NAME')}</span>
           <Input id='new-category-input' value={categoryName} onChange={e => setCategoryName(e.target.value)} />
           <Button type='button' size='md' kind='primary' onClick={() => handleCreateCategory()}>
             {t('CREATE')}
