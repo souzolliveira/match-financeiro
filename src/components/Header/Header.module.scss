@@ -1,14 +1,19 @@
 .header {
+  align-items: center;
   background-color: var(--gold);
-  background-image: url('../../assets//logo.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
   box-shadow: var(--subtle-drop-shadow);
+  display: flex;
   height: var(--header-height);
+  justify-content: center;
   left: 0;
+  padding: var(--spacing-small);
   position: fixed;
   top: 0;
   width: 100vw;
   z-index: var(--zindex-header);
+
+  .header__logo {
+    height: 100%;
+    width: auto;
+  }
 }
