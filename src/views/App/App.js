@@ -6,6 +6,7 @@ import useLocale from 'hooks/useLocale';
 import { NotificationProvider } from 'hooks/useNotification';
 import useTheme from 'hooks/useTheme';
 
+import Cover from 'views/Cover/Cover';
 import Home from 'views/Home/Home';
 import Login from 'views/Login/Login';
 import Register from 'views/Register/Register';
@@ -44,8 +45,9 @@ const App = () => {
                 <Route exact path='/transactions' element={<Transactions />} />
                 <Route exact path='/stats' element={<Stats />} />
               </Route>
-              <Route exact path='/register' element={<Register />} />
-              <Route exact path='/login' element={<Login />} />
+              <Route path='/match-financeiro' element={<Cover />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
             </Routes>
           </div>
         </AuthProvider>

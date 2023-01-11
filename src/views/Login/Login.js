@@ -8,6 +8,8 @@ import { useNotification } from 'hooks/useNotification';
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 
+import Logo from 'assets/logo_main.png';
+
 import styles from './Login.module.scss';
 
 const Login = () => {
@@ -32,18 +34,19 @@ const Login = () => {
 
   return (
     <form className={styles.login} onSubmit={e => login(e)}>
+      <img alt='Match Financeiro Logo' src={Logo} className={styles.login__logo} />
       <div className={styles.login__fields}>
         <div className={styles.login__inputgroup}>
-          <span className={styles.login__label}>{t('LOGIN.EMAIL')}</span>
-          <Input name='username' value={email} onChange={e => setEmail(e.target.value)} />
+          <span className={styles.login__label}>{t('EMAIL')}</span>
+          <Input name='email' value={email} onChange={e => setEmail(e.target.value)} />
         </div>
         <div className={styles.login__inputgroup}>
-          <span className={styles.login__label}>{t('LOGIN.PASSWORD')}</span>
+          <span className={styles.login__label}>{t('PASSWORD')}</span>
           <Input type='password' name='password' value={password} onChange={e => setPassword(e.target.value)} />
         </div>
         <div className={styles.login__inputsubmit}>
           <Button type='submit' kind='primary' size='lg' disabled={isSigningIn}>
-            {t('LOGIN.SUBMIT')}
+            {t('LOGIN')}
           </Button>
         </div>
       </div>
