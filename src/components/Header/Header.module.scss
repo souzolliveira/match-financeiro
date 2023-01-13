@@ -4,7 +4,7 @@
   box-shadow: var(--subtle-drop-shadow);
   display: flex;
   height: var(--header-height);
-  justify-content: center;
+  justify-content: space-between;
   left: 0;
   padding: var(--spacing-small);
   position: fixed;
@@ -15,5 +15,12 @@
   .header__logo {
     height: 100%;
     width: auto;
+  }
+
+  .header__logout {
+    align-items: center;
+    display: flex;
+    margin: 0;
+    padding: 0;
   }
 }

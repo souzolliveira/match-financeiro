@@ -57,21 +57,21 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  // const signOut = useCallback(() => {
-  //   setIsSigningOut(true);
-  //   authenticateService
-  //     .signut(data?.sessionGuid, handleError)
-  //     .then(() => {
-  //       localStorage.removeItem('@match-financeiro:session');
-  //       setData(null);
-  //     })
-  //     .catch(error => {
-  //       throw error;
-  //     })
-  //     .finally(() => {
-  //       setIsSigningOut(false);
-  //     });
-  // }, [data, handleError]);
+  const signOut = useCallback(() => {
+    setIsSigningOut(true);
+    authenticateService
+      .signOut({ handleError })
+      .then(() => {
+        localStorage.removeItem('@match-financeiro:session');
+        setData(null);
+      })
+      .catch(error => {
+        throw error;
+      })
+      .finally(() => {
+        setIsSigningOut(false);
+      });
+  }, [handleError]);
 
   const signIn = useCallback(
     async ({ email, password }) => {
@@ -103,7 +103,9 @@ export const AuthProvider = ({ children }) => {
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ session: data, signIn, isSigningIn, isSigningOut, handleError }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ session: data, signIn, isSigningIn, signOut, isSigningOut, handleError }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

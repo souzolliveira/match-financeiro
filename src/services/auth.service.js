@@ -1,3 +1,4 @@
+import authHeader from 'helpers/authHeader';
 import handleResponse from 'helpers/handleResponse';
 
 import api from './conf.service';
@@ -19,8 +20,18 @@ function signIn({ email, password, handleError }) {
     .catch(handleError);
 }
 
+function signOut({ handleError }) {
+  return api
+    .delete('/sign-out', {
+      headers: authHeader(),
+    })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const authenticateService = {
   signIn,
+  signOut,
 };
 
 export default authenticateService;
