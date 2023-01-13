@@ -33,6 +33,9 @@
   --font-size-sm: 14px;
   --font-size-md: 16px;
   --font-size-lg: 19px;
+  --font-size-h1: 48px;
+  --font-size-h2: 36px;
+  --font-size-h3: 24px;
 
   --font-weight-thin: 300;
   --font-weight-normal: normal;
@@ -83,7 +86,7 @@
   --gold: #c3a67a;
   --gold-dark: #887455;
   --gold-darker: #4e4230;
-  --gold-darkest: #13100c;
+  --gold-darkest: rgb(19, 16, 12);
 }
 
 [data-theme='light'] {

@@ -4,11 +4,49 @@
   position: relative;
   width: 100%;
 
+  .transactions__header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-small);
+    width: 100%;
+
+    .transactions__title {
+      color: var(--gold-darker);
+      font-size: var(--font-size-h3);
+      font-weight: var(--font-weight-thin);
+      line-height: var(--line-height-simple);
+    }
+
+    .transactions__count {
+      color: var(--gold-dark);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-simple);
+    }
+  }
+
+  .transactions__empty {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - var(--font-size-h3) - var(--spacing-small));
+    justify-content: center;
+
+    .transactions__emptylabel {
+      color: var(--gold-dark);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-gold);
+      margin-top: var(--spacing-base);
+    }
+  }
+
   .transactions__list {
     border-radius: var(--medium-radius);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100% - var(--font-size-h3) - var(--spacing-small));
     list-style-type: none;
     margin: 0;
     overflow-y: auto;

@@ -9,6 +9,9 @@
   "HAS.ACCOUNT": "Já tem conta?",
   "DO.LOGIN": "Faça login aqui",
 
+  "TRANSACTIONS": "Transações",
+  "TRANSACTIONS.COUNT": "{{count}} transações encontradas",
+  "TRANSACTIONS.EMPTY": "Nenhuma transação encontrada",
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
   "TRANSACTION_TYPE.EXPENSE": "Despesa",
   "TRANSACTION_TYPE.INCOME": "Receita",

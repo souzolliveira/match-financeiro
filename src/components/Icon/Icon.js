@@ -5,6 +5,7 @@ import Close from './Icons/Close';
 import Expense from './Icons/Expense';
 import Home from './Icons/Home';
 import Income from './Icons/Income';
+import List from './Icons/List';
 import Logout from './Icons/Logout';
 import Plus from './Icons/Plus';
 import Stats from './Icons/Stats';
@@ -22,6 +23,8 @@ const Icon = ({ name, width, height, fill, className }) => {
       return <Home fill={fill} width={width} height={height} className={className} />;
     case 'income':
       return <Income fill={fill} width={width} height={height} className={className} />;
+    case 'list':
+      return <List fill={fill} width={width} height={height} className={className} />;
     case 'logout':
       return <Logout fill={fill} width={width} height={height} className={className} />;
     case 'plus':
