@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
@@ -73,10 +74,16 @@ const Register = () => {
           <span className={styles.register__label}>{t('PASSWORD.CONFIRM')}</span>
           <Input type='password' name='confirm-password' value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
         </div>
-        <div className={styles.register__inputsubmit}>
+        <div className={styles.register__submit}>
           <Button type='submit' kind='primary' size='lg'>
             {t('REGISTER')}
           </Button>
+        </div>
+        <div className={styles.register__login}>
+          <span className={styles.register__label}>{t('HAS.ACCOUNT')}</span>
+          <Link to='/login' className={styles.register__loginlink}>
+            {t('DO.LOGIN')}
+          </Link>
         </div>
       </div>
     </form>

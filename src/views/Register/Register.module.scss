@@ -20,6 +20,14 @@
     width: 100%;
   }
 
+  .register__label {
+    color: var(--gold-darker);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    margin-bottom: var(--spacing-nano);
+  }
+
   .register__inputgroup {
     display: flex;
     flex-direction: column;
@@ -27,20 +35,33 @@
     width: 100%;
 
     .register__label {
-      color: var(--gold-darker);
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 19px;
-      margin-bottom: var(--spacing-nano);
+      @extend .register__label;
     }
   }
 
-  .register__inputsubmit {
+  .register__submit {
     margin-top: var(--spacing-tiny);
     width: 100%;
 
     & > button {
       width: 100%;
+    }
+  }
+
+  .register__login {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-tiny);
+    justify-content: center;
+    margin-top: var(--spacing-small);
+
+    .register__label {
+      @extend .register__label;
+    }
+
+    .register__loginlink {
+      @extend .register__label;
+      color: var(--color-success);
     }
   }
 }

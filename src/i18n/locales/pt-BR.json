@@ -6,6 +6,8 @@
 
   "LOGIN": "Login",
   "REGISTER": "Cadastrar",
+  "HAS.ACCOUNT": "Já tem conta?",
+  "DO.LOGIN": "Faça login aqui",
 
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
   "TRANSACTION_TYPE.EXPENSE": "Despesa",
