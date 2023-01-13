@@ -6,9 +6,9 @@ import useLocale from 'hooks/useLocale';
 import { NotificationProvider } from 'hooks/useNotification';
 import useTheme from 'hooks/useTheme';
 
-import Cover from 'views/Cover/Cover';
 import Home from 'views/Home/Home';
 import Login from 'views/Login/Login';
+import NotFound from 'views/NotFound/NotFound';
 import Register from 'views/Register/Register';
 import Stats from 'views/Stats/Stats';
 import Transactions from 'views/Transactions/Transactions';
@@ -45,7 +45,7 @@ const App = () => {
                 <Route exact path='/transactions' element={<Transactions />} />
                 <Route exact path='/stats' element={<Stats />} />
               </Route>
-              <Route path='/match-financeiro' element={<Cover />} />
+              <Route path='*' element={<NotFound />} />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
             </Routes>
