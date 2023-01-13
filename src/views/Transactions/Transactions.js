@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAuth } from 'hooks/useAuth';
+import { useLoader } from 'hooks/useLoader';
+import { useNotification } from 'hooks/useNotification';
 import transactionService from 'services/transaction.service';
 
 import Icon from 'components/Icon/Icon';
@@ -14,20 +16,30 @@ import styles from './Transactions.module.scss';
 
 const Transactions = () => {
   const { t } = useTranslation();
+  const { addToast } = useNotification();
   const { handleError } = useAuth();
+  const { setIsLoading } = useLoader();
 
   const [transactions, setTransactions] = useState([]);
 
   const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
 
   const fetchTransactions = async () => {
+    setIsLoading(true);
     await transactionService
       .listTransactions({ handleError })
       .then(data => {
         setTransactions(data);
       })
-      .catch(() => {})
-      .finally(() => {});
+      .catch(() => {
+        addToast({
+          content: t('TRANSACTIONS.FETCH.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {

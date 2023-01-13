@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { useAuth } from 'hooks/useAuth';
+import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import registerService from 'services/register.service';
 
@@ -18,6 +19,7 @@ const Register = () => {
   const { addToast } = useNotification();
   const { t } = useTranslation();
   const { handleError, signIn } = useAuth();
+  const { setIsLoading } = useLoader();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -29,25 +31,33 @@ const Register = () => {
     e.preventDefault();
     if (!name || !email || !phone || !password || !confirmPassword) {
       addToast({
-        content: '',
+        content: t('REGISTER.WARNING.FIELDS'),
         type: 'warning',
       });
       return;
     }
     if (password !== confirmPassword) {
       addToast({
-        content: '',
+        content: t('REGISTER.WARNING.PASSWORD'),
         type: 'warning',
       });
       return;
     }
+    setIsLoading(true);
     registerService
       .register({ name, email, phone, password, handleError })
       .then(() => {
         signIn({ email, password });
       })
-      .catch()
-      .finally();
+      .catch(() => {
+        addToast({
+          content: t('REGISTER.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

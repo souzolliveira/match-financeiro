@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import steps from 'constants/steps';
 import { useAuth } from 'hooks/useAuth';
 import useHiddenStep from 'hooks/useHiddenStep';
+import { useLoader } from 'hooks/useLoader';
+import { useNotification } from 'hooks/useNotification';
 import categoryService from 'services/category.service';
 
 import Button from 'components/Button/Button';
@@ -16,8 +18,10 @@ import styles from './Categories.module.scss';
 
 const Categories = ({ categories, fetchCategories, selectedCategory, setSelectedCategory, step, setStep, transactionType }) => {
   const { t } = useTranslation();
+  const { addToast } = useNotification();
   const { hidden } = useHiddenStep({ target: steps.CATEGORY, step });
   const { handleError } = useAuth();
+  const { setIsLoading } = useLoader();
 
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
   const [categoryName, setCategoryName] = useState('');
@@ -29,14 +33,21 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
   };
 
   const handleCreateCategory = () => {
+    setIsLoading(true);
     categoryService
       .createCategory({ name: categoryName, transactionType, handleError })
       .then(() => {
         fetchCategories();
       })
-      .catch(() => {})
+      .catch(() => {
+        addToast({
+          content: t('CATEGORIES.CREATE.ERROR'),
+          type: 'danger',
+        });
+      })
       .finally(() => {
         setIsAddCategoryModalVisible(false);
+        setIsLoading(false);
       });
   };
 

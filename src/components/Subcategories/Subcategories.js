@@ -6,6 +6,8 @@ import costingTypes from 'constants/costing';
 import steps from 'constants/steps';
 import { useAuth } from 'hooks/useAuth';
 import useHiddenStep from 'hooks/useHiddenStep';
+import { useLoader } from 'hooks/useLoader';
+import { useNotification } from 'hooks/useNotification';
 import subcategoryService from 'services/subcategory.service';
 
 import Button from 'components/Button/Button';
@@ -27,8 +29,10 @@ const Subcategories = ({
   transactionType,
 }) => {
   const { t } = useTranslation();
+  const { addToast } = useNotification();
   const { hidden } = useHiddenStep({ target: steps.SUBCATEGORY, step });
   const { handleError } = useAuth();
+  const { setIsLoading } = useLoader();
 
   const [isAddSubcategoryModalVisible, setIsAddSubcategoryModalVisible] = useState(false);
   const [subcategoryName, setSubcategoryName] = useState('');
@@ -42,14 +46,21 @@ const Subcategories = ({
   };
 
   const handleCreateSubcategory = () => {
+    setIsLoading(true);
     subcategoryService
       .createSubcategory({ category, costing, name: subcategoryName, transactionType, handleError })
       .then(() => {
         fetchSubcategories();
       })
-      .catch(() => {})
+      .catch(() => {
+        addToast({
+          content: t('SUBCATEGORIES.CREATE.ERROR'),
+          type: 'danger',
+        });
+      })
       .finally(() => {
         setIsAddSubcategoryModalVisible(false);
+        setIsLoading(false);
       });
   };
 

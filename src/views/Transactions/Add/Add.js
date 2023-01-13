@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import steps from 'constants/steps';
 import { useAuth } from 'hooks/useAuth';
+import { useLoader } from 'hooks/useLoader';
+import { useNotification } from 'hooks/useNotification';
 import categoryService from 'services/category.service';
 import subcategoryService from 'services/subcategory.service';
 import transactionService from 'services/transaction.service';
@@ -19,7 +23,10 @@ import Value from 'components/Value/Value';
 import styles from './Add.module.scss';
 
 const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchTransactions }) => {
+  const { t } = useTranslation();
+  const { addToast } = useNotification();
   const { handleError } = useAuth();
+  const { setIsLoading } = useLoader();
 
   const [transactionType, setTransactionType] = useState('');
   const [step, setStep] = useState(steps.TYPE);
@@ -34,13 +41,21 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
   const [showForms, setShowForms] = useState(false);
 
   const fetchCategories = async () => {
+    setIsLoading(true);
     await categoryService
       .listCategory({ transactionType, handleError })
       .then(data => {
         setCategories(data);
       })
-      .catch()
-      .finally();
+      .catch(() => {
+        addToast({
+          content: t('CATEGORIES.FETCH.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -49,6 +64,7 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
   }, [transactionType]);
 
   const fetchSubcategories = async () => {
+    setIsLoading(true);
     await subcategoryService
       .listSubcategory({
         transactionType,
@@ -58,8 +74,15 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
       .then(data => {
         setSubcategories(data);
       })
-      .catch()
-      .finally();
+      .catch(() => {
+        addToast({
+          content: t('SUBCATEGORIES.FETCH.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -80,6 +103,7 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setIsLoading(true);
     await transactionService
       .createTransaction({
         transactionType,
@@ -92,9 +116,15 @@ const Add = ({ isAddTransactionFormOpened, setIsAddTransactionFormOpened, fetchT
       .then(() => {
         fetchTransactions();
       })
-      .catch()
+      .catch(() => {
+        addToast({
+          content: t('TRANSACTIONS.CREATE.ERROR'),
+          type: 'danger',
+        });
+      })
       .finally(() => {
         setShowForms(false);
+        setIsLoading(false);
         setTimeout(() => {
           cleanForms();
         }, [100]);

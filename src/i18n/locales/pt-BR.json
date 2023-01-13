@@ -2,32 +2,49 @@
   "NAVBAR.HOME": "Home",
   "NAVBAR.TRANSACTIONS": "Transações",
   "NAVBAR.STATS": "Stats",
-  "NAVBAR.BUDGET": "Budget",
 
   "LOGIN": "Login",
+  "LOGIN.ERROR": "Erro ao tentar fazer login",
+
   "REGISTER": "Cadastrar",
+  "REGISTER.WARNING.FIELDS": "É necessário preencher todos os campos",
+  "REGISTER.WARNING.PASSWORD": "A senha e sua confirmação estão diferentes",
+  "REGISTER.ERROR": "Erro ao tentar criar conta",
+
   "HAS.ACCOUNT": "Já tem conta?",
   "DO.LOGIN": "Faça login aqui",
 
   "TRANSACTIONS": "Transações",
+  "TRANSACTIONS.FETCH.ERROR": "Erro ao tentar carregar transações",
+  "TRANSACTIONS.CREATE.ERROR": "Erro ao tentar criar transação",
   "TRANSACTIONS.COUNT": "{{count}} transações encontradas",
   "TRANSACTIONS.EMPTY": "Nenhuma transação encontrada",
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
   "TRANSACTION_TYPE.EXPENSE": "Despesa",
   "TRANSACTION_TYPE.INCOME": "Receita",
   "TRANSACTION_TYPE.INVESTIMENT": "Investimento",
+
   "CALENDAR.LABEL": "Informe a data:",
+
+  "CATEGORIES.FETCH.ERROR": "Erro ao tentar carregar categorias",
   "CATEGORIES.LABEL": "Selecione a categoria:",
   "CATEGORIES.CREATE": "Criar categoria",
+  "CATEGORIES.CREATE.ERROR": "Erro ao tentar criar categoria",
   "CATEGORIES.NAME": "Nome da categoria:",
+
+  "SUBCATEGORIES.FETCH.ERROR": "Erro ao tentar carregar subcategorias",
   "SUBCATEGORIES.LABEL": "Selecione a subcategoria:",
   "SUBCATEGORIES.CREATE": "Criar subcategoria",
+  "SUBCATEGORIES.CREATE.ERROR": "Erro ao tentar criar subcategoria",
   "SUBCATEGORIES.NAME": "Nome da subcategoria:",
   "SUBCATEGORIES.COSTING": "Custo da subcategoria:",
   "SUBCATEGORIES.COSTING.FIXED": "Fixo",
   "SUBCATEGORIES.COSTING.VARIABLE": "Variável",
+
   "VALUE.LABEL": "Informe o valor:",
+
   "OBSERVATION.LABEL": "Alguma observação?",
+
   "TRANSACTION.SUBMIT": "Adicionar transação",
 
   "CREATE": "Criar",
