@@ -18,7 +18,7 @@ const PrivateRoute = () => {
       <Navbar />
     </div>
   ) : (
-    <Navigate to='/match-financeiro' />
+    <Navigate to='/login' />
   );
 };
 

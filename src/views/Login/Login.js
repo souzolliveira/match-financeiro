@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +17,7 @@ const Login = () => {
   const { addToast } = useNotification();
   const { t } = useTranslation();
   const { signIn, isSigningIn } = useAuth();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,9 +46,14 @@ const Login = () => {
           <span className={styles.login__label}>{t('PASSWORD')}</span>
           <Input type='password' name='password' value={password} onChange={e => setPassword(e.target.value)} />
         </div>
-        <div className={styles.login__inputsubmit}>
+        <div className={styles.login__submit}>
           <Button type='submit' kind='primary' size='lg' disabled={isSigningIn}>
             {t('LOGIN')}
+          </Button>
+        </div>
+        <div className={styles.login__register}>
+          <Button type='submit' kind='outline' size='lg' onClick={() => navigate('/register')}>
+            {t('REGISTER')}
           </Button>
         </div>
       </div>

@@ -35,7 +35,16 @@
     }
   }
 
-  .login__inputsubmit {
+  .login__submit {
+    margin-top: var(--spacing-tiny);
+    width: 100%;
+
+    & > button {
+      width: 100%;
+    }
+  }
+
+  .login__register {
     margin-top: var(--spacing-tiny);
     width: 100%;
 
