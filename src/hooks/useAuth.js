@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
+import { useLoader } from 'hooks/useLoader';
 import useNetwork from 'hooks/useNetwork';
 import { useNotification } from 'hooks/useNotification';
 import authenticateService from 'services/auth.service';
@@ -13,14 +15,13 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const { addToast } = useNotification();
   const { t } = useTranslation();
+  const { setIsLoading } = useLoader();
+
   const [data, setData] = useState(() => {
     const sessionGuid = JSON.parse(localStorage.getItem('@match-financeiro:session'))?.session_guid;
     if (sessionGuid) return { sessionGuid };
     return null;
   });
-
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const [isSigningOut, setIsSigningOut] = useState(false);
 
   useEffect(() => {
     const handleStorage = () => {
@@ -58,7 +59,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signOut = useCallback(() => {
-    setIsSigningOut(true);
+    setIsLoading(true);
     authenticateService
       .signOut({ handleError })
       .then(() => {
@@ -69,14 +70,14 @@ export const AuthProvider = ({ children }) => {
         throw error;
       })
       .finally(() => {
-        setIsSigningOut(false);
+        setIsLoading(false);
       });
   }, [handleError]);
 
   const signIn = useCallback(
     async ({ email, password }) => {
+      setIsLoading(true);
       try {
-        setIsSigningIn(true);
         const response = await authenticateService.signIn({
           email: email?.toLowerCase(),
           password,
@@ -89,9 +90,9 @@ export const AuthProvider = ({ children }) => {
           navigate('/');
         }
         setData({ sessionGuid });
-        setIsSigningIn(false);
+        setIsLoading(false);
       } catch (error) {
-        setIsSigningIn(false);
+        setIsLoading(false);
         addToast({
           content: t('LOGIN.ERROR'),
           type: 'danger',
@@ -103,9 +104,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ session: data, signIn, isSigningIn, signOut, isSigningOut, handleError }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ session: data, signIn, signOut, handleError }}>{children}</AuthContext.Provider>
   );
 };
 

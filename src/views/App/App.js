@@ -1,19 +1,12 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from 'routes/Routes';
 
 import { AuthProvider } from 'hooks/useAuth';
+import { LoaderProvider } from 'hooks/useLoader';
 import useLocale from 'hooks/useLocale';
 import { NotificationProvider } from 'hooks/useNotification';
 import useTheme from 'hooks/useTheme';
-
-import Home from 'views/Home/Home';
-import Login from 'views/Login/Login';
-import NotFound from 'views/NotFound/NotFound';
-import Register from 'views/Register/Register';
-import Stats from 'views/Stats/Stats';
-import Transactions from 'views/Transactions/Transactions';
-
-import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 
 import styles from './App.module.scss';
 
@@ -37,20 +30,13 @@ const App = () => {
   return (
     <Router basename='/'>
       <NotificationProvider>
-        <AuthProvider>
-          <div className={styles.app}>
-            <Routes>
-              <Route exact path='/' element={<PrivateRoute />}>
-                <Route exact path='/' element={<Home />} />
-                <Route exact path='/transactions' element={<Transactions />} />
-                <Route exact path='/stats' element={<Stats />} />
-              </Route>
-              <Route path='*' element={<NotFound />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
-            </Routes>
-          </div>
-        </AuthProvider>
+        <LoaderProvider>
+          <AuthProvider>
+            <div className={styles.app}>
+              <Routes />
+            </div>
+          </AuthProvider>
+        </LoaderProvider>
       </NotificationProvider>
     </Router>
   );
