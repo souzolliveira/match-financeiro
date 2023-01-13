@@ -4,12 +4,11 @@
   "NAVBAR.STATS": "Stats",
   "NAVBAR.BUDGET": "Budget",
 
-  "LOGIN.EMAIL": "Email",
-  "LOGIN.PASSWORD": "Senha",
-  "LOGIN.SUBMIT": "Login",
+  "LOGIN": "Login",
+  "REGISTER": "Cadastrar",
 
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
-  "TRANSACTION_TYPE.EXPENSE": "Despeza",
+  "TRANSACTION_TYPE.EXPENSE": "Despesa",
   "TRANSACTION_TYPE.INCOME": "Receita",
   "CALENDAR.LABEL": "Informe a data:",
   "CATEGORIES.LABEL": "Selecione a categoria:",
@@ -25,5 +24,10 @@
   "OBSERVATION.LABEL": "Alguma observação?",
   "TRANSACTION.SUBMIT": "Adicionar transação",
 
-  "CREATE": "Criar"
+  "CREATE": "Criar",
+  "NAME": "Nome",
+  "EMAIL": "Email",
+  "PHONE": "Telefone celular",
+  "PASSWORD": "Senha",
+  "PASSWORD.CONFIRM": "Confirmar senha"
 }

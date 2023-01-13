@@ -1,18 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import { useAuth } from 'hooks/useAuth';
 import { useNotification } from 'hooks/useNotification';
+import registerService from 'services/register.service';
+
+import Button from 'components/Button/Button';
+import Input from 'components/Input/Input';
+
+import Logo from 'assets/logo_main.png';
 
 import styles from './Register.module.scss';
 
 const Register = () => {
   const { addToast } = useNotification();
   const { t } = useTranslation();
-  const { signIn, isSigningIn } = useAuth();
+  const { handleError, signIn } = useAuth();
 
-  return <div className={styles.Register}>Register</div>;
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const register = e => {
+    e.preventDefault();
+    if (!name || !email || !phone || !password || !confirmPassword) {
+      addToast({
+        content: '',
+        type: 'warning',
+      });
+      return;
+    }
+    if (password !== confirmPassword) {
+      addToast({
+        content: '',
+        type: 'warning',
+      });
+      return;
+    }
+    registerService
+      .register({ name, email, phone, password, handleError })
+      .then(() => {
+        signIn({ email, password });
+      })
+      .catch()
+      .finally();
+  };
+
+  return (
+    <form className={styles.register} onSubmit={e => register(e)}>
+      <img alt='Match Financeiro Logo' src={Logo} className={styles.register__logo} />
+      <div className={styles.register__fields}>
+        <div className={styles.register__inputgroup}>
+          <span className={styles.register__label}>{t('NAME')}</span>
+          <Input name='name' value={name} onChange={e => setName(e.target.value)} />
+        </div>
+        <div className={styles.register__inputgroup}>
+          <span className={styles.register__label}>{t('EMAIL')}</span>
+          <Input name='email' value={email} onChange={e => setEmail(e.target.value)} />
+        </div>
+        <div className={styles.register__inputgroup}>
+          <span className={styles.register__label}>{t('PHONE')}</span>
+          <Input type='text' name='phone-number' value={phone} onChange={e => setPhone(e.target.value)} />
+        </div>
+        <div className={styles.register__inputgroup}>
+          <span className={styles.register__label}>{t('PASSWORD')}</span>
+          <Input type='password' name='password' value={password} onChange={e => setPassword(e.target.value)} />
+        </div>
+        <div className={styles.register__inputgroup}>
+          <span className={styles.register__label}>{t('PASSWORD.CONFIRM')}</span>
+          <Input type='password' name='confirm-password' value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+        </div>
+        <div className={styles.register__inputsubmit}>
+          <Button type='submit' kind='primary' size='lg'>
+            {t('REGISTER')}
+          </Button>
+        </div>
+      </div>
+    </form>
+  );
 };
 
 export default Register;
