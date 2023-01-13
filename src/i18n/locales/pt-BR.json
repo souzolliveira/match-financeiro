@@ -12,6 +12,7 @@
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
   "TRANSACTION_TYPE.EXPENSE": "Despesa",
   "TRANSACTION_TYPE.INCOME": "Receita",
+  "TRANSACTION_TYPE.INVESTIMENT": "Investimento",
   "CALENDAR.LABEL": "Informe a data:",
   "CATEGORIES.LABEL": "Selecione a categoria:",
   "CATEGORIES.CREATE": "Criar categoria",

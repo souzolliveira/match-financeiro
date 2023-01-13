@@ -18,6 +18,7 @@
 
   .transactionType__buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--spacing-small);
   }
 

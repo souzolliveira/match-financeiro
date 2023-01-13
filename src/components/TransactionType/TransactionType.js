@@ -27,6 +27,9 @@ const TransactionType = ({ transactionType, setTransactionType, setStep }) => {
         <Button type='button' size='lg' kind='secondary' onClick={() => handleChange(transactionTypes.EXPENSE)}>
           {t(`TRANSACTION_TYPE.${transactionTypes.EXPENSE}`)}
         </Button>
+        <Button type='button' size='lg' kind='secondary' onClick={() => handleChange(transactionTypes.INVESTIMENT)}>
+          {t(`TRANSACTION_TYPE.${transactionTypes.INVESTIMENT}`)}
+        </Button>
       </div>
     </div>
   );
