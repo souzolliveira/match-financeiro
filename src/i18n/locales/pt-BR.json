@@ -19,10 +19,12 @@
   "TRANSACTIONS.CREATE.ERROR": "Erro ao tentar criar transação",
   "TRANSACTIONS.COUNT": "{{count}} transações encontradas",
   "TRANSACTIONS.EMPTY": "Nenhuma transação encontrada",
+  "TRANSACTIONS.BALANCE": "Saldo:",
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
   "TRANSACTION_TYPE.EXPENSE": "Despesa",
   "TRANSACTION_TYPE.INCOME": "Receita",
   "TRANSACTION_TYPE.INVESTIMENT": "Investimento",
+  "TRANSACTION.SUBMIT": "Adicionar transação",
 
   "CALENDAR.LABEL": "Informe a data:",
 
@@ -44,8 +46,6 @@
   "VALUE.LABEL": "Informe o valor:",
 
   "OBSERVATION.LABEL": "Alguma observação?",
-
-  "TRANSACTION.SUBMIT": "Adicionar transação",
 
   "CREATE": "Criar",
   "NAME": "Nome",

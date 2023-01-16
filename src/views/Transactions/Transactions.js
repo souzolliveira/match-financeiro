@@ -21,6 +21,7 @@ const Transactions = () => {
   const { setIsLoading } = useLoader();
 
   const [transactions, setTransactions] = useState([]);
+  const [balance, setBalance] = useState(0);
 
   const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
 
@@ -29,7 +30,8 @@ const Transactions = () => {
     await transactionService
       .listTransactions({ handleError })
       .then(data => {
-        setTransactions(data);
+        setTransactions(data.data);
+        setBalance(data.balance);
       })
       .catch(() => {
         addToast({
@@ -56,15 +58,21 @@ const Transactions = () => {
         )}
       </div>
       {transactions.length ? (
-        <ul className={styles.transactions__list}>
-          {transactions.map((transaction, index) => {
-            return (
-              <Transaction key={index} transaction={transaction}>
-                {transaction.observation}
-              </Transaction>
-            );
-          })}
-        </ul>
+        <div className={styles.transactions__container}>
+          <ul className={styles.transactions__list}>
+            {transactions.map((transaction, index) => {
+              return (
+                <Transaction key={index} transaction={transaction}>
+                  {transaction.observation}
+                </Transaction>
+              );
+            })}
+          </ul>
+          <div className={styles.transactions__balance}>
+            <span className={styles.transactions__label}>{t('TRANSACTIONS.BALANCE')}</span>
+            <span className={styles.transactions__difference}>R$ {balance}</span>
+          </div>
+        </div>
       ) : (
         <div className={styles.transactions__empty}>
           <Icon name='list' width={128} height={128} fill='var(--gold-dark)' />

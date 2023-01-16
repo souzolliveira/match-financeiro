@@ -38,7 +38,6 @@ function listTransactions({ handleError }) {
       headers: authHeader(),
     })
     .then(handleResponse)
-    .then(data => data.data)
     .catch(handleError);
 }
 
