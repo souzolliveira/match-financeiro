@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ArrowRight from './Icons/ArrowRight';
+import ChevronTop from './Icons/ChevronTop';
 import Close from './Icons/Close';
 import Expense from './Icons/Expense';
 import Home from './Icons/Home';
@@ -15,6 +16,8 @@ const Icon = ({ name, width, height, fill, className }) => {
   switch (name) {
     case 'arrow-right':
       return <ArrowRight fill={fill} width={width} height={height} className={className} />;
+    case 'chevron-top':
+      return <ChevronTop fill={fill} width={width} height={height} className={className} />;
     case 'close':
       return <Close fill={fill} width={width} height={height} className={className} />;
     case 'expense':
