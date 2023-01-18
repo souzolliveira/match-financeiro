@@ -22,16 +22,17 @@ function createSubcategory({ category, costing, name, transactionType, handleErr
 }
 
 function listSubcategory({ transactionType, categoryName, handleError }) {
+  let url = '/subcategory';
+  if (transactionType) {
+    url += `/${transactionType}`;
+    if (categoryName) {
+      url += `/${categoryName}`;
+    }
+  }
   return api
-    .post(
-      `/subcategory/${transactionType}`,
-      {
-        category_name: categoryName,
-      },
-      {
-        headers: authHeader(),
-      }
-    )
+    .get(url, {
+      headers: authHeader(),
+    })
     .then(handleResponse)
     .then(data => data.data)
     .catch(handleError);

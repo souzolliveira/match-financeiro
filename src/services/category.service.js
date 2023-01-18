@@ -20,8 +20,12 @@ function createCategory({ name, transactionType, handleError }) {
 }
 
 function listCategory({ transactionType, handleError }) {
+  let url = '/category';
+  if (transactionType) {
+    url += `/${transactionType}`;
+  }
   return api
-    .get(`/category/${transactionType}`, {
+    .get(url, {
       headers: authHeader(),
     })
     .then(handleResponse)
