@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import convertNumbers from 'helpers/convertNumbers';
 import { useAuth } from 'hooks/useAuth';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
+import categoryService from 'services/category.service';
+import subcategoryService from 'services/subcategory.service';
 import transactionService from 'services/transaction.service';
 
 import Icon from 'components/Icon/Icon';
 
 import Add from './Add/Add';
+import Balance from './Balance/Balance';
 import Transaction from './Transaction/Transaction';
 
 import styles from './Transactions.module.scss';
@@ -21,7 +25,12 @@ const Transactions = () => {
   const { setIsLoading } = useLoader();
 
   const [transactions, setTransactions] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [balance, setBalance] = useState(0);
+  const [incomes, setIncomes] = useState(0);
+  const [expenses, setExpenses] = useState(0);
+  const [investiments, setInvestiments] = useState(0);
 
   const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
 
@@ -31,7 +40,10 @@ const Transactions = () => {
       .listTransactions({ handleError })
       .then(data => {
         setTransactions(data.data);
-        setBalance(data.balance);
+        setBalance(convertNumbers.convertToFloat(data.balance));
+        setIncomes(convertNumbers.convertToFloat(data.income));
+        setExpenses(convertNumbers.convertToFloat(data.expense));
+        setInvestiments(convertNumbers.convertToFloat(data.investiment));
       })
       .catch(() => {
         addToast({
@@ -44,8 +56,48 @@ const Transactions = () => {
       });
   };
 
+  const fetchCategories = async () => {
+    setIsLoading(true);
+    await categoryService
+      .listCategory({ handleError })
+      .then(data => {
+        setCategories(data);
+      })
+      .catch(() => {
+        addToast({
+          content: t('CATEGORIES.FETCH.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const fetchSubcategories = async () => {
+    setIsLoading(true);
+    await subcategoryService
+      .listSubcategory({
+        handleError,
+      })
+      .then(data => {
+        setSubcategories(data);
+      })
+      .catch(() => {
+        addToast({
+          content: t('SUBCATEGORIES.FETCH.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
     fetchTransactions();
+    fetchCategories();
+    fetchSubcategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,10 +120,14 @@ const Transactions = () => {
               );
             })}
           </ul>
-          <div className={styles.transactions__balance}>
-            <span className={styles.transactions__label}>{t('TRANSACTIONS.BALANCE')}</span>
-            <span className={styles.transactions__difference}>R$ {balance}</span>
-          </div>
+          <Balance
+            balance={balance}
+            incomes={incomes}
+            expenses={expenses}
+            investiments={investiments}
+            categories={categories}
+            subcategories={subcategories}
+          />
         </div>
       ) : (
         <div className={styles.transactions__empty}>
@@ -83,6 +139,10 @@ const Transactions = () => {
         isAddTransactionFormOpened={isAddTransactionFormOpened}
         setIsAddTransactionFormOpened={setIsAddTransactionFormOpened}
         fetchTransactions={fetchTransactions}
+        fetchCategories={fetchCategories}
+        categories={categories}
+        fetchSubcategories={fetchSubcategories}
+        subcategories={subcategories}
       />
     </div>
   );

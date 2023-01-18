@@ -20,11 +20,30 @@
   "TRANSACTIONS.COUNT": "{{count}} transações encontradas",
   "TRANSACTIONS.EMPTY": "Nenhuma transação encontrada",
   "TRANSACTIONS.BALANCE": "Saldo:",
+  "TRANSACTIONS.INCOMES": "Receitas",
+  "TRANSACTIONS.EXPENSES": "Despesas",
+  "TRANSACTIONS.INVESTIMENTS": "Investimentos",
   "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
   "TRANSACTION_TYPE.EXPENSE": "Despesa",
   "TRANSACTION_TYPE.INCOME": "Receita",
   "TRANSACTION_TYPE.INVESTIMENT": "Investimento",
   "TRANSACTION.SUBMIT": "Adicionar transação",
+
+  "FILTERS.PERIOD": "Período:",
+  "FILTERS.TRANSACTION_TYPE": "Tipo de transação:",
+  "FILTERS.INCOMES": "Receitas",
+  "FILTERS.EXPENSES": "Despesas",
+  "FILTERS.INVESTIMENTS": "Investimentos",
+  "FILTERS.CATEGORY": "Categoria:",
+  "FILTERS.SUBCATEGORY": "Subcategoria:",
+  "FILTERS.GROUP": "Agrupar:",
+  "FILTERS.GROUP.NONE": "Não agrupar",
+  "FILTERS.GROUP.TRANSACTION_TYPE": "Tipo de transação",
+  "FILTERS.GROUP.CATEGORY": "Categoria",
+  "FILTERS.GROUP.SUBCATEGORY": "Subcategoria",
+  "FILTERS.COSTING": "Custo:",
+  "FILTERS.COSTING.FIXED": "Fixo",
+  "FILTERS.COSTING.VARIABLE": "Variável",
 
   "CALENDAR.LABEL": "Informe a data:",
 
@@ -52,5 +71,6 @@
   "EMAIL": "Email",
   "PHONE": "Telefone celular",
   "PASSWORD": "Senha",
-  "PASSWORD.CONFIRM": "Confirmar senha"
+  "PASSWORD.CONFIRM": "Confirmar senha",
+  "SELECT": "Selecione..."
 }
