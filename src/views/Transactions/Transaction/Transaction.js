@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import bindTransactionTypeIconColor from 'helpers/bindTransactionTypeIconColor';
 import useDate from 'hooks/useDate';
 
@@ -8,7 +10,15 @@ import Icon from 'components/Icon/Icon';
 import styles from './Transaction.module.scss';
 
 const Transaction = ({ transaction }) => {
+  const { t } = useTranslation();
   const { formatDateFromAPIToFront } = useDate();
+
+  const renderHeader = () => {
+    if (transaction.observation) return transaction.observation;
+    if (transaction.subcategory) return `${transaction.category} - ${transaction.subcategory}`;
+    if (transaction.category) return transaction.category;
+    return t(`TRANSACTION_TYPE.${transaction.transaction_type}`);
+  };
 
   return (
     <li className={styles.transaction}>
@@ -21,10 +31,10 @@ const Transaction = ({ transaction }) => {
         />
       </div>
       <div className={styles.transaction__infos}>
-        <div className={styles.transaction__header}>{transaction.observation}</div>
+        <span className={styles.transaction__header}>{renderHeader()}</span>
         <div className={styles.transaction__main}>
-          <div>R$ {transaction.value}</div>
-          <div>{formatDateFromAPIToFront(transaction.date)}</div>
+          <span className={styles.transaction__value}>R$ {transaction.value}</span>
+          <span className={styles.transaction__date}>{formatDateFromAPIToFront(transaction.date)}</span>
         </div>
       </div>
     </li>

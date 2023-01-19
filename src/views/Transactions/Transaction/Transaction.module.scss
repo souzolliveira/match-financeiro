@@ -22,9 +22,9 @@
     width: calc(100% - 40px - var(--spacing-small));
 
     .transaction__header {
-      color: var(--gold-darkest);
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-normal);
+      color: var(--gold-darker);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
       line-height: var(--line-height-md);
       margin-bottom: var(--spacing-tiny);
       overflow: hidden;
@@ -34,13 +34,21 @@
     }
 
     .transaction__main {
-      color: var(--gold-darker);
       display: flex;
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      line-height: var(--line-height-simple);
       justify-content: space-between;
       width: 100%;
+
+      .transaction__value {
+        color: var(--gold-darkest);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--line-height-simple);
+      }
+
+      .transaction__date {
+        @extend .transaction__value;
+        color: var(--gold-darker);
+      }
     }
   }
 
