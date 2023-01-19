@@ -32,9 +32,9 @@ function createTransaction({
     .catch(handleError);
 }
 
-function listTransactions({ handleError }) {
+function listTransactions({ params, handleError }) {
   return api
-    .get(`/transactions`, {
+    .get(`/transactions?${params && params}`, {
       headers: authHeader(),
     })
     .then(handleResponse)

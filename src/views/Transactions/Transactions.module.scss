@@ -1,15 +1,17 @@
 .transactions {
   height: 100%;
-  padding: var(--spacing-base);
   position: relative;
   width: 100%;
 
   .transactions__header {
     align-items: center;
+    background-color: var(--gold-lightest);
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--spacing-small);
+    padding: var(--spacing-base);
+    position: relative;
     width: 100%;
+    z-index: var(--zindex-header);
 
     .transactions__title {
       color: var(--gold-darker);
@@ -44,25 +46,31 @@
 
   .transactions__container {
     align-items: flex-end;
-    border: 2px solid var(--gold-light);
     border-radius: var(--medium-radius);
     display: flex;
     flex-direction: column;
     height: calc(100% - var(--font-size-h3) - var(--spacing-small));
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     position: relative;
-    width: 100%;
+    width: calc(100% - 2 * var(--spacing-base));
+
+    .transactions__line {
+      background-color: var(--gold);
+      height: 2px;
+      width: 100%;
+      z-index: var(--zindex-header);
+    }
 
     .transactions__list {
       display: flex;
+      border: 2px solid var(--gold);
       flex-direction: column;
-      height: 100%;
+      height: calc(100% - var(--font-size-h3) - 2 * var(--spacing-small) - 60px);
       list-style-type: none;
       margin: 0;
       overflow-y: auto;
       padding: 0;
-      padding-top: 60px;
       width: 100%;
     }
   }

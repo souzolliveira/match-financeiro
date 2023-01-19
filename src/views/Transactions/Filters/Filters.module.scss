@@ -1,0 +1,35 @@
+.filters {
+  border: 1px solid var(--gold);
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-tiny);
+  width: 100%;
+
+  .filters__group {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-tiny);
+    margin-bottom: var(--spacing-small);
+    width: 100%;
+
+    .filters__label {
+      color: var(--gold-dark);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-simple);
+      width: 40%;
+    }
+
+    .filters__select {
+      width: 60%;
+    }
+
+    .filters__submit {
+      width: 100%;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}

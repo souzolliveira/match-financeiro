@@ -37,13 +37,10 @@
   "FILTERS.CATEGORY": "Categoria:",
   "FILTERS.SUBCATEGORY": "Subcategoria:",
   "FILTERS.GROUP": "Agrupar:",
-  "FILTERS.GROUP.NONE": "Não agrupar",
   "FILTERS.GROUP.TRANSACTION_TYPE": "Tipo de transação",
   "FILTERS.GROUP.CATEGORY": "Categoria",
   "FILTERS.GROUP.SUBCATEGORY": "Subcategoria",
-  "FILTERS.COSTING": "Custo:",
-  "FILTERS.COSTING.FIXED": "Fixo",
-  "FILTERS.COSTING.VARIABLE": "Variável",
+  "FILTERS.FILTER": "Filtrar",
 
   "CALENDAR.LABEL": "Informe a data:",
 

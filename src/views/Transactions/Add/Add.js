@@ -27,6 +27,7 @@ const Add = ({
   categories,
   fetchSubcategories,
   subcategories,
+  setIsFiltersTabOpened,
 }) => {
   const { t } = useTranslation();
   const { addToast } = useNotification();
@@ -87,6 +88,7 @@ const Add = ({
     if (showForms)
       setTimeout(() => {
         setIsAddTransactionFormOpened(true);
+        setIsFiltersTabOpened(false);
       }, [200]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showForms]);

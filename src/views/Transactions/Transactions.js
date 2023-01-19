@@ -33,11 +33,12 @@ const Transactions = () => {
   const [investiments, setInvestiments] = useState(0);
 
   const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
+  const [isFiltersTabOpened, setIsFiltersTabOpened] = useState(false);
 
-  const fetchTransactions = async () => {
+  const fetchTransactions = async params => {
     setIsLoading(true);
     await transactionService
-      .listTransactions({ handleError })
+      .listTransactions({ params, handleError })
       .then(data => {
         setTransactions(data.data);
         setBalance(convertNumbers.convertToFloat(data.balance));
@@ -111,6 +112,18 @@ const Transactions = () => {
       </div>
       {transactions.length ? (
         <div className={styles.transactions__container}>
+          <div className={styles.transactions__line} />
+          <Balance
+            active={isFiltersTabOpened}
+            setActive={setIsFiltersTabOpened}
+            balance={balance}
+            incomes={incomes}
+            expenses={expenses}
+            investiments={investiments}
+            categories={categories}
+            subcategories={subcategories}
+            fetchTransactions={fetchTransactions}
+          />
           <ul className={styles.transactions__list}>
             {transactions.map((transaction, index) => {
               return (
@@ -120,14 +133,6 @@ const Transactions = () => {
               );
             })}
           </ul>
-          <Balance
-            balance={balance}
-            incomes={incomes}
-            expenses={expenses}
-            investiments={investiments}
-            categories={categories}
-            subcategories={subcategories}
-          />
         </div>
       ) : (
         <div className={styles.transactions__empty}>
@@ -143,6 +148,7 @@ const Transactions = () => {
         categories={categories}
         fetchSubcategories={fetchSubcategories}
         subcategories={subcategories}
+        setIsFiltersTabOpened={setIsFiltersTabOpened}
       />
     </div>
   );
