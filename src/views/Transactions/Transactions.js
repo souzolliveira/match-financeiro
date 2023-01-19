@@ -110,20 +110,20 @@ const Transactions = () => {
           <span className={styles.transactions__count}>{t('TRANSACTIONS.COUNT', { count: transactions.length })}</span>
         )}
       </div>
-      {transactions.length ? (
-        <div className={styles.transactions__container}>
-          <div className={styles.transactions__line} />
-          <Balance
-            active={isFiltersTabOpened}
-            setActive={setIsFiltersTabOpened}
-            balance={balance}
-            incomes={incomes}
-            expenses={expenses}
-            investiments={investiments}
-            categories={categories}
-            subcategories={subcategories}
-            fetchTransactions={fetchTransactions}
-          />
+      <div className={styles.transactions__container}>
+        <div className={styles.transactions__line} />
+        <Balance
+          active={isFiltersTabOpened}
+          setActive={setIsFiltersTabOpened}
+          balance={balance}
+          incomes={incomes}
+          expenses={expenses}
+          investiments={investiments}
+          categories={categories}
+          subcategories={subcategories}
+          fetchTransactions={fetchTransactions}
+        />
+        {transactions.length ? (
           <ul className={styles.transactions__list}>
             {transactions.map((transaction, index) => {
               return (
@@ -133,13 +133,13 @@ const Transactions = () => {
               );
             })}
           </ul>
-        </div>
-      ) : (
-        <div className={styles.transactions__empty}>
-          <Icon name='list' width={128} height={128} fill='var(--gold-dark)' />
-          <span className={styles.transactions__emptylabel}>{t('TRANSACTIONS.EMPTY')}</span>
-        </div>
-      )}
+        ) : (
+          <div className={styles.transactions__empty}>
+            <Icon name='list' width={128} height={128} fill='var(--gold-dark)' />
+            <span className={styles.transactions__emptylabel}>{t('TRANSACTIONS.EMPTY')}</span>
+          </div>
+        )}
+      </div>
       <Add
         isAddTransactionFormOpened={isAddTransactionFormOpened}
         setIsAddTransactionFormOpened={setIsAddTransactionFormOpened}

@@ -31,9 +31,14 @@
   .transactions__empty {
     align-items: center;
     display: flex;
+    border: 2px solid var(--gold);
     flex-direction: column;
-    height: calc(100% - var(--font-size-h3) - var(--spacing-small));
+    height: calc(100% - var(--font-size-h3) - 2 * var(--spacing-small) - 60px);
     justify-content: center;
+    margin: 0;
+    overflow-y: auto;
+    padding: 0;
+    width: 100%;
 
     .transactions__emptylabel {
       color: var(--gold-dark);
