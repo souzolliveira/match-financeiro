@@ -3,10 +3,11 @@
   flex-direction: column;
   height: calc(100vh - 2 * (44px + 24px));
   justify-content: center;
+  padding: var(--spacing-base);
   position: fixed;
   top: calc(44px + 24px);
   transition: 600ms ease-out;
-  width: calc(100% - 2 * var(--spacing-base));
+  width: 100%;
 
   .calendar__label {
     color: var(--gold-darker);
