@@ -1,0 +1,32 @@
+.select {
+  align-items: flex-start;
+  background-color: var(--gold-lightest);
+  border: 0;
+  border-bottom: 2px solid var(--gold);
+  color: var(--gold-darkest);
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  justify-content: space-between;
+  letter-spacing: 0.25px;
+  line-height: 16px;
+  padding: var(--spacing-tiny);
+  transition: border ease 300ms;
+  width: 100%;
+
+  &:focus,
+  &:hover {
+    border: 0;
+    border-bottom: 2px solid var(--gold-darker);
+    outline: 0;
+    transition: border ease 300ms;
+  }
+
+  &:disabled {
+    cursor: no-drop;
+  }
+
+  option {
+    color: var(--gold-darkest);
+  }
+}
