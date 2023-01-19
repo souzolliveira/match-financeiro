@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import costingTypes from 'constants/costing';
+import costingTypes from 'constants/costingTypes';
 import steps from 'constants/steps';
 import { useAuth } from 'hooks/useAuth';
 import useHiddenStep from 'hooks/useHiddenStep';
