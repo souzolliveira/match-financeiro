@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -27,10 +27,27 @@ const Filters = ({
 }) => {
   const { t } = useTranslation();
 
+  const [intermediateTransactionType, setIntermediateTransactionType] = useState(transactionType);
+  const [intermediateCategory, setIntermediateCategory] = useState(category);
+  const [intermediateSubcategory, setIntermediateSubcategory] = useState(subcategory);
+  const [intermediateGroupBy, setIntermediateGroupBy] = useState(groupBy);
+
   const handleFilter = () => {
     setActive(false);
-    fetchTransactions(handleParams({ transactionType, category, subcategory, groupBy }));
+    setTransactionType(intermediateTransactionType);
+    setCategory(intermediateCategory);
+    setSubcategory(intermediateSubcategory);
+    setGroupBy(intermediateGroupBy);
+    fetchTransactions(
+      handleParams({
+        transactionType: intermediateTransactionType,
+        category: intermediateCategory,
+        subcategory: intermediateSubcategory,
+        groupBy: intermediateGroupBy,
+      })
+    );
   };
+
   return (
     <div className={styles.filters}>
       <div className={styles.filters__group}>
@@ -41,11 +58,11 @@ const Filters = ({
         <span className={styles.filters__label}>{t('FILTERS.TRANSACTION_TYPE')}</span>
         <Select
           className={styles.filters__select}
-          value={transactionType}
+          value={intermediateTransactionType}
           onChange={e => {
-            setTransactionType(e.target.value);
-            setCategory('');
-            setSubcategory('');
+            setIntermediateTransactionType(e.target.value);
+            setIntermediateCategory('');
+            setIntermediateSubcategory('');
           }}
           defaultValue=''
         >
@@ -61,19 +78,19 @@ const Filters = ({
         <span className={styles.filters__label}>{t('FILTERS.CATEGORY')}</span>
         <Select
           className={styles.filters__select}
-          value={category}
+          value={intermediateCategory}
           onChange={e => {
-            setCategory(e.target.value);
-            setSubcategory('');
+            setIntermediateCategory(e.target.value);
+            setIntermediateSubcategory('');
           }}
           defaultValue=''
-          disabled={transactionType === ''}
+          disabled={intermediateTransactionType === ''}
         >
           <option value='' disabled>
             {t('SELECT')}
           </option>
           {categories
-            .filter(cat => cat.transaction_type === transactionType)
+            .filter(cat => cat.transaction_type === intermediateTransactionType)
             .map((item, index) => {
               return (
                 <option key={index} value={item.category_name}>
@@ -87,16 +104,16 @@ const Filters = ({
         <span className={styles.filters__label}>{t('FILTERS.SUBCATEGORY')}</span>
         <Select
           className={styles.filters__select}
-          value={subcategory}
-          onChange={e => setSubcategory(e.target.value)}
+          value={intermediateSubcategory}
+          onChange={e => setIntermediateSubcategory(e.target.value)}
           defaultValue=''
-          disabled={category === ''}
+          disabled={intermediateCategory === ''}
         >
           <option value='' disabled>
             {t('SELECT')}
           </option>
           {subcategories
-            .filter(subcat => subcat.category_name === category)
+            .filter(subcat => subcat.category_name === intermediateCategory)
             .map((item, index) => {
               return (
                 <option key={index} value={item.subcategory_name}>
@@ -108,7 +125,12 @@ const Filters = ({
       </div>
       <div className={styles.filters__group}>
         <span className={styles.filters__label}>{t('FILTERS.GROUP')}</span>
-        <Select className={styles.filters__select} value={groupBy} onChange={e => setGroupBy(e.target.value)} defaultValue=''>
+        <Select
+          className={styles.filters__select}
+          value={intermediateGroupBy}
+          onChange={e => setIntermediateGroupBy(e.target.value)}
+          defaultValue=''
+        >
           <option value='' disabled>
             {t('SELECT')}
           </option>
