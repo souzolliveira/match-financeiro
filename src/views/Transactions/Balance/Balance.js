@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -14,16 +14,36 @@ import styles from './Balance.module.scss';
 const Balance = ({ active, setActive, balance, incomes, expenses, investiments, categories, subcategories, fetchTransactions }) => {
   const { t } = useTranslation();
 
+  const nav = useRef(null);
+  const header = useRef(null);
+
   const [transactionType, setTransactionType] = useState('');
   const [category, setCategory] = useState('');
   const [subcategory, setSubcategory] = useState('');
   const [groupBy, setGroupBy] = useState('');
 
+  const handleClickOutside = event => {
+    if (active && nav.current && !nav.current.contains(event.target) && header.current && !header.current.contains(event.target))
+      setActive(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
   return (
     <div className={`${styles.balance} ${active ? styles.balance__active : ''}`}>
       <div
-        onClick={() => setActive(state => !state)}
-        onKeyDown={() => setActive(state => !state)}
+        onClick={() => {
+          setActive(state => !state);
+        }}
+        onKeyDown={() => {
+          setActive(state => !state);
+        }}
+        ref={header}
         role='button'
         tabIndex={0}
         className={styles.balance__button}
@@ -40,7 +60,7 @@ const Balance = ({ active, setActive, balance, incomes, expenses, investiments, 
           className={`${styles.balance__icon} ${active ? styles.balance__nav__active : ''}`}
         />
       </div>
-      <div className={`${styles.balance__nav} ${active ? styles.balance__nav__active : ''}`}>
+      <div className={`${styles.balance__nav} ${active ? styles.balance__nav__active : ''}`} ref={nav}>
         <div className={styles.balance__results}>
           <div className={styles.results__column}>
             <span className={styles.results__label}>{t('TRANSACTIONS.INCOMES')}</span>
