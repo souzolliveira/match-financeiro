@@ -1,0 +1,10 @@
+.appliedFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-tiny);
+
+  .appliedFilters__clear {
+    font-weight: bold;
+    margin-bottom: var(--spacing-tiny);
+  }
+}

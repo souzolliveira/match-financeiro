@@ -9,6 +9,8 @@ import handleParams from 'helpers/handleParams';
 import Button from 'components/Button/Button';
 import Select from 'components/Select/Select';
 
+import AppliedFilters from '../AppliedFilters/AppliedFilters';
+
 import styles from './Filters.module.scss';
 
 const Filters = ({
@@ -51,11 +53,11 @@ const Filters = ({
   return (
     <div className={styles.filters}>
       <div className={styles.filters__group}>
-        <span className={styles.filters__label}>{t('FILTERS.PERIOD')}</span>
+        <span className={styles.filters__label}>{t('FILTERS.PERIOD')}:</span>
         <input type='date' />
       </div>
       <div className={styles.filters__group}>
-        <span className={styles.filters__label}>{t('FILTERS.TRANSACTION_TYPE')}</span>
+        <span className={styles.filters__label}>{t('FILTERS.TRANSACTION_TYPE')}:</span>
         <Select
           className={styles.filters__select}
           value={intermediateTransactionType}
@@ -75,7 +77,7 @@ const Filters = ({
         </Select>
       </div>
       <div className={styles.filters__group}>
-        <span className={styles.filters__label}>{t('FILTERS.CATEGORY')}</span>
+        <span className={styles.filters__label}>{t('FILTERS.CATEGORY')}:</span>
         <Select
           className={styles.filters__select}
           value={intermediateCategory}
@@ -101,7 +103,7 @@ const Filters = ({
         </Select>
       </div>
       <div className={styles.filters__group}>
-        <span className={styles.filters__label}>{t('FILTERS.SUBCATEGORY')}</span>
+        <span className={styles.filters__label}>{t('FILTERS.SUBCATEGORY')}:</span>
         <Select
           className={styles.filters__select}
           value={intermediateSubcategory}
@@ -124,7 +126,7 @@ const Filters = ({
         </Select>
       </div>
       <div className={styles.filters__group}>
-        <span className={styles.filters__label}>{t('FILTERS.GROUP')}</span>
+        <span className={styles.filters__label}>{t('FILTERS.GROUP')}:</span>
         <Select
           className={styles.filters__select}
           value={intermediateGroupBy}
@@ -144,6 +146,22 @@ const Filters = ({
           {t('FILTERS.FILTER')}
         </Button>
       </div>
+      <AppliedFilters
+        transactionType={transactionType}
+        setTransactionType={setTransactionType}
+        setIntermediateTransactionType={setIntermediateTransactionType}
+        category={category}
+        setCategory={setCategory}
+        setIntermediateCategory={setIntermediateCategory}
+        subcategory={subcategory}
+        setSubcategory={setSubcategory}
+        setIntermediateSubcategory={setIntermediateSubcategory}
+        groupBy={groupBy}
+        setGroupBy={setGroupBy}
+        setIntermediateGroupBy={setIntermediateGroupBy}
+        setActive={setActive}
+        fetchTransactions={fetchTransactions}
+      />
     </div>
   );
 };
