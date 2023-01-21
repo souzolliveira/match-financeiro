@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import steps from 'constants/steps';
 import useHiddenStep from 'hooks/useHiddenStep';
 
-import Button from 'components/Button/Button';
-import Icon from 'components/Icon/Icon';
 import Input from 'components/Input/Input';
 
 import styles from './Observation.module.scss';
@@ -15,40 +13,42 @@ const Observation = ({ transactionObservation, setTransactionObservation, step, 
   const { t } = useTranslation();
   const { hidden } = useHiddenStep({ target: steps.OBSERVATION, step });
 
-  const [intermediateValue, setIntermediateValue] = useState('');
+  const [focused, setFocused] = useState(false);
+  const [isChangedStep, setIsChangedStep] = useState(false);
 
   const handleChange = e => {
-    setIntermediateValue(e.target.value);
+    setTransactionObservation(e.target.value);
   };
 
-  const handleApply = value => {
-    setIntermediateValue('');
-    setTransactionObservation(value);
-    setStep(steps.CONFIRM);
+  const handleKeyDown = e => {
+    if (focused && e.key === 'Enter') {
+      setStep(steps.CONFIRM);
+      setIsChangedStep(true);
+    }
   };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  });
 
   return (
     <>
-      <div
-        className={`${styles.observation} ${hidden ? styles.observation__bottom : ''} ${
-          transactionObservation ? styles.observation__top : ''
-        }`}
-      >
+      <div className={`${styles.observation} ${hidden ? styles.observation__bottom : ''} ${isChangedStep ? styles.observation__top : ''}`}>
         <span className={styles.observation__label}>{t('OBSERVATION.LABEL')}</span>
-        <div className={styles.observation__inputcontainer}>
-          <Input
-            id='transaction-observation'
-            name='transaction-observation'
-            type='text'
-            value={intermediateValue}
-            onChange={e => handleChange(e)}
-          />
-          <Button type='button' kind='outline' onClick={() => handleApply(intermediateValue)}>
-            <Icon name='arrow-right' width={20} height={20} fill='var(--gold-dark)' />
-          </Button>
-        </div>
+        <Input
+          id='transaction-observation'
+          name='transaction-observation'
+          type='text'
+          value={transactionObservation}
+          onChange={e => handleChange(e)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+        />
       </div>
-      <div className={transactionObservation ? styles.observation__selected : styles.observation__unselected}>
+      <div className={isChangedStep ? styles.observation__selected : styles.observation__unselected}>
         <span className={styles.observation__label}>{t('OBSERVATION')}</span>
         <Input
           className={styles.observation__input}

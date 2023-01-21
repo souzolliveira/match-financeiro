@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import steps from 'constants/steps';
 import useHiddenStep from 'hooks/useHiddenStep';
 
-import Button from 'components/Button/Button';
-import Icon from 'components/Icon/Icon';
 import Input from 'components/Input/Input';
 
 import styles from './Value.module.scss';
@@ -15,40 +13,72 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
   const { t } = useTranslation();
   const { hidden } = useHiddenStep({ target: steps.VALUE, step });
 
-  const [intermediateValue, setIntermediateValue] = useState('');
+  const [focused, setFocused] = useState(false);
+  const [isChangedStep, setIsChangedStep] = useState(false);
 
-  const handleChange = e => {
-    setIntermediateValue(e.target.value);
+  const handleChange = value => {
+    if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(parseFloat(value))) {
+      setTransactionValue(state => (state * 10 + parseFloat(value) / 100).toFixed(2));
+    }
   };
 
-  const handleApply = value => {
-    setIntermediateValue('');
-    setTransactionValue(value);
-    setStep(steps.OBSERVATION);
-    const valueInput = document.getElementById('transaction-observation');
-    if (valueInput) valueInput.focus();
+  const handleKeyDown = e => {
+    if (focused)
+      if (e.key === 'Backspace') {
+        setTransactionValue(state => (state / 10).toFixed(2));
+      } else if (e.key === 'Enter') {
+        setStep(steps.OBSERVATION);
+        setIsChangedStep(true);
+        const valueInput = document.getElementById('transaction-observation');
+        if (valueInput) valueInput.focus();
+      }
   };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  });
 
   return (
     <>
-      <div className={`${styles.value} ${hidden ? styles.value__bottom : ''} ${transactionValue ? styles.value__top : ''}`}>
+      <div className={`${styles.value} ${hidden ? styles.value__bottom : ''} ${isChangedStep ? styles.value__top : ''}`}>
         <span className={styles.value__label}>{t('VALUE.LABEL')}</span>
         <div className={styles.value__inputcontainer}>
-          <Input id='transaction-value' name='transaction-value' type='number' value={intermediateValue} onChange={e => handleChange(e)} />
-          <Button type='button' kind='outline' onClick={() => handleApply(intermediateValue)}>
-            <Icon name='arrow-right' width={20} height={20} fill='var(--gold-dark)' />
-          </Button>
+          <Input
+            className={styles.value__input}
+            id='transaction-value'
+            name='transaction-value'
+            type='number'
+            value=''
+            onInput={e => handleChange(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+          />
+          <div className={styles.value__showcontainer}>
+            <span className={styles.value__show}>{transactionValue.replace('.', ',')}</span>
+            <div className={focused ? styles.value__cursor : ''} />
+          </div>
         </div>
       </div>
-      <div className={transactionValue ? styles.value__selected : styles.value__unselected}>
+      <div className={isChangedStep ? styles.value__selected : styles.value__unselected}>
         <span className={styles.value__label}>{t('VALUE')}</span>
-        <Input
-          className={styles.value__input}
-          type='number'
-          name='transaction-value'
-          value={transactionValue}
-          onChange={e => setTransactionValue(e.target.value)}
-        />
+        <div className={styles.value__inputcontainer}>
+          <Input
+            className={styles.value__input}
+            type='number'
+            name='transaction-value'
+            value=''
+            onInput={e => handleChange(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+          />
+          <div className={styles.value__showcontainer}>
+            <span className={styles.value__show}>{transactionValue.replace('.', ',')}</span>
+            <div className={focused ? styles.value__cursor : ''} />
+          </div>
+        </div>
       </div>
     </>
   );

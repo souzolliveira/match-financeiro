@@ -34,11 +34,11 @@ const Add = ({
   const { setIsLoading } = useLoader();
 
   const [transactionType, setTransactionType] = useState('');
-  const [step, setStep] = useState(steps.TYPE);
+  const [step, setStep] = useState(steps.DATE);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [transactionDate, setTransactionDate] = useState('');
-  const [transactionValue, setTransactionValue] = useState(0);
+  const [transactionValue, setTransactionValue] = useState((0).toFixed(2));
   const [transactionObservation, setTransactionObservation] = useState('');
 
   const [showForms, setShowForms] = useState(false);
@@ -46,16 +46,15 @@ const Add = ({
   const cleanForms = () => {
     setIsAddTransactionFormOpened(false);
     setTransactionType('');
-    setStep(steps.TYPE);
+    setStep(steps.DATE);
     setSelectedCategory('');
     setSelectedSubcategory('');
     setTransactionDate('');
-    setTransactionValue('');
+    setTransactionValue((0).toFixed(2));
     setTransactionObservation('');
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setIsLoading(true);
     await transactionService
       .createTransaction({
@@ -67,7 +66,11 @@ const Add = ({
         transactionObservation,
       })
       .then(() => {
-        fetchTransactions();
+        fetchTransactions({});
+        addToast({
+          content: t('TRANSACTIONS.CREATE.SUCCESS'),
+          type: 'success',
+        });
       })
       .catch(() => {
         addToast({
@@ -109,14 +112,22 @@ const Add = ({
         </Button>
       )}
       {showForms && (
-        <form className={`${styles.add} ${isAddTransactionFormOpened ? '' : styles.hidden}`} onSubmit={e => handleSubmit(e)}>
-          <TransactionType transactionType={transactionType} setTransactionType={setTransactionType} setStep={setStep} />
-          <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} step={step} setStep={setStep} />
+        <div className={`${styles.add} ${isAddTransactionFormOpened ? '' : styles.hidden}`}>
+          <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} setStep={setStep} />
+          <TransactionType
+            transactionType={transactionType}
+            setTransactionType={setTransactionType}
+            setSelectedCategory={setSelectedCategory}
+            setSelectedSubcategory={setSelectedSubcategory}
+            step={step}
+            setStep={setStep}
+          />
           <Categories
             categories={categories.filter(category => category.transaction_type === transactionType)}
             fetchCategories={fetchCategories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
+            setSelectedSubcategory={setSelectedSubcategory}
             step={step}
             setStep={setStep}
             transactionType={transactionType}
@@ -138,8 +149,18 @@ const Add = ({
             step={step}
             setStep={setStep}
           />
-          <Confirm step={step} />
-        </form>
+          <Confirm
+            step={step}
+            handleSubmit={handleSubmit}
+            disabled={
+              transactionType === '' ||
+              transactionDate === '' ||
+              selectedCategory === '' ||
+              selectedSubcategory === '' ||
+              transactionValue === (0).toFixed(2)
+            }
+          />
+        </div>
       )}
       <Button
         type='button'

@@ -17,9 +17,11 @@ const Input = ({
   onChange,
   onPaste,
   onInput,
+  onFocus,
   onBlur,
   onKeyUp,
   disabled,
+  readOnly,
 }) => {
   return (
     <input
@@ -35,11 +37,13 @@ const Input = ({
       onChange={onChange}
       onPaste={onPaste}
       onInput={onInput}
+      onFocus={onFocus}
       onBlur={onBlur}
       onKeyUp={onKeyUp}
       className={`${className} ${styles.input}`}
       style={width ? { width } : null}
       disabled={disabled}
+      readOnly={readOnly}
     />
   );
 };

@@ -38,12 +38,17 @@ const Subcategories = ({
   const [isAddSubcategoryModalVisible, setIsAddSubcategoryModalVisible] = useState(false);
   const [subcategoryName, setSubcategoryName] = useState('');
   const [costing, setCosting] = useState(true);
+  const [isChangedStep, setIsChangedStep] = useState(false);
 
   const handleSelectSubcategory = subcategory => {
     setSelectedSubcategory(subcategory);
     setStep(steps.VALUE);
+    setIsChangedStep(true);
     const valueInput = document.getElementById('transaction-value');
-    if (valueInput) valueInput.focus();
+    if (valueInput) {
+      valueInput.focus();
+      valueInput.value = (0).toFixed(2);
+    }
   };
 
   const handleCreateSubcategory = () => {
@@ -69,7 +74,7 @@ const Subcategories = ({
     <>
       <div
         className={`${styles.subcategories} ${hidden ? styles.subcategories__bottom : ''} ${
-          selectedSubcategory ? styles.subcategories__top : ''
+          isChangedStep ? styles.subcategories__top : ''
         }`}
       >
         <span className={styles.subcategories__label}>{t('SUBCATEGORIES.LABEL')}</span>
@@ -102,7 +107,7 @@ const Subcategories = ({
           </Button>
         </div>
       </div>
-      <div className={selectedSubcategory ? styles.subcategories__selected : styles.subcategories__unselected}>
+      <div className={isChangedStep ? styles.subcategories__selected : styles.subcategories__unselected}>
         <span className={styles.subcategories__label}>{t('FILTERS.SUBCATEGORY')}:</span>
         <Select
           className={styles.subcategories__select}

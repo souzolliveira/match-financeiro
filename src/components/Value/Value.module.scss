@@ -6,7 +6,7 @@
   justify-content: center;
   padding: var(--spacing-base);
   position: fixed;
-  transition: all 600ms ease-out;
+  transition: all 300ms ease-out;
   width: 100%;
 
   .value__label {
@@ -18,22 +18,51 @@
   }
 
   .value__inputcontainer {
-    display: flex;
-    gap: var(--spacing-small);
+    position: relative;
+    width: 100%;
 
-    & > button {
-      width: 36px;
+    .value__showcontainer {
+      display: flex;
+      left: var(--spacing-tiny);
+      position: absolute;
+      top: var(--spacing-tiny);
+    }
+
+    .value__input {
+      color: transparent;
+      width: 100%;
+    }
+
+    .value__show {
+      color: var(--gold-darkest);
+      font-size: var(--font-size-md);
+      line-height: var(--line-height-xs);
+    }
+
+    .value__cursor {
+      animation: spin 500ms ease infinite;
+      height: var(--line-height-xs);
+      width: 2px;
+    }
+
+    @keyframes spin {
+      0% {
+        background-color: var(--gold-darkest);
+      }
+      100% {
+        background-color: transparent;
+      }
     }
   }
 
   &.value__bottom {
     bottom: -100vh;
-    transition: all 600ms ease-out;
+    transition: all 300ms ease-out;
   }
 
   &.value__top {
     bottom: 100vh;
-    transition: all 600ms ease-in;
+    transition: all 300ms ease-in;
   }
 }
 
@@ -43,7 +72,7 @@
   gap: var(--spacing-small);
   opacity: 0;
   padding: var(--spacing-tiny) var(--spacing-base);
-  transition: all 300ms ease-in 600ms;
+  transition: all 300ms ease-in 300ms;
   width: 100%;
 
   .value__label {
@@ -54,8 +83,42 @@
     width: 40%;
   }
 
-  .value__input {
+  .value__inputcontainer {
+    position: relative;
     width: 60%;
+
+    .value__showcontainer {
+      display: flex;
+      left: var(--spacing-tiny);
+      position: absolute;
+      top: var(--spacing-tiny);
+    }
+
+    .value__input {
+      color: transparent;
+      width: 100%;
+    }
+
+    .value__show {
+      color: var(--gold-darkest);
+      font-size: var(--font-size-md);
+      line-height: var(--line-height-xs);
+    }
+
+    .value__cursor {
+      animation: spin 500ms ease infinite;
+      height: var(--line-height-xs);
+      width: 2px;
+    }
+
+    @keyframes spin {
+      0% {
+        background-color: var(--gold-darkest);
+      }
+      100% {
+        background-color: transparent;
+      }
+    }
   }
 }
 

@@ -17,7 +17,16 @@ import Select from 'components/Select/Select';
 
 import styles from './Categories.module.scss';
 
-const Categories = ({ categories, fetchCategories, selectedCategory, setSelectedCategory, step, setStep, transactionType }) => {
+const Categories = ({
+  categories,
+  fetchCategories,
+  selectedCategory,
+  setSelectedCategory,
+  setSelectedSubcategory,
+  step,
+  setStep,
+  transactionType,
+}) => {
   const { t } = useTranslation();
   const { addToast } = useNotification();
   const { hidden } = useHiddenStep({ target: steps.CATEGORY, step });
@@ -26,11 +35,13 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
 
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
   const [categoryName, setCategoryName] = useState('');
+  const [isChangedStep, setIsChangedStep] = useState(false);
 
   const handleSelectCategory = category => {
     setSelectedCategory(category);
     setCategoryName('');
     setStep(steps.SUBCATEGORY);
+    setIsChangedStep(true);
   };
 
   const handleCreateCategory = () => {
@@ -54,7 +65,7 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
 
   return (
     <>
-      <div className={`${styles.categories} ${hidden ? styles.categories__bottom : ''} ${selectedCategory ? styles.categories__top : ''}`}>
+      <div className={`${styles.categories} ${hidden ? styles.categories__bottom : ''} ${isChangedStep ? styles.categories__top : ''}`}>
         <span className={styles.categories__label}>{t('CATEGORIES.LABEL')}</span>
         <div className={styles.categories__items}>
           {categories.map((item, index) => {
@@ -85,13 +96,14 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
           </Button>
         </div>
       </div>
-      <div className={selectedCategory ? styles.categories__selected : styles.categories__unselected}>
+      <div className={isChangedStep ? styles.categories__selected : styles.categories__unselected}>
         <span className={styles.categories__label}>{t('FILTERS.CATEGORY')}:</span>
         <Select
           className={styles.categories__select}
           value={selectedCategory}
           onChange={e => {
             setSelectedCategory(e.target.value);
+            setSelectedSubcategory('');
           }}
         >
           <option value='' disabled>

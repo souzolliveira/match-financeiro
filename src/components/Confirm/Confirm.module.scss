@@ -7,11 +7,11 @@
   margin-top: auto;
   padding: var(--spacing-base);
   position: fixed;
-  transition: all 600ms ease-out;
+  transition: all 300ms ease-out;
   width: 100%;
 
   &.confirm__bottom {
     bottom: -100vh;
-    transition: all 600ms ease-out;
+    transition: all 300ms ease-out;
   }
 }
