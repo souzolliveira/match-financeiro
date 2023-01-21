@@ -37,11 +37,12 @@ const Subcategories = ({
 
   const [isAddSubcategoryModalVisible, setIsAddSubcategoryModalVisible] = useState(false);
   const [subcategoryName, setSubcategoryName] = useState('');
-  const [costing, setCosting] = useState(true);
+  const [costing, setCosting] = useState('');
   const [isChangedStep, setIsChangedStep] = useState(false);
 
   const handleSelectSubcategory = subcategory => {
     setSelectedSubcategory(subcategory);
+    setSubcategoryName('');
     setStep(steps.VALUE);
     setIsChangedStep(true);
     const valueInput = document.getElementById('transaction-value');
@@ -51,9 +52,10 @@ const Subcategories = ({
     }
   };
 
-  const handleCreateSubcategory = () => {
+  const handleCreateSubcategory = async () => {
+    const name = subcategoryName;
     setIsLoading(true);
-    subcategoryService
+    await subcategoryService
       .createSubcategory({ category, costing, name: subcategoryName, transactionType, handleError })
       .then(() => {
         fetchSubcategories();
@@ -67,6 +69,9 @@ const Subcategories = ({
       .finally(() => {
         setIsAddSubcategoryModalVisible(false);
         setIsLoading(false);
+        setSelectedSubcategory(name);
+        setSubcategoryName('');
+        setCosting('');
       });
   };
 
@@ -113,7 +118,13 @@ const Subcategories = ({
           className={styles.subcategories__select}
           value={selectedSubcategory}
           onChange={e => {
-            setSelectedSubcategory(e.target.value);
+            const { value } = e.target;
+            if (value === 'CREATE') {
+              setIsAddSubcategoryModalVisible(true);
+              setSelectedSubcategory('');
+            } else {
+              setSelectedSubcategory(value);
+            }
           }}
         >
           <option value='' disabled>
@@ -126,6 +137,7 @@ const Subcategories = ({
               </option>
             );
           })}
+          <option value='CREATE'>{t('SUBCATEGORIES.CREATE')}</option>
         </Select>
       </div>
       <Modal

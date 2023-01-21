@@ -44,9 +44,10 @@ const Categories = ({
     setIsChangedStep(true);
   };
 
-  const handleCreateCategory = () => {
+  const handleCreateCategory = async () => {
+    const name = categoryName;
     setIsLoading(true);
-    categoryService
+    await categoryService
       .createCategory({ name: categoryName, transactionType, handleError })
       .then(() => {
         fetchCategories();
@@ -60,6 +61,8 @@ const Categories = ({
       .finally(() => {
         setIsAddCategoryModalVisible(false);
         setIsLoading(false);
+        setSelectedCategory(name);
+        setCategoryName('');
       });
   };
 
@@ -102,8 +105,15 @@ const Categories = ({
           className={styles.categories__select}
           value={selectedCategory}
           onChange={e => {
-            setSelectedCategory(e.target.value);
-            setSelectedSubcategory('');
+            const { value } = e.target;
+            if (value === 'CREATE') {
+              setIsAddCategoryModalVisible(true);
+              setSelectedCategory('');
+              setSelectedSubcategory('');
+            } else {
+              setSelectedCategory(value);
+              setSelectedSubcategory('');
+            }
           }}
         >
           <option value='' disabled>
@@ -116,6 +126,7 @@ const Categories = ({
               </option>
             );
           })}
+          <option value='CREATE'>{t('CATEGORIES.CREATE')}</option>
         </Select>
       </div>
       <Modal
