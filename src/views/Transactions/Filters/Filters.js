@@ -66,7 +66,6 @@ const Filters = ({
             setIntermediateCategory('');
             setIntermediateSubcategory('');
           }}
-          defaultValue=''
         >
           <option value='' disabled>
             {t('SELECT')}
@@ -85,7 +84,6 @@ const Filters = ({
             setIntermediateCategory(e.target.value);
             setIntermediateSubcategory('');
           }}
-          defaultValue=''
           disabled={intermediateTransactionType === ''}
         >
           <option value='' disabled>
@@ -108,7 +106,6 @@ const Filters = ({
           className={styles.filters__select}
           value={intermediateSubcategory}
           onChange={e => setIntermediateSubcategory(e.target.value)}
-          defaultValue=''
           disabled={intermediateCategory === ''}
         >
           <option value='' disabled>
@@ -127,12 +124,7 @@ const Filters = ({
       </div>
       <div className={styles.filters__group}>
         <span className={styles.filters__label}>{t('FILTERS.GROUP')}:</span>
-        <Select
-          className={styles.filters__select}
-          value={intermediateGroupBy}
-          onChange={e => setIntermediateGroupBy(e.target.value)}
-          defaultValue=''
-        >
+        <Select className={styles.filters__select} value={intermediateGroupBy} onChange={e => setIntermediateGroupBy(e.target.value)}>
           <option value='' disabled>
             {t('SELECT')}
           </option>
