@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import convertNumbers from 'helpers/convertNumbers';
+import convertToFloat from 'helpers/convertToFloat';
 import { useAuth } from 'hooks/useAuth';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
@@ -41,10 +41,10 @@ const Transactions = () => {
       .listTransactions({ params, handleError })
       .then(data => {
         setTransactions(data.data);
-        setBalance(convertNumbers.convertToFloat(data.balance));
-        setIncomes(convertNumbers.convertToFloat(data.income));
-        setExpenses(convertNumbers.convertToFloat(data.expense));
-        setInvestiments(convertNumbers.convertToFloat(data.investiment));
+        setBalance(convertToFloat(data.balance));
+        setIncomes(convertToFloat(data.income));
+        setExpenses(convertToFloat(data.expense));
+        setInvestiments(convertToFloat(data.investiment));
       })
       .catch(() => {
         addToast({

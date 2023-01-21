@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import bindBalanceColor from 'helpers/bindBalanceColor';
-import convertNumbers from 'helpers/convertNumbers';
+import convertToString from 'helpers/convertToString';
 
 import Icon from 'components/Icon/Icon';
 
@@ -49,9 +49,7 @@ const Balance = ({ active, setActive, balance, incomes, expenses, investiments, 
         className={styles.balance__button}
       >
         <span className={styles.balance__label}>{t('TRANSACTIONS.BALANCE')}</span>
-        <span className={`${styles.balance__value} ${bindBalanceColor(balance, styles)}`}>
-          R$ {convertNumbers.convertToString(balance)}
-        </span>
+        <span className={`${styles.balance__value} ${bindBalanceColor(balance, styles)}`}>R$ {convertToString(balance)}</span>
         <Icon
           name='chevron-top'
           width={24}
@@ -64,15 +62,15 @@ const Balance = ({ active, setActive, balance, incomes, expenses, investiments, 
         <div className={styles.balance__results}>
           <div className={styles.results__column}>
             <span className={styles.results__label}>{t('TRANSACTIONS.INCOMES')}</span>
-            <span className={styles.results__incomes}>R$ {convertNumbers.convertToString(incomes)}</span>
+            <span className={styles.results__incomes}>R$ {convertToString(incomes)}</span>
           </div>
           <div className={styles.results__column}>
             <span className={styles.results__label}>{t('TRANSACTIONS.EXPENSES')}</span>
-            <span className={styles.results__expenses}>R$ {convertNumbers.convertToString(expenses)}</span>
+            <span className={styles.results__expenses}>R$ {convertToString(expenses)}</span>
           </div>
           <div className={styles.results__column}>
             <span className={styles.results__label}>{t('TRANSACTIONS.INVESTIMENTS')}</span>
-            <span className={styles.results__investiments}>R$ {convertNumbers.convertToString(investiments)}</span>
+            <span className={styles.results__investiments}>R$ {convertToString(investiments)}</span>
           </div>
         </div>
         <Filters
