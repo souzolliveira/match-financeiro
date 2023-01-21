@@ -1,9 +1,9 @@
-function convertToFloat(n) {
-  return parseFloat(n.replace(',', '.')).toFixed(2);
+function convertToFloat(s) {
+  return parseFloat(s?.replace(',', '.')).toFixed(2);
 }
 
 function convertToString(n) {
-  return n.replace('.', ',');
+  return n?.replace('.', ',');
 }
 
 const convertNumbers = { convertToFloat, convertToString };
