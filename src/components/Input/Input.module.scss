@@ -1,19 +1,21 @@
 .input {
-  background: var(--gold-lighter);
-  border: 1px solid var(--gold-darker);
-  border-radius: var(--subtle-radius);
-  box-shadow: var(--subtle-inner-shadow);
-  color: var(--gold-darker);
+  background-color: var(--gold-lightest);
+  border: 0;
+  border-bottom: 2px solid var(--gold);
+  color: var(--gold-darkest);
   font-size: var(--font-size-md);
   height: 36px;
   letter-spacing: 0.25px;
   line-height: var(--line-height-xs);
   padding: var(--spacing-tiny);
 
-  &:hover,
+  &:active,
   &:focus,
-  &:active {
-    border: var(--input-border-hover);
+  &:hover {
+    border: 0;
+    border-bottom: 2px solid var(--gold-darker);
+    outline: 0;
+    transition: border ease 300ms;
   }
 
   &:disabled {

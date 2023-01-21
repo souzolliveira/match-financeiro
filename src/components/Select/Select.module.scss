@@ -6,14 +6,14 @@
   color: var(--gold-darkest);
   display: flex;
   flex-direction: column;
-  font-size: 14px;
+  font-size: var(--font-size-md);
   justify-content: space-between;
-  letter-spacing: 0.25px;
-  line-height: 16px;
+  line-height: var(--line-height-xs);
   padding: var(--spacing-tiny);
   transition: border ease 300ms;
   width: 100%;
 
+  &:active,
   &:focus,
   &:hover {
     border: 0;
