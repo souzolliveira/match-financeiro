@@ -23,7 +23,7 @@
     .transactions__count {
       color: var(--gold-dark);
       font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-bold);
       line-height: var(--line-height-simple);
     }
   }
@@ -43,7 +43,7 @@
     .transactions__emptylabel {
       color: var(--gold-dark);
       font-size: var(--font-size-md);
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-bold);
       line-height: var(--line-height-gold);
       margin-top: var(--spacing-base);
     }

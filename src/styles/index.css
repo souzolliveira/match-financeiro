@@ -39,8 +39,9 @@
 
   --font-weight-thin: 300;
   --font-weight-normal: normal;
-  --font-weight-semibold: 700;
-  --font-weight-bold: 900;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 700;
+  --font-weight-bolder: 900;
 
   --line-height-simple: 1;
   --line-height-xs: 1.125;
