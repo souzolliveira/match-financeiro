@@ -30,15 +30,27 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
   };
 
   return (
-    <div className={`${styles.value} ${hidden ? styles.hidden : ''} ${transactionValue ? styles.selected : ''}`}>
-      <span className={styles.value__label}>{t('VALUE.LABEL')}</span>
-      <div className={styles.value__inputcontainer}>
-        <Input id='transaction-value' name='transaction-value' type='number' value={intermediateValue} onChange={e => handleChange(e)} />
-        <Button type='button' kind='outline' onClick={() => handleApply(intermediateValue)}>
-          <Icon name='arrow-right' width={20} height={20} fill='var(--gold-dark)' />
-        </Button>
+    <>
+      <div className={`${styles.value} ${hidden ? styles.value__bottom : ''} ${transactionValue ? styles.value__top : ''}`}>
+        <span className={styles.value__label}>{t('VALUE.LABEL')}</span>
+        <div className={styles.value__inputcontainer}>
+          <Input id='transaction-value' name='transaction-value' type='number' value={intermediateValue} onChange={e => handleChange(e)} />
+          <Button type='button' kind='outline' onClick={() => handleApply(intermediateValue)}>
+            <Icon name='arrow-right' width={20} height={20} fill='var(--gold-dark)' />
+          </Button>
+        </div>
       </div>
-    </div>
+      <div className={transactionValue ? styles.value__selected : styles.value__unselected}>
+        <span className={styles.value__label}>{t('VALUE')}</span>
+        <Input
+          className={styles.value__input}
+          type='number'
+          name='transaction-value'
+          value={transactionValue}
+          onChange={e => setTransactionValue(e.target.value)}
+        />
+      </div>
+    </>
   );
 };
 

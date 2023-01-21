@@ -1,18 +1,17 @@
 .confirm {
+  bottom: var(--spacing-base);
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 2 * (44px + 24px));
+  height: fit-content;
   justify-content: center;
   margin-top: auto;
   padding: var(--spacing-base);
   position: fixed;
-  top: calc(44px + 24px);
-  transition: 600ms ease-out;
+  transition: all 600ms ease-out;
   width: 100%;
 
-  &.hidden {
-    position: fixed;
-    top: 100%;
-    transition: 600ms ease-out;
+  &.confirm__bottom {
+    bottom: -100vh;
+    transition: all 600ms ease-out;
   }
 }

@@ -1,20 +1,20 @@
 .transactionType {
+  bottom: var(--spacing-base);
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 2 * (44px + 24px));
+  height: fit-content;
   justify-content: center;
   padding: var(--spacing-base);
   position: fixed;
-  top: calc(44px + 24px);
-  transition: 600ms ease-out;
+  transition: all 600ms ease-out;
   width: 100%;
 
   .transactionType__label {
     color: var(--gold-darker);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 19px;
-    margin-bottom: var(--spacing-small);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-sm);
+    margin-bottom: var(--spacing-base);
   }
 
   .transactionType__buttons {
@@ -23,9 +23,35 @@
     gap: var(--spacing-small);
   }
 
-  &.selected {
-    position: fixed;
-    top: -100%;
-    transition: 600ms ease-in;
+  &.transactionType__top {
+    bottom: 100vh;
+    transition: all 600ms ease-in;
   }
+}
+
+.transactionType__unselected {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-small);
+  opacity: 0;
+  padding: var(--spacing-tiny) var(--spacing-base);
+  transition: all 300ms ease-in 600ms;
+  width: 100%;
+
+  .transactionType__label {
+    color: var(--gold-darker);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-sm);
+    width: 40%;
+  }
+
+  .transactionType__select {
+    width: 60%;
+  }
+}
+
+.transactionType__selected {
+  @extend .transactionType__unselected;
+  opacity: 1;
 }

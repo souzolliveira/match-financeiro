@@ -14,7 +14,7 @@ const Confirm = ({ step }) => {
   const { hidden } = useHiddenStep({ target: steps.CONFIRM, step });
 
   return (
-    <div className={`${styles.confirm} ${hidden ? styles.hidden : ''}`}>
+    <div className={`${styles.confirm} ${hidden ? styles.confirm__bottom : ''}`}>
       <Button type='submit' size='lg' kind='primary'>
         {t('TRANSACTION.SUBMIT')}
       </Button>

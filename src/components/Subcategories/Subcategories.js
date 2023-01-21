@@ -15,6 +15,7 @@ import Icon from 'components/Icon/Icon';
 import Input from 'components/Input/Input';
 import Modal from 'components/Modal/Modal';
 import Radio from 'components/Radio/Radio';
+import Select from 'components/Select/Select';
 
 import styles from './Subcategories.module.scss';
 
@@ -65,35 +66,62 @@ const Subcategories = ({
   };
 
   return (
-    <div className={`${styles.subcategories} ${hidden ? styles.hidden : ''} ${selectedSubcategory ? styles.selected : ''}`}>
-      <span className={styles.subcategories__label}>{t('SUBCATEGORIES.LABEL')}</span>
-      <div className={styles.subcategories__items}>
-        {subcategories.map((item, index) => {
-          return (
-            <Button
-              key={index}
-              type='button'
-              size='lg'
-              kind='secondary'
-              className={styles.subcategories__button}
-              onClick={() => handleSelectSubcategory(item.subcategory_name)}
-            >
-              {item.subcategory_name}
-            </Button>
-          );
-        })}
-        <Button
-          type='button'
-          size='lg'
-          kind='secondary'
-          className={styles.subcategories__button}
-          onClick={() => {
-            setIsAddSubcategoryModalVisible(true);
+    <>
+      <div
+        className={`${styles.subcategories} ${hidden ? styles.subcategories__bottom : ''} ${
+          selectedSubcategory ? styles.subcategories__top : ''
+        }`}
+      >
+        <span className={styles.subcategories__label}>{t('SUBCATEGORIES.LABEL')}</span>
+        <div className={styles.subcategories__items}>
+          {subcategories.map((item, index) => {
+            return (
+              <Button
+                key={index}
+                type='button'
+                size='lg'
+                kind='secondary'
+                className={styles.subcategories__button}
+                onClick={() => handleSelectSubcategory(item.subcategory_name)}
+              >
+                {item.subcategory_name}
+              </Button>
+            );
+          })}
+          <Button
+            type='button'
+            size='lg'
+            kind='secondary'
+            className={styles.subcategories__button}
+            onClick={() => {
+              setIsAddSubcategoryModalVisible(true);
+            }}
+          >
+            <Icon name='plus' width={18} height={18} fill='var(--gold-darker)' />
+            {t('SUBCATEGORIES.CREATE')}
+          </Button>
+        </div>
+      </div>
+      <div className={selectedSubcategory ? styles.subcategories__selected : styles.subcategories__unselected}>
+        <span className={styles.subcategories__label}>{t('FILTERS.SUBCATEGORY')}:</span>
+        <Select
+          className={styles.subcategories__select}
+          value={selectedSubcategory}
+          onChange={e => {
+            setSelectedSubcategory(e.target.value);
           }}
         >
-          <Icon name='plus' width={18} height={18} fill='var(--gold-darker)' />
-          {t('SUBCATEGORIES.CREATE')}
-        </Button>
+          <option value='' disabled>
+            {t('SELECT')}
+          </option>
+          {subcategories.map((item, index) => {
+            return (
+              <option key={index} value={item.subcategory_name}>
+                {item.subcategory_name}
+              </option>
+            );
+          })}
+        </Select>
       </div>
       <Modal
         canClose
@@ -128,7 +156,7 @@ const Subcategories = ({
           </Button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

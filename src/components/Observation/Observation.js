@@ -28,21 +28,37 @@ const Observation = ({ transactionObservation, setTransactionObservation, step, 
   };
 
   return (
-    <div className={`${styles.observation} ${hidden ? styles.hidden : ''} ${transactionObservation ? styles.selected : ''}`}>
-      <span className={styles.observation__label}>{t('OBSERVATION.LABEL')}</span>
-      <div className={styles.observation__inputcontainer}>
-        <Input
-          id='transaction-observation'
-          name='transaction-observation'
-          type='text'
-          value={intermediateValue}
-          onChange={e => handleChange(e)}
-        />
-        <Button type='button' kind='outline' onClick={() => handleApply(intermediateValue)}>
-          <Icon name='arrow-right' width={20} height={20} fill='var(--gold-dark)' />
-        </Button>
+    <>
+      <div
+        className={`${styles.observation} ${hidden ? styles.observation__bottom : ''} ${
+          transactionObservation ? styles.observation__top : ''
+        }`}
+      >
+        <span className={styles.observation__label}>{t('OBSERVATION.LABEL')}</span>
+        <div className={styles.observation__inputcontainer}>
+          <Input
+            id='transaction-observation'
+            name='transaction-observation'
+            type='text'
+            value={intermediateValue}
+            onChange={e => handleChange(e)}
+          />
+          <Button type='button' kind='outline' onClick={() => handleApply(intermediateValue)}>
+            <Icon name='arrow-right' width={20} height={20} fill='var(--gold-dark)' />
+          </Button>
+        </div>
       </div>
-    </div>
+      <div className={transactionObservation ? styles.observation__selected : styles.observation__unselected}>
+        <span className={styles.observation__label}>{t('OBSERVATION')}</span>
+        <Input
+          className={styles.observation__input}
+          type='text'
+          name='transaction-observation'
+          value={transactionObservation}
+          onChange={e => setTransactionObservation(e.target.value)}
+        />
+      </div>
+    </>
   );
 };
 

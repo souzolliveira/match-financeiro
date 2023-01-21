@@ -23,7 +23,7 @@
   "TRANSACTIONS.INCOMES": "Receitas",
   "TRANSACTIONS.EXPENSES": "Despesas",
   "TRANSACTIONS.INVESTIMENTS": "Investimentos",
-  "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação",
+  "TRANSACTION_TYPE.LABEL": "Selecione o tipo de transação:",
   "TRANSACTION_TYPE.EXPENSE": "Despesa",
   "TRANSACTION_TYPE.INCOME": "Receita",
   "TRANSACTION_TYPE.INVESTIMENT": "Investimento",
@@ -64,8 +64,10 @@
   "SUBCATEGORIES.COSTING.VARIABLE": "Variável",
 
   "VALUE.LABEL": "Informe o valor:",
+  "VALUE": "Valor:",
 
   "OBSERVATION.LABEL": "Alguma observação?",
+  "OBSERVATION": "Observação:",
 
   "CREATE": "Criar",
   "NAME": "Nome",

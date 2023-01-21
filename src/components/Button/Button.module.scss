@@ -4,7 +4,7 @@
   box-sizing: border-box;
   cursor: pointer;
   text-align: center;
-  transition: 600ms ease-out;
+  transition: all 600ms ease-out;
 
   &.primary {
     background-color: var(--color-success);

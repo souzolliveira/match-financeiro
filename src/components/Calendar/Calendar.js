@@ -19,10 +19,22 @@ const Calendar = ({ transactionDate, setTransactionDate, step, setStep }) => {
   };
 
   return (
-    <div className={`${styles.calendar} ${hidden ? styles.hidden : ''}  ${transactionDate ? styles.selected : ''}`}>
-      <span className={styles.calendar__label}>{t('CALENDAR.LABEL')}</span>
-      <Input type='date' name='transaction-date' value={transactionDate} onChange={e => handleChange(e)} />
-    </div>
+    <>
+      <div className={`${styles.calendar} ${hidden ? styles.calendar__bottom : ''}  ${transactionDate ? styles.calendar__top : ''}`}>
+        <span className={styles.calendar__label}>{t('CALENDAR.LABEL')}</span>
+        <Input type='date' name='transaction-date' value={transactionDate} onChange={e => handleChange(e)} />
+      </div>
+      <div className={transactionDate ? styles.calendar__selected : styles.calendar__unselected}>
+        <span className={styles.calendar__label}>{t('CALENDAR.LABEL')}</span>
+        <Input
+          className={styles.calendar__input}
+          type='date'
+          name='transaction-date'
+          value={transactionDate}
+          onChange={e => handleChange(e)}
+        />
+      </div>
+    </>
   );
 };
 

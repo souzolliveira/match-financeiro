@@ -13,6 +13,7 @@ import Button from 'components/Button/Button';
 import Icon from 'components/Icon/Icon';
 import Input from 'components/Input/Input';
 import Modal from 'components/Modal/Modal';
+import Select from 'components/Select/Select';
 
 import styles from './Categories.module.scss';
 
@@ -52,35 +53,58 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
   };
 
   return (
-    <div className={`${styles.categories} ${hidden ? styles.hidden : ''} ${selectedCategory ? styles.selected : ''}`}>
-      <span className={styles.categories__label}>{t('CATEGORIES.LABEL')}</span>
-      <div className={styles.categories__items}>
-        {categories.map((item, index) => {
-          return (
-            <Button
-              key={index}
-              type='button'
-              size='lg'
-              kind='secondary'
-              className={styles.categories__button}
-              onClick={() => handleSelectCategory(item.category_name)}
-            >
-              {item.category_name}
-            </Button>
-          );
-        })}
-        <Button
-          type='button'
-          size='lg'
-          kind='secondary'
-          className={styles.categories__button}
-          onClick={() => {
-            setIsAddCategoryModalVisible(true);
+    <>
+      <div className={`${styles.categories} ${hidden ? styles.categories__bottom : ''} ${selectedCategory ? styles.categories__top : ''}`}>
+        <span className={styles.categories__label}>{t('CATEGORIES.LABEL')}</span>
+        <div className={styles.categories__items}>
+          {categories.map((item, index) => {
+            return (
+              <Button
+                key={index}
+                type='button'
+                size='lg'
+                kind='secondary'
+                className={styles.categories__button}
+                onClick={() => handleSelectCategory(item.category_name)}
+              >
+                {item.category_name}
+              </Button>
+            );
+          })}
+          <Button
+            type='button'
+            size='lg'
+            kind='secondary'
+            className={styles.categories__button}
+            onClick={() => {
+              setIsAddCategoryModalVisible(true);
+            }}
+          >
+            <Icon name='plus' width={18} height={18} fill='var(--gold-darker)' />
+            {t('CATEGORIES.CREATE')}
+          </Button>
+        </div>
+      </div>
+      <div className={selectedCategory ? styles.categories__selected : styles.categories__unselected}>
+        <span className={styles.categories__label}>{t('FILTERS.CATEGORY')}:</span>
+        <Select
+          className={styles.categories__select}
+          value={selectedCategory}
+          onChange={e => {
+            setSelectedCategory(e.target.value);
           }}
         >
-          <Icon name='plus' width={18} height={18} fill='var(--gold-darker)' />
-          {t('CATEGORIES.CREATE')}
-        </Button>
+          <option value='' disabled>
+            {t('SELECT')}
+          </option>
+          {categories.map((item, index) => {
+            return (
+              <option key={index} value={item.category_name}>
+                {item.category_name}
+              </option>
+            );
+          })}
+        </Select>
       </div>
       <Modal
         canClose
@@ -98,7 +122,7 @@ const Categories = ({ categories, fetchCategories, selectedCategory, setSelected
           </Button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 
