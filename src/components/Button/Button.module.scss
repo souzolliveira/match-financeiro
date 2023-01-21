@@ -4,12 +4,19 @@
   box-sizing: border-box;
   cursor: pointer;
   text-align: center;
-  transition: all 600ms ease-out;
+  transition: all 300ms ease-out;
 
   &.primary {
     background-color: var(--color-success);
     box-shadow: var(--subtle-drop-shadow);
     color: var(--gold-lightest);
+
+    &:disabled {
+      background-color: var(--gold-lighter);
+      color: var(--gold);
+      box-shadow: none;
+      cursor: no-drop;
+    }
   }
 
   &.secondary {
