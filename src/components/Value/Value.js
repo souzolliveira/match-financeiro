@@ -26,7 +26,7 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
     if (focused)
       if (e.key === 'Backspace') {
         setTransactionValue(state => (state / 10).toFixed(2));
-      } else if (e.key === 'Enter') {
+      } else if (e.key === 'Enter' || e.key === 'Tab') {
         setStep(steps.OBSERVATION);
         setIsChangedStep(true);
         const valueInput = document.getElementById('transaction-observation');

@@ -21,7 +21,7 @@ const Observation = ({ transactionObservation, setTransactionObservation, step, 
   };
 
   const handleKeyDown = e => {
-    if (focused && e.key === 'Enter') {
+    if (focused && (e.key === 'Enter' || e.key === 'Tab')) {
       setStep(steps.CONFIRM);
       setIsChangedStep(true);
     }
