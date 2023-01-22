@@ -34,7 +34,7 @@ const Transaction = ({ transaction }) => {
         <span className={styles.transaction__header}>{renderHeader()}</span>
         <div className={styles.transaction__main}>
           <span className={styles.transaction__value}>R$ {transaction.value}</span>
-          <span className={styles.transaction__date}>{formatDateFromAPIToFront(transaction.date)}</span>
+          <span className={styles.transaction__date}>{formatDateFromAPIToFront(transaction.transaction_date)}</span>
         </div>
       </div>
     </li>
