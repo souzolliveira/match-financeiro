@@ -34,7 +34,7 @@ function createTransaction({
 
 function listTransactions({ params, handleError }) {
   return api
-    .get(`/transactions?${params && params}`, {
+    .get(`/transactions?${params ?? ''}`, {
       headers: authHeader(),
     })
     .then(handleResponse)

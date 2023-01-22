@@ -66,7 +66,7 @@ const Add = ({
         transactionObservation,
       })
       .then(() => {
-        fetchTransactions({});
+        fetchTransactions();
         addToast({
           content: t('TRANSACTIONS.CREATE.SUCCESS'),
           type: 'success',
