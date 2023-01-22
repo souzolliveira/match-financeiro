@@ -1,10 +1,16 @@
 .appliedFilters {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-tiny);
+  gap: var(--spacing-nano);
 
   .appliedFilters__clear {
+    align-items: center;
+    box-sizing: content-box;
+    display: flex;
     font-weight: bold;
+    height: 24px;
+    justify-content: center;
+    padding: 0 var(--spacing-tiny);
     margin-bottom: var(--spacing-tiny);
   }
 }
