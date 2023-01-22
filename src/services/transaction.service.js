@@ -41,9 +41,19 @@ function listTransactions({ params, handleError }) {
     .catch(handleError);
 }
 
+function lastUpdate({ handleError }) {
+  return api
+    .get('/transactions/last-update', {
+      headers: authHeader(),
+    })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const transactionService = {
   createTransaction,
   listTransactions,
+  lastUpdate,
 };
 
 export default transactionService;

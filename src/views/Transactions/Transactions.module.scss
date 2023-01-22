@@ -18,13 +18,16 @@
       font-size: var(--font-size-h3);
       font-weight: var(--font-weight-thin);
       line-height: var(--line-height-simple);
+      width: 50%;
     }
 
-    .transactions__count {
+    .transactions__lastupdate {
       color: var(--gold-dark);
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-bold);
       line-height: var(--line-height-simple);
+      text-align: right;
+      width: 50%;
     }
   }
 

@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 import convertToFloat from 'helpers/convertToFloat';
 import { useAuth } from 'hooks/useAuth';
+import useDate from 'hooks/useDate';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
+import useTime from 'hooks/useTime';
 import categoryService from 'services/category.service';
 import subcategoryService from 'services/subcategory.service';
 import transactionService from 'services/transaction.service';
@@ -23,6 +25,8 @@ const Transactions = () => {
   const { addToast } = useNotification();
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
+  const { formatDateFromAPIToFront } = useDate();
+  const { bindHour } = useTime();
 
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -31,6 +35,7 @@ const Transactions = () => {
   const [incomes, setIncomes] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [investiments, setInvestiments] = useState(0);
+  const [lastUpdate, setLastUpdate] = useState('');
 
   const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
   const [isFiltersTabOpened, setIsFiltersTabOpened] = useState(false);
@@ -55,6 +60,9 @@ const Transactions = () => {
       .finally(() => {
         setIsLoading(false);
       });
+    await transactionService.lastUpdate({ handleError }).then(data => {
+      setLastUpdate(data?.date);
+    });
   };
 
   const fetchCategories = async () => {
@@ -106,9 +114,9 @@ const Transactions = () => {
     <div className={styles.transactions}>
       <div className={styles.transactions__header}>
         <h3 className={styles.transactions__title}>{t('TRANSACTIONS')}</h3>
-        {!!transactions.length && (
-          <span className={styles.transactions__count}>{t('TRANSACTIONS.COUNT', { count: transactions.length })}</span>
-        )}
+        <span className={styles.transactions__lastupdate}>
+          {t('TRANSACTIONS.LAST.UPDATE', { date: formatDateFromAPIToFront(lastUpdate), time: bindHour(lastUpdate) })}
+        </span>
       </div>
       <div className={styles.transactions__container}>
         <div className={styles.transactions__line} />

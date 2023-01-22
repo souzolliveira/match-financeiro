@@ -19,6 +19,7 @@
   "TRANSACTIONS.CREATE.SUCCESS": "Transação criada com sucesso",
   "TRANSACTIONS.CREATE.ERROR": "Erro ao tentar criar transação",
   "TRANSACTIONS.COUNT": "{{count}} transações encontradas",
+  "TRANSACTIONS.LAST.UPDATE": "Última atualização feita por você em {{date}} às {{time}}",
   "TRANSACTIONS.EMPTY": "Nenhuma transação encontrada",
   "TRANSACTIONS.BALANCE": "Saldo:",
   "TRANSACTIONS.INCOMES": "Receitas",
