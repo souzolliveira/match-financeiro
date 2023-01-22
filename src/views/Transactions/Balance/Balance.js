@@ -17,6 +17,8 @@ const Balance = ({ active, setActive, balance, incomes, expenses, investiments, 
   const nav = useRef(null);
   const header = useRef(null);
 
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [transactionType, setTransactionType] = useState('');
   const [category, setCategory] = useState('');
   const [subcategory, setSubcategory] = useState('');
@@ -75,6 +77,10 @@ const Balance = ({ active, setActive, balance, incomes, expenses, investiments, 
         </div>
         <Filters
           setActive={setActive}
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
           categories={categories}
           subcategories={subcategories}
           transactionType={transactionType}

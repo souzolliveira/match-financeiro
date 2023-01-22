@@ -30,7 +30,8 @@
   "TRANSACTION_TYPE.INVESTIMENT": "Investimento",
   "TRANSACTION.SUBMIT": "Adicionar transação",
 
-  "FILTERS.PERIOD": "Período",
+  "FILTERS.DATE.START": "Data inicial",
+  "FILTERS.DATE.END": "Data final",
   "FILTERS.TRANSACTION_TYPE": "Tipo de transação",
   "FILTERS.INCOMES": "Receitas",
   "FILTERS.INCOME": "Receitas",

@@ -7,6 +7,7 @@ import transactionTypes from 'constants/transactionTypes';
 import handleParams from 'helpers/handleParams';
 
 import Button from 'components/Button/Button';
+import Input from 'components/Input/Input';
 import Select from 'components/Select/Select';
 
 import AppliedFilters from '../AppliedFilters/AppliedFilters';
@@ -15,6 +16,10 @@ import styles from './Filters.module.scss';
 
 const Filters = ({
   setActive,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
   categories,
   subcategories,
   transactionType,
@@ -29,6 +34,8 @@ const Filters = ({
 }) => {
   const { t } = useTranslation();
 
+  const [intermediateStartDate, setIntermediateStartDate] = useState(startDate);
+  const [intermediateEndDate, setIntermediateEndDate] = useState(endDate);
   const [intermediateTransactionType, setIntermediateTransactionType] = useState(transactionType);
   const [intermediateCategory, setIntermediateCategory] = useState(category);
   const [intermediateSubcategory, setIntermediateSubcategory] = useState(subcategory);
@@ -36,12 +43,16 @@ const Filters = ({
 
   const handleFilter = () => {
     setActive(false);
+    setStartDate(intermediateStartDate);
+    setEndDate(intermediateEndDate);
     setTransactionType(intermediateTransactionType);
     setCategory(intermediateCategory);
     setSubcategory(intermediateSubcategory);
     setGroupBy(intermediateGroupBy);
     fetchTransactions(
       handleParams({
+        startDate: intermediateStartDate,
+        endDate: intermediateEndDate,
         transactionType: intermediateTransactionType,
         category: intermediateCategory,
         subcategory: intermediateSubcategory,
@@ -53,8 +64,24 @@ const Filters = ({
   return (
     <div className={styles.filters}>
       <div className={styles.filters__group}>
-        <span className={styles.filters__label}>{t('FILTERS.PERIOD')}:</span>
-        <input type='date' />
+        <span className={styles.filters__label}>{t('FILTERS.DATE.START')}:</span>
+        <Input
+          className={styles.filters__input}
+          type='date'
+          name='start-date'
+          value={intermediateStartDate}
+          onChange={e => setIntermediateStartDate(e.target.value)}
+        />
+      </div>
+      <div className={styles.filters__group}>
+        <span className={styles.filters__label}>{t('FILTERS.DATE.END')}:</span>
+        <Input
+          className={styles.filters__input}
+          type='date'
+          name='end-date'
+          value={intermediateEndDate}
+          onChange={e => setIntermediateEndDate(e.target.value)}
+        />
       </div>
       <div className={styles.filters__group}>
         <span className={styles.filters__label}>{t('FILTERS.TRANSACTION_TYPE')}:</span>
@@ -139,6 +166,13 @@ const Filters = ({
         </Button>
       </div>
       <AppliedFilters
+        setActive={setActive}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        setIntermediateStartDate={setIntermediateStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+        setIntermediateEndDate={setIntermediateEndDate}
         transactionType={transactionType}
         setTransactionType={setTransactionType}
         setIntermediateTransactionType={setIntermediateTransactionType}
@@ -151,7 +185,6 @@ const Filters = ({
         groupBy={groupBy}
         setGroupBy={setGroupBy}
         setIntermediateGroupBy={setIntermediateGroupBy}
-        setActive={setActive}
         fetchTransactions={fetchTransactions}
       />
     </div>
