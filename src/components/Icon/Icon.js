@@ -11,6 +11,7 @@ import Logout from './Icons/Logout';
 import Plus from './Icons/Plus';
 import Stats from './Icons/Stats';
 import Transactions from './Icons/Transactions';
+import User from './Icons/User';
 
 const Icon = ({ name, width, height, fill, className }) => {
   switch (name) {
@@ -36,6 +37,8 @@ const Icon = ({ name, width, height, fill, className }) => {
       return <Stats fill={fill} width={width} height={height} className={className} />;
     case 'transactions':
       return <Transactions fill={fill} width={width} height={height} className={className} />;
+    case 'user':
+      return <User fill={fill} width={width} height={height} className={className} />;
     default:
       return <div />;
   }
