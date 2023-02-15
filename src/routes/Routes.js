@@ -11,6 +11,7 @@ import Stats from 'views/Stats/Stats';
 import Transactions from 'views/Transactions/Transactions';
 
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
+import User from 'components/User/User';
 
 const Routes = () => {
   const { loader } = useLoader();
@@ -23,6 +24,7 @@ const Routes = () => {
           <Route exact path='/' element={<Home />} />
           <Route exact path='/transactions' element={<Transactions />} />
           <Route exact path='/stats' element={<Stats />} />
+          <Route exact path='/user' element={<User />} />
         </Route>
         <Route path='*' element={<NotFound />} />
         <Route path='/login' element={<Login />} />

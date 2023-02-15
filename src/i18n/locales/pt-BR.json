@@ -5,6 +5,7 @@
 
   "LOGIN": "Login",
   "LOGIN.ERROR": "Erro ao tentar fazer login",
+  "LOGOUT": "Logout",
 
   "REGISTER": "Cadastrar",
   "REGISTER.WARNING.FIELDS": "É necessário preencher todos os campos",
@@ -78,5 +79,6 @@
   "PHONE": "Telefone celular",
   "PASSWORD": "Senha",
   "PASSWORD.CONFIRM": "Confirmar senha",
-  "SELECT": "Selecione..."
+  "SELECT": "Selecione...",
+  "CATEGORIES": "Categorias e subcategorias"
 }
