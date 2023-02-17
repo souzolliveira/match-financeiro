@@ -7,12 +7,20 @@ import Modal from 'components/Modal/Modal';
 
 import styles from './DeleteCategory.module.scss';
 
-const DeleteCategory = ({ isDeleteCategoryModalVisible, setIsDeleteCategoryModalVisible, selectedCategory, setSelectedCategory }) => {
+const DeleteCategory = ({
+  isDeleteCategoryModalVisible,
+  setIsDeleteCategoryModalVisible,
+  selectedCategory,
+  setSelectedCategory,
+  hasTransactions,
+  setHasTransactions,
+}) => {
   const { t } = useTranslation();
 
   const handleModalClose = () => {
     setIsDeleteCategoryModalVisible(false);
     setSelectedCategory(null);
+    setHasTransactions(false);
   };
 
   return (
@@ -27,23 +35,41 @@ const DeleteCategory = ({ isDeleteCategoryModalVisible, setIsDeleteCategoryModal
       <div className={styles.modal__content}>
         <div className={styles.modal__body}>
           <span className={styles.modal__label}>
-            <Trans
-              i18nKey='CATEGORIES.DELETE.DESCRIPTION'
-              values={{
-                category: selectedCategory?.category_name,
-                transactionType: t(`TRANSACTION_TYPE.${selectedCategory?.transaction_type}`),
-              }}
-            />
+            {!hasTransactions ? (
+              <Trans
+                i18nKey='CATEGORIES.DELETE.DESCRIPTION'
+                values={{
+                  category: selectedCategory?.category_name,
+                  transactionType: t(`TRANSACTION_TYPE.${selectedCategory?.transaction_type}`),
+                }}
+              />
+            ) : (
+              <Trans
+                i18nKey='CATEGORIES.DELETE.FORBIDDEN'
+                values={{
+                  category: selectedCategory?.category_name,
+                  transactionType: t(`TRANSACTION_TYPE.${selectedCategory?.transaction_type}`),
+                }}
+              />
+            )}
           </span>
         </div>
-        <div className={styles.modal__footer}>
-          <Button kind='outline' size='md' onClick={() => handleModalClose()}>
-            {t('CANCEL')}
-          </Button>
-          <Button kind='danger' size='md'>
-            {t('DELETE')}
-          </Button>
-        </div>
+        {!hasTransactions ? (
+          <div className={styles.modal__footer}>
+            <Button kind='outline' size='md' onClick={() => handleModalClose()}>
+              {t('CANCEL')}
+            </Button>
+            <Button kind='danger' size='md'>
+              {t('DELETE')}
+            </Button>
+          </div>
+        ) : (
+          <div className={styles.modal__close}>
+            <Button kind='outline' size='md' onClick={() => handleModalClose()}>
+              {t('CLOSE')}
+            </Button>
+          </div>
+        )}
       </div>
     </Modal>
   );

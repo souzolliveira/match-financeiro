@@ -17,13 +17,13 @@ const List = ({
   setOpenedCategory,
   setIsNewCategoryModalVisible,
   setNewCategoryType,
-  setIsDeleteCategoryModalVisible,
+  handleDeleteCategory,
   setIsEditCategoryModalVisible,
   setSelectedCategory,
   setIsNewSubcategoryModalVisible,
   setNewSubcategoryType,
   setNewSubcategoryCategory,
-  setIsDeleteSubcategoryModalVisible,
+  handleDeleteSubcategory,
   setIsEditSubcategoryModalVisible,
   setSelectedSubcategory,
 }) => {
@@ -44,12 +44,6 @@ const List = ({
     setNewCategoryType(transactionType);
   };
 
-  const handleDeleteCategory = (e, category) => {
-    e.stopPropagation();
-    setIsDeleteCategoryModalVisible(true);
-    setSelectedCategory(category);
-  };
-
   const handleEditCategory = (e, category) => {
     e.stopPropagation();
     setIsEditCategoryModalVisible(true);
@@ -61,12 +55,6 @@ const List = ({
     setIsNewSubcategoryModalVisible(true);
     setNewSubcategoryType(category.transaction_type);
     setNewSubcategoryCategory(category.category_name);
-  };
-
-  const handleDeleteSubcategory = (e, subcategory) => {
-    e.stopPropagation();
-    setIsDeleteSubcategoryModalVisible(true);
-    setSelectedSubcategory(subcategory);
   };
 
   const handleEditSubcategory = (e, subcategory) => {
@@ -95,7 +83,13 @@ const List = ({
               tabIndex={0}
             >
               <div className={styles.list__categoryname}>
-                <Icon name='chevron-top' width={24} height={24} fill='var(--gold-darker)' />
+                <Icon
+                  name='chevron-top'
+                  width={24}
+                  height={24}
+                  fill='var(--gold-darker)'
+                  className={`${styles.list__icon} ${isCategoryOpened(category) ? styles.list__opened : ''}`}
+                />
                 <span className={styles.list__label}>{category.category_name}</span>
                 <Fill />
                 <div className={styles.list__buttons}>

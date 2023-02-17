@@ -49,6 +49,15 @@
       display: flex;
       gap: var(--spacing-tiny);
 
+      .list__icon {
+        transition: all ease 300ms;
+
+        &.list__opened {
+          transform: rotate(180deg);
+          transition: all ease 300ms;
+        }
+      }
+
       .list__label {
         color: var(--gold-darker);
         font-size: var(--font-size-md);

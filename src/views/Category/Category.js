@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import transactionTypes from 'constants/transactionTypes';
+import handleParams from 'helpers/handleParams';
 import { useAuth } from 'hooks/useAuth';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import categoryService from 'services/category.service';
 import subcategoryService from 'services/subcategory.service';
+import transactionService from 'services/transaction.service';
 
 import Fill from 'components/Fill/Fill';
 import Icon from 'components/Icon/Icon';
@@ -48,6 +50,19 @@ const Category = () => {
   const [isDeleteSubcategoryModalVisible, setIsDeleteSubcategoryModalVisible] = useState(false);
   const [isEditSubcategoryModalVisible, setIsEditSubcategoryModalVisible] = useState(false);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [hasTransactions, setHasTransactions] = useState(false);
+
+  const fetchTransactions = async params => {
+    setIsLoading(true);
+    await transactionService
+      .listTransactions({ params, handleError })
+      .then(data => {
+        setHasTransactions(!!data.data.length);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const fetchCategories = async () => {
     setIsLoading(true);
@@ -93,6 +108,26 @@ const Category = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleDeleteCategory = async (e, category) => {
+    e.stopPropagation();
+    await fetchTransactions(handleParams({ transactionType: category?.transaction_type, category: category?.category_name }));
+    setIsDeleteCategoryModalVisible(true);
+    setSelectedCategory(category);
+  };
+
+  const handleDeleteSubcategory = async (e, subcategory) => {
+    e.stopPropagation();
+    await fetchTransactions(
+      handleParams({
+        transactionType: subcategory?.transaction_type,
+        category: subcategory?.category_name,
+        subcategory: subcategory?.subcategory_name,
+      })
+    );
+    setIsDeleteSubcategoryModalVisible(true);
+    setSelectedSubcategory(subcategory);
+  };
+
   return (
     <div className={styles.category}>
       <div className={styles.category__header}>
@@ -117,13 +152,13 @@ const Category = () => {
               setOpenedCategory={setOpenedCategory}
               setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
               setNewCategoryType={setNewCategoryType}
-              setIsDeleteCategoryModalVisible={setIsDeleteCategoryModalVisible}
+              handleDeleteCategory={handleDeleteCategory}
               setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
               setSelectedCategory={setSelectedCategory}
               setIsNewSubcategoryModalVisible={setIsNewSubcategoryModalVisible}
               setNewSubcategoryType={setNewSubcategoryType}
               setNewSubcategoryCategory={setNewSubcategoryCategory}
-              setIsDeleteSubcategoryModalVisible={setIsDeleteSubcategoryModalVisible}
+              handleDeleteSubcategory={handleDeleteSubcategory}
               setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
               setSelectedSubcategory={setSelectedSubcategory}
             />
@@ -144,6 +179,8 @@ const Category = () => {
         setIsDeleteCategoryModalVisible={setIsDeleteCategoryModalVisible}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        hasTransactions={hasTransactions}
+        setHasTransactions={setHasTransactions}
       />
       <EditCategory
         isEditCategoryModalVisible={isEditCategoryModalVisible}
@@ -171,6 +208,8 @@ const Category = () => {
         setIsDeleteSubcategoryModalVisible={setIsDeleteSubcategoryModalVisible}
         selectedSubcategory={selectedSubcategory}
         setSelectedSubcategory={setSelectedSubcategory}
+        hasTransactions={hasTransactions}
+        setHasTransactions={setHasTransactions}
       />
       <EditSubcategory
         isEditSubcategoryModalVisible={isEditSubcategoryModalVisible}

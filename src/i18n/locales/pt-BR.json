@@ -64,6 +64,7 @@
   "CATEGORIES.NEW.ERROR": "Erro ao criar nova categoria",
   "CATEGORIES.DELETE": "Apagar categoria",
   "CATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a categoria <strong>{{category}}</strong> de <strong>{{transactionType}}</strong>?",
+  "CATEGORIES.DELETE.FORBIDDEN": "Você não pode apagar a categoria <strong>{{category}}</strong> de <strong>{{transactionType}}</strong>, pois existem transações cadastradas com ela",
   "CATEGORIES.EDIT": "Editar categoria",
   "CATEGORIES.EDIT.DESCRIPTION": "Digite o novo nome da categoria:",
   "CATEGORIES.EDIT.SUCCESS": "Categoria editada com sucesso",
@@ -83,6 +84,7 @@
   "SUBCATEGORIES.EMPTY": "Nenhuma subcategoria encontrada",
   "SUBCATEGORIES.DELETE": "Apagar subcategoria",
   "SUBCATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a subcategoria <strong>{{subcategory}}</strong> da categoria <strong>{{category}}</strong> de <strong>{{transactionType}}</strong>?",
+  "SUBCATEGORIES.DELETE.FORBIDDEN": "Você não pode apagar a subcategoria <strong>{{subcategory}}</strong> da categoria <strong>{{category}}</strong> de <strong>{{transactionType}}</strong>, pois existem transações cadastradas com ela",
   "SUBCATEGORIES.EDIT": "Editar subcategoria",
   "SUBCATEGORIES.EDIT.DESCRIPTION": "Digite o novo nome da subcategoria:",
   "SUBCATEGORIES.EDIT.SUCCESS": "Subcategoria editada com sucesso",
@@ -103,5 +105,6 @@
   "SELECT": "Selecione...",
   "CANCEL": "Cancelar",
   "SAVE": "Salvar",
-  "DELETE": "Apagar"
+  "DELETE": "Apagar",
+  "CLOSE": "Fechar"
 }
