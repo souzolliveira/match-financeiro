@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 import Button from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
@@ -32,11 +32,14 @@ const DeleteSubcategory = ({
       <div className={styles.modal__content}>
         <div className={styles.modal__body}>
           <span className={styles.modal__label}>
-            {t('SUBCATEGORIES.DELETE.DESCRIPTION', {
-              subcategory: selectedSubcategory?.subcategory_name,
-              category: selectedSubcategory?.category_name,
-              transactionType: t(`TRANSACTION_TYPE.${selectedSubcategory?.transaction_type}`),
-            })}
+            <Trans
+              i18nKey='SUBCATEGORIES.DELETE.DESCRIPTION'
+              values={{
+                subcategory: selectedSubcategory?.subcategory_name,
+                category: selectedSubcategory?.category_name,
+                transactionType: t(`TRANSACTION_TYPE.${selectedSubcategory?.transaction_type}`),
+              }}
+            />
           </span>
         </div>
         <div className={styles.modal__footer}>

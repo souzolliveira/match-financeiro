@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 import Button from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
@@ -27,10 +27,13 @@ const DeleteCategory = ({ isDeleteCategoryModalVisible, setIsDeleteCategoryModal
       <div className={styles.modal__content}>
         <div className={styles.modal__body}>
           <span className={styles.modal__label}>
-            {t('CATEGORIES.DELETE.DESCRIPTION', {
-              category: selectedCategory?.category_name,
-              transactionType: t(`TRANSACTION_TYPE.${selectedCategory?.transaction_type}`),
-            })}
+            <Trans
+              i18nKey='CATEGORIES.DELETE.DESCRIPTION'
+              values={{
+                category: selectedCategory?.category_name,
+                transactionType: t(`TRANSACTION_TYPE.${selectedCategory?.transaction_type}`),
+              }}
+            />
           </span>
         </div>
         <div className={styles.modal__footer}>
