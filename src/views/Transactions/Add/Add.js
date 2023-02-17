@@ -8,14 +8,15 @@ import { useNotification } from 'hooks/useNotification';
 import transactionService from 'services/transaction.service';
 
 import Button from 'components/Button/Button';
-import Calendar from 'components/Calendar/Calendar';
-import Categories from 'components/Categories/Categories';
-import Confirm from 'components/Confirm/Confirm';
 import Icon from 'components/Icon/Icon';
-import Observation from 'components/Observation/Observation';
-import Subcategories from 'components/Subcategories/Subcategories';
-import TransactionType from 'components/TransactionType/TransactionType';
-import Value from 'components/Value/Value';
+
+import Calendar from './Calendar/Calendar';
+import Categories from './Categories/Categories';
+import Confirm from './Confirm/Confirm';
+import Observation from './Observation/Observation';
+import Subcategories from './Subcategories/Subcategories';
+import TransactionType from './TransactionType/TransactionType';
+import Value from './Value/Value';
 
 import styles from './Add.module.scss';
 
