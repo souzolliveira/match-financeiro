@@ -16,6 +16,7 @@
 
     button {
       margin: 0;
+      outline: 0;
       padding: 0;
     }
   }
@@ -35,31 +36,81 @@
     width: 100%;
   }
 
-  .list__item {
-    align-items: center;
+  .list__category {
     display: flex;
     background-color: var(--gold-lightest);
     border-radius: var(--subtle-radius);
-    gap: var(--spacing-tiny);
+    flex-direction: column;
     padding: var(--spacing-small);
+    outline: 0;
 
-    .list__label {
-      color: var(--gold-darker);
-      font-size: var(--font-size-md);
-      font-weight: var(--font-weight-semibold);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    .list__categoryname {
+      align-items: center;
+      display: flex;
+      gap: var(--spacing-tiny);
+
+      .list__label {
+        color: var(--gold-darker);
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-semibold);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .list__buttons {
+        display: flex;
+        gap: var(--spacing-small);
+
+        button {
+          margin: 0;
+          outline: 0;
+          padding: 0;
+        }
+      }
     }
 
-    .list__buttons {
+    .list__subcategories {
       display: flex;
-      gap: var(--spacing-small);
+      flex-direction: column;
+      gap: var(--spacing-tiny);
+      margin-top: var(--spacing-small);
 
-      button {
-        margin: 0;
-        outline: 0;
-        padding: 0;
+      .list__subcategory {
+        align-items: center;
+        border-bottom: 1px solid var(--gold-light);
+        display: flex;
+        gap: var(--spacing-tiny);
+        padding: var(--spacing-tiny) 0;
+
+        .list__label {
+          color: var(--gold-dark);
+          font-size: var(--font-size-sm);
+          font-weight: var(--font-weight-semibold);
+          overflow: hidden;
+          padding-left: var(--spacing-tiny);
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .list__buttons {
+          display: flex;
+          gap: var(--spacing-small);
+
+          button {
+            margin: 0;
+            outline: 0;
+            padding: 0;
+          }
+        }
+      }
+
+      .list__empty {
+        color: var(--gold-dark);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+        text-align: center;
+        width: 100%;
       }
     }
   }
