@@ -38,9 +38,29 @@ function listSubcategory({ transactionType, categoryName, handleError }) {
     .catch(handleError);
 }
 
+function updateSubcategory({ transactionType, category, name, newName, costing, handleError }) {
+  return api
+    .put(
+      '/subcategory',
+      {
+        transaction_type: transactionType,
+        category,
+        name,
+        newName,
+        costing,
+      },
+      {
+        headers: authHeader(),
+      }
+    )
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const subcategoryService = {
   createSubcategory,
   listSubcategory,
+  updateSubcategory,
 };
 
 export default subcategoryService;

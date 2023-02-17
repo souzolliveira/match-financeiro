@@ -21,9 +21,9 @@ const EditCategory = ({
   fetchCategories,
 }) => {
   const { addToast } = useNotification();
-  const { t } = useTranslation();
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
+  const { t } = useTranslation();
 
   const [intermediateValue, setIntermediateValue] = useState(null);
 
@@ -37,6 +37,10 @@ const EditCategory = ({
   };
 
   const handleSave = () => {
+    if (selectedCategory?.category_name === intermediateValue) {
+      handleModalClose();
+      return;
+    }
     setIsLoading(true);
     categoryService
       .updateCategory({

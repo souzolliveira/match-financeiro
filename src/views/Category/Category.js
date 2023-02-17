@@ -177,6 +177,7 @@ const Category = () => {
         setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
         selectedSubcategory={selectedSubcategory}
         setSelectedSubcategory={setSelectedSubcategory}
+        fetchSubcategories={fetchSubcategories}
       />
     </div>
   );

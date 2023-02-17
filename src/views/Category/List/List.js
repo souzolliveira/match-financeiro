@@ -119,7 +119,7 @@ const List = ({
                         return (
                           <div className={styles.list__subcategory}>
                             <span className={styles.list__label}>
-                              {subcategory.subcategory_name} - {t(`SUBCATEGORIES.COSTING.${costingTypes.VARIABLE}`)}
+                              {subcategory.subcategory_name} - {t(`SUBCATEGORIES.COSTING.${costingTypes[subcategory.costing]}`)}
                             </span>
                             <Fill />
                             <div className={styles.list__buttons}>

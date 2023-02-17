@@ -85,6 +85,8 @@
   "SUBCATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a subcategoria <strong>{{subcategory}}</strong> da categoria <strong>{{category}}</strong> de <strong>{{transactionType}}</strong>?",
   "SUBCATEGORIES.EDIT": "Editar subcategoria",
   "SUBCATEGORIES.EDIT.DESCRIPTION": "Digite o novo nome da subcategoria:",
+  "SUBCATEGORIES.EDIT.SUCCESS": "Subcategoria editada com sucesso",
+  "SUBCATEGORIES.EDIT.ERROR": "Erro ao editar subcategoria",
 
   "VALUE.LABEL": "Informe o valor:",
   "VALUE": "Valor:",
