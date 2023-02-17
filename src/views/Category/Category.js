@@ -107,54 +107,28 @@ const Category = () => {
       </div>
       <Fill />
       <div className={styles.category__list}>
-        <List
-          transactionType={transactionTypes.INCOME}
-          categories={categories.filter(category => category.transaction_type === transactionTypes.INCOME)}
-          subcategories={subcategories}
-          openedCategory={openedCategory}
-          setOpenedCategory={setOpenedCategory}
-          setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
-          setNewCategoryType={setNewCategoryType}
-          setIsDeleteCategoryModalVisible={setIsDeleteCategoryModalVisible}
-          setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
-          setSelectedCategory={setSelectedCategory}
-          setIsNewSubcategoryModalVisible={setIsNewSubcategoryModalVisible}
-          setNewSubcategoryType={setNewSubcategoryType}
-          setNewSubcategoryCategory={setNewSubcategoryCategory}
-          setIsDeleteSubcategoryModalVisible={setIsDeleteSubcategoryModalVisible}
-          setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
-          setSelectedSubcategory={setSelectedSubcategory}
-        />
-        <List
-          transactionType={transactionTypes.EXPENSE}
-          categories={categories.filter(category => category.transaction_type === transactionTypes.EXPENSE)}
-          setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
-          setNewCategoryType={setNewCategoryType}
-          setIsDeleteCategoryModalVisible={setIsDeleteCategoryModalVisible}
-          setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
-          setSelectedCategory={setSelectedCategory}
-          setIsNewSubcategoryModalVisible={setIsNewSubcategoryModalVisible}
-          setNewSubcategoryType={setNewSubcategoryType}
-          setNewSubcategoryCategory={setNewSubcategoryCategory}
-          setIsDeleteSubcategoryModalVisible={setIsDeleteSubcategoryModalVisible}
-          setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
-          setSelectedSubcategory={setSelectedSubcategory}
-        />
-        <List
-          transactionType={transactionTypes.INVESTIMENT}
-          categories={categories.filter(category => category.transaction_type === transactionTypes.INVESTIMENT)}
-          setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
-          setNewCategoryType={setNewCategoryType}
-          setIsDeleteCategoryModalVisible={setIsDeleteCategoryModalVisible}
-          setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
-          setSelectedCategory={setSelectedCategory}
-          setIsNewSubcategoryModalVisible={setIsNewSubcategoryModalVisible}
-          setNewSubcategoryType={setNewSubcategoryType}
-          setNewSubcategoryCategory={setNewSubcategoryCategory}
-          setIsDeleteSubcategoryModalVisible={setIsDeleteSubcategoryModalVisible}
-          setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
-          setSelectedSubcategory={setSelectedSubcategory}
-        />
+        {[transactionTypes.INCOME, transactionTypes.EXPENSE, transactionTypes.INVESTIMENT].map(transactionType => {
+          return (
+            <List
+              transactionType={transactionTypes[transactionType]}
+              categories={categories.filter(category => category.transaction_type === transactionTypes[transactionType])}
+              subcategories={subcategories}
+              openedCategory={openedCategory}
+              setOpenedCategory={setOpenedCategory}
+              setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
+              setNewCategoryType={setNewCategoryType}
+              setIsDeleteCategoryModalVisible={setIsDeleteCategoryModalVisible}
+              setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
+              setSelectedCategory={setSelectedCategory}
+              setIsNewSubcategoryModalVisible={setIsNewSubcategoryModalVisible}
+              setNewSubcategoryType={setNewSubcategoryType}
+              setNewSubcategoryCategory={setNewSubcategoryCategory}
+              setIsDeleteSubcategoryModalVisible={setIsDeleteSubcategoryModalVisible}
+              setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
+              setSelectedSubcategory={setSelectedSubcategory}
+            />
+          );
+        })}
       </div>
       <NewCategory
         isNewCategoryModalVisible={isNewCategoryModalVisible}
@@ -176,6 +150,7 @@ const Category = () => {
         setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        fetchCategories={fetchCategories}
       />
       <NewSubcategory
         isNewSubcategoryModalVisible={isNewSubcategoryModalVisible}

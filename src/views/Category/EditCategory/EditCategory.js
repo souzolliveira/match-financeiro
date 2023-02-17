@@ -2,14 +2,28 @@ import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import { useAuth } from 'hooks/useAuth';
+import { useLoader } from 'hooks/useLoader';
+import { useNotification } from 'hooks/useNotification';
+import categoryService from 'services/category.service';
+
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 import Modal from 'components/Modal/Modal';
 
 import styles from './EditCategory.module.scss';
 
-const EditCategory = ({ isEditCategoryModalVisible, setIsEditCategoryModalVisible, selectedCategory, setSelectedCategory }) => {
+const EditCategory = ({
+  isEditCategoryModalVisible,
+  setIsEditCategoryModalVisible,
+  selectedCategory,
+  setSelectedCategory,
+  fetchCategories,
+}) => {
+  const { addToast } = useNotification();
   const { t } = useTranslation();
+  const { handleError } = useAuth();
+  const { setIsLoading } = useLoader();
 
   const [intermediateValue, setIntermediateValue] = useState(null);
 
@@ -20,6 +34,34 @@ const EditCategory = ({ isEditCategoryModalVisible, setIsEditCategoryModalVisibl
   const handleModalClose = () => {
     setIsEditCategoryModalVisible(false);
     setSelectedCategory(null);
+  };
+
+  const handleSave = () => {
+    setIsLoading(true);
+    categoryService
+      .updateCategory({
+        name: selectedCategory?.category_name,
+        newName: intermediateValue,
+        transactionType: selectedCategory?.transaction_type,
+        handleError,
+      })
+      .then(async () => {
+        addToast({
+          content: t('CATEGORIES.EDIT.SUCCESS'),
+          type: 'success',
+        });
+        await fetchCategories();
+        handleModalClose();
+      })
+      .catch(() => {
+        addToast({
+          content: t('CATEGORIES.EDIT.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -40,7 +82,7 @@ const EditCategory = ({ isEditCategoryModalVisible, setIsEditCategoryModalVisibl
           <Button kind='outline' size='md' onClick={() => handleModalClose()}>
             {t('CANCEL')}
           </Button>
-          <Button kind='primary' size='md'>
+          <Button kind='primary' size='md' onClick={() => handleSave()}>
             {t('SAVE')}
           </Button>
         </div>

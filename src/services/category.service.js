@@ -33,9 +33,27 @@ function listCategory({ transactionType, handleError }) {
     .catch(handleError);
 }
 
+function updateCategory({ name, newName, transactionType, handleError }) {
+  return api
+    .put(
+      '/category',
+      {
+        transaction_type: transactionType,
+        name,
+        newName,
+      },
+      {
+        headers: authHeader(),
+      }
+    )
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const categoryService = {
   createCategory,
   listCategory,
+  updateCategory,
 };
 
 export default categoryService;

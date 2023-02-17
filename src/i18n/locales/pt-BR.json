@@ -63,9 +63,11 @@
   "CATEGORIES.NEW.SUCCESS": "Nova categoria criada com sucesso",
   "CATEGORIES.NEW.ERROR": "Erro ao criar nova categoria",
   "CATEGORIES.DELETE": "Apagar categoria",
-  "CATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a categoria \"{{category}}\" de \"{{transactionType}}\"?",
+  "CATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a categoria <strong>{{category}}</strong> de <strong>{{transactionType}}</strong>?",
   "CATEGORIES.EDIT": "Editar categoria",
   "CATEGORIES.EDIT.DESCRIPTION": "Digite o novo nome da categoria:",
+  "CATEGORIES.EDIT.SUCCESS": "Categoria editada com sucesso",
+  "CATEGORIES.EDIT.ERROR": "Erro ao editar categoria",
 
   "SUBCATEGORIES.NEW": "Nova subcategoria",
   "SUBCATEGORIES.NEW.SUCCESS": "Nova subcategoria criada com sucesso",
@@ -80,7 +82,7 @@
   "SUBCATEGORIES.COSTING.VARIABLE": "Variável",
   "SUBCATEGORIES.EMPTY": "Nenhuma subcategoria encontrada",
   "SUBCATEGORIES.DELETE": "Apagar subcategoria",
-  "SUBCATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a subcategoria \"{{subcategory}}\" da categoria \"{{category}}\" de \"{{transactionType}}\"?",
+  "SUBCATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a subcategoria <strong>{{subcategory}}</strong> da categoria <strong>{{category}}</strong> de <strong>{{transactionType}}</strong>?",
   "SUBCATEGORIES.EDIT": "Editar subcategoria",
   "SUBCATEGORIES.EDIT.DESCRIPTION": "Digite o novo nome da subcategoria:",
 
