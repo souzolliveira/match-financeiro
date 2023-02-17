@@ -52,11 +52,17 @@
 
   "CALENDAR.LABEL": "Informe a data:",
 
+  "CATEGORIES": "Categorias e subcategorias",
   "CATEGORIES.FETCH.ERROR": "Erro ao tentar carregar categorias",
   "CATEGORIES.LABEL": "Selecione a categoria:",
   "CATEGORIES.CREATE": "Criar categoria",
   "CATEGORIES.CREATE.ERROR": "Erro ao tentar criar categoria",
   "CATEGORIES.NAME": "Nome da categoria:",
+  "CATEGORIES.EMPTY": "Nenhuma categoria encontrada",
+  "CATEGORIES.DELETE": "Apagar categoria",
+  "CATEGORIES.DELETE.DESCRIPTION": "Você tem certeza que gostaria de apagar a categoria \"{{category}}\" de \"{{transactionType}}\"?",
+  "CATEGORIES.EDIT": "Editar categoria",
+  "CATEGORIES.EDIT.DESCRIPTION": "Digite o novo nome da categoria:",
 
   "SUBCATEGORIES.FETCH.ERROR": "Erro ao tentar carregar subcategorias",
   "SUBCATEGORIES.LABEL": "Selecione a subcategoria:",
@@ -80,5 +86,7 @@
   "PASSWORD": "Senha",
   "PASSWORD.CONFIRM": "Confirmar senha",
   "SELECT": "Selecione...",
-  "CATEGORIES": "Categorias e subcategorias"
+  "CANCEL": "Cancelar",
+  "SAVE": "Salvar",
+  "DELETE": "Apagar"
 }
