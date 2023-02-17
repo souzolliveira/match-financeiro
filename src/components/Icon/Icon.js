@@ -3,6 +3,7 @@ import React from 'react';
 import ArrowRight from './Icons/ArrowRight';
 import ChevronTop from './Icons/ChevronTop';
 import Close from './Icons/Close';
+import Edit from './Icons/Edit';
 import Expense from './Icons/Expense';
 import Home from './Icons/Home';
 import Income from './Icons/Income';
@@ -11,6 +12,7 @@ import Logout from './Icons/Logout';
 import Plus from './Icons/Plus';
 import Stats from './Icons/Stats';
 import Transactions from './Icons/Transactions';
+import Trash from './Icons/Trash';
 import User from './Icons/User';
 
 const Icon = ({ name, width, height, fill, className }) => {
@@ -21,6 +23,8 @@ const Icon = ({ name, width, height, fill, className }) => {
       return <ChevronTop fill={fill} width={width} height={height} className={className} />;
     case 'close':
       return <Close fill={fill} width={width} height={height} className={className} />;
+    case 'edit':
+      return <Edit fill={fill} width={width} height={height} className={className} />;
     case 'expense':
       return <Expense fill={fill} width={width} height={height} className={className} />;
     case 'home':
@@ -37,6 +41,8 @@ const Icon = ({ name, width, height, fill, className }) => {
       return <Stats fill={fill} width={width} height={height} className={className} />;
     case 'transactions':
       return <Transactions fill={fill} width={width} height={height} className={className} />;
+    case 'trash':
+      return <Trash fill={fill} width={width} height={height} className={className} />;
     case 'user':
       return <User fill={fill} width={width} height={height} className={className} />;
     default:
