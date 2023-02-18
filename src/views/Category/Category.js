@@ -50,6 +50,7 @@ const Category = () => {
   const [isDeleteSubcategoryModalVisible, setIsDeleteSubcategoryModalVisible] = useState(false);
   const [isEditSubcategoryModalVisible, setIsEditSubcategoryModalVisible] = useState(false);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [hasSubcategories, setHasSubcategories] = useState(false);
   const [hasTransactions, setHasTransactions] = useState(false);
 
   const fetchTransactions = async params => {
@@ -108,9 +109,9 @@ const Category = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleDeleteCategory = async (e, category) => {
+  const handleDeleteCategory = (e, category) => {
     e.stopPropagation();
-    await fetchTransactions(handleParams({ transactionType: category?.transaction_type, category: category?.category_name }));
+    setHasSubcategories(subcategories.filter(subcategory => subcategory.category_name === category.category_name)?.length > 0);
     setIsDeleteCategoryModalVisible(true);
     setSelectedCategory(category);
   };
@@ -179,8 +180,9 @@ const Category = () => {
         setIsDeleteCategoryModalVisible={setIsDeleteCategoryModalVisible}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
-        hasTransactions={hasTransactions}
-        setHasTransactions={setHasTransactions}
+        fetchCategories={fetchCategories}
+        hasSubcategories={hasSubcategories}
+        setHasSubcategories={setHasSubcategories}
       />
       <EditCategory
         isEditCategoryModalVisible={isEditCategoryModalVisible}
@@ -208,6 +210,7 @@ const Category = () => {
         setIsDeleteSubcategoryModalVisible={setIsDeleteSubcategoryModalVisible}
         selectedSubcategory={selectedSubcategory}
         setSelectedSubcategory={setSelectedSubcategory}
+        fetchSubcategories={fetchSubcategories}
         hasTransactions={hasTransactions}
         setHasTransactions={setHasTransactions}
       />

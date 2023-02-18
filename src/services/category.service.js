@@ -50,10 +50,20 @@ function updateCategory({ name, newName, transactionType, handleError }) {
     .catch(handleError);
 }
 
+function deleteCategory({ params, handleError }) {
+  return api
+    .delete(`/category?${params}`, {
+      headers: authHeader(),
+    })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const categoryService = {
   createCategory,
   listCategory,
   updateCategory,
+  deleteCategory,
 };
 
 export default categoryService;

@@ -57,10 +57,20 @@ function updateSubcategory({ transactionType, category, name, newName, costing, 
     .catch(handleError);
 }
 
+function deleteSubcategory({ params, handleError }) {
+  return api
+    .delete(`/subcategory?${params}`, {
+      headers: authHeader(),
+    })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const subcategoryService = {
   createSubcategory,
   listSubcategory,
   updateSubcategory,
+  deleteSubcategory,
 };
 
 export default subcategoryService;

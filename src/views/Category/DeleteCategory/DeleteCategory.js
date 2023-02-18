@@ -2,6 +2,12 @@ import React from 'react';
 
 import { useTranslation, Trans } from 'react-i18next';
 
+import handleParams from 'helpers/handleParams';
+import { useAuth } from 'hooks/useAuth';
+import { useLoader } from 'hooks/useLoader';
+import { useNotification } from 'hooks/useNotification';
+import categoryService from 'services/category.service';
+
 import Button from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 
@@ -12,15 +18,45 @@ const DeleteCategory = ({
   setIsDeleteCategoryModalVisible,
   selectedCategory,
   setSelectedCategory,
-  hasTransactions,
-  setHasTransactions,
+  fetchCategories,
+  hasSubcategories,
+  setHasSubcategories,
 }) => {
+  const { addToast } = useNotification();
+  const { handleError } = useAuth();
+  const { setIsLoading } = useLoader();
   const { t } = useTranslation();
 
   const handleModalClose = () => {
     setIsDeleteCategoryModalVisible(false);
     setSelectedCategory(null);
-    setHasTransactions(false);
+    setHasSubcategories(false);
+  };
+
+  const handleDelete = () => {
+    setIsLoading(true);
+    categoryService
+      .deleteCategory({
+        params: handleParams({ transaction_type: selectedCategory.transaction_type, name: selectedCategory.category_name }),
+        handleError,
+      })
+      .then(async () => {
+        addToast({
+          content: t('CATEGORIES.DELETE.SUCCESS'),
+          type: 'success',
+        });
+        await fetchCategories();
+        handleModalClose();
+      })
+      .catch(() => {
+        addToast({
+          content: t('CATEGORIES.DELETE.SUCCESS'),
+          type: 'success',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -35,7 +71,7 @@ const DeleteCategory = ({
       <div className={styles.modal__content}>
         <div className={styles.modal__body}>
           <span className={styles.modal__label}>
-            {!hasTransactions ? (
+            {!hasSubcategories ? (
               <Trans
                 i18nKey='CATEGORIES.DELETE.DESCRIPTION'
                 values={{
@@ -54,12 +90,12 @@ const DeleteCategory = ({
             )}
           </span>
         </div>
-        {!hasTransactions ? (
+        {!hasSubcategories ? (
           <div className={styles.modal__footer}>
             <Button kind='outline' size='md' onClick={() => handleModalClose()}>
               {t('CANCEL')}
             </Button>
-            <Button kind='danger' size='md'>
+            <Button kind='danger' size='md' onClick={() => handleDelete()}>
               {t('DELETE')}
             </Button>
           </div>
