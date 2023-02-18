@@ -1,10 +1,10 @@
 .user {
-  align-items: flex-start;
+  align-items: flex-end;
   background-color: var(--gold-lightest);
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-small);
   height: 100vh;
-  justify-content: center;
   opacity: 1;
   position: absolute;
   top: 0;
@@ -12,74 +12,114 @@
   width: 100vw;
   z-index: var(--zindex-overlay);
 
-  .user__photo {
+  .user__header {
     align-items: center;
+    background-color: var(--gold);
+    box-shadow: var(--subtle-drop-shadow);
     display: flex;
-    justify-content: center;
-    padding: var(--spacing-base) 0;
-    width: 100%;
-  }
+    height: var(--header-height);
+    left: 0;
+    padding: var(--spacing-small);
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: var(--zindex-overlay);
 
-  .user__info {
-    display: flex;
-    flex-direction: column;
-    padding: var(--spacing-base);
-    width: 100%;
-
-    .user__inputGroup {
+    .user__return {
+      align-items: center;
       display: flex;
-      flex-direction: column;
-      margin-bottom: var(--spacing-small);
+      margin: 0;
+      margin-right: var(--spacing-tiny);
+      padding: 0;
 
-      .user__label {
-        color: var(--gold-dark);
-        font-size: var(--font-size-sm);
-        font-weight: var(--font-weight-semibold);
-        line-height: var(--line-height-sm);
-        margin-bottom: var(--spacing-nano);
+      .user__returnicon {
+        transform: rotate(180deg);
       }
     }
-  }
 
-  .user__options {
-    display: flex;
-    flex-direction: column;
-    padding: var(--spacing-small) 0;
-    width: 100%;
-
-    .user__option {
-      border: 1px solid var(--gold-light);
-      border-left: 0;
-      border-right: 0;
-      color: var(--gold-darker);
-      cursor: pointer;
-      font-size: var(--font-size-md);
-      font-weight: var(--font-weight-normal);
-      line-height: var(--line-height-sm);
-      padding: var(--spacing-small);
-      width: 100%;
+    .user__title {
+      color: white;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
     }
   }
 
-  .user__logout {
-    padding: var(--spacing-small);
+  .user__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+    height: calc(100% - var(--header-height));
     width: 100%;
 
-    .user__logoutbutton {
+    .user__photo {
       align-items: center;
-      border: 2px solid var(--gold-dark);
-      border-radius: var(--subtle-radius);
-      box-shadow: var(--subtle-drop-shadow);
-      color: var(--gold-dark);
-      cursor: pointer;
       display: flex;
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-bold);
-      gap: var(--spacing-tiny);
       justify-content: center;
-      line-height: var(--line-height-sm);
-      padding: var(--spacing-tiny);
+      padding: var(--spacing-base) 0;
       width: 100%;
+    }
+
+    .user__info {
+      display: flex;
+      flex-direction: column;
+      padding: var(--spacing-base);
+      width: 100%;
+
+      .user__inputGroup {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: var(--spacing-small);
+
+        .user__label {
+          color: var(--gold-dark);
+          font-size: var(--font-size-sm);
+          font-weight: var(--font-weight-semibold);
+          line-height: var(--line-height-sm);
+          margin-bottom: var(--spacing-nano);
+        }
+      }
+    }
+
+    .user__options {
+      display: flex;
+      flex-direction: column;
+      padding: var(--spacing-small) 0;
+      width: 100%;
+
+      .user__option {
+        border: 1px solid var(--gold-light);
+        border-left: 0;
+        border-right: 0;
+        color: var(--gold-darker);
+        cursor: pointer;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-normal);
+        line-height: var(--line-height-sm);
+        padding: var(--spacing-small);
+        width: 100%;
+      }
+    }
+
+    .user__logout {
+      padding: var(--spacing-small);
+      width: 100%;
+
+      .user__logoutbutton {
+        align-items: center;
+        border: 2px solid var(--gold-dark);
+        border-radius: var(--subtle-radius);
+        box-shadow: var(--subtle-drop-shadow);
+        color: var(--gold-dark);
+        cursor: pointer;
+        display: flex;
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-bold);
+        gap: var(--spacing-tiny);
+        justify-content: center;
+        line-height: var(--line-height-sm);
+        padding: var(--spacing-tiny);
+        width: 100%;
+      }
     }
   }
 }

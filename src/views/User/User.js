@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
@@ -15,11 +15,12 @@ import Input from 'components/Input/Input';
 import styles from './User.module.scss';
 
 const User = () => {
+  const { addToast } = useNotification();
+  const { handleError } = useAuth();
+  const navigate = useNavigate();
+  const { setIsLoading } = useLoader();
   const { signOut } = useAuth();
   const { t } = useTranslation();
-  const { addToast } = useNotification();
-  const { setIsLoading } = useLoader();
-  const { handleError } = useAuth();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -55,34 +56,43 @@ const User = () => {
 
   return (
     <div className={styles.user}>
-      <div className={styles.user__photo}>
-        <Icon name='user' width={200} height={200} fill='var(--gold-dark)' />
-      </div>
-      <div className={styles.user__info}>
-        <div className={styles.user__inputGroup}>
-          <span className={styles.user__label}>{t('NAME')}</span>
-          <Input value={name} disabled />
-        </div>
-        <div className={styles.user__inputGroup}>
-          <span className={styles.user__label}>{t('EMAIL')}</span>
-          <Input value={email} disabled />
-        </div>
-        <div className={styles.user__inputGroup}>
-          <span className={styles.user__label}>{t('PHONE')}</span>
-          <Input value={phone} disabled />
-        </div>
-      </div>
-      <div className={styles.user__options}>
-        <Link to='/categories' className={styles.user__option}>
-          {t('CATEGORIES')}
-        </Link>
+      <div className={styles.user__header}>
+        <button type='button' onClick={() => navigate('/')} className={styles.user__return}>
+          <Icon name='arrow-right' width={24} height={24} fill='white' className={styles.user__returnicon} />
+        </button>
+        <span className={styles.user__title}>{t('PROFILE')}</span>
       </div>
       <Fill />
-      <div className={styles.user__logout}>
-        <button type='button' onClick={() => signOut('/user')} className={styles.user__logoutbutton}>
-          <Icon name='logout' width={24} height={24} fill='var(--gold-dark)' />
-          <span>{t('LOGOUT')}</span>
-        </button>
+      <div className={styles.user__container}>
+        <div className={styles.user__photo}>
+          <Icon name='user' width={200} height={200} fill='var(--gold-dark)' />
+        </div>
+        <div className={styles.user__info}>
+          <div className={styles.user__inputGroup}>
+            <span className={styles.user__label}>{t('NAME')}</span>
+            <Input value={name} disabled />
+          </div>
+          <div className={styles.user__inputGroup}>
+            <span className={styles.user__label}>{t('EMAIL')}</span>
+            <Input value={email} disabled />
+          </div>
+          <div className={styles.user__inputGroup}>
+            <span className={styles.user__label}>{t('PHONE')}</span>
+            <Input value={phone} disabled />
+          </div>
+        </div>
+        <div className={styles.user__options}>
+          <Link to='/categories' className={styles.user__option}>
+            {t('CATEGORIES')}
+          </Link>
+        </div>
+        <Fill />
+        <div className={styles.user__logout}>
+          <button type='button' onClick={() => signOut('/user')} className={styles.user__logoutbutton}>
+            <Icon name='logout' width={24} height={24} fill='var(--gold-dark)' />
+            <span>{t('LOGOUT')}</span>
+          </button>
+        </div>
       </div>
     </div>
   );
