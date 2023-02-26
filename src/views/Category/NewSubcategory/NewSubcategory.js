@@ -63,7 +63,7 @@ const NewSubcategory = ({
       })
       .catch(() => {
         addToast({
-          content: t('SUBCATEGORIES.NEW.ERROR'),
+          content: t('SUBCATEGORIES.NEW.ERROR', { subcategory: newSubcategoryName }),
           type: 'danger',
         });
       })

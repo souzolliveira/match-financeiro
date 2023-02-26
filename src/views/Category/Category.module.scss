@@ -53,4 +53,14 @@
     padding: var(--spacing-base);
     width: 100%;
   }
+
+  .category__template {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+    height: calc(100% - var(--header-height));
+    overflow-y: auto;
+    padding: var(--spacing-base);
+    width: 100%;
+  }
 }

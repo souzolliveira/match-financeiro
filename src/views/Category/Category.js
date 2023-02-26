@@ -22,6 +22,7 @@ import EditSubcategory from './EditSubcategory/EditSubcategory';
 import List from './List/List';
 import NewCategory from './NewCategory/NewCategory';
 import NewSubcategory from './NewSubcategory/NewSubcategory';
+import Template from './Template/Template';
 
 import styles from './Category.module.scss';
 
@@ -53,6 +54,8 @@ const Category = () => {
   const [hasSubcategories, setHasSubcategories] = useState(false);
   const [hasTransactions, setHasTransactions] = useState(false);
 
+  const [showTemplate, setShowTemplate] = useState(false);
+
   const fetchTransactions = async params => {
     setIsLoading(true);
     await transactionService
@@ -71,6 +74,7 @@ const Category = () => {
       .listCategory({ handleError })
       .then(data => {
         setCategories(data);
+        setShowTemplate(!!(data.length === 0));
       })
       .catch(() => {
         addToast({
@@ -137,35 +141,42 @@ const Category = () => {
         </button>
         <span className={styles.category__title}>{t('CATEGORIES')}</span>
         <Fill />
-        <button type='button' onClick={() => setIsNewCategoryModalVisible(true)}>
-          <Icon name='plus' width={24} height={24} fill='white' />
-        </button>
+        {!showTemplate && (
+          <button type='button' onClick={() => setIsNewCategoryModalVisible(true)}>
+            <Icon name='plus' width={24} height={24} fill='white' />
+          </button>
+        )}
       </div>
       <Fill />
-      <div className={styles.category__list}>
-        {[transactionTypes.INCOME, transactionTypes.EXPENSE, transactionTypes.INVESTIMENT].map(transactionType => {
-          return (
-            <List
-              transactionType={transactionTypes[transactionType]}
-              categories={categories.filter(category => category.transaction_type === transactionTypes[transactionType])}
-              subcategories={subcategories}
-              openedCategory={openedCategory}
-              setOpenedCategory={setOpenedCategory}
-              setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
-              setNewCategoryType={setNewCategoryType}
-              handleDeleteCategory={handleDeleteCategory}
-              setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
-              setSelectedCategory={setSelectedCategory}
-              setIsNewSubcategoryModalVisible={setIsNewSubcategoryModalVisible}
-              setNewSubcategoryType={setNewSubcategoryType}
-              setNewSubcategoryCategory={setNewSubcategoryCategory}
-              handleDeleteSubcategory={handleDeleteSubcategory}
-              setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
-              setSelectedSubcategory={setSelectedSubcategory}
-            />
-          );
-        })}
-      </div>
+      {showTemplate ? (
+        <Template fetchCategories={fetchCategories} fetchSubcategories={fetchSubcategories} />
+      ) : (
+        <div className={styles.category__list}>
+          {[transactionTypes.INCOME, transactionTypes.EXPENSE, transactionTypes.INVESTIMENT].map(transactionType => {
+            return (
+              <List
+                key={transactionType}
+                transactionType={transactionTypes[transactionType]}
+                categories={categories.filter(category => category.transaction_type === transactionTypes[transactionType])}
+                subcategories={subcategories}
+                openedCategory={openedCategory}
+                setOpenedCategory={setOpenedCategory}
+                setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
+                setNewCategoryType={setNewCategoryType}
+                handleDeleteCategory={handleDeleteCategory}
+                setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}
+                setSelectedCategory={setSelectedCategory}
+                setIsNewSubcategoryModalVisible={setIsNewSubcategoryModalVisible}
+                setNewSubcategoryType={setNewSubcategoryType}
+                setNewSubcategoryCategory={setNewSubcategoryCategory}
+                handleDeleteSubcategory={handleDeleteSubcategory}
+                setIsEditSubcategoryModalVisible={setIsEditSubcategoryModalVisible}
+                setSelectedSubcategory={setSelectedSubcategory}
+              />
+            );
+          })}
+        </div>
+      )}
       <NewCategory
         isNewCategoryModalVisible={isNewCategoryModalVisible}
         setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}

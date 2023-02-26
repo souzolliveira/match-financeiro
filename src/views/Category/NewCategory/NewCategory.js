@@ -49,7 +49,7 @@ const NewCategory = ({
       })
       .catch(() => {
         addToast({
-          content: t('CATEGORIES.NEW.ERROR'),
+          content: t('CATEGORIES.NEW.ERROR', { category: newCategoryName }),
           type: 'danger',
         });
       })
