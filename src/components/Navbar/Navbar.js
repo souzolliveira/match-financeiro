@@ -12,15 +12,15 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <NavLink exact to='/' activeClassName='navbar__navlink--active' className='navbar__navlink'>
+      <NavLink exact to='/' activeclassname='navbar__navlink--active' className='navbar__navlink'>
         <Icon name='home' width={24} height={24} fill='var(--color-highlight)' />
         {t('NAVBAR.HOME')}
       </NavLink>
-      <NavLink to='/transactions' activeClassName='navbar__navlink--active' className='navbar__navlink'>
+      <NavLink to='/transactions' activeclassname='navbar__navlink--active' className='navbar__navlink'>
         <Icon name='transactions' width={24} height={24} fill='var(--color-highlight)' />
         {t('NAVBAR.TRANSACTIONS')}
       </NavLink>
-      <NavLink to='/stats' activeClassName='navbar__navlink--active' className='navbar__navlink'>
+      <NavLink to='/stats' activeclassname='navbar__navlink--active' className='navbar__navlink'>
         <Icon name='stats' width={24} height={24} fill='var(--color-highlight)' />
         {t('NAVBAR.STATS')}
       </NavLink>
