@@ -5,6 +5,7 @@ import React from 'react';
 import styles from './Button.module.scss';
 
 const Button = ({
+  id,
   type,
   name,
   children,
@@ -28,6 +29,7 @@ const Button = ({
 
   return (
     <button
+      id={id}
       type={type}
       name={name}
       className={classes}

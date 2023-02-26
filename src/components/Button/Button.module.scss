@@ -8,12 +8,14 @@
 
   &.primary {
     background-color: var(--color-success);
+    border: 2px solid var(--color-success);
     box-shadow: var(--subtle-drop-shadow);
     color: var(--gold-lightest);
 
     &:disabled {
       background-color: var(--gold-lighter);
       color: var(--gold);
+      border: 2px solid var(--gold-lighter);
       box-shadow: none;
       cursor: no-drop;
     }
