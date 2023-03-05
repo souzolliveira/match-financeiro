@@ -31,6 +31,10 @@
   "TRANSACTION_TYPE.INCOME": "Receita",
   "TRANSACTION_TYPE.INVESTIMENT": "Investimento",
   "TRANSACTION.SUBMIT": "Adicionar transação",
+  "TRANSACTIONS.UPDATE.SUCCESS": "Transação atualizada com sucesso",
+  "TRANSACTIONS.UPDATE.ERROR": "Erro ao atualizar transação",
+  "TRANSACTIONS.DELETE.SUCCESS": "Transação apagada com sucesso",
+  "TRANSACTIONS.DELETE.ERROR": "Erro ao apagar transação",
 
   "FILTERS.DATE.START": "Data inicial",
   "FILTERS.DATE.END": "Data final",
@@ -104,8 +108,12 @@
   "OBSERVATION.LABEL": "Alguma observação?",
   "OBSERVATION": "Observação:",
 
+  "CATEGORY": "Categoria:",
+  "SUBCATEGORY": "Subcategoria:",
   "PROFILE": "Perfil",
   "CREATE": "Criar",
+  "CREATED": "Criado",
+  "OCCURRED": "Ocorreu em",
   "ADD": "Adicionar",
   "NAME": "Nome",
   "EMAIL": "Email",
@@ -115,6 +123,8 @@
   "SELECT": "Selecione...",
   "CANCEL": "Cancelar",
   "SAVE": "Salvar",
+  "EDIT": "Editar",
   "DELETE": "Apagar",
-  "CLOSE": "Fechar"
+  "CLOSE": "Fechar",
+  "AT": " às "
 }

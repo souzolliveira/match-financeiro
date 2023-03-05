@@ -32,6 +32,45 @@ function createTransaction({
     .catch(handleError);
 }
 
+function updateTransaction({
+  transaction,
+  transactionType,
+  categoryName,
+  subcategoryName,
+  transactionDate,
+  transactionValue,
+  transactionObservation,
+  handleError,
+}) {
+  return api
+    .put(
+      '/transaction',
+      {
+        transaction,
+        transactionType,
+        categoryName,
+        subcategoryName,
+        transactionDate,
+        transactionValue,
+        transactionObservation,
+      },
+      {
+        headers: authHeader(),
+      }
+    )
+    .then(handleResponse)
+    .catch(handleError);
+}
+
+function deleteTransaction({ params, handleError }) {
+  return api
+    .delete(`/transaction?${params}`, {
+      headers: authHeader(),
+    })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 function listTransactions({ params, handleError }) {
   return api
     .get(`/transactions?${params ?? ''}`, {
@@ -52,6 +91,8 @@ function lastUpdate({ handleError }) {
 
 const transactionService = {
   createTransaction,
+  updateTransaction,
+  deleteTransaction,
   listTransactions,
   lastUpdate,
 };

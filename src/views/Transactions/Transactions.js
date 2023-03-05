@@ -135,7 +135,13 @@ const Transactions = () => {
           <ul className={styles.transactions__list}>
             {transactions.map((transaction, index) => {
               return (
-                <Transaction key={index} transaction={transaction}>
+                <Transaction
+                  key={index}
+                  transaction={transaction}
+                  categories={categories}
+                  subcategories={subcategories}
+                  fetchTransactions={fetchTransactions}
+                >
                   {transaction.observation}
                 </Transaction>
               );

@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -7,11 +8,15 @@ import useDate from 'hooks/useDate';
 
 import Icon from 'components/Icon/Icon';
 
+import Details from './Details/Details';
+
 import styles from './Transaction.module.scss';
 
-const Transaction = ({ transaction }) => {
-  const { t } = useTranslation();
+const Transaction = ({ transaction, categories, subcategories, fetchTransactions }) => {
   const { formatDateFromAPIToFront } = useDate();
+  const { t } = useTranslation();
+
+  const [showDetails, setShowDetails] = useState(false);
 
   const renderHeader = () => {
     if (transaction.observation) return transaction.observation;
@@ -21,23 +26,40 @@ const Transaction = ({ transaction }) => {
   };
 
   return (
-    <li className={styles.transaction}>
-      <div className={styles.transaction__type}>
-        <Icon
-          name={transaction.transaction_type?.toLowerCase()}
-          width={24}
-          height={24}
-          fill={bindTransactionTypeIconColor(transaction.transaction_type)}
-        />
-      </div>
-      <div className={styles.transaction__infos}>
-        <span className={styles.transaction__header}>{renderHeader()}</span>
-        <div className={styles.transaction__main}>
-          <span className={styles.transaction__value}>R$ {transaction.value}</span>
-          <span className={styles.transaction__date}>{formatDateFromAPIToFront(transaction.transaction_date)}</span>
+    <>
+      <li
+        className={styles.transaction}
+        onClick={() => setShowDetails(true)}
+        onKeyDown={() => setShowDetails(true)}
+        role='button'
+        tabIndex={0}
+      >
+        <div className={styles.transaction__type}>
+          <Icon
+            name={transaction.transaction_type?.toLowerCase()}
+            width={24}
+            height={24}
+            fill={bindTransactionTypeIconColor(transaction.transaction_type)}
+          />
         </div>
-      </div>
-    </li>
+        <div className={styles.transaction__infos}>
+          <span className={styles.transaction__header}>{renderHeader()}</span>
+          <div className={styles.transaction__main}>
+            <span className={styles.transaction__value}>R$ {transaction.value}</span>
+            <span className={styles.transaction__date}>{formatDateFromAPIToFront(transaction.transaction_date)}</span>
+          </div>
+        </div>
+      </li>
+      {showDetails && (
+        <Details
+          transaction={transaction}
+          setShowDetails={setShowDetails}
+          categories={categories}
+          subcategories={subcategories}
+          fetchTransactions={fetchTransactions}
+        />
+      )}
+    </>
   );
 };
 
