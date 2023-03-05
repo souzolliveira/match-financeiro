@@ -127,31 +127,26 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
     };
   });
 
-  return (
-    <div className={styles.details}>
-      {!isEditing && (
-        <Button type='button' kind='outline' className={styles.details__close} onClick={() => setShowDetails(false)}>
-          <Icon name='close' width={24} height={24} fill='var(--gold-darkest)' />
-        </Button>
-      )}
-      <div className={styles.details__infos}>
-        <span className={styles.details__date}>
-          {`
-            ${t('CREATED')}
-            ${formatDateFromAPIToFront(transaction.date)}
-            ${t('AT')}
-            ${bindHour(transaction.date)}
-          `}
-        </span>
-        <div className={styles.details__transactionType}>
-          <Icon
-            name={transaction.transaction_type?.toLowerCase()}
-            width={48}
-            height={48}
-            fill={bindTransactionTypeIconColor(transaction.transaction_type)}
-          />
-        </div>
-        {isEditing ? (
+  if (isEditing) {
+    return (
+      <div className={styles.details}>
+        <div className={styles.details__infos}>
+          <span className={styles.details__date}>
+            {`
+              ${t('CREATED')}
+              ${formatDateFromAPIToFront(transaction.date)}
+              ${t('AT')}
+              ${bindHour(transaction.date)}
+            `}
+          </span>
+          <div className={styles.details__transactionType}>
+            <Icon
+              name={transaction.transaction_type?.toLowerCase()}
+              width={48}
+              height={48}
+              fill={bindTransactionTypeIconColor(transaction.transaction_type)}
+            />
+          </div>
           <Select
             className={styles.details__transactionTypeSelect}
             value={transactionIntermediate.transaction_type}
@@ -168,12 +163,8 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
             <option value={transactionTypes.EXPENSE}>{t('FILTERS.EXPENSES')}</option>
             <option value={transactionTypes.INVESTIMENT}>{t('FILTERS.INVESTIMENTS')}</option>
           </Select>
-        ) : (
-          <span className={styles.details__transactionTypeValue}>{t(`TRANSACTION_TYPE.${transaction.transaction_type}`)}</span>
-        )}
-        <div className={styles.details__category}>
-          <span className={styles.details__categoryLabel}>{t('CATEGORY')}</span>
-          {isEditing ? (
+          <div className={styles.details__category}>
+            <span className={styles.details__categoryLabel}>{t('CATEGORY')}</span>
             <Select
               value={transactionIntermediate.categories_fk}
               onChange={e => {
@@ -193,13 +184,9 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
                 );
               })}
             </Select>
-          ) : (
-            <span className={styles.details__categoryValue}>{transaction.categories_fk}</span>
-          )}
-        </div>
-        <div className={styles.details__subcategory}>
-          <span className={styles.details__subcategoryLabel}>{t('SUBCATEGORY')}</span>
-          {isEditing ? (
+          </div>
+          <div className={styles.details__subcategory}>
+            <span className={styles.details__subcategoryLabel}>{t('SUBCATEGORY')}</span>
             <Select
               value={transactionIntermediate.subcategories_fk}
               onChange={e => {
@@ -218,13 +205,9 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
                 );
               })}
             </Select>
-          ) : (
-            <span className={styles.details__subcategoryValue}>{transaction.subcategories_fk}</span>
-          )}
-        </div>
-        <div className={styles.details__observation}>
-          <span className={styles.details__observationLabel}>{t('OBSERVATION')}</span>
-          {isEditing ? (
+          </div>
+          <div className={styles.details__observation}>
+            <span className={styles.details__observationLabel}>{t('OBSERVATION')}</span>
             <Input
               className={styles.details__observationInput}
               type='text'
@@ -237,11 +220,7 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
                 })
               }
             />
-          ) : (
-            <span className={styles.details__observationValue}>{transaction.observation}</span>
-          )}
-        </div>
-        {isEditing ? (
+          </div>
           <Input
             className={styles.details__dateinput}
             type='date'
@@ -249,15 +228,6 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
             value={transactionIntermediate.transaction_date}
             onChange={e => setTransactionIntermediate({ ...transactionIntermediate, transaction_date: e.target.value })}
           />
-        ) : (
-          <span className={styles.details__date}>
-            {`
-            ${t('OCCURRED')}
-            ${formatDateFromAPIToFront(transaction.transaction_date)}
-          `}
-          </span>
-        )}
-        {isEditing ? (
           <div className={styles.details__value__inputcontainer}>
             <Input
               className={styles.details__value__input}
@@ -280,12 +250,8 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
               <div className={focused ? styles.details__value__cursor : ''} />
             </div>
           </div>
-        ) : (
-          <span className={styles.details__value}>R$ {transactionIntermediate.value.replace('.', ',')}</span>
-        )}
-      </div>
-      <Fill />
-      {isEditing ? (
+        </div>
+        <Fill />
         <div className={styles.details__footer}>
           <div className={styles.details__buttonContainer}>
             <Button type='button' className={styles.details__button} kind='outline' size='lg' onClick={() => handleCancelEdition()}>
@@ -300,22 +266,68 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
             <span className={styles.details__buttonSpan}>{t('SAVE')}</span>
           </div>
         </div>
-      ) : (
-        <div className={styles.details__footer}>
-          <div className={styles.details__buttonContainer}>
-            <Button type='button' className={styles.details__button} kind='outline' size='lg' onClick={() => handleEditTransaction()}>
-              <Icon name='edit' width={30} height={30} fill='var(--gold-darker)' />
-            </Button>
-            <span className={styles.details__buttonSpan}>{t('EDIT')}</span>
-          </div>
-          <div className={styles.details__buttonContainer}>
-            <Button type='button' className={styles.details__button} kind='outline' size='lg' onClick={() => handleDeleteTransaction()}>
-              <Icon name='trash' width={30} height={30} fill='var(--color-danger)' />
-            </Button>
-            <span className={styles.details__buttonSpan}>{t('DELETE')}</span>
-          </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.details}>
+      <Button type='button' kind='outline' className={styles.details__close} onClick={() => setShowDetails(false)}>
+        <Icon name='close' width={24} height={24} fill='var(--gold-darkest)' />
+      </Button>
+      <div className={styles.details__infos}>
+        <span className={styles.details__date}>
+          {`
+            ${t('CREATED')}
+            ${formatDateFromAPIToFront(transaction.date)}
+            ${t('AT')}
+            ${bindHour(transaction.date)}
+          `}
+        </span>
+        <div className={styles.details__transactionType}>
+          <Icon
+            name={transaction.transaction_type?.toLowerCase()}
+            width={48}
+            height={48}
+            fill={bindTransactionTypeIconColor(transaction.transaction_type)}
+          />
         </div>
-      )}
+        <span className={styles.details__transactionTypeValue}>{t(`TRANSACTION_TYPE.${transaction.transaction_type}`)}</span>
+        <div className={styles.details__category}>
+          <span className={styles.details__categoryLabel}>{t('CATEGORY')}</span>
+          <span className={styles.details__categoryValue}>{transaction.categories_fk}</span>
+        </div>
+        <div className={styles.details__subcategory}>
+          <span className={styles.details__subcategoryLabel}>{t('SUBCATEGORY')}</span>
+          <span className={styles.details__subcategoryValue}>{transaction.subcategories_fk}</span>
+        </div>
+        <div className={styles.details__observation}>
+          <span className={styles.details__observationLabel}>{t('OBSERVATION')}</span>
+          <span className={styles.details__observationValue}>{transaction.observation}</span>
+        </div>
+        <span className={styles.details__date}>
+          {`
+            ${t('OCCURRED')}
+            ${formatDateFromAPIToFront(transaction.transaction_date)}
+          `}
+        </span>
+        <span className={styles.details__value}>R$ {transactionIntermediate.value.replace('.', ',')}</span>
+      </div>
+      <Fill />
+      <div className={styles.details__footer}>
+        <div className={styles.details__buttonContainer}>
+          <Button type='button' className={styles.details__button} kind='outline' size='lg' onClick={() => handleEditTransaction()}>
+            <Icon name='edit' width={30} height={30} fill='var(--gold-darker)' />
+          </Button>
+          <span className={styles.details__buttonSpan}>{t('EDIT')}</span>
+        </div>
+        <div className={styles.details__buttonContainer}>
+          <Button type='button' className={styles.details__button} kind='outline' size='lg' onClick={() => handleDeleteTransaction()}>
+            <Icon name='trash' width={30} height={30} fill='var(--color-danger)' />
+          </Button>
+          <span className={styles.details__buttonSpan}>{t('DELETE')}</span>
+        </div>
+      </div>
     </div>
   );
 };
