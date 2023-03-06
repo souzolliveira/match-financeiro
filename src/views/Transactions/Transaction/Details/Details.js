@@ -44,7 +44,6 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
   };
 
   const handleSaveTransaction = () => {
-    setIsEditing(false);
     setIsLoading(true);
     transactionService
       .updateTransaction({
@@ -53,7 +52,7 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
         categoryName: transactionIntermediate.categories_fk,
         subcategoryName: transactionIntermediate.subcategories_fk,
         transactionDate: transactionIntermediate.transaction_date,
-        transactionValue: transactionIntermediate.value,
+        transactionValue: transactionIntermediate.value?.replace(',', '.'),
         transactionObservation: transactionIntermediate.observation,
         handleError,
       })
@@ -64,6 +63,7 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
         });
         await fetchTransactions();
         setShowDetails(false);
+        setIsEditing(false);
       })
       .catch(() => {
         addToast({
@@ -176,13 +176,15 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
               }}
             >
               <option value=''>{t('SELECT')}</option>
-              {categories.map((item, index) => {
-                return (
-                  <option key={index} value={item.category_name}>
-                    {item.category_name}
-                  </option>
-                );
-              })}
+              {categories
+                ?.filter(category => category.transaction_type === transactionIntermediate.transaction_type)
+                ?.map((item, index) => {
+                  return (
+                    <option key={index} value={item.category_name}>
+                      {item.category_name}
+                    </option>
+                  );
+                })}
             </Select>
           </div>
           <div className={styles.details__subcategory}>
@@ -197,13 +199,15 @@ const Details = ({ transaction, setShowDetails, categories, subcategories, fetch
               }}
             >
               <option value=''>{t('SELECT')}</option>
-              {subcategories.map((item, index) => {
-                return (
-                  <option key={index} value={item.subcategory_name}>
-                    {item.subcategory_name}
-                  </option>
-                );
-              })}
+              {subcategories
+                ?.filter(subcategory => subcategory.transaction_type === transactionIntermediate.transaction_type)
+                ?.map((item, index) => {
+                  return (
+                    <option key={index} value={item.subcategory_name}>
+                      {item.subcategory_name}
+                    </option>
+                  );
+                })}
             </Select>
           </div>
           <div className={styles.details__observation}>

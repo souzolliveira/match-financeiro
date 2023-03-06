@@ -106,9 +106,17 @@ const List = ({
               </div>
               {isCategoryOpened(category) ? (
                 <div className={styles.list__subcategories}>
-                  {subcategories.filter(subcategory => subcategory.category_name === openedCategory.category_name)?.length > 0 ? (
+                  {subcategories.filter(
+                    subcategory =>
+                      subcategory.category_name === openedCategory.category_name &&
+                      subcategory.transaction_type === openedCategory.transaction_type
+                  )?.length > 0 ? (
                     subcategories
-                      .filter(subcategory => subcategory.category_name === openedCategory.category_name)
+                      .filter(
+                        subcategory =>
+                          subcategory.category_name === openedCategory.category_name &&
+                          subcategory.transaction_type === openedCategory.transaction_type
+                      )
                       .map(subcategory => {
                         return (
                           <div className={styles.list__subcategory}>

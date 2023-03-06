@@ -136,7 +136,9 @@ const Add = ({
           <Subcategories
             category={selectedCategory}
             fetchSubcategories={fetchSubcategories}
-            subcategories={subcategories.filter(subcategory => subcategory.category_name === selectedCategory)}
+            subcategories={subcategories.filter(
+              subcategory => subcategory.category_name === selectedCategory && subcategory.transaction_type === transactionType
+            )}
             selectedSubcategory={selectedSubcategory}
             setSelectedSubcategory={setSelectedSubcategory}
             step={step}
