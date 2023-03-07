@@ -114,7 +114,7 @@ const Add = ({
       )}
       {showForms && (
         <div className={`${styles.add} ${isAddTransactionFormOpened ? '' : styles.hidden}`}>
-          <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} setStep={setStep} />
+          <Calendar transactionDate={transactionDate} setTransactionDate={setTransactionDate} step={step} setStep={setStep} />
           <TransactionType
             transactionType={transactionType}
             setTransactionType={setTransactionType}
@@ -165,14 +165,10 @@ const Add = ({
           />
         </div>
       )}
-      <Button
-        type='button'
-        kind='primary'
-        className={`${styles.add__button} ${isAddTransactionFormOpened ? styles.add__button__isopened : ''}`}
-        onClick={() => setShowForms(true)}
-      >
+      <Button type='button' kind='primary' className={styles.add__button} onClick={() => setShowForms(true)}>
         <Icon name='plus' width={24} height={24} fill='var(--gold-lightest)' />
       </Button>
+      <div className={isAddTransactionFormOpened ? styles.add__overlay : styles.add__overlay__hidden} />
     </>
   );
 };

@@ -25,6 +25,7 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
   };
 
   const handleNextStep = () => {
+    if (step !== steps.VALUE) return;
     setStep(steps.OBSERVATION);
     setIsChangedStep(true);
     const valueInput = document.getElementById('transaction-observation');

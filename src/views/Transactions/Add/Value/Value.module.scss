@@ -43,7 +43,7 @@
     }
 
     .value__cursor {
-      animation: spin 500ms ease infinite;
+      animation: cursor 500ms ease infinite;
       height: var(--line-height-xs);
       width: 2px;
     }

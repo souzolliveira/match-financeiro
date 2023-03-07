@@ -19,6 +19,7 @@ const TransactionType = ({ transactionType, setTransactionType, setSelectedCateg
 
   const handleChange = value => {
     setTransactionType(value);
+    if (step !== steps.TYPE) return;
     setStep(steps.CATEGORY);
     setIsChangedStep(true);
   };

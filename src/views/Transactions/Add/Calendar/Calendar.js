@@ -8,13 +8,14 @@ import Input from 'components/Input/Input';
 
 import styles from './Calendar.module.scss';
 
-const Calendar = ({ transactionDate, setTransactionDate, setStep }) => {
+const Calendar = ({ transactionDate, setTransactionDate, step, setStep }) => {
   const { t } = useTranslation();
 
   const [isChangedStep, setIsChangedStep] = useState(false);
 
   const handleChange = e => {
     setTransactionDate(e.target.value);
+    if (step !== steps.DATE) return;
     setStep(steps.TYPE);
     setIsChangedStep(true);
   };

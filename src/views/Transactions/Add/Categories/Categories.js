@@ -40,6 +40,7 @@ const Categories = ({
   const handleSelectCategory = category => {
     setSelectedCategory(category);
     setCategoryName('');
+    if (step !== steps.CATEGORY) return;
     setStep(steps.SUBCATEGORY);
     setIsChangedStep(true);
   };

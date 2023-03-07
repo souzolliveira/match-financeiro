@@ -43,6 +43,7 @@ const Subcategories = ({
   const handleSelectSubcategory = subcategory => {
     setSelectedSubcategory(subcategory);
     setSubcategoryName('');
+    if (step !== steps.SUBCATEGORY) return;
     setStep(steps.VALUE);
     setIsChangedStep(true);
     const valueInput = document.getElementById('transaction-value');
