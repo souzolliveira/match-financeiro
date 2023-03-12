@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import costingTypes from 'constants/costingTypes';
 import steps from 'constants/steps';
+import transactionTypes from 'constants/transactionTypes';
 import { useAuth } from 'hooks/useAuth';
 import useHiddenStep from 'hooks/useHiddenStep';
 import { useLoader } from 'hooks/useLoader';
@@ -107,6 +108,7 @@ const Subcategories = ({
             onClick={() => {
               setIsAddSubcategoryModalVisible(true);
             }}
+            disabled={!category}
           >
             <Icon name='plus' width={18} height={18} fill='var(--gold-darker)' />
             {t('SUBCATEGORIES.CREATE')}
@@ -138,7 +140,9 @@ const Subcategories = ({
               </option>
             );
           })}
-          <option value='CREATE'>{t('SUBCATEGORIES.CREATE')}</option>
+          <option value='CREATE' disabled={!category}>
+            {t('SUBCATEGORIES.CREATE')}
+          </option>
         </Select>
       </div>
       <Modal
@@ -150,25 +154,31 @@ const Subcategories = ({
         width='300px'
       >
         <div className={styles.subcategories__modal}>
-          <span className={styles.subcategories__label}>{t('SUBCATEGORIES.NAME')}</span>
-          <Input className={styles.subcategories__input} value={subcategoryName} onChange={e => setSubcategoryName(e.target.value)} />
-          <span className={styles.subcategories__label}>{t('SUBCATEGORIES.COSTING')}</span>
-          <div className={styles.subcategories__costing}>
-            <Radio
-              reference={costing}
-              value={costingTypes.FIXED}
-              onChange={() => setCosting(costingTypes.FIXED)}
-              label={t('SUBCATEGORIES.COSTING.FIXED')}
-              name='subcategories-costing'
-            />
-            <Radio
-              reference={costing}
-              value={costingTypes.VARIABLE}
-              onChange={() => setCosting(costingTypes.VARIABLE)}
-              label={t('SUBCATEGORIES.COSTING.VARIABLE')}
-              name='subcategories-costing'
-            />
+          <div className={styles.subcategories__inputGroup}>
+            <span className={styles.subcategories__label}>{t('SUBCATEGORIES.NAME')}</span>
+            <Input className={styles.subcategories__input} value={subcategoryName} onChange={e => setSubcategoryName(e.target.value)} />
           </div>
+          {transactionType === transactionTypes.EXPENSE && (
+            <div className={styles.subcategories__inputGroup}>
+              <span className={styles.subcategories__label}>{t('SUBCATEGORIES.COSTING')}</span>
+              <div className={styles.subcategories__costing}>
+                <Radio
+                  reference={costing}
+                  value={costingTypes.FIXED}
+                  onChange={() => setCosting(costingTypes.FIXED)}
+                  label={t('SUBCATEGORIES.COSTING.FIXED')}
+                  name='subcategories-costing'
+                />
+                <Radio
+                  reference={costing}
+                  value={costingTypes.VARIABLE}
+                  onChange={() => setCosting(costingTypes.VARIABLE)}
+                  label={t('SUBCATEGORIES.COSTING.VARIABLE')}
+                  name='subcategories-costing'
+                />
+              </div>
+            </div>
+          )}
           <Button type='button' size='md' kind='primary' onClick={() => handleCreateSubcategory()}>
             {t('CREATE')}
           </Button>

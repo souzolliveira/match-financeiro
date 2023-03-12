@@ -77,6 +77,11 @@
   padding: var(--spacing-small);
   width: 100%;
 
+  .subcategories__inputGroup {
+    display: flex;
+    flex-direction: column;
+  }
+
   .subcategories__label {
     color: var(--gold-darker);
     font-size: var(--font-size-md);

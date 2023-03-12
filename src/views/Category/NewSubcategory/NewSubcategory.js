@@ -37,10 +37,10 @@ const NewSubcategory = ({
 
   const handleModalClose = () => {
     setIsNewSubcategoryModalVisible(false);
-    setNewSubcategoryType(null);
-    setNewSubcategoryCategory(null);
-    setNewSubcategoryName(null);
-    setNewSubcategoryCosting(null);
+    setNewSubcategoryType('');
+    setNewSubcategoryCategory('');
+    setNewSubcategoryName('');
+    setNewSubcategoryCosting('');
   };
 
   const handleCreateSubcategory = () => {
@@ -118,14 +118,20 @@ const NewSubcategory = ({
                 })}
             </Select>
           </div>
-          <div className={styles.modal__inputGroup}>
-            <span className={styles.modal__label}>{t('SUBCATEGORIES.COSTING')}</span>
-            <Select className={styles.modal__input} onChange={e => setNewSubcategoryCosting(e.target.value)} value={newSubcategoryCosting}>
-              <option value=''>{t('SELECT')}</option>
-              <option value={costingTypes.FIXED}>{t(`SUBCATEGORIES.COSTING.${costingTypes.FIXED}`)}</option>
-              <option value={costingTypes.VARIABLE}>{t(`SUBCATEGORIES.COSTING.${costingTypes.VARIABLE}`)}</option>
-            </Select>
-          </div>
+          {newSubcategoryType === transactionTypes.EXPENSE && (
+            <div className={styles.modal__inputGroup}>
+              <span className={styles.modal__label}>{t('SUBCATEGORIES.COSTING')}</span>
+              <Select
+                className={styles.modal__input}
+                onChange={e => setNewSubcategoryCosting(e.target.value)}
+                value={newSubcategoryCosting}
+              >
+                <option value=''>{t('SELECT')}</option>
+                <option value={costingTypes.FIXED}>{t(`SUBCATEGORIES.COSTING.${costingTypes.FIXED}`)}</option>
+                <option value={costingTypes.VARIABLE}>{t(`SUBCATEGORIES.COSTING.${costingTypes.VARIABLE}`)}</option>
+              </Select>
+            </div>
+          )}
           <div className={styles.modal__inputGroup}>
             <span className={styles.modal__label}>{t('SUBCATEGORIES.NAME')}</span>
             <Input className={styles.modal__input} onChange={e => setNewSubcategoryName(e.target.value)} value={newSubcategoryName} />

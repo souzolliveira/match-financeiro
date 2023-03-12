@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import costingTypes from 'constants/costingTypes';
+import transactionTypes from 'constants/transactionTypes';
 
 import Fill from 'components/Fill/Fill';
 import Icon from 'components/Icon/Icon';
@@ -121,7 +122,9 @@ const List = ({
                         return (
                           <div className={styles.list__subcategory}>
                             <span className={styles.list__label}>
-                              {subcategory.subcategory_name} - {t(`SUBCATEGORIES.COSTING.${costingTypes[subcategory.costing]}`)}
+                              {subcategory.subcategory_name}{' '}
+                              {transactionType === transactionTypes.EXPENSE &&
+                                `- ${t(`SUBCATEGORIES.COSTING.${costingTypes[subcategory.costing]}`)}`}
                             </span>
                             <Fill />
                             <div className={styles.list__buttons}>
