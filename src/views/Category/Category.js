@@ -35,22 +35,22 @@ const Category = () => {
 
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
-  const [openedCategory, setOpenedCategory] = useState(null);
+  const [openedCategory, setOpenedCategory] = useState('');
 
   const [isNewCategoryModalVisible, setIsNewCategoryModalVisible] = useState(false);
-  const [newCategoryType, setNewCategoryType] = useState(null);
-  const [newCategoryName, setNewCategoryName] = useState(null);
+  const [newCategoryType, setNewCategoryType] = useState('');
+  const [newCategoryName, setNewCategoryName] = useState('');
   const [isDeleteCategoryModalVisible, setIsDeleteCategoryModalVisible] = useState(false);
   const [isEditCategoryModalVisible, setIsEditCategoryModalVisible] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [isNewSubcategoryModalVisible, setIsNewSubcategoryModalVisible] = useState(false);
-  const [newSubcategoryType, setNewSubcategoryType] = useState(null);
-  const [newSubcategoryCategory, setNewSubcategoryCategory] = useState(null);
-  const [newSubcategoryName, setNewSubcategoryName] = useState(null);
-  const [newSubcategoryCosting, setNewSubcategoryCosting] = useState(null);
+  const [newSubcategoryType, setNewSubcategoryType] = useState('');
+  const [newSubcategoryCategory, setNewSubcategoryCategory] = useState('');
+  const [newSubcategoryName, setNewSubcategoryName] = useState('');
+  const [newSubcategoryCosting, setNewSubcategoryCosting] = useState('');
   const [isDeleteSubcategoryModalVisible, setIsDeleteSubcategoryModalVisible] = useState(false);
   const [isEditSubcategoryModalVisible, setIsEditSubcategoryModalVisible] = useState(false);
-  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [hasSubcategories, setHasSubcategories] = useState(false);
   const [hasTransactions, setHasTransactions] = useState(false);
 

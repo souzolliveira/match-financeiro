@@ -31,8 +31,8 @@ const NewCategory = ({
 
   const handleModalClose = () => {
     setIsNewCategoryModalVisible(false);
-    setNewCategoryType(null);
-    setNewCategoryName(null);
+    setNewCategoryType('');
+    setNewCategoryName('');
   };
 
   const handleCreateCategory = () => {

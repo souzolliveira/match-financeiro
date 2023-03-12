@@ -15,7 +15,7 @@ const NewCategoryFromTemplate = ({ template, setTemplate, transactionType }) => 
   const { t } = useTranslation();
 
   const [isAddingCategory, setIsAddingCategory] = useState(false);
-  const [transactionTypeToCreateCategory, setTransactionTypeToCreateCategory] = useState(null);
+  const [transactionTypeToCreateCategory, setTransactionTypeToCreateCategory] = useState('');
   const [categoryToBeCreated, setCategoryToBeCreated] = useState('');
 
   const handleAddCategory = () => {

@@ -17,8 +17,8 @@ const NewSubcategoryFromTemplate = ({ template, setTemplate, transactionType, ca
   const { t } = useTranslation();
 
   const [isAddingSubcategory, setIsAddingSubcategory] = useState(false);
-  const [transactionTypeToCreateSubcategory, setTransactionTypeToCreateSubcategory] = useState(null);
-  const [categoryToCreateSubcategory, setCategoryToCreateSubcategory] = useState(null);
+  const [transactionTypeToCreateSubcategory, setTransactionTypeToCreateSubcategory] = useState('');
+  const [categoryToCreateSubcategory, setCategoryToCreateSubcategory] = useState('');
   const [subcategoryToBeCreated, setSubcategoryToBeCreated] = useState('');
 
   const handleAddSubcategory = () => {

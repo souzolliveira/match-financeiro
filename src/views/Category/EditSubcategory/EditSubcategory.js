@@ -27,8 +27,8 @@ const EditSubcategory = ({
   const { setIsLoading } = useLoader();
   const { t } = useTranslation();
 
-  const [intermediateValue, setIntermediateValue] = useState(null);
-  const [intermediateCosting, setIntermediateCosting] = useState(null);
+  const [intermediateValue, setIntermediateValue] = useState('');
+  const [intermediateCosting, setIntermediateCosting] = useState('');
 
   useEffect(() => {
     setIntermediateValue(selectedSubcategory?.subcategory_name);

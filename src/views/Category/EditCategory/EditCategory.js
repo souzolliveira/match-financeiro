@@ -25,7 +25,7 @@ const EditCategory = ({
   const { setIsLoading } = useLoader();
   const { t } = useTranslation();
 
-  const [intermediateValue, setIntermediateValue] = useState(null);
+  const [intermediateValue, setIntermediateValue] = useState('');
 
   useEffect(() => {
     setIntermediateValue(selectedCategory?.category_name);
