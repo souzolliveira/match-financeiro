@@ -14,9 +14,9 @@
 
     &:disabled {
       background-color: var(--gold-lighter);
-      color: var(--gold);
       border: 2px solid var(--gold-lighter);
       box-shadow: none;
+      color: var(--gold);
       cursor: no-drop;
     }
   }
@@ -44,6 +44,20 @@
       outline: none;
       text-shadow: -2px -2px 3px rgba(0, 0, 0, 0.2), 2px 2px 3px rgba(255, 255, 255, 1);
       transform: translateY(2px);
+    }
+
+    &:disabled {
+      background-color: var(--gold-lighter);
+      border: 2px solid var(--gold-lighter);
+      box-shadow: none;
+      color: var(--gold);
+      cursor: no-drop;
+      text-shadow: none;
+      transform: none;
+
+      svg path {
+        fill: var(--gold);
+      }
     }
   }
 
