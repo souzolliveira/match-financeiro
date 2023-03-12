@@ -126,5 +126,7 @@
   "EDIT": "Editar",
   "DELETE": "Apagar",
   "CLOSE": "Fechar",
-  "AT": " às "
+  "AT": " às ",
+  "LOST": "Parece que alguém se perdeu por aqui",
+  "GO.HOME": "Clique para voltar à tela principal"
 }

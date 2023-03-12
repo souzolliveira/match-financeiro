@@ -1,2 +1,29 @@
-.notfound {
+.notFound {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: var(--spacing-base) var(--spacing-base);
+  width: calc(100vw - 2 * var(--spacing-base));
+
+  .notFound__message {
+    color: var(--gold-dark);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    padding-top: var(--spacing-base);
+    text-align: center;
+    width: 260px;
+  }
+
+  .notFound__image {
+    background-image: url('./not_found.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 100%;
+    max-width: 720px;
+    width: 100%;
+  }
 }
