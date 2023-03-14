@@ -80,26 +80,6 @@
       }
     }
 
-    .user__options {
-      display: flex;
-      flex-direction: column;
-      padding: var(--spacing-small) 0;
-      width: 100%;
-
-      .user__option {
-        border: 1px solid var(--gold-light);
-        border-left: 0;
-        border-right: 0;
-        color: var(--gold-darker);
-        cursor: pointer;
-        font-size: var(--font-size-md);
-        font-weight: var(--font-weight-normal);
-        line-height: var(--line-height-sm);
-        padding: var(--spacing-small);
-        width: 100%;
-      }
-    }
-
     .user__logout {
       padding: var(--spacing-small);
       width: 100%;

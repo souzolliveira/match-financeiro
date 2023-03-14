@@ -8,6 +8,7 @@ import Home from 'views/Home/Home';
 import Login from 'views/Login/Login';
 import NotFound from 'views/NotFound/NotFound';
 import Register from 'views/Register/Register';
+import Settings from 'views/Settings/Settings';
 import Stats from 'views/Stats/Stats';
 import Transactions from 'views/Transactions/Transactions';
 import User from 'views/User/User';
@@ -25,7 +26,8 @@ const Routes = () => {
           <Route exact path='/' element={<Home />} />
           <Route exact path='/categories' element={<Category />} />
           <Route exact path='/stats' element={<Stats />} />
-          <Route exact path='/transactions' element={<Transactions />} />
+          <Route exact path='/transactions' element={<Transactions hasFilters />} />
+          <Route exact path='/settings' element={<Settings />} />
           <Route exact path='/user' element={<User />} />
         </Route>
         <Route path='*' element={<NotFound />} />

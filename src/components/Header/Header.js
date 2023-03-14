@@ -13,9 +13,14 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <img alt='Match Financeiro Logo' src={Logo} className={styles.header__logo} />
-      <button type='button' onClick={() => navigate('/user')} className={styles.header__settings}>
-        <Icon name='user' width={32} height={32} fill='#fff' />
-      </button>
+      <div className={styles.header__buttons}>
+        <button type='button' onClick={() => navigate('/settings')} className={styles.header__button}>
+          <Icon name='settings' width={32} height={32} fill='#fff' />
+        </button>
+        <button type='button' onClick={() => navigate('/user')} className={styles.header__button}>
+          <Icon name='user' width={32} height={32} fill='#fff' />
+        </button>
+      </div>
     </div>
   );
 };

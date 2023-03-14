@@ -136,7 +136,7 @@ const Category = () => {
   return (
     <div className={styles.category}>
       <div className={styles.category__header}>
-        <button type='button' onClick={() => navigate('/user')} className={styles.category__return}>
+        <button type='button' onClick={() => navigate('/settings')} className={styles.category__return}>
           <Icon name='arrow-right' width={24} height={24} fill='white' className={styles.category__returnicon} />
         </button>
         <span className={styles.category__title}>{t('CATEGORIES')}</span>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
@@ -80,11 +80,6 @@ const User = () => {
             <span className={styles.user__label}>{t('PHONE')}</span>
             <Input value={phone} disabled />
           </div>
-        </div>
-        <div className={styles.user__options}>
-          <Link to='/categories' className={styles.user__option}>
-            {t('CATEGORIES')}
-          </Link>
         </div>
         <Fill />
         <div className={styles.user__logout}>

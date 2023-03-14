@@ -17,10 +17,15 @@
     width: auto;
   }
 
-  .header__settings {
-    align-items: center;
+  .header__buttons {
     display: flex;
-    margin: 0;
-    padding: 0;
+    gap: var(--spacing-tiny);
+
+    .header__button {
+      align-items: center;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
   }
 }
