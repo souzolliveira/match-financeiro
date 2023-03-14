@@ -20,7 +20,7 @@ import Transaction from './Transaction/Transaction';
 
 import styles from './Transactions.module.scss';
 
-const Transactions = () => {
+const Transactions = ({ hasFilters }) => {
   const { t } = useTranslation();
   const { addToast } = useNotification();
   const { handleError } = useAuth();
@@ -45,7 +45,11 @@ const Transactions = () => {
     await transactionService
       .listTransactions({ params, handleError })
       .then(data => {
-        setTransactions(data.data);
+        if (!hasFilters) {
+          setTransactions(data.data.slice(0, 3));
+        } else {
+          setTransactions(data.data);
+        }
         setBalance(convertToFloat(data.balance));
         setIncomes(convertToFloat(data.income));
         setExpenses(convertToFloat(data.expense));
@@ -114,25 +118,31 @@ const Transactions = () => {
     <div className={styles.transactions}>
       <div className={styles.transactions__header}>
         <h3 className={styles.transactions__title}>{t('TRANSACTIONS')}</h3>
-        <span className={styles.transactions__lastupdate}>
-          {t('TRANSACTIONS.LAST.UPDATE', { date: formatDateFromAPIToFront(lastUpdate), time: bindHour(lastUpdate) })}
-        </span>
+        {transactions.length > 0 && (
+          <span className={styles.transactions__lastupdate}>
+            {t('TRANSACTIONS.LAST.UPDATE', { date: formatDateFromAPIToFront(lastUpdate), time: bindHour(lastUpdate) })}
+          </span>
+        )}
       </div>
       <div className={styles.transactions__container}>
-        <div className={styles.transactions__line} />
-        <Balance
-          active={isFiltersTabOpened}
-          setActive={setIsFiltersTabOpened}
-          balance={balance}
-          incomes={incomes}
-          expenses={expenses}
-          investiments={investiments}
-          categories={categories}
-          subcategories={subcategories}
-          fetchTransactions={fetchTransactions}
-        />
+        {hasFilters && (
+          <>
+            <div className={styles.transactions__line} />
+            <Balance
+              active={isFiltersTabOpened}
+              setActive={setIsFiltersTabOpened}
+              balance={balance}
+              incomes={incomes}
+              expenses={expenses}
+              investiments={investiments}
+              categories={categories}
+              subcategories={subcategories}
+              fetchTransactions={fetchTransactions}
+            />
+          </>
+        )}
         {transactions.length ? (
-          <ul className={styles.transactions__list}>
+          <ul className={`${styles.transactions__list} ${hasFilters ? '' : styles.transactions__listHeight}`}>
             {transactions.map((transaction, index) => {
               return (
                 <Transaction
@@ -148,22 +158,24 @@ const Transactions = () => {
             })}
           </ul>
         ) : (
-          <div className={styles.transactions__empty}>
+          <div className={`${styles.transactions__empty} ${hasFilters ? '' : styles.transactions__listHeight}`}>
             <Icon name='list' width={128} height={128} fill='var(--gold-dark)' />
             <span className={styles.transactions__emptylabel}>{t('TRANSACTIONS.EMPTY')}</span>
           </div>
         )}
       </div>
-      <Add
-        isAddTransactionFormOpened={isAddTransactionFormOpened}
-        setIsAddTransactionFormOpened={setIsAddTransactionFormOpened}
-        fetchTransactions={fetchTransactions}
-        fetchCategories={fetchCategories}
-        categories={categories}
-        fetchSubcategories={fetchSubcategories}
-        subcategories={subcategories}
-        setIsFiltersTabOpened={setIsFiltersTabOpened}
-      />
+      {hasFilters && (
+        <Add
+          isAddTransactionFormOpened={isAddTransactionFormOpened}
+          setIsAddTransactionFormOpened={setIsAddTransactionFormOpened}
+          fetchTransactions={fetchTransactions}
+          fetchCategories={fetchCategories}
+          categories={categories}
+          fetchSubcategories={fetchSubcategories}
+          subcategories={subcategories}
+          setIsFiltersTabOpened={setIsFiltersTabOpened}
+        />
+      )}
     </div>
   );
 };

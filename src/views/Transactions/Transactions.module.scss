@@ -43,12 +43,16 @@
     padding: 0;
     width: 100%;
 
+    &.transactions__listHeight {
+      height: fit-content;
+      padding: var(--spacing-base);
+    }
+
     .transactions__emptylabel {
       color: var(--gold-dark);
       font-size: var(--font-size-md);
       font-weight: var(--font-weight-bold);
       line-height: var(--line-height-gold);
-      margin-top: var(--spacing-base);
     }
   }
 
@@ -80,6 +84,10 @@
       overflow-y: auto;
       padding: 0;
       width: 100%;
+
+      &.transactions__listHeight {
+        height: fit-content;
+      }
     }
   }
 }
