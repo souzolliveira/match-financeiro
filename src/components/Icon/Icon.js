@@ -11,6 +11,7 @@ import Income from './Icons/Income';
 import List from './Icons/List';
 import Logout from './Icons/Logout';
 import Plus from './Icons/Plus';
+import Settings from './Icons/Settings';
 import Stats from './Icons/Stats';
 import Transactions from './Icons/Transactions';
 import Trash from './Icons/Trash';
@@ -40,6 +41,8 @@ const Icon = ({ name, width, height, fill, className }) => {
       return <Logout fill={fill} width={width} height={height} className={className} />;
     case 'plus':
       return <Plus fill={fill} width={width} height={height} className={className} />;
+    case 'settings':
+      return <Settings fill={fill} width={width} height={height} className={className} />;
     case 'stats':
       return <Stats fill={fill} width={width} height={height} className={className} />;
     case 'transactions':
