@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -11,18 +11,33 @@ import Filters from '../Filters/Filters';
 
 import styles from './Balance.module.scss';
 
-const Balance = ({ active, setActive, balance, incomes, expenses, investiments, categories, subcategories, fetchTransactions }) => {
+const Balance = ({
+  active,
+  setActive,
+  balance,
+  incomes,
+  expenses,
+  investiments,
+  categories,
+  subcategories,
+  fetchTransactions,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  transactionType,
+  setTransactionType,
+  category,
+  setCategory,
+  subcategory,
+  setSubcategory,
+  groupBy,
+  setGroupBy,
+}) => {
   const { t } = useTranslation();
 
   const nav = useRef(null);
   const header = useRef(null);
-
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [transactionType, setTransactionType] = useState('');
-  const [category, setCategory] = useState('');
-  const [subcategory, setSubcategory] = useState('');
-  const [groupBy, setGroupBy] = useState('');
 
   const handleClickOutside = event => {
     if (active && nav.current && !nav.current.contains(event.target) && header.current && !header.current.contains(event.target))

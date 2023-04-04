@@ -1,16 +1,16 @@
 import transactionTypes from 'constants/transactionTypes';
 
-const bindTransactionTypeIconColor = transactionType => {
+const bindTransactionTypeIcon = transactionType => {
   switch (transactionType) {
     case transactionTypes.INCOME:
-      return 'var(--color-success)';
+      return 'income';
     case transactionTypes.EXPENSE:
-      return 'var(--color-danger)';
+      return 'expense';
     case transactionTypes.INVESTIMENT:
-      return 'var(--color-info)';
+      return 'expense';
     default:
       return null;
   }
 };
 
-export default bindTransactionTypeIconColor;
+export default bindTransactionTypeIcon;

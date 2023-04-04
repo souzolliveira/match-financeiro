@@ -37,6 +37,13 @@ const Transactions = ({ hasFilters }) => {
   const [investiments, setInvestiments] = useState(0);
   const [lastUpdate, setLastUpdate] = useState('');
 
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [transactionType, setTransactionType] = useState('');
+  const [category, setCategory] = useState('');
+  const [subcategory, setSubcategory] = useState('');
+  const [groupBy, setGroupBy] = useState('');
+
   const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
   const [isFiltersTabOpened, setIsFiltersTabOpened] = useState(false);
 
@@ -138,6 +145,18 @@ const Transactions = ({ hasFilters }) => {
               categories={categories}
               subcategories={subcategories}
               fetchTransactions={fetchTransactions}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              transactionType={transactionType}
+              setTransactionType={setTransactionType}
+              category={category}
+              setCategory={setCategory}
+              subcategory={subcategory}
+              setSubcategory={setSubcategory}
+              groupBy={groupBy}
+              setGroupBy={setGroupBy}
             />
           </>
         )}
@@ -151,6 +170,7 @@ const Transactions = ({ hasFilters }) => {
                   categories={categories}
                   subcategories={subcategories}
                   fetchTransactions={fetchTransactions}
+                  disabled={!hasFilters || groupBy}
                 >
                   {transaction.observation}
                 </Transaction>

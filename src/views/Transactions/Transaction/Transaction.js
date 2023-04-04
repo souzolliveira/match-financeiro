@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import bindTransactionTypeIcon from 'helpers/bindTransactionTypeIcon';
 import bindTransactionTypeIconColor from 'helpers/bindTransactionTypeIconColor';
 import useDate from 'hooks/useDate';
 
@@ -12,7 +13,7 @@ import Details from './Details/Details';
 
 import styles from './Transaction.module.scss';
 
-const Transaction = ({ transaction, categories, subcategories, fetchTransactions }) => {
+const Transaction = ({ transaction, categories, subcategories, fetchTransactions, disabled }) => {
   const { formatDateFromAPIToFront } = useDate();
   const { t } = useTranslation();
 
@@ -29,14 +30,20 @@ const Transaction = ({ transaction, categories, subcategories, fetchTransactions
     <>
       <li
         className={styles.transaction}
-        onClick={() => setShowDetails(true)}
-        onKeyDown={() => setShowDetails(true)}
+        onClick={() => {
+          if (disabled) return;
+          setShowDetails(true);
+        }}
+        onKeyDown={() => {
+          if (disabled) return;
+          setShowDetails(true);
+        }}
         role='button'
         tabIndex={0}
       >
         <div className={styles.transaction__type}>
           <Icon
-            name={transaction.transaction_type?.toLowerCase()}
+            name={bindTransactionTypeIcon(transaction.transaction_type)}
             width={24}
             height={24}
             fill={bindTransactionTypeIconColor(transaction.transaction_type)}
