@@ -9,6 +9,7 @@ import { useAuth } from 'hooks/useAuth';
 import useHiddenStep from 'hooks/useHiddenStep';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
+import { useTransactions } from 'hooks/useTransactions';
 import subcategoryService from 'services/subcategory.service';
 
 import Button from 'components/Button/Button';
@@ -20,21 +21,13 @@ import Select from 'components/Select/Select';
 
 import styles from './Subcategories.module.scss';
 
-const Subcategories = ({
-  category,
-  fetchSubcategories,
-  subcategories,
-  selectedSubcategory,
-  setSelectedSubcategory,
-  step,
-  setStep,
-  transactionType,
-}) => {
+const Subcategories = ({ category, selectedSubcategory, setSelectedSubcategory, step, setStep, transactionType }) => {
   const { t } = useTranslation();
   const { addToast } = useNotification();
   const { hidden } = useHiddenStep({ target: steps.SUBCATEGORY, step });
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
+  const { fetchSubcategories, subcategories } = useTransactions();
 
   const [isAddSubcategoryModalVisible, setIsAddSubcategoryModalVisible] = useState(false);
   const [subcategoryName, setSubcategoryName] = useState('');
@@ -86,20 +79,22 @@ const Subcategories = ({
       >
         <span className={styles.subcategories__label}>{t('SUBCATEGORIES.LABEL')}</span>
         <div className={styles.subcategories__items}>
-          {subcategories.map((item, index) => {
-            return (
-              <Button
-                key={index}
-                type='button'
-                size='lg'
-                kind='secondary'
-                className={styles.subcategories__button}
-                onClick={() => handleSelectSubcategory(item.subcategory_name)}
-              >
-                {item.subcategory_name}
-              </Button>
-            );
-          })}
+          {subcategories
+            .filter(subcategory => subcategory.category_name === category && subcategory.transaction_type === transactionType)
+            .map((item, index) => {
+              return (
+                <Button
+                  key={index}
+                  type='button'
+                  size='lg'
+                  kind='secondary'
+                  className={styles.subcategories__button}
+                  onClick={() => handleSelectSubcategory(item.subcategory_name)}
+                >
+                  {item.subcategory_name}
+                </Button>
+              );
+            })}
           <Button
             type='button'
             size='lg'
@@ -133,13 +128,15 @@ const Subcategories = ({
           <option value='' disabled>
             {t('SELECT')}
           </option>
-          {subcategories.map((item, index) => {
-            return (
-              <option key={index} value={item.subcategory_name}>
-                {item.subcategory_name}
-              </option>
-            );
-          })}
+          {subcategories
+            .filter(subcategory => subcategory.category_name === category && subcategory.transaction_type === transactionType)
+            .map((item, index) => {
+              return (
+                <option key={index} value={item.subcategory_name}>
+                  {item.subcategory_name}
+                </option>
+              );
+            })}
           <option value='CREATE' disabled={!category}>
             {t('SUBCATEGORIES.CREATE')}
           </option>

@@ -3,130 +3,60 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import filterTypes from 'constants/filterTypes';
-import handleParams from 'helpers/handleParams';
 import useDate from 'hooks/useDate';
+import { useTransactions } from 'hooks/useTransactions';
 
 import Button from 'components/Button/Button';
 import Pill from 'components/Pill/Pill';
 
 import styles from './AppliedFilters.module.scss';
 
-const AppliedFilters = ({
-  setActive,
-  startDate,
-  setStartDate,
-  setIntermediateStartDate,
-  endDate,
-  setEndDate,
-  setIntermediateEndDate,
-  transactionType,
-  setTransactionType,
-  setIntermediateTransactionType,
-  category,
-  setCategory,
-  setIntermediateCategory,
-  subcategory,
-  setSubcategory,
-  setIntermediateSubcategory,
-  groupBy,
-  setGroupBy,
-  setIntermediateGroupBy,
-  fetchTransactions,
-}) => {
+const AppliedFilters = () => {
   const { t } = useTranslation();
   const { formatDateFromAPIToFront } = useDate();
-
-  const onRemoveFilter = key => {
-    setActive(false);
-    if (key === filterTypes.START_DATE) {
-      setStartDate('');
-      setIntermediateStartDate('');
-    } else if (key === filterTypes.END_DATE) {
-      setEndDate('');
-      setIntermediateEndDate('');
-    } else if (key === filterTypes.TRANSACTION_TYPE) {
-      setTransactionType('');
-      setIntermediateTransactionType('');
-      setCategory('');
-      setIntermediateCategory('');
-      setSubcategory('');
-      setIntermediateSubcategory('');
-    } else if (key === filterTypes.CATEGORY) {
-      setCategory('');
-      setIntermediateCategory('');
-      setSubcategory('');
-      setIntermediateSubcategory('');
-    } else if (key === filterTypes.SUBCATEGORY) {
-      setSubcategory('');
-      setIntermediateSubcategory('');
-    } else if (key === filterTypes.GROUP_BY) {
-      setGroupBy('');
-      setIntermediateGroupBy('');
-    }
-    fetchTransactions(
-      handleParams({
-        startDate: key === filterTypes.START_DATE ? '' : startDate,
-        endDate: key === filterTypes.END_DATE ? '' : endDate,
-        transactionType: key === filterTypes.TRANSACTION_TYPE ? '' : transactionType,
-        category: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY ? '' : category,
-        subcategory:
-          key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY ? '' : subcategory,
-        groupBy: key === filterTypes.GROUP_BY ? '' : groupBy,
-      })
-    );
-  };
-
-  const onClearFilters = () => {
-    setActive(false);
-    setStartDate('');
-    setIntermediateStartDate('');
-    setEndDate('');
-    setIntermediateEndDate('');
-    setTransactionType('');
-    setIntermediateTransactionType('');
-    setCategory('');
-    setIntermediateCategory('');
-    setSubcategory('');
-    setIntermediateSubcategory('');
-    setGroupBy('');
-    setIntermediateGroupBy('');
-    fetchTransactions();
-  };
+  const { filters, onRemoveFilter, onClearFilters } = useTransactions();
 
   return (
     <div className={styles.appliedFilters}>
-      {startDate && (
+      {filters.startDate && (
         <Pill
           id={filterTypes.START_DATE}
           name={t('FILTERS.DATE.START')}
-          value={formatDateFromAPIToFront(startDate)}
+          value={formatDateFromAPIToFront(filters.startDate)}
           onRemovePill={onRemoveFilter}
         />
       )}
-      {endDate && (
+      {filters.endDate && (
         <Pill
           id={filterTypes.END_DATE}
           name={t('FILTERS.DATE.END')}
-          value={formatDateFromAPIToFront(endDate)}
+          value={formatDateFromAPIToFront(filters.endDate)}
           onRemovePill={onRemoveFilter}
         />
       )}
-      {transactionType && (
+      {filters.transactionType && (
         <Pill
           id={filterTypes.TRANSACTION_TYPE}
           name={t('FILTERS.TRANSACTION_TYPE')}
-          value={`${t(`FILTERS.${transactionType}`)}`}
+          value={`${t(`FILTERS.${filters.transactionType}`)}`}
           onRemovePill={onRemoveFilter}
         />
       )}
-      {category && <Pill id={filterTypes.CATEGORY} name={t('FILTERS.CATEGORY')} value={category} onRemovePill={onRemoveFilter} />}
-      {subcategory && (
-        <Pill id={filterTypes.SUBCATEGORY} name={t('FILTERS.SUBCATEGORY')} value={subcategory} onRemovePill={onRemoveFilter} />
+      {filters.category && (
+        <Pill id={filterTypes.CATEGORY} name={t('FILTERS.CATEGORY')} value={filters.category} onRemovePill={onRemoveFilter} />
       )}
-      {groupBy && (
-        <Pill id={filterTypes.GROUP_BY} name={t('FILTERS.GROUP')} value={`${t(`FILTERS.${groupBy}`)}`} onRemovePill={onRemoveFilter} />
+      {filters.subcategory && (
+        <Pill id={filterTypes.SUBCATEGORY} name={t('FILTERS.SUBCATEGORY')} value={filters.subcategory} onRemovePill={onRemoveFilter} />
       )}
-      {(startDate || endDate || transactionType || category || subcategory || groupBy) && (
+      {filters.groupBy && (
+        <Pill
+          id={filterTypes.GROUP_BY}
+          name={t('FILTERS.GROUP')}
+          value={`${t(`FILTERS.${filters.groupBy}`)}`}
+          onRemovePill={onRemoveFilter}
+        />
+      )}
+      {(filters.startDate || filters.endDate || filters.transactionType || filters.category || filters.subcategory || filters.groupBy) && (
         <Button size='md' kind='outline' onClick={onClearFilters} className={styles.appliedFilters__clear}>
           {t('FILTERS.CLEAR')}
         </Button>

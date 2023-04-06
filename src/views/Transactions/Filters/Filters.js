@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import filterTypes from 'constants/filterTypes';
 import groupByTypes from 'constants/groupByTypes';
 import transactionTypes from 'constants/transactionTypes';
 import handleParams from 'helpers/handleParams';
+import { useTransactions } from 'hooks/useTransactions';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
@@ -14,51 +16,15 @@ import AppliedFilters from '../AppliedFilters/AppliedFilters';
 
 import styles from './Filters.module.scss';
 
-const Filters = ({
-  setActive,
-  startDate,
-  setStartDate,
-  endDate,
-  setEndDate,
-  categories,
-  subcategories,
-  transactionType,
-  setTransactionType,
-  category,
-  setCategory,
-  subcategory,
-  setSubcategory,
-  groupBy,
-  setGroupBy,
-  fetchTransactions,
-}) => {
+const Filters = () => {
   const { t } = useTranslation();
-
-  const [intermediateStartDate, setIntermediateStartDate] = useState(startDate);
-  const [intermediateEndDate, setIntermediateEndDate] = useState(endDate);
-  const [intermediateTransactionType, setIntermediateTransactionType] = useState(transactionType);
-  const [intermediateCategory, setIntermediateCategory] = useState(category);
-  const [intermediateSubcategory, setIntermediateSubcategory] = useState(subcategory);
-  const [intermediateGroupBy, setIntermediateGroupBy] = useState(groupBy);
+  const { categories, subcategories, setFilters, intermediateFilters, setIntermediateFilters, fetchTransactions, setIsFiltersTabOpened } =
+    useTransactions();
 
   const handleFilter = () => {
-    setActive(false);
-    setStartDate(intermediateStartDate);
-    setEndDate(intermediateEndDate);
-    setTransactionType(intermediateTransactionType);
-    setCategory(intermediateCategory);
-    setSubcategory(intermediateSubcategory);
-    setGroupBy(intermediateGroupBy);
-    fetchTransactions(
-      handleParams({
-        startDate: intermediateStartDate,
-        endDate: intermediateEndDate,
-        transactionType: intermediateTransactionType,
-        category: intermediateCategory,
-        subcategory: intermediateSubcategory,
-        groupBy: intermediateGroupBy,
-      })
-    );
+    setIsFiltersTabOpened(false);
+    setFilters({ ...intermediateFilters });
+    fetchTransactions(handleParams({ ...intermediateFilters }));
   };
 
   return (
@@ -69,8 +35,13 @@ const Filters = ({
           className={styles.filters__input}
           type='date'
           name='start-date'
-          value={intermediateStartDate}
-          onChange={e => setIntermediateStartDate(e.target.value)}
+          value={intermediateFilters.startDate}
+          onChange={e =>
+            setIntermediateFilters(state => ({
+              ...state,
+              [filterTypes.START_DATE]: e.target.value,
+            }))
+          }
         />
       </div>
       <div className={styles.filters__group}>
@@ -79,20 +50,28 @@ const Filters = ({
           className={styles.filters__input}
           type='date'
           name='end-date'
-          value={intermediateEndDate}
-          onChange={e => setIntermediateEndDate(e.target.value)}
+          value={intermediateFilters.endDate}
+          onChange={e =>
+            setIntermediateFilters(state => ({
+              ...state,
+              [filterTypes.END_DATE]: e.target.value,
+            }))
+          }
         />
       </div>
       <div className={styles.filters__group}>
         <span className={styles.filters__label}>{t('FILTERS.TRANSACTION_TYPE')}:</span>
         <Select
           className={styles.filters__select}
-          value={intermediateTransactionType}
-          onChange={e => {
-            setIntermediateTransactionType(e.target.value);
-            setIntermediateCategory('');
-            setIntermediateSubcategory('');
-          }}
+          value={intermediateFilters.transactionType}
+          onChange={e =>
+            setIntermediateFilters(state => ({
+              ...state,
+              [filterTypes.TRANSACTION_TYPE]: e.target.value,
+              [filterTypes.CATEGORY]: '',
+              [filterTypes.SUBCATEGORY]: '',
+            }))
+          }
         >
           <option value='' disabled>
             {t('SELECT')}
@@ -106,18 +85,21 @@ const Filters = ({
         <span className={styles.filters__label}>{t('FILTERS.CATEGORY')}:</span>
         <Select
           className={styles.filters__select}
-          value={intermediateCategory}
-          onChange={e => {
-            setIntermediateCategory(e.target.value);
-            setIntermediateSubcategory('');
-          }}
-          disabled={intermediateTransactionType === ''}
+          value={intermediateFilters.category}
+          onChange={e =>
+            setIntermediateFilters(state => ({
+              ...state,
+              [filterTypes.CATEGORY]: e.target.value,
+              [filterTypes.SUBCATEGORY]: '',
+            }))
+          }
+          disabled={intermediateFilters.transactionType === ''}
         >
           <option value='' disabled>
             {t('SELECT')}
           </option>
           {categories
-            .filter(cat => cat.transaction_type === intermediateTransactionType)
+            .filter(cat => cat.transaction_type === intermediateFilters.transactionType)
             .map((item, index) => {
               return (
                 <option key={index} value={item.category_name}>
@@ -131,15 +113,20 @@ const Filters = ({
         <span className={styles.filters__label}>{t('FILTERS.SUBCATEGORY')}:</span>
         <Select
           className={styles.filters__select}
-          value={intermediateSubcategory}
-          onChange={e => setIntermediateSubcategory(e.target.value)}
-          disabled={intermediateCategory === ''}
+          value={intermediateFilters.subcategory}
+          onChange={e =>
+            setIntermediateFilters(state => ({
+              ...state,
+              [filterTypes.SUBCATEGORY]: e.target.value,
+            }))
+          }
+          disabled={intermediateFilters.category === ''}
         >
           <option value='' disabled>
             {t('SELECT')}
           </option>
           {subcategories
-            .filter(subcat => subcat.category_name === intermediateCategory)
+            .filter(subcat => subcat.category_name === intermediateFilters.category)
             .map((item, index) => {
               return (
                 <option key={index} value={item.subcategory_name}>
@@ -151,7 +138,16 @@ const Filters = ({
       </div>
       <div className={styles.filters__group}>
         <span className={styles.filters__label}>{t('FILTERS.GROUP')}:</span>
-        <Select className={styles.filters__select} value={intermediateGroupBy} onChange={e => setIntermediateGroupBy(e.target.value)}>
+        <Select
+          className={styles.filters__select}
+          value={intermediateFilters.groupBy}
+          onChange={e =>
+            setIntermediateFilters(state => ({
+              ...state,
+              [filterTypes.GROUP_BY]: e.target.value,
+            }))
+          }
+        >
           <option value='' disabled>
             {t('SELECT')}
           </option>
@@ -165,28 +161,7 @@ const Filters = ({
           {t('FILTERS.FILTER')}
         </Button>
       </div>
-      <AppliedFilters
-        setActive={setActive}
-        startDate={startDate}
-        setStartDate={setStartDate}
-        setIntermediateStartDate={setIntermediateStartDate}
-        endDate={endDate}
-        setEndDate={setEndDate}
-        setIntermediateEndDate={setIntermediateEndDate}
-        transactionType={transactionType}
-        setTransactionType={setTransactionType}
-        setIntermediateTransactionType={setIntermediateTransactionType}
-        category={category}
-        setCategory={setCategory}
-        setIntermediateCategory={setIntermediateCategory}
-        subcategory={subcategory}
-        setSubcategory={setSubcategory}
-        setIntermediateSubcategory={setIntermediateSubcategory}
-        groupBy={groupBy}
-        setGroupBy={setGroupBy}
-        setIntermediateGroupBy={setIntermediateGroupBy}
-        fetchTransactions={fetchTransactions}
-      />
+      <AppliedFilters />
     </div>
   );
 };

@@ -1,10 +1,10 @@
 const filterTypes = {
-  START_DATE: 'START_DATE',
-  END_DATE: 'END_DATE',
-  TRANSACTION_TYPE: 'TRANSACTION_TYPE',
-  CATEGORY: 'CATEGORY',
-  SUBCATEGORY: 'SUBCATEGORY',
-  GROUP_BY: 'GROUP_BY',
+  START_DATE: 'startDate',
+  END_DATE: 'endDate',
+  TRANSACTION_TYPE: 'transactionType',
+  CATEGORY: 'category',
+  SUBCATEGORY: 'subcategory',
+  GROUP_BY: 'groupBy',
 };
 
 export default filterTypes;

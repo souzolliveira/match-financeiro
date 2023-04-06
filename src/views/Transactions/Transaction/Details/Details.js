@@ -10,6 +10,7 @@ import useDate from 'hooks/useDate';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import useTime from 'hooks/useTime';
+import { useTransactions } from 'hooks/useTransactions';
 import transactionService from 'services/transaction.service';
 
 import Button from 'components/Button/Button';
@@ -20,13 +21,14 @@ import Select from 'components/Select/Select';
 
 import styles from './Details.module.scss';
 
-const Details = ({ transaction, setShowDetails, categories, subcategories, fetchTransactions }) => {
+const Details = ({ transaction, setShowDetails }) => {
   const { addToast } = useNotification();
   const { bindHour } = useTime();
   const { formatDateFromAPIToFront } = useDate();
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
   const { t } = useTranslation();
+  const { categories, subcategories, fetchTransactions } = useTransactions();
 
   const transactionDefault = { ...transaction, transaction_date: transaction?.transaction_date?.split('T')?.[0] };
 

@@ -13,7 +13,7 @@ import Details from './Details/Details';
 
 import styles from './Transaction.module.scss';
 
-const Transaction = ({ transaction, categories, subcategories, fetchTransactions, disabled }) => {
+const Transaction = ({ transaction, disabled }) => {
   const { formatDateFromAPIToFront } = useDate();
   const { t } = useTranslation();
 
@@ -57,15 +57,7 @@ const Transaction = ({ transaction, categories, subcategories, fetchTransactions
           </div>
         </div>
       </li>
-      {showDetails && (
-        <Details
-          transaction={transaction}
-          setShowDetails={setShowDetails}
-          categories={categories}
-          subcategories={subcategories}
-          fetchTransactions={fetchTransactions}
-        />
-      )}
+      {showDetails && <Details transaction={transaction} setShowDetails={setShowDetails} />}
     </>
   );
 };

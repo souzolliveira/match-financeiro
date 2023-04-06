@@ -7,6 +7,7 @@ import { useAuth } from 'hooks/useAuth';
 import useHiddenStep from 'hooks/useHiddenStep';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
+import { useTransactions } from 'hooks/useTransactions';
 import categoryService from 'services/category.service';
 
 import Button from 'components/Button/Button';
@@ -17,21 +18,13 @@ import Select from 'components/Select/Select';
 
 import styles from './Categories.module.scss';
 
-const Categories = ({
-  categories,
-  fetchCategories,
-  selectedCategory,
-  setSelectedCategory,
-  setSelectedSubcategory,
-  step,
-  setStep,
-  transactionType,
-}) => {
+const Categories = ({ selectedCategory, setSelectedCategory, setSelectedSubcategory, step, setStep, transactionType }) => {
   const { t } = useTranslation();
   const { addToast } = useNotification();
   const { hidden } = useHiddenStep({ target: steps.CATEGORY, step });
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
+  const { fetchCategories, categories } = useTransactions();
 
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
   const [categoryName, setCategoryName] = useState('');
@@ -72,20 +65,22 @@ const Categories = ({
       <div className={`${styles.categories} ${hidden ? styles.categories__bottom : ''} ${isChangedStep ? styles.categories__top : ''}`}>
         <span className={styles.categories__label}>{t('CATEGORIES.LABEL')}</span>
         <div className={styles.categories__items}>
-          {categories.map((item, index) => {
-            return (
-              <Button
-                key={index}
-                type='button'
-                size='lg'
-                kind='secondary'
-                className={styles.categories__button}
-                onClick={() => handleSelectCategory(item.category_name)}
-              >
-                {item.category_name}
-              </Button>
-            );
-          })}
+          {categories
+            .filter(category => category.transaction_type === transactionType)
+            .map((item, index) => {
+              return (
+                <Button
+                  key={index}
+                  type='button'
+                  size='lg'
+                  kind='secondary'
+                  className={styles.categories__button}
+                  onClick={() => handleSelectCategory(item.category_name)}
+                >
+                  {item.category_name}
+                </Button>
+              );
+            })}
           <Button
             type='button'
             size='lg'
@@ -120,13 +115,15 @@ const Categories = ({
           <option value='' disabled>
             {t('SELECT')}
           </option>
-          {categories.map((item, index) => {
-            return (
-              <option key={index} value={item.category_name}>
-                {item.category_name}
-              </option>
-            );
-          })}
+          {categories
+            .filter(category => category.transaction_type === transactionType)
+            .map((item, index) => {
+              return (
+                <option key={index} value={item.category_name}>
+                  {item.category_name}
+                </option>
+              );
+            })}
           <option value='CREATE'>{t('CATEGORIES.CREATE')}</option>
         </Select>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { useAuth } from 'hooks/useAuth';
+import { TransactionsProvider } from 'hooks/useTransactions';
 
 import Header from 'components/Header/Header';
 import Navbar from 'components/Navbar/Navbar';
@@ -13,9 +14,11 @@ const PrivateRoute = () => {
 
   return session ? (
     <div className={styles.privateRoute}>
-      <Header />
-      <Outlet />
-      <Navbar />
+      <TransactionsProvider>
+        <Header />
+        <Outlet />
+        <Navbar />
+      </TransactionsProvider>
     </div>
   ) : (
     <Navigate to='/login' />

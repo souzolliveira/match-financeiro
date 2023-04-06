@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import bindBalanceColor from 'helpers/bindBalanceColor';
 import convertToString from 'helpers/convertToString';
+import { useTransactions } from 'hooks/useTransactions';
 
 import Icon from 'components/Icon/Icon';
 
@@ -11,37 +12,22 @@ import Filters from '../Filters/Filters';
 
 import styles from './Balance.module.scss';
 
-const Balance = ({
-  active,
-  setActive,
-  balance,
-  incomes,
-  expenses,
-  investiments,
-  categories,
-  subcategories,
-  fetchTransactions,
-  startDate,
-  setStartDate,
-  endDate,
-  setEndDate,
-  transactionType,
-  setTransactionType,
-  category,
-  setCategory,
-  subcategory,
-  setSubcategory,
-  groupBy,
-  setGroupBy,
-}) => {
+const Balance = () => {
+  const { balance, incomes, expenses, investiments, isFiltersTabOpened, setIsFiltersTabOpened } = useTransactions();
   const { t } = useTranslation();
 
   const nav = useRef(null);
   const header = useRef(null);
 
   const handleClickOutside = event => {
-    if (active && nav.current && !nav.current.contains(event.target) && header.current && !header.current.contains(event.target))
-      setActive(false);
+    if (
+      isFiltersTabOpened &&
+      nav.current &&
+      !nav.current.contains(event.target) &&
+      header.current &&
+      !header.current.contains(event.target)
+    )
+      setIsFiltersTabOpened(false);
   };
 
   useEffect(() => {
@@ -52,13 +38,13 @@ const Balance = ({
   });
 
   return (
-    <div className={`${styles.balance} ${active ? styles.balance__active : ''}`}>
+    <div className={`${styles.balance} ${isFiltersTabOpened ? styles.balance__active : ''}`}>
       <div
         onClick={() => {
-          setActive(state => !state);
+          setIsFiltersTabOpened(state => !state);
         }}
         onKeyDown={() => {
-          setActive(state => !state);
+          setIsFiltersTabOpened(state => !state);
         }}
         ref={header}
         role='button'
@@ -72,10 +58,10 @@ const Balance = ({
           width={24}
           height={24}
           fill='var(--gold-darker)'
-          className={`${styles.balance__icon} ${active ? styles.balance__nav__active : ''}`}
+          className={`${styles.balance__icon} ${isFiltersTabOpened ? styles.balance__nav__active : ''}`}
         />
       </div>
-      <div className={`${styles.balance__nav} ${active ? styles.balance__nav__active : ''}`} ref={nav}>
+      <div className={`${styles.balance__nav} ${isFiltersTabOpened ? styles.balance__nav__active : ''}`} ref={nav}>
         <div className={styles.balance__results}>
           <div className={styles.results__column}>
             <span className={styles.results__label}>{t('TRANSACTIONS.INCOMES')}</span>
@@ -90,24 +76,7 @@ const Balance = ({
             <span className={styles.results__investiments}>R$ {convertToString(investiments)}</span>
           </div>
         </div>
-        <Filters
-          setActive={setActive}
-          startDate={startDate}
-          setStartDate={setStartDate}
-          endDate={endDate}
-          setEndDate={setEndDate}
-          categories={categories}
-          subcategories={subcategories}
-          transactionType={transactionType}
-          setTransactionType={setTransactionType}
-          category={category}
-          setCategory={setCategory}
-          subcategory={subcategory}
-          setSubcategory={setSubcategory}
-          groupBy={groupBy}
-          setGroupBy={setGroupBy}
-          fetchTransactions={fetchTransactions}
-        />
+        <Filters />
       </div>
     </div>
   );

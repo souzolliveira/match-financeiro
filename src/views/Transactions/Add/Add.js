@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import steps from 'constants/steps';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
+import { useTransactions } from 'hooks/useTransactions';
 import transactionService from 'services/transaction.service';
 
 import Button from 'components/Button/Button';
@@ -20,19 +21,11 @@ import Value from './Value/Value';
 
 import styles from './Add.module.scss';
 
-const Add = ({
-  isAddTransactionFormOpened,
-  setIsAddTransactionFormOpened,
-  fetchTransactions,
-  fetchCategories,
-  categories,
-  fetchSubcategories,
-  subcategories,
-  setIsFiltersTabOpened,
-}) => {
+const Add = () => {
   const { t } = useTranslation();
   const { addToast } = useNotification();
   const { setIsLoading } = useLoader();
+  const { fetchTransactions, isAddTransactionFormOpened, setIsAddTransactionFormOpened, setIsFiltersTabOpened } = useTransactions();
 
   const [transactionType, setTransactionType] = useState('');
   const [step, setStep] = useState(steps.DATE);
@@ -124,8 +117,6 @@ const Add = ({
             setStep={setStep}
           />
           <Categories
-            categories={categories.filter(category => category.transaction_type === transactionType)}
-            fetchCategories={fetchCategories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
             setSelectedSubcategory={setSelectedSubcategory}
@@ -135,10 +126,6 @@ const Add = ({
           />
           <Subcategories
             category={selectedCategory}
-            fetchSubcategories={fetchSubcategories}
-            subcategories={subcategories.filter(
-              subcategory => subcategory.category_name === selectedCategory && subcategory.transaction_type === transactionType
-            )}
             selectedSubcategory={selectedSubcategory}
             setSelectedSubcategory={setSelectedSubcategory}
             step={step}
