@@ -4,6 +4,19 @@ import { useState, useEffect } from 'react';
 const useDate = () => {
   const [dateFormat, setDateFormat] = useState('L');
 
+  const getMonth = () => {
+    const date = new Date();
+    return new Intl.DateTimeFormat(window.localStorage.getItem('locale'), { month: 'long' }).format(date);
+  };
+
+  const getFirstDayOfMonth = () => {
+    return moment().startOf('month').format('YYYY-MM-DD');
+  };
+
+  const getLastDayOfMonth = () => {
+    return moment().endOf('month').format('YYYY-MM-DD');
+  };
+
   const getDateFormat = () => {
     const currentDateFormat = window.localStorage.getItem('date');
     return currentDateFormat || 'L';
@@ -132,6 +145,9 @@ const useDate = () => {
 
   return {
     dateFormat,
+    getMonth,
+    getFirstDayOfMonth,
+    getLastDayOfMonth,
     getDateFormat,
     changeDateFormat,
     formatDateFromPreviousToNewFormat,

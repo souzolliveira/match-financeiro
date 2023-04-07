@@ -1,0 +1,103 @@
+.summary {
+  margin-bottom: var(--spacing-base);
+  width: 100%;
+
+  .summary__header {
+    align-items: center;
+    background-color: var(--gold-lightest);
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-base);
+    position: relative;
+    width: 100%;
+    z-index: var(--zindex-header);
+
+    .summary__title {
+      color: var(--gold-darker);
+      font-size: var(--font-size-h3);
+      font-weight: var(--font-weight-thin);
+      line-height: var(--line-height-simple);
+      width: 50%;
+    }
+  }
+
+  .summary__content {
+    border: 2px solid var(--gold);
+    display: flex;
+    margin: 0 auto;
+    width: calc(100% - 2 * var(--spacing-base));
+
+    .summary__label {
+      color: var(--gold-darker);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-md);
+      text-align: center;
+    }
+
+    .summary__incomes,
+    .balance__positive {
+      @extend .summary__label;
+      color: var(--color-success);
+    }
+
+    .summary__expenses,
+    .balance__negative {
+      @extend .summary__label;
+      color: var(--color-danger);
+    }
+
+    .summary__investiments {
+      @extend .summary__label;
+      color: var(--color-info);
+    }
+
+    .balance__neutral {
+      @extend .summary__label;
+    }
+
+    .summary__row {
+      display: flex;
+      gap: var(--spacing-nano);
+      justify-content: space-between;
+      padding: var(--spacing-tiny);
+      width: 100%;
+
+      &:nth-of-type(odd) {
+        background-color: var(--gold-light);
+      }
+
+      &:nth-of-type(even) {
+        background-color: var(--gold-lighter);
+      }
+    }
+
+    .summary__column {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 50%;
+    }
+
+    .summary__balance {
+      @extend .summary__row;
+      @extend .summary__label;
+      align-items: center;
+      border-left: 2px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 50% !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .summary__label {
+      text-align: center !important;
+    }
+
+    .summary__row {
+      flex-direction: column;
+    }
+  }
+}

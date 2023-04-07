@@ -4,6 +4,7 @@ import React, { useState, createContext, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import filterTypes from 'constants/filterTypes';
+import groupByTypes from 'constants/groupByTypes';
 import convertToFloat from 'helpers/convertToFloat';
 import handleParams from 'helpers/handleParams';
 import categoryService from 'services/category.service';
@@ -11,6 +12,7 @@ import subcategoryService from 'services/subcategory.service';
 import transactionService from 'services/transaction.service';
 
 import { useAuth } from './useAuth';
+import useDate from './useDate';
 import { useLoader } from './useLoader';
 import { useNotification } from './useNotification';
 
@@ -21,6 +23,7 @@ const TransactionsProvider = ({ children }) => {
   const { handleError } = useAuth();
   const { t } = useTranslation();
   const { setIsLoading } = useLoader();
+  const { getFirstDayOfMonth, getLastDayOfMonth } = useDate();
 
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -163,7 +166,15 @@ const TransactionsProvider = ({ children }) => {
     setIsFiltersTabOpened(false);
     setFilters({ ...defaultFilters });
     setIntermediateFilters({ ...defaultFilters });
-    fetchTransactions();
+    if (isHome)
+      fetchTransactions(
+        handleParams({
+          startDate: getFirstDayOfMonth(),
+          endDate: getLastDayOfMonth(),
+          groupBy: groupByTypes.TRANSACTION_TYPE,
+        })
+      );
+    else fetchTransactions();
   };
 
   useEffect(() => {
