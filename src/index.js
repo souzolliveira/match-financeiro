@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/client';
 import './i18n/i18n';
 
 // Main styles
+import './styles/datepicker.css';
 import './styles/index.css';
 import './styles/tooltip.css';
 
