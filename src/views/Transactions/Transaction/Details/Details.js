@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import transactionTypes from 'constants/transactionTypes';
+import bindTransactionTypeIcon from 'helpers/bindTransactionTypeIcon';
 import bindTransactionTypeIconColor from 'helpers/bindTransactionTypeIconColor';
 import handleParams from 'helpers/handleParams';
 import { useAuth } from 'hooks/useAuth';
@@ -24,7 +25,7 @@ import styles from './Details.module.scss';
 const Details = ({ transaction, setShowDetails }) => {
   const { addToast } = useNotification();
   const { bindHour } = useTime();
-  const { formatDateFromAPIToFront } = useDate();
+  const { formatDateFromAPIToFront, formatDateFromFrontToAPI } = useDate();
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
   const { t } = useTranslation();
@@ -82,15 +83,18 @@ const Details = ({ transaction, setShowDetails }) => {
     setIsLoading(true);
     transactionService
       .deleteTransaction({
-        params: handleParams({
-          transactionType: transaction.transaction_type,
-          categoryName: transaction.categories_fk,
-          subcategoryName: transaction.subcategories_fk,
-          transactionDate: transaction.transaction_date,
-          transactionValue: transaction.value.replace(',', '.'),
-          transactionObservation: transaction.observation,
-          date: transaction.date,
-        }),
+        params: handleParams(
+          {
+            transactionType: transaction.transaction_type,
+            categoryName: transaction.categories_fk,
+            subcategoryName: transaction.subcategories_fk,
+            transactionDate: transaction.transaction_date,
+            transactionValue: transaction.value.replace(',', '.'),
+            transactionObservation: transaction.observation,
+            date: transaction.date,
+          },
+          formatDateFromFrontToAPI
+        ),
         handleError,
       })
       .then(async () => {
@@ -143,7 +147,7 @@ const Details = ({ transaction, setShowDetails }) => {
           </span>
           <div className={styles.details__transactionType}>
             <Icon
-              name={transaction.transaction_type?.toLowerCase()}
+              name={bindTransactionTypeIcon(transaction.transaction_type)}
               width={48}
               height={48}
               fill={bindTransactionTypeIconColor(transaction.transaction_type)}
@@ -292,7 +296,7 @@ const Details = ({ transaction, setShowDetails }) => {
         </span>
         <div className={styles.details__transactionType}>
           <Icon
-            name={transaction.transaction_type?.toLowerCase()}
+            name={bindTransactionTypeIcon(transaction.transaction_type)}
             width={48}
             height={48}
             fill={bindTransactionTypeIconColor(transaction.transaction_type)}

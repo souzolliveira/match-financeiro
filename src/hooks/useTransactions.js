@@ -23,7 +23,7 @@ const TransactionsProvider = ({ children }) => {
   const { handleError } = useAuth();
   const { t } = useTranslation();
   const { setIsLoading } = useLoader();
-  const { getFirstDayOfMonth, getLastDayOfMonth } = useDate();
+  const { getFirstDayOfMonth, getLastDayOfMonth, formatDateFromFrontToAPI } = useDate();
 
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -149,15 +149,18 @@ const TransactionsProvider = ({ children }) => {
             : filters.subcategory,
       }));
       fetchTransactions(
-        handleParams({
-          ...filters,
-          [key]: '',
-          category: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY ? '' : filters.category,
-          subcategory:
-            key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY
-              ? ''
-              : filters.subcategory,
-        })
+        handleParams(
+          {
+            ...filters,
+            [key]: '',
+            category: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY ? '' : filters.category,
+            subcategory:
+              key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY
+                ? ''
+                : filters.subcategory,
+          },
+          formatDateFromFrontToAPI
+        )
       );
     });
   };

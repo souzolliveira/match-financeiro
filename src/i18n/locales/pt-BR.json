@@ -44,6 +44,9 @@
 
   "FILTERS.DATE.START": "Data inicial",
   "FILTERS.DATE.END": "Data final",
+  "FILTERS.DATE.L": "dd/mm/aaaa",
+  "FILTERS.DATE.M": "mm/dd/aaaa",
+  "FILTERS.DATE.B": "aaaa/mm/dd",
   "FILTERS.TRANSACTION_TYPE": "Tipo de transação",
   "FILTERS.INCOMES": "Receitas",
   "FILTERS.INCOME": "Receitas",

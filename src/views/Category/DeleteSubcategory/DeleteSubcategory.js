@@ -37,11 +37,14 @@ const DeleteSubcategory = ({
     setIsLoading(true);
     subcategoryService
       .deleteSubcategory({
-        params: handleParams({
-          transaction_type: selectedSubcategory.transaction_type,
-          name: selectedSubcategory.subcategory_name,
-          category: selectedSubcategory.category_name,
-        }),
+        params: handleParams(
+          {
+            transaction_type: selectedSubcategory.transaction_type,
+            name: selectedSubcategory.subcategory_name,
+            category: selectedSubcategory.category_name,
+          },
+          formatDateFromFrontToAPI
+        ),
         handleError,
       })
       .then(async () => {

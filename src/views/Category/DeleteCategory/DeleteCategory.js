@@ -4,6 +4,7 @@ import { useTranslation, Trans } from 'react-i18next';
 
 import handleParams from 'helpers/handleParams';
 import { useAuth } from 'hooks/useAuth';
+import useDate from 'hooks/useDate';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import categoryService from 'services/category.service';
@@ -22,6 +23,7 @@ const DeleteCategory = ({
   hasSubcategories,
   setHasSubcategories,
 }) => {
+  const { formatDateFromFrontToAPI } = useDate();
   const { addToast } = useNotification();
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
@@ -37,7 +39,10 @@ const DeleteCategory = ({
     setIsLoading(true);
     categoryService
       .deleteCategory({
-        params: handleParams({ transaction_type: selectedCategory.transaction_type, name: selectedCategory.category_name }),
+        params: handleParams(
+          { transaction_type: selectedCategory.transaction_type, name: selectedCategory.category_name },
+          formatDateFromFrontToAPI
+        ),
         handleError,
       })
       .then(async () => {

@@ -1,4 +1,8 @@
-import React from 'react';
+import moment from 'moment';
+import React, { useState } from 'react';
+import 'react-dates/initialize';
+import { SingleDatePicker, isInclusivelyBeforeDay } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 
 import { useTranslation } from 'react-i18next';
 
@@ -6,10 +10,10 @@ import filterTypes from 'constants/filterTypes';
 import groupByTypes from 'constants/groupByTypes';
 import transactionTypes from 'constants/transactionTypes';
 import handleParams from 'helpers/handleParams';
+import useDate from 'hooks/useDate';
 import { useTransactions } from 'hooks/useTransactions';
 
 import Button from 'components/Button/Button';
-import Input from 'components/Input/Input';
 import Select from 'components/Select/Select';
 
 import AppliedFilters from '../AppliedFilters/AppliedFilters';
@@ -17,46 +21,75 @@ import AppliedFilters from '../AppliedFilters/AppliedFilters';
 import styles from './Filters.module.scss';
 
 const Filters = () => {
+  const { formatDateInFiltersInput, getDateFormat, formatDateFromFrontToAPI } = useDate();
   const { t } = useTranslation();
   const { categories, subcategories, setFilters, intermediateFilters, setIntermediateFilters, fetchTransactions, setIsFiltersTabOpened } =
     useTransactions();
 
+  const [focusedStartDate, setFocusedStartDate] = useState(false);
+  const [focusedEndDate, setFocusedEndDate] = useState(false);
+
   const handleFilter = () => {
     setIsFiltersTabOpened(false);
     setFilters({ ...intermediateFilters });
-    fetchTransactions(handleParams({ ...intermediateFilters }));
+    fetchTransactions(handleParams({ ...intermediateFilters }, formatDateFromFrontToAPI));
+  };
+
+  const date = dt => {
+    if (dt && moment(dt, formatDateInFiltersInput()).isValid()) {
+      return moment(dt, formatDateInFiltersInput());
+    }
+    return null;
   };
 
   return (
     <div className={styles.filters}>
       <div className={styles.filters__group}>
         <span className={styles.filters__label}>{t('FILTERS.DATE.START')}:</span>
-        <Input
-          className={styles.filters__input}
-          type='date'
-          name='start-date'
-          value={intermediateFilters.startDate}
-          onChange={e =>
+        <SingleDatePicker
+          id='startDate'
+          placeholder={t(`FILTERS.DATE.${getDateFormat()}`)}
+          date={date(intermediateFilters.startDate)}
+          onDateChange={dt =>
             setIntermediateFilters(state => ({
               ...state,
-              [filterTypes.START_DATE]: e.target.value,
+              [filterTypes.START_DATE]: dt,
             }))
           }
+          focused={focusedStartDate}
+          onFocusChange={({ focused: startDateFocus }) => setFocusedStartDate(startDateFocus)}
+          numberOfMonths={1}
+          small
+          showClearDate
+          hideKeyboardShortcutsPanel
+          isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+          initialVisibleMonth={() => moment()}
+          displayFormat={formatDateInFiltersInput()}
+          readOnly
         />
       </div>
       <div className={styles.filters__group}>
         <span className={styles.filters__label}>{t('FILTERS.DATE.END')}:</span>
-        <Input
-          className={styles.filters__input}
-          type='date'
-          name='end-date'
-          value={intermediateFilters.endDate}
-          onChange={e =>
+        <SingleDatePicker
+          id='endDate'
+          placeholder={t(`FILTERS.DATE.${getDateFormat()}`)}
+          date={date(intermediateFilters.endDate)}
+          onDateChange={dt =>
             setIntermediateFilters(state => ({
               ...state,
-              [filterTypes.END_DATE]: e.target.value,
+              [filterTypes.END_DATE]: dt,
             }))
           }
+          focused={focusedEndDate}
+          onFocusChange={({ focused: endDateFocus }) => setFocusedEndDate(endDateFocus)}
+          numberOfMonths={1}
+          small
+          showClearDate
+          hideKeyboardShortcutsPanel
+          isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+          initialVisibleMonth={() => moment()}
+          displayFormat={formatDateInFiltersInput()}
+          readOnly
         />
       </div>
       <div className={styles.filters__group}>

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import transactionTypes from 'constants/transactionTypes';
 import handleParams from 'helpers/handleParams';
 import { useAuth } from 'hooks/useAuth';
+import useDate from 'hooks/useDate';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import categoryService from 'services/category.service';
@@ -27,6 +28,7 @@ import Template from './Template/Template';
 import styles from './Category.module.scss';
 
 const Category = () => {
+  const { formatDateFromFrontToAPI } = useDate();
   const { addToast } = useNotification();
   const { handleError } = useAuth();
   const navigate = useNavigate();
@@ -123,11 +125,14 @@ const Category = () => {
   const handleDeleteSubcategory = async (e, subcategory) => {
     e.stopPropagation();
     await fetchTransactions(
-      handleParams({
-        transactionType: subcategory?.transaction_type,
-        category: subcategory?.category_name,
-        subcategory: subcategory?.subcategory_name,
-      })
+      handleParams(
+        {
+          transactionType: subcategory?.transaction_type,
+          category: subcategory?.category_name,
+          subcategory: subcategory?.subcategory_name,
+        },
+        formatDateFromFrontToAPI
+      )
     );
     setIsDeleteSubcategoryModalVisible(true);
     setSelectedSubcategory(subcategory);

@@ -1,14 +1,18 @@
-export default function handleParams(filters) {
+export default function handleParams(filters, formatDateFromFrontToAPI) {
   const p = [];
   Object.keys(filters).forEach(filter => {
     p.push({
-      key: [filter],
+      key: filter,
       value: filters[filter],
     });
   });
   let params = '';
   p.forEach(filter => {
-    params = `${params}&${filter.key}=${filter.value}`;
+    if (filter.key === 'startDate' || filter.key === 'endDate') {
+      params = `${params}&${filter.key}=${formatDateFromFrontToAPI(filter.value) || ''}`;
+    } else {
+      params = `${params}&${filter.key}=${filter.value}`;
+    }
   });
   return params;
 }
