@@ -9,6 +9,10 @@
   transition: all 300ms ease-out;
   width: 100%;
 
+  > div {
+    width: 100% !important;
+  }
+
   .calendar__label {
     color: var(--gold-darker);
     font-size: var(--font-size-md);

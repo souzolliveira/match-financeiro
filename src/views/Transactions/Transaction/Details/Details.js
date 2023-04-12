@@ -1,4 +1,8 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import 'react-dates/initialize';
+import { SingleDatePicker, isInclusivelyBeforeDay } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 
 import { useTranslation } from 'react-i18next';
 
@@ -25,7 +29,7 @@ import styles from './Details.module.scss';
 const Details = ({ transaction, setShowDetails }) => {
   const { addToast } = useNotification();
   const { bindHour } = useTime();
-  const { formatDateFromAPIToFront, formatDateFromFrontToAPI } = useDate();
+  const { formatDateInFiltersInput, getDateFormat, formatDateFromFrontToAPI, formatDateFromAPIToFront } = useDate();
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
   const { t } = useTranslation();
@@ -36,6 +40,7 @@ const Details = ({ transaction, setShowDetails }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [transactionIntermediate, setTransactionIntermediate] = useState(transactionDefault);
   const [focused, setFocused] = useState(false);
+  const [focusedDate, setFocusedDate] = useState(false);
 
   const handleEditTransaction = () => {
     setIsEditing(true);
@@ -124,6 +129,13 @@ const Details = ({ transaction, setShowDetails }) => {
           value: (parseFloat(transactionIntermediate.value) / 10).toFixed(2),
         });
       }
+  };
+
+  const date = dt => {
+    if (dt && moment(dt, formatDateFromAPIToFront()).isValid()) {
+      return moment(dt, formatDateFromAPIToFront());
+    }
+    return null;
   };
 
   useEffect(() => {
@@ -231,13 +243,29 @@ const Details = ({ transaction, setShowDetails }) => {
               }
             />
           </div>
-          <Input
-            className={styles.details__dateinput}
-            type='date'
-            name='transaction-date'
-            value={transactionIntermediate.transaction_date}
-            onChange={e => setTransactionIntermediate({ ...transactionIntermediate, transaction_date: e.target.value })}
-          />
+          <div className={styles.details__dateinput}>
+            <SingleDatePicker
+              id='date'
+              placeholder={t(`FILTERS.DATE.${getDateFormat()}`)}
+              date={date(transactionIntermediate.transaction_date)}
+              onDateChange={dt =>
+                setTransactionIntermediate(state => ({
+                  ...state,
+                  transaction_date: dt,
+                }))
+              }
+              focused={focusedDate}
+              onFocusChange={({ focused: dateFocus }) => setFocusedDate(dateFocus)}
+              numberOfMonths={1}
+              small
+              showClearDate
+              hideKeyboardShortcutsPanel
+              isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+              initialVisibleMonth={() => moment()}
+              displayFormat={formatDateInFiltersInput()}
+              readOnly
+            />
+          </div>
           <div className={styles.details__value__inputcontainer}>
             <Input
               className={styles.details__value__input}

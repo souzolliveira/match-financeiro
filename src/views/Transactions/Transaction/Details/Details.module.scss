@@ -124,6 +124,10 @@
     .details__dateinput {
       margin-bottom: var(--spacing-base);
       width: 100%;
+
+      > div {
+        width: 100% !important;
+      }
     }
 
     .details__value__inputcontainer {
