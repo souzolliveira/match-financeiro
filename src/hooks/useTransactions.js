@@ -171,11 +171,14 @@ const TransactionsProvider = ({ children }) => {
     setIntermediateFilters({ ...defaultFilters });
     if (isHome)
       fetchTransactions(
-        handleParams({
-          startDate: getFirstDayOfMonth(),
-          endDate: getLastDayOfMonth(),
-          groupBy: groupByTypes.TRANSACTION_TYPE,
-        })
+        handleParams(
+          {
+            startDate: getFirstDayOfMonth(),
+            endDate: getLastDayOfMonth(),
+            groupBy: groupByTypes.TRANSACTION_TYPE,
+          },
+          formatDateFromFrontToAPI
+        )
       );
     else fetchTransactions();
   };

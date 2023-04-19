@@ -10,11 +10,11 @@ const useDate = () => {
   };
 
   const getFirstDayOfMonth = () => {
-    return moment().startOf('month').format('YYYY-MM-DD');
+    return moment().startOf('month');
   };
 
   const getLastDayOfMonth = () => {
-    return moment().endOf('month').format('YYYY-MM-DD');
+    return moment().endOf('month');
   };
 
   const getDateFormat = () => {
