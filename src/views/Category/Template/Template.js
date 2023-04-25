@@ -139,15 +139,17 @@ const Template = ({ fetchCategories, fetchSubcategories }) => {
                           tabIndex={0}
                         >
                           <span className={styles.template__label}>{subcategory}</span>
-                          <Button
-                            id={`${transactionType}-${category}-${subcategory}-costing`}
-                            type='button'
-                            kind='outline'
-                            size='md'
-                            onClick={e => handleChangeCosting(e, transactionType, category, subcategory)}
-                          >
-                            {t(`SUBCATEGORIES.COSTING.${costingTypes[template[transactionType][category][subcategory].costing]}`)}
-                          </Button>
+                          {transactionType === transactionTypes.EXPENSE && (
+                            <Button
+                              id={`${transactionType}-${category}-${subcategory}-costing`}
+                              type='button'
+                              kind='outline'
+                              size='md'
+                              onClick={e => handleChangeCosting(e, transactionType, category, subcategory)}
+                            >
+                              {t(`SUBCATEGORIES.COSTING.${costingTypes[template[transactionType][category][subcategory].costing]}`)}
+                            </Button>
+                          )}
                           <div className={styles.template__checkbox}>
                             <Checkbox type='checkbox' checked={template[transactionType][category][subcategory].value} />
                           </div>
