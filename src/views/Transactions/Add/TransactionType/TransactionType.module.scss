@@ -42,6 +42,7 @@
   opacity: 0;
   padding: var(--spacing-tiny) var(--spacing-base);
   transition: all 300ms ease-in 300ms;
+  visibility: hidden;
   width: 100%;
 
   .transactionType__label {
@@ -60,4 +61,5 @@
 .transactionType__selected {
   @extend .transactionType__unselected;
   opacity: 1;
+  visibility: visible;
 }

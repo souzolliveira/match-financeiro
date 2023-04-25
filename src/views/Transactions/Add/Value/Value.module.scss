@@ -97,6 +97,7 @@
   opacity: 0;
   padding: var(--spacing-tiny) var(--spacing-base);
   transition: all 300ms ease-in 300ms;
+  visibility: hidden;
   width: 100%;
 
   .value__label {
@@ -149,4 +150,5 @@
 .value__selected {
   @extend .value__unselected;
   opacity: 1;
+  visibility: visible;
 }

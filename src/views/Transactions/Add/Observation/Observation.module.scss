@@ -67,6 +67,7 @@
   opacity: 0;
   padding: var(--spacing-tiny) var(--spacing-base);
   transition: all 300ms ease-in 300ms;
+  visibility: hidden;
   width: 100%;
 
   .observation__label {
@@ -85,4 +86,5 @@
 .observation__selected {
   @extend .observation__unselected;
   opacity: 1;
+  visibility: visible;
 }
