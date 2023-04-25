@@ -26,6 +26,9 @@ const Settings = () => {
           <Link to='/categories' className={styles.settings__option}>
             {t('CATEGORIES')}
           </Link>
+          <Link to='/cards' className={styles.settings__option}>
+            {t('CARDS')}
+          </Link>
         </div>
       </div>
     </div>

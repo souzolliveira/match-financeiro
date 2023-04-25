@@ -15,6 +15,10 @@
   "HAS.ACCOUNT": "Já tem conta?",
   "DO.LOGIN": "Faça login aqui",
 
+  "USER.UPDATE.SUCCESS": "Perfil atualizado com sucesso",
+  "USER.UPDATE.ERROR": "Erro ao atualizar perfil",
+  "USER.UPDATE.FILL": "Preencha todos os campos",
+
   "SUMMARY": "Resumo de {{month}}",
   "SUMMARY.INCOMES": "Receitas de",
   "SUMMARY.EXPENSES": "Despesas de",
@@ -119,6 +123,21 @@
 
   "STATS.MESSAGE": "Em breve, novidades...",
 
+  "CARDS": "Cartões",
+  "CARDS.EMPTY": "Nenhum cartão cadastrado",
+  "CARDS.ADD": "Para adicionar cartão,",
+  "CARDS.CLICK": "clique aqui.",
+  "CARDS.NEW": "Novo cartão",
+  "CARDS.NAME": "Apelido do cartão",
+  "CARDS.EXPIRATION": "Dia de fechamento da fatura",
+  "CARDS.PAYMENT": "Dia de pagamento da fatura",
+  "CARDS.TYPE": "Tipo do cartão",
+  "CARDS.NEW.SUCCESS": "Cartão criado com sucesso",
+  "CARDS.NEW.ERROR": "Erro ao criar novo cartão: {{card}}",
+  "CARDS.DEBIT": "Débito",
+  "CARDS.CREDIT": "Crédito",
+  "CARDS.BOTH": "Ambos",
+
   "CATEGORY": "Categoria:",
   "SUBCATEGORY": "Subcategoria:",
   "SETTINGS": "Configurações",
@@ -129,9 +148,9 @@
   "ADD": "Adicionar",
   "NAME": "Nome",
   "EMAIL": "Email",
-  "PHONE": "Telefone celular",
   "PASSWORD": "Senha",
   "PASSWORD.CONFIRM": "Confirmar senha",
+  "CONFIRM.EMAIL.REQUIREMENT": "É necessário confirmar o email",
   "SELECT": "Selecione...",
   "CANCEL": "Cancelar",
   "SAVE": "Salvar",

@@ -3,6 +3,7 @@ import { Route, Routes as Routering } from 'react-router-dom';
 
 import { useLoader } from 'hooks/useLoader';
 
+import Card from 'views/Card/Card';
 import Category from 'views/Category/Category';
 import Home from 'views/Home/Home';
 import Login from 'views/Login/Login';
@@ -25,6 +26,7 @@ const Routes = () => {
         <Route exact path='/' element={<PrivateRoute />}>
           <Route exact path='/' element={<Home />} />
           <Route exact path='/categories' element={<Category />} />
+          <Route exact path='/cards' element={<Card />} />
           <Route exact path='/stats' element={<Stats />} />
           <Route exact path='/transactions' element={<Transactions />} />
           <Route exact path='/settings' element={<Settings />} />
