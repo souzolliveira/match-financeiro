@@ -93,6 +93,7 @@
   width: 100% !important;
 }
 .SingleDatePickerInput__withBorder {
+  border: none !important;
   border-bottom: 2px solid var(--gold) !important;
   transition: border ease 300ms;
 }
