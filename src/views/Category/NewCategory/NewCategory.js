@@ -26,7 +26,7 @@ const NewCategory = ({
 }) => {
   const { addToast } = useNotification();
   const { handleError } = useAuth();
-  const { setIsLoading } = useLoader();
+  const { isLoading, setIsLoading } = useLoader();
   const { t } = useTranslation();
 
   const handleModalClose = () => {
@@ -87,7 +87,7 @@ const NewCategory = ({
           <Button kind='outline' size='md' onClick={() => handleModalClose()}>
             {t('CANCEL')}
           </Button>
-          <Button kind='primary' size='md' onClick={() => handleCreateCategory()}>
+          <Button kind='primary' size='md' onClick={() => handleCreateCategory()} disabled={isLoading}>
             {t('CREATE')}
           </Button>
         </div>

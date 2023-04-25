@@ -26,7 +26,7 @@ const DeleteCategory = ({
   const { formatDateFromFrontToAPI } = useDate();
   const { addToast } = useNotification();
   const { handleError } = useAuth();
-  const { setIsLoading } = useLoader();
+  const { isLoading, setIsLoading } = useLoader();
   const { t } = useTranslation();
 
   const handleModalClose = () => {
@@ -100,7 +100,7 @@ const DeleteCategory = ({
             <Button kind='outline' size='md' onClick={() => handleModalClose()}>
               {t('CANCEL')}
             </Button>
-            <Button kind='danger' size='md' onClick={() => handleDelete()}>
+            <Button kind='danger' size='md' onClick={() => handleDelete()} disabled={isLoading}>
               {t('DELETE')}
             </Button>
           </div>

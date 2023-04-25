@@ -4,6 +4,7 @@ import { useTranslation, Trans } from 'react-i18next';
 
 import handleParams from 'helpers/handleParams';
 import { useAuth } from 'hooks/useAuth';
+import useDate from 'hooks/useDate';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import subcategoryService from 'services/subcategory.service';
@@ -24,8 +25,9 @@ const DeleteSubcategory = ({
 }) => {
   const { addToast } = useNotification();
   const { handleError } = useAuth();
-  const { setIsLoading } = useLoader();
+  const { isLoading, setIsLoading } = useLoader();
   const { t } = useTranslation();
+  const { formatDateFromFrontToAPI } = useDate();
 
   const handleModalClose = () => {
     setIsDeleteSubcategoryModalVisible(false);
@@ -104,7 +106,7 @@ const DeleteSubcategory = ({
             <Button kind='outline' size='md' onClick={() => handleModalClose()}>
               {t('CANCEL')}
             </Button>
-            <Button kind='danger' size='md' onClick={() => handleDelete()}>
+            <Button kind='danger' size='md' onClick={() => handleDelete()} disabled={isLoading}>
               {t('DELETE')}
             </Button>
           </div>

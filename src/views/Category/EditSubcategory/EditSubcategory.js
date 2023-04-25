@@ -24,7 +24,7 @@ const EditSubcategory = ({
 }) => {
   const { addToast } = useNotification();
   const { handleError } = useAuth();
-  const { setIsLoading } = useLoader();
+  const { isLoading, setIsLoading } = useLoader();
   const { t } = useTranslation();
 
   const [intermediateValue, setIntermediateValue] = useState('');
@@ -102,7 +102,7 @@ const EditSubcategory = ({
           <Button kind='outline' size='md' onClick={() => handleModalClose()}>
             {t('CANCEL')}
           </Button>
-          <Button kind='primary' size='md' onClick={() => handleSave()}>
+          <Button kind='primary' size='md' onClick={() => handleSave()} disabled={isLoading}>
             {t('SAVE')}
           </Button>
         </div>
