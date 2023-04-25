@@ -1,13 +1,16 @@
+/* eslint-disable react/no-unknown-property */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
+import bindConfirmationIcon from 'helpers/bindConfirmationIcon';
 import { useAuth } from 'hooks/useAuth';
 import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import userService from 'services/user.service';
 
+import Button from 'components/Button/Button';
 import Fill from 'components/Fill/Fill';
 import Icon from 'components/Icon/Icon';
 import Input from 'components/Input/Input';
@@ -25,8 +28,7 @@ const User = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
-  const [phone, setPhone] = useState('');
-  const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const fetchUser = () => {
     setIsLoading(true);
@@ -37,12 +39,37 @@ const User = () => {
         setName(data?.user?.name);
         setEmail(data?.user?.email);
         setIsEmailConfirmed(data?.user?.email_confirmation);
-        setPhone(data?.user?.phone_number);
-        setIsPhoneConfirmed(data?.user?.phone_confirmation);
       })
       .catch(() => {
         addToast({
           content: t('LOGIN.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  const saveUser = () => {
+    if (!name || !email) {
+      addToast({
+        content: t('USER.UPDATE.FILL'),
+        type: 'warning',
+      });
+      return;
+    }
+    setIsLoading(true);
+    userService
+      .updateUser({ name, email, handleError })
+      .then(() => {
+        addToast({
+          content: t('USER.UPDATE.SUCCESS'),
+          type: 'success',
+        });
+        setIsEditing(false);
+      })
+      .catch(() => {
+        addToast({
+          content: t('USER.UPDATE.ERROR'),
           type: 'danger',
         });
       })
@@ -66,21 +93,48 @@ const User = () => {
       <div className={styles.user__container}>
         <div className={styles.user__photo}>
           <Icon name='user' width={200} height={200} fill='var(--gold-dark)' />
+          {!isEditing && (
+            <Button type='button' onClick={() => setIsEditing(true)} className={styles.user__editIcon}>
+              <Icon name='edit' width={24} height={24} fill='white' />
+            </Button>
+          )}
         </div>
-        <div className={styles.user__info}>
-          <div className={styles.user__inputGroup}>
-            <span className={styles.user__label}>{t('NAME')}</span>
-            <Input value={name} disabled />
+        {isEditing ? (
+          <div className={styles.user__edit}>
+            <div className={styles.user__inputGroup}>
+              <span className={styles.user__label}>{t('NAME')}</span>
+              <Input value={name} onChange={e => setName(e.target.value)} />
+            </div>
+            <div className={styles.user__inputGroup}>
+              <span className={styles.user__label}>{t('EMAIL')}</span>
+              <Input value={email} onChange={e => setEmail(e.target.value)} disabled={isEmailConfirmed} />
+            </div>
+            <div className={styles.user__editButtons}>
+              <Button type='button' kind='outline' size='lg' onClick={() => setIsEditing(false)}>
+                {t('CANCEL')}
+              </Button>
+              <Button type='button' kind='primary' size='lg' onClick={() => saveUser()}>
+                {t('SAVE')}
+              </Button>
+            </div>
           </div>
-          <div className={styles.user__inputGroup}>
-            <span className={styles.user__label}>{t('EMAIL')}</span>
-            <Input value={email} disabled />
+        ) : (
+          <div className={styles.user__info}>
+            <span className={styles.user__name}>{name}</span>
+            {email && (
+              <div className={styles.user__emailContainer} tooltipflow='bottom' tooltip={t('CONFIRM.EMAIL.REQUIREMENT')}>
+                <span className={styles.user__email}>{email}</span>
+                <button
+                  type='button'
+                  className={styles.user__emailConfirmation}
+                  style={{ backgroundColor: isEmailConfirmed ? 'var(--color-success)' : 'var(--color-danger)' }}
+                >
+                  <Icon name={bindConfirmationIcon(isEmailConfirmed)} width={16} height={16} fill='white' />
+                </button>
+              </div>
+            )}
           </div>
-          <div className={styles.user__inputGroup}>
-            <span className={styles.user__label}>{t('PHONE')}</span>
-            <Input value={phone} disabled />
-          </div>
-        </div>
+        )}
         <Fill />
         <div className={styles.user__logout}>
           <button type='button' onClick={() => signOut('/user')} className={styles.user__logoutbutton}>

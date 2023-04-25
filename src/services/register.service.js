@@ -2,7 +2,7 @@ import handleResponse from 'helpers/handleResponse';
 
 import api from './conf.service';
 
-function register({ name, email, phone, password, handleError }) {
+function register({ name, email, password, handleError }) {
   return api
     .post(
       '/register',
@@ -10,7 +10,6 @@ function register({ name, email, phone, password, handleError }) {
         name,
         email,
         password,
-        phone,
       },
       {}
     )

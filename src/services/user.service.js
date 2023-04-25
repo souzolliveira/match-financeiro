@@ -12,8 +12,25 @@ function getUser({ handleError }) {
     .catch(handleError);
 }
 
+function updateUser({ name, email, handleError }) {
+  return api
+    .put(
+      '/user',
+      {
+        name,
+        email,
+      },
+      {
+        headers: authHeader(),
+      }
+    )
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const userService = {
   getUser,
+  updateUser,
 };
 
 export default userService;

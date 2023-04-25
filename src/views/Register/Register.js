@@ -25,11 +25,10 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [phone, setPhone] = useState('');
 
   const register = e => {
     e.preventDefault();
-    if (!name || !email || !phone || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
       addToast({
         content: t('REGISTER.WARNING.FIELDS'),
         type: 'warning',
@@ -45,7 +44,7 @@ const Register = () => {
     }
     setIsLoading(true);
     registerService
-      .register({ name, email, phone, password, handleError })
+      .register({ name, email, password, handleError })
       .then(() => {
         signIn({ email, password });
       })
@@ -71,10 +70,6 @@ const Register = () => {
         <div className={styles.register__inputgroup}>
           <span className={styles.register__label}>{t('EMAIL')}</span>
           <Input name='email' value={email} onChange={e => setEmail(e.target.value)} />
-        </div>
-        <div className={styles.register__inputgroup}>
-          <span className={styles.register__label}>{t('PHONE')}</span>
-          <Input type='text' name='phone-number' value={phone} onChange={e => setPhone(e.target.value)} />
         </div>
         <div className={styles.register__inputgroup}>
           <span className={styles.register__label}>{t('PASSWORD')}</span>

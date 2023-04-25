@@ -55,20 +55,34 @@
       align-items: center;
       display: flex;
       justify-content: center;
-      padding: var(--spacing-base) 0;
-      width: 100%;
+      margin: var(--spacing-base) auto;
+      padding: 0;
+      position: relative;
+      width: 200px;
+
+      .user__editIcon {
+        align-items: center;
+        background-color: var(--gold-darker);
+        border-radius: var(--full-radius);
+        bottom: var(--spacing-tiny);
+        display: flex;
+        justify-content: center;
+        padding: var(--spacing-small);
+        position: absolute;
+        right: var(--spacing-tiny);
+      }
     }
 
-    .user__info {
+    .user__edit {
       display: flex;
       flex-direction: column;
-      padding: var(--spacing-base);
+      gap: var(--spacing-small);
+      padding: 0 var(--spacing-base);
       width: 100%;
 
       .user__inputGroup {
         display: flex;
         flex-direction: column;
-        margin-bottom: var(--spacing-small);
 
         .user__label {
           color: var(--gold-dark);
@@ -76,6 +90,51 @@
           font-weight: var(--font-weight-semibold);
           line-height: var(--line-height-sm);
           margin-bottom: var(--spacing-nano);
+        }
+      }
+
+      .user__editButtons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: var(--spacing-tiny);
+      }
+    }
+
+    .user__info {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-small);
+
+      .user__name {
+        color: var(--gold-darker);
+        font-size: var(--font-size-h3);
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--line-height-simple);
+      }
+
+      .user__emailContainer {
+        align-items: center;
+        display: flex;
+        gap: var(--spacing-tiny);
+        justify-content: center;
+
+        .user__email {
+          color: var(--gold-dark);
+          font-size: var(--font-size-md);
+          font-weight: var(--font-weight-normal);
+          line-height: var(--line-height-simple);
+        }
+
+        .user__emailConfirmation {
+          align-items: center;
+          background-color: var(--color-success);
+          border-radius: var(--full-radius);
+          display: flex;
+          height: 20px;
+          justify-content: center;
+          padding: var(--spacing-nano);
+          width: 20px;
         }
       }
     }
