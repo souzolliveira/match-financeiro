@@ -62,7 +62,7 @@ const Filters = () => {
           small
           showClearDate
           hideKeyboardShortcutsPanel
-          isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+          isOutsideRange={() => false}
           initialVisibleMonth={() => moment()}
           displayFormat={formatDateInFiltersInput()}
           readOnly
@@ -86,7 +86,7 @@ const Filters = () => {
           small
           showClearDate
           hideKeyboardShortcutsPanel
-          isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+          isOutsideRange={() => false}
           initialVisibleMonth={() => moment()}
           displayFormat={formatDateInFiltersInput()}
           readOnly

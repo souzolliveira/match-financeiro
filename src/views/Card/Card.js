@@ -11,7 +11,9 @@ import cardService from 'services/card.service';
 import Fill from 'components/Fill/Fill';
 import Icon from 'components/Icon/Icon';
 
+import EditCard from './EditCard/EditCard';
 import NewCard from './NewCard/NewCard';
+import RemoveCard from './RemoveCard/RemoveCard';
 
 import styles from './Card.module.scss';
 
@@ -31,10 +33,13 @@ const Card = () => {
   };
   const [newCard, setNewCard] = useState(defaultCard);
   const [isNewCardModalVisible, setIsNewCardModalVisible] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(defaultCard);
+  const [isEditCardModalVisible, setIsEditCardModalVisible] = useState(false);
+  const [isRemoveCardModalVisible, setIsRemoveCardModalVisible] = useState(false);
 
-  const fetchCards = () => {
+  const fetchCards = async () => {
     setIsLoading(true);
-    cardService
+    await cardService
       .getCards({ handleError })
       .then(data => data.data)
       .then(data => setCards(data))
@@ -53,30 +58,69 @@ const Card = () => {
   }, []);
 
   return (
-    <div className={styles.card}>
-      <div className={styles.card__header}>
-        <button type='button' onClick={() => navigate('/settings')} className={styles.card__return}>
-          <Icon name='arrow-right' width={24} height={24} fill='white' className={styles.card__returnicon} />
+    <div className={styles.cards}>
+      <div className={styles.cards__header}>
+        <button type='button' onClick={() => navigate('/settings')} className={styles.cards__return}>
+          <Icon name='arrow-right' width={24} height={24} fill='white' className={styles.cards__returnicon} />
         </button>
-        <span className={styles.card__title}>{t('CARDS')}</span>
+        <span className={styles.cards__title}>{t('CARDS')}</span>
         <Fill />
         <button type='button' onClick={() => setIsNewCardModalVisible(true)}>
           <Icon name='plus' width={24} height={24} fill='white' />
         </button>
       </div>
       <Fill />
-      <div className={styles.card__list}>
-        <div className={styles.card__image} />
+      <div className={styles.cards__list}>
         {cards.length > 0 ? (
           cards?.map(card => {
-            return <span>{card.name}</span>;
+            return (
+              <div key={card.name} className={styles.cards__card}>
+                <div className={styles.cards__cardHeader}>
+                  <div className={styles.cards__cardTitle}>
+                    <span className={styles.cards__cardName}>{card.name}</span>
+                    <span className={styles.cards__cardType}>{t(`CARDS.${card.type}`)}</span>
+                  </div>
+                  <div className={styles.cards__cardActions}>
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setIsEditCardModalVisible(true);
+                        setSelectedCard(card);
+                      }}
+                    >
+                      <Icon name='edit' width={24} height={24} fill='var(--gold-darker)' />
+                    </button>
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setIsRemoveCardModalVisible(true);
+                        setSelectedCard(card);
+                      }}
+                    >
+                      <Icon name='trash' width={24} height={24} fill='var(--gold-darker)' />
+                    </button>
+                  </div>
+                </div>
+                <div className={styles.cards__cardInfo}>
+                  <div>
+                    <span className={styles.cards__cardLabel}>{t('CARDS.EXPIRATION_DAY')}</span>
+                    <span className={styles.cards__cardValue}>{card.expirationDay}</span>
+                  </div>
+                  <div>
+                    <span className={styles.cards__cardLabel}>{t('CARDS.PAYMENT_DAY')}</span>
+                    <span className={styles.cards__cardValue}>{card.paymentDay}</span>
+                  </div>
+                </div>
+              </div>
+            );
           })
         ) : (
-          <div className={styles.card__emptyContainer}>
-            <span className={styles.card__empty}>{t('CARDS.EMPTY')}</span>
-            <div className={styles.card__addContainer}>
-              <span className={styles.card__empty}>{t('CARDS.ADD')}</span>
-              <button type='button' className={styles.card__add} onClick={() => setIsNewCardModalVisible(true)}>
+          <div className={styles.cards__emptyContainer}>
+            <div className={styles.cards__image} />
+            <span className={styles.cards__empty}>{t('CARDS.EMPTY')}</span>
+            <div className={styles.cards__addContainer}>
+              <span className={styles.cards__empty}>{t('CARDS.ADD')}</span>
+              <button type='button' className={styles.cards__add} onClick={() => setIsNewCardModalVisible(true)}>
                 {t('CARDS.CLICK')}
               </button>
             </div>
@@ -89,6 +133,20 @@ const Card = () => {
         defaultCard={defaultCard}
         newCard={newCard}
         setNewCard={setNewCard}
+        fetchCards={fetchCards}
+      />
+      <EditCard
+        isEditCardModalVisible={isEditCardModalVisible}
+        setIsEditCardModalVisible={setIsEditCardModalVisible}
+        card={selectedCard}
+        defaultCard={defaultCard}
+        fetchCards={fetchCards}
+      />
+      <RemoveCard
+        isRemoveCardModalVisible={isRemoveCardModalVisible}
+        setIsRemoveCardModalVisible={setIsRemoveCardModalVisible}
+        card={selectedCard}
+        defaultCard={defaultCard}
         fetchCards={fetchCards}
       />
     </div>

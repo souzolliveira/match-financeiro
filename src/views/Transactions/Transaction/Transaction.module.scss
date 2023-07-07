@@ -22,15 +22,22 @@
     width: calc(100% - 40px - var(--spacing-small));
 
     .transaction__header {
-      color: var(--gold-darker);
-      font-size: var(--font-size-md);
-      font-weight: var(--font-weight-bold);
-      line-height: var(--line-height-md);
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
       margin-bottom: var(--spacing-tiny);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       width: 100%;
+
+      .transaction__title {
+        color: var(--gold-darker);
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--line-height-md);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: calc(100% - 24px);
+      }
     }
 
     .transaction__main {

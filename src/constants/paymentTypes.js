@@ -2,7 +2,7 @@ const paymentTypes = {
   CASH: 'CASH',
   BILLET: 'BILLET',
   PIX: 'PIX',
-  DEBIT: 'DEBIT',
+  DEBT: 'DEBT',
   CREDIT: 'CREDIT',
 };
 

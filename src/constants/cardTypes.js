@@ -1,5 +1,5 @@
 const cardTypes = {
-  DEBIT: 'DEBIT',
+  DEBT: 'DEBT',
   CREDIT: 'CREDIT',
   BOTH: 'BOTH',
 };

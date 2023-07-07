@@ -1,9 +1,8 @@
-.card {
+.cards {
   align-items: flex-end;
   background-color: var(--gold-lightest);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-small);
   height: 100vh;
   opacity: 1;
   position: absolute;
@@ -12,7 +11,7 @@
   width: 100vw;
   z-index: var(--zindex-overlay);
 
-  .card__header {
+  .cards__header {
     align-items: center;
     background-color: var(--gold);
     box-shadow: var(--subtle-drop-shadow);
@@ -25,66 +24,129 @@
     width: 100vw;
     z-index: var(--zindex-overlay);
 
-    .card__return {
+    .cards__return {
       align-items: center;
       display: flex;
       margin: 0;
       margin-right: var(--spacing-tiny);
       padding: 0;
 
-      .card__returnicon {
+      .cards__returnicon {
         transform: rotate(180deg);
       }
     }
 
-    .card__title {
+    .cards__title {
       color: white;
       font-size: var(--font-size-lg);
       font-weight: var(--font-weight-semibold);
     }
   }
 
-  .card__list {
+  .cards__list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-small);
+    gap: var(--spacing-base);
     height: calc(100% - var(--header-height));
     overflow-y: auto;
     padding: var(--spacing-base);
     width: 100%;
 
-    .card__image {
-      align-self: center;
-      background-image: url('./credit_card.svg');
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
+    .cards__card {
+      border: 1px solid var(--gold-light);
+      border-radius: var(--medium-radius);
+      box-shadow: var(--medium-drop-shadow);
       display: flex;
-      height: 40%;
-      max-width: 720px;
-      width: 100%;
+      flex-direction: column;
+
+      .cards__cardHeader {
+        background-color: var(--gold-light);
+        border-radius: var(--medium-radius) var(--medium-radius) 0 0;
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-small);
+
+        .cards__cardTitle {
+          align-items: center;
+          display: flex;
+          gap: var(--spacing-small);
+
+          .cards__cardName {
+            color: var(--gold-darker);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+          }
+
+          .cards__cardType {
+            color: var(--gold-darker);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-simple);
+          }
+        }
+
+        .cards__cardActions {
+          display: flex;
+          gap: var(--spacing-small);
+
+          button {
+            padding: 0;
+          }
+        }
+      }
+
+      .cards__cardInfo {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-small);
+
+        .cards__cardLabel {
+          color: var(--gold-dark);
+          font-size: var(--font-size-sm);
+          font-weight: var(--font-weight-semibold);
+          margin-right: var(--spacing-tiny);
+        }
+
+        .cards__cardValue {
+          color: var(--gold-darker);
+          font-size: var(--font-size-md);
+          font-weight: var(--font-weight-bold);
+        }
+      }
     }
 
-    .card__emptyContainer {
+    .cards__emptyContainer {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-small);
-      margin-top: var(--spacing-large);
+      height: 100%;
+
+      .cards__image {
+        align-self: center;
+        background-image: url('./credit_card.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        display: flex;
+        height: 40%;
+        margin-bottom: var(--spacing-large);
+        max-width: 720px;
+        width: 100%;
+      }
     }
 
-    .card__empty {
+    .cards__empty {
       color: var(--gold);
       font-size: var(--font-size-md);
       font-weight: var(--font-weight-semibold);
       text-align: center;
     }
 
-    .card__addContainer {
+    .cards__addContainer {
       display: flex;
       gap: var(--spacing-nano);
       justify-content: center;
 
-      .card__add {
+      .cards__add {
         color: var(--color-success);
         cursor: pointer;
         font-size: var(--font-size-md);

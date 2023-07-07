@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 import transactionTypes from 'constants/transactionTypes';
 import bindTransactionTypeIcon from 'helpers/bindTransactionTypeIcon';
 import bindTransactionTypeIconColor from 'helpers/bindTransactionTypeIconColor';
-import handleParams from 'helpers/handleParams';
 import { useAuth } from 'hooks/useAuth';
 import useDate from 'hooks/useDate';
 import { useLoader } from 'hooks/useLoader';
@@ -29,7 +28,7 @@ import styles from './Details.module.scss';
 const Details = ({ transaction, setShowDetails }) => {
   const { addToast } = useNotification();
   const { bindHour } = useTime();
-  const { formatDateInFiltersInput, getDateFormat, formatDateFromFrontToAPI, formatDateFromAPIToFront } = useDate();
+  const { formatDateInFiltersInput, getDateFormat, formatDateFromAPIToFront } = useDate();
   const { handleError } = useAuth();
   const { setIsLoading } = useLoader();
   const { t } = useTranslation();
@@ -55,12 +54,13 @@ const Details = ({ transaction, setShowDetails }) => {
     setIsLoading(true);
     transactionService
       .updateTransaction({
-        transaction,
+        transactionId: transactionIntermediate.id,
         transactionType: transactionIntermediate.transaction_type,
         categoryName: transactionIntermediate.categories_fk,
         subcategoryName: transactionIntermediate.subcategories_fk,
         transactionDate: transactionIntermediate.transaction_date,
         transactionValue: transactionIntermediate.value?.replace(',', '.'),
+        transactionPayment: transactionIntermediate.transaction_payment,
         transactionObservation: transactionIntermediate.observation,
         handleError,
       })
@@ -88,18 +88,7 @@ const Details = ({ transaction, setShowDetails }) => {
     setIsLoading(true);
     transactionService
       .deleteTransaction({
-        params: handleParams(
-          {
-            transactionType: transaction.transaction_type,
-            categoryName: transaction.categories_fk,
-            subcategoryName: transaction.subcategories_fk,
-            transactionDate: transaction.transaction_date,
-            transactionValue: transaction.value.replace(',', '.'),
-            transactionObservation: transaction.observation,
-            date: transaction.date,
-          },
-          formatDateFromFrontToAPI
-        ),
+        transactionId: transaction.id,
         handleError,
       })
       .then(async () => {

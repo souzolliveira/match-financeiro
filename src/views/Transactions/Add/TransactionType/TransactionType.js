@@ -11,7 +11,16 @@ import Select from 'components/Select/Select';
 
 import styles from './TransactionType.module.scss';
 
-const TransactionType = ({ transactionType, setTransactionType, setSelectedCategory, setSelectedSubcategory, step, setStep }) => {
+const TransactionType = ({
+  transactionType,
+  setTransactionType,
+  setSelectedCategory,
+  setSelectedSubcategory,
+  setTransactionPayment,
+  setTransactionCard,
+  step,
+  setStep,
+}) => {
   const { t } = useTranslation();
   const { hidden } = useHiddenStep({ target: steps.TYPE, step });
 
@@ -19,6 +28,10 @@ const TransactionType = ({ transactionType, setTransactionType, setSelectedCateg
 
   const handleChange = value => {
     setTransactionType(value);
+    setSelectedCategory('');
+    setSelectedSubcategory('');
+    setTransactionPayment('');
+    setTransactionCard('');
     if (step !== steps.TYPE) return;
     setStep(steps.CATEGORY);
     setIsChangedStep(true);
@@ -46,15 +59,7 @@ const TransactionType = ({ transactionType, setTransactionType, setSelectedCateg
       </div>
       <div className={isChangedStep ? styles.transactionType__selected : styles.transactionType__unselected}>
         <span className={styles.transactionType__label}>{t('FILTERS.TRANSACTION_TYPE')}:</span>
-        <Select
-          className={styles.transactionType__select}
-          value={transactionType}
-          onChange={e => {
-            setTransactionType(e.target.value);
-            setSelectedCategory('');
-            setSelectedSubcategory('');
-          }}
-        >
+        <Select className={styles.transactionType__select} value={transactionType} onChange={e => handleChange(e.target.value)}>
           <option value='' disabled>
             {t('SELECT')}
           </option>

@@ -1,3 +1,4 @@
+import installments from 'constants/installmentTypes';
 import authHeader from 'helpers/authHeader';
 import handleResponse from 'helpers/handleResponse';
 
@@ -9,6 +10,9 @@ function createTransaction({
   subcategoryName,
   transactionDate,
   transactionValue,
+  transactionPayment,
+  transactionCard,
+  transactionInstallments,
   transactionObservation,
   handleError,
 }) {
@@ -21,6 +25,9 @@ function createTransaction({
         subcategory: subcategoryName,
         transaction_date: transactionDate,
         value: transactionValue,
+        payment: transactionPayment,
+        card: transactionCard,
+        installments: installments.toServer[transactionInstallments],
         observation: transactionObservation,
       },
       {
@@ -62,9 +69,9 @@ function updateTransaction({
     .catch(handleError);
 }
 
-function deleteTransaction({ params, handleError }) {
+function deleteTransaction({ transactionId, handleError }) {
   return api
-    .delete(`/transaction?${params}`, {
+    .delete(`/transaction?transactionId=${transactionId}`, {
       headers: authHeader(),
     })
     .then(handleResponse)

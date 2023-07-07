@@ -1,0 +1,66 @@
+.paymentType {
+  bottom: var(--spacing-base);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: center;
+  padding: var(--spacing-base);
+  position: fixed;
+  transition: all 300ms ease-out;
+  width: 100%;
+
+  .paymentType__label {
+    color: var(--gold-darker);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-sm);
+    margin-bottom: var(--spacing-base);
+  }
+
+  .paymentType__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+  }
+
+  &.paymentType__bottom {
+    bottom: -100vh;
+    position: fixed;
+    transition: all 300ms ease-out;
+  }
+
+  &.paymentType__top {
+    bottom: 100vh;
+    transition: all 300ms ease-in;
+  }
+}
+
+.paymentType__unselected {
+  display: none;
+  gap: var(--spacing-small);
+  opacity: 0;
+  padding: var(--spacing-tiny) var(--spacing-base);
+  transition: all 300ms ease-in 300ms;
+  visibility: hidden;
+  width: 100%;
+
+  .paymentType__label {
+    color: var(--gold-darker);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-sm);
+    width: 40%;
+  }
+
+  .paymentType__select {
+    width: 60%;
+  }
+}
+
+.paymentType__selected {
+  @extend .paymentType__unselected;
+  align-items: center;
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}

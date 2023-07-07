@@ -12,9 +12,12 @@ import Button from 'components/Button/Button';
 import Icon from 'components/Icon/Icon';
 
 import Calendar from './Calendar/Calendar';
+import Card from './Card/Card';
 import Categories from './Categories/Categories';
 import Confirm from './Confirm/Confirm';
+import Installments from './Installments/Installments';
 import Observation from './Observation/Observation';
+import Payment from './Payment/Payment';
 import Subcategories from './Subcategories/Subcategories';
 import TransactionType from './TransactionType/TransactionType';
 import Value from './Value/Value';
@@ -33,6 +36,9 @@ const Add = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [transactionDate, setTransactionDate] = useState('');
   const [transactionValue, setTransactionValue] = useState((0).toFixed(2));
+  const [transactionPayment, setTransactionPayment] = useState('');
+  const [transactionCard, setTransactionCard] = useState('');
+  const [transactionInstallments, setTransactionInstallments] = useState('');
   const [transactionObservation, setTransactionObservation] = useState('');
 
   const [showForms, setShowForms] = useState(false);
@@ -57,6 +63,9 @@ const Add = () => {
         subcategoryName: selectedSubcategory,
         transactionDate,
         transactionValue,
+        transactionPayment,
+        transactionCard,
+        transactionInstallments,
         transactionObservation,
       })
       .then(() => {
@@ -65,6 +74,11 @@ const Add = () => {
           content: t('TRANSACTIONS.CREATE.SUCCESS'),
           type: 'success',
         });
+        setShowForms(false);
+        setIsLoading(false);
+        setTimeout(() => {
+          cleanForms();
+        }, [100]);
       })
       .catch(() => {
         addToast({
@@ -73,11 +87,7 @@ const Add = () => {
         });
       })
       .finally(() => {
-        setShowForms(false);
         setIsLoading(false);
-        setTimeout(() => {
-          cleanForms();
-        }, [100]);
       });
   };
 
@@ -113,6 +123,8 @@ const Add = () => {
             setTransactionType={setTransactionType}
             setSelectedCategory={setSelectedCategory}
             setSelectedSubcategory={setSelectedSubcategory}
+            setTransactionPayment={setTransactionPayment}
+            setTransactionCard={setTransactionCard}
             step={step}
             setStep={setStep}
           />
@@ -132,7 +144,37 @@ const Add = () => {
             setStep={setStep}
             transactionType={transactionType}
           />
-          <Value transactionValue={transactionValue} setTransactionValue={setTransactionValue} step={step} setStep={setStep} />
+          <Value
+            transactionValue={transactionValue}
+            setTransactionValue={setTransactionValue}
+            transactionType={transactionType}
+            step={step}
+            setStep={setStep}
+          />
+          <Payment
+            transactionPayment={transactionPayment}
+            setTransactionPayment={setTransactionPayment}
+            setTransactionCard={setTransactionCard}
+            transactionType={transactionType}
+            step={step}
+            setStep={setStep}
+          />
+          <Card
+            transactionPayment={transactionPayment}
+            transactionCard={transactionCard}
+            setTransactionCard={setTransactionCard}
+            transactionType={transactionType}
+            step={step}
+            setStep={setStep}
+          />
+          <Installments
+            transactionInstallments={transactionInstallments}
+            setTransactionInstallments={setTransactionInstallments}
+            transactionPayment={transactionPayment}
+            transactionType={transactionType}
+            step={step}
+            setStep={setStep}
+          />
           <Observation
             transactionObservation={transactionObservation}
             setTransactionObservation={setTransactionObservation}

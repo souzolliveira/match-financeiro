@@ -30,9 +30,36 @@ function createCard({ name, expirationDay, paymentDay, type, handleError }) {
     .catch(handleError);
 }
 
+function updateCard({ id, card, handleError }) {
+  return api
+    .put(
+      '/card',
+      {
+        id,
+        card,
+      },
+      {
+        headers: authHeader(),
+      }
+    )
+    .then(handleResponse)
+    .catch(handleError);
+}
+
+function removeCard({ id, handleError }) {
+  return api
+    .delete(`/card?id=${id}`, {
+      headers: authHeader(),
+    })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
 const cardService = {
   getCards,
   createCard,
+  updateCard,
+  removeCard,
 };
 
 export default cardService;

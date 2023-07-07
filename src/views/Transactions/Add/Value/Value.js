@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import steps from 'constants/steps';
+import transactionTypes from 'constants/transactionTypes';
 import useHiddenStep from 'hooks/useHiddenStep';
 
 import Button from 'components/Button/Button';
@@ -11,7 +12,7 @@ import Input from 'components/Input/Input';
 
 import styles from './Value.module.scss';
 
-const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
+const Value = ({ transactionValue, setTransactionValue, step, setStep, transactionType }) => {
   const { t } = useTranslation();
   const { hidden } = useHiddenStep({ target: steps.VALUE, step });
 
@@ -26,10 +27,14 @@ const Value = ({ transactionValue, setTransactionValue, step, setStep }) => {
 
   const handleNextStep = () => {
     if (step !== steps.VALUE) return;
-    setStep(steps.OBSERVATION);
+    if (transactionType === transactionTypes.EXPENSE) {
+      setStep(steps.PAYMENT);
+    } else {
+      setStep(steps.OBSERVATION);
+      const valueInput = document.getElementById('transaction-observation');
+      if (valueInput) valueInput.focus();
+    }
     setIsChangedStep(true);
-    const valueInput = document.getElementById('transaction-observation');
-    if (valueInput) valueInput.focus();
   };
 
   const handleKeyDown = e => {

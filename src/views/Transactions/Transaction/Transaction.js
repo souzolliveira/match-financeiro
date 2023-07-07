@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import bindPaymentIcon from 'helpers/bindPaymentIcon';
 import bindTransactionTypeIcon from 'helpers/bindTransactionTypeIcon';
 import bindTransactionTypeIconColor from 'helpers/bindTransactionTypeIconColor';
 import useDate from 'hooks/useDate';
@@ -50,7 +51,10 @@ const Transaction = ({ transaction, disabled }) => {
           />
         </div>
         <div className={styles.transaction__infos}>
-          <span className={styles.transaction__header}>{renderHeader()}</span>
+          <div className={styles.transaction__header}>
+            <span className={styles.transaction__title}>{renderHeader()}</span>
+            <Icon name={bindPaymentIcon(transaction.payment)} width={24} height={24} fill='var(--gold-darker)' />
+          </div>
           <div className={styles.transaction__main}>
             <span className={styles.transaction__value}>R$ {transaction.value}</span>
             <span className={styles.transaction__date}>{formatDateFromAPIToFront(transaction.transaction_date)}</span>

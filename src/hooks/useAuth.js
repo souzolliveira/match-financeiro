@@ -97,6 +97,7 @@ export const AuthProvider = ({ children }) => {
           content: t('LOGIN.ERROR'),
           type: 'danger',
         });
+        setData(null);
       }
     },
     [addToast, handleError, navigate, t]

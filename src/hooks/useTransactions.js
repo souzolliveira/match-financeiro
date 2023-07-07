@@ -7,6 +7,7 @@ import filterTypes from 'constants/filterTypes';
 import groupByTypes from 'constants/groupByTypes';
 import convertToFloat from 'helpers/convertToFloat';
 import handleParams from 'helpers/handleParams';
+import cardService from 'services/card.service';
 import categoryService from 'services/category.service';
 import subcategoryService from 'services/subcategory.service';
 import transactionService from 'services/transaction.service';
@@ -28,6 +29,7 @@ const TransactionsProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
+  const [cards, setCards] = useState([]);
   const [balance, setBalance] = useState(0);
   const [incomes, setIncomes] = useState(0);
   const [expenses, setExpenses] = useState(0);
@@ -112,10 +114,28 @@ const TransactionsProvider = ({ children }) => {
       });
   };
 
+  const fetchCards = async () => {
+    setIsLoading(true);
+    await cardService
+      .getCards({ handleError })
+      .then(data => data.data)
+      .then(data => setCards(data))
+      .catch(() => {
+        addToast({
+          content: t('CARDS.FETCH.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
     fetchTransactions();
     fetchCategories();
     fetchSubcategories();
+    fetchCards();
 
     return () => {
       setFilters({ ...defaultFilters });
@@ -123,6 +143,7 @@ const TransactionsProvider = ({ children }) => {
       setTransactions([]);
       setCategories([]);
       setSubcategories([]);
+      setCards([]);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -194,12 +215,15 @@ const TransactionsProvider = ({ children }) => {
         fetchTransactions,
         fetchCategories,
         fetchSubcategories,
+        fetchCards,
         transactions,
         setTransactions,
         categories,
         setCategories,
         subcategories,
         setSubcategories,
+        cards,
+        setCards,
         balance,
         setBalance,
         incomes,
