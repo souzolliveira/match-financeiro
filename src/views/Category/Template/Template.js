@@ -10,11 +10,11 @@ import { useNotification } from 'hooks/useNotification';
 import categoryService from 'services/category.service';
 import subcategoryService from 'services/subcategory.service';
 
-import Button from 'components/Button/Button';
+import Button from 'components/Button';
 import Checkbox from 'components/Checkbox/Checkbox';
 
-import NewCategoryFromTemplate from './NewCategoryFromTemplate/NewCategoryFromTemplate';
-import NewSubcategoryFromTemplate from './NewSubcategoryFromTemplate/NewSubcategoryFromTemplate';
+// import NewCategoryFromTemplate from './NewCategoryFromTemplate/NewCategoryFromTemplate';
+// import NewSubcategoryFromTemplate from './NewSubcategoryFromTemplate/NewSubcategoryFromTemplate';
 import json from './template.json';
 
 import styles from './Template.module.scss';
@@ -156,17 +156,17 @@ const Template = ({ fetchCategories, fetchSubcategories }) => {
                         </div>
                       );
                     })}
-                    <NewSubcategoryFromTemplate
+                    {/* <NewSubcategoryFromTemplate
                       template={template}
                       setTemplate={setTemplate}
                       transactionType={transactionType}
                       category={category}
-                    />
+                    /> */}
                   </div>
                 </div>
               );
             })}
-            <NewCategoryFromTemplate template={template} setTemplate={setTemplate} transactionType={transactionType} />
+            {/* <NewCategoryFromTemplate template={template} setTemplate={setTemplate} transactionType={transactionType} /> */}
           </div>
         );
       })}

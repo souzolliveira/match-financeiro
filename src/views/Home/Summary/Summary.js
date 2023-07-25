@@ -12,7 +12,7 @@ import styles from './Summary.module.scss';
 const Summary = () => {
   const { t } = useTranslation();
   const { getMonth } = useDate();
-  const { balance, incomes, expenses, investiments } = useTransactions();
+  const { balance, incomes, expenses, expensesFixed, expensesVariable, investiments, redemptions, dividends } = useTransactions();
 
   return (
     <div className={styles.summary}>
@@ -30,8 +30,24 @@ const Summary = () => {
             <span className={styles.summary__expenses}>R$ {convertToString(expenses)}</span>
           </div>
           <div className={styles.summary__row}>
+            <span className={styles.summary__label}>{t('SUMMARY.EXPENSES.FIXED')}</span>
+            <span className={styles.summary__expenses}>R$ {convertToString(expensesFixed)}</span>
+          </div>
+          <div className={styles.summary__row}>
+            <span className={styles.summary__label}>{t('SUMMARY.EXPENSES.VARIABLE')}</span>
+            <span className={styles.summary__expenses}>R$ {convertToString(expensesVariable)}</span>
+          </div>
+          <div className={styles.summary__row}>
             <span className={styles.summary__label}>{t('SUMMARY.INVESTIMENTS')}</span>
             <span className={styles.summary__investiments}>R$ {convertToString(investiments)}</span>
+          </div>
+          <div className={styles.summary__row}>
+            <span className={styles.summary__label}>{t('SUMMARY.REDEMPTIONS')}</span>
+            <span className={styles.summary__incomes}>R$ {convertToString(redemptions)}</span>
+          </div>
+          <div className={styles.summary__row}>
+            <span className={styles.summary__label}>{t('SUMMARY.DIVIDENDS')}</span>
+            <span className={styles.summary__incomes}>R$ {convertToString(dividends)}</span>
           </div>
         </div>
         <div className={styles.summary__balance}>

@@ -22,7 +22,11 @@
   "SUMMARY": "Resumo de {{month}}",
   "SUMMARY.INCOMES": "Receitas de",
   "SUMMARY.EXPENSES": "Despesas de",
+  "SUMMARY.EXPENSES.FIXED": "Fixas:",
+  "SUMMARY.EXPENSES.VARIABLE": "Variáveis:",
   "SUMMARY.INVESTIMENTS": "Investimentos de",
+  "SUMMARY.REDEMPTIONS": "Resgates de",
+  "SUMMARY.DIVIDENDS": "Dividendos de",
   "SUMMARY.BALANCE": "Saldo de",
 
   "TRANSACTIONS": "Transações",
@@ -83,7 +87,7 @@
 
   "CALENDAR.LABEL": "Informe a data:",
 
-  "CATEGORIES": "Categorias e subcategorias",
+  "CATEGORIES": "Categorias, subcategorias e ativos",
   "CATEGORIES.FETCH.ERROR": "Erro ao tentar carregar categorias",
   "CATEGORIES.LABEL": "Selecione a categoria:",
   "CATEGORIES.ADD": "Adicionar categoria",
@@ -129,6 +133,16 @@
   "SUBCATEGORIES.EDIT.ERROR": "Erro ao editar subcategoria",
   "SUBCATEGORIES.DIFFERENT.NAME": "O nome da subcategoria deve ser diferente das subcategorias já criadas nessa categoria",
 
+  "ASSETS.NEW": "Novo ativo",
+  "ASSETS.NEW.SUCCESS": "Novo ativo criado com sucesso",
+  "ASSETS.NEW.ERROR": "Erro ao criar novo ativo: {{asset}}",
+  "ASSETS.FETCH.ERROR": "Erro ao tentar carregar ativos",
+  "ASSETS.EMPTY": "Nenhum ativo encontrado",
+  "ASSETS.NAME": "Digite o nome do ativo:",
+  "ASSETS.QUANTIFIABLE.LABEL": "O ativo é quantizável?",
+  "ASSETS.QUANTIFIABLE": "Quantizável",
+  "ASSETS.NOT_QUANTIFIABLE": "Não quantizável",
+
   "VALUE.LABEL": "Informe o valor:",
   "VALUE": "Valor:",
 
@@ -168,8 +182,37 @@
   "CARDS.REMOVE.SUCCESS": "Cartão removido com sucesso",
   "CARDS.REMOVE.ERROR": "Erro ao remover cartão",
 
+  "BUDGETS": "Meta de gastos",
+
+  "INCOMES": "Receitas",
+  "INCOME.ADD": "Adicionar receita",
+  "INCOME.CREATE.SUCCESS": "Receita cadastrada com sucesso",
+  "INCOME.CREATE.ERROR": "Erro ao cadastrar receita",
+
+  "EXPENSES": "Despesas",
+  "EXPENSE.ADD": "Adicionar despesa",
+  "EXPENSE.CREATE.SUCCESS": "Despesa cadastrada com sucesso",
+  "EXPENSE.CREATE.ERROR": "Erro ao cadastrar despesa",
+
+  "INVESTIMENTS": "Investimentos",
+  "INVESTIMENT.ADD": "Adicionar investimento",
+  "INVESTIMENT.CREATE.SUCCESS": "Investimento cadastrado com sucesso",
+  "INVESTIMENT.CREATE.ERROR": "Erro ao cadastrar investimento",
+
+  "REDEMPTIONS": "Resgates",
+  "REDEMPTION.ADD": "Adicionar resgate",
+  "REDEMPTION.CREATE.SUCCESS": "Resgate cadastrado com sucesso",
+  "REDEMPTION.CREATE.ERROR": "Erro ao cadastrar resgate",
+
+  "DIVIDENDS": "Dividendos",
+  "DIVIDEND.ADD": "Adicionar dividendo",
+  "DIVIDEND.CREATE.SUCCESS": "Dividendo cadastrado com sucesso",
+  "DIVIDEND.CREATE.ERROR": "Erro ao cadastrar dividendo",
+
+  "TRANSACTION_TYPE": "Tipo de transação:",
   "CATEGORY": "Categoria:",
   "SUBCATEGORY": "Subcategoria:",
+  "ASSET": "Ativo:",
   "SETTINGS": "Configurações",
   "PROFILE": "Perfil",
   "CREATE": "Criar",

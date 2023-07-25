@@ -6,7 +6,7 @@ import filterTypes from 'constants/filterTypes';
 import useDate from 'hooks/useDate';
 import { useTransactions } from 'hooks/useTransactions';
 
-import Button from 'components/Button/Button';
+import Button from 'components/Button';
 import Pill from 'components/Pill/Pill';
 
 import styles from './AppliedFilters.module.scss';

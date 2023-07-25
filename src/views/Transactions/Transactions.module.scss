@@ -90,4 +90,22 @@
       }
     }
   }
+
+  .transactions__add {
+    align-items: center;
+    background-color: var(--color-success);
+    border-radius: var(--full-radius);
+    bottom: calc(var(--navbar-height) + var(--spacing-tiny));
+    box-shadow: var(--long-drop-shadow);
+    color: white;
+    display: flex;
+    font-size: 32px;
+    height: var(--spacing-large);
+    justify-content: center;
+    position: fixed;
+    right: var(--spacing-tiny);
+    transition: background-color ease-out 600ms;
+    width: var(--spacing-large);
+    z-index: var(--zindex-overlay);
+  }
 }

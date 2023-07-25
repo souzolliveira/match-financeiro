@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
-import Icon from 'components/Icon/Icon';
+import Icon from 'components/Icon';
 
 import './Navbar.scss';
 

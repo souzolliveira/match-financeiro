@@ -7,8 +7,8 @@ import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import cardService from 'services/card.service';
 
-import Button from 'components/Button/Button';
-import Modal from 'components/Modal/Modal';
+import Button from 'components/Button';
+import Modal from 'components/Modal';
 
 import styles from './RemoveCard.module.scss';
 
@@ -32,7 +32,7 @@ const RemoveCard = ({ isRemoveCardModalVisible, setIsRemoveCardModalVisible, car
   const handleRemoveCard = () => {
     setIsLoading(true);
     cardService
-      .removeCard({ id: removeCard?.id, handleError })
+      .remove({ id: removeCard?.id, handleError })
       .then(async () => {
         addToast({
           content: t('CARDS.REMOVE.SUCCESS'),

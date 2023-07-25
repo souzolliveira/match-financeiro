@@ -3,7 +3,7 @@ import handleResponse from 'helpers/handleResponse';
 
 import api from './conf.service';
 
-function getCards({ handleError }) {
+function list({ handleError }) {
   return api
     .get('/cards', {
       headers: authHeader(),
@@ -12,7 +12,7 @@ function getCards({ handleError }) {
     .catch(handleError);
 }
 
-function createCard({ name, expirationDay, paymentDay, type, handleError }) {
+function create({ name, expirationDay, paymentDay, type, handleError }) {
   return api
     .post(
       '/card',
@@ -30,7 +30,7 @@ function createCard({ name, expirationDay, paymentDay, type, handleError }) {
     .catch(handleError);
 }
 
-function updateCard({ id, card, handleError }) {
+function update({ id, card, handleError }) {
   return api
     .put(
       '/card',
@@ -46,7 +46,7 @@ function updateCard({ id, card, handleError }) {
     .catch(handleError);
 }
 
-function removeCard({ id, handleError }) {
+function remove({ id, handleError }) {
   return api
     .delete(`/card?id=${id}`, {
       headers: authHeader(),
@@ -56,10 +56,10 @@ function removeCard({ id, handleError }) {
 }
 
 const cardService = {
-  getCards,
-  createCard,
-  updateCard,
-  removeCard,
+  list,
+  create,
+  update,
+  remove,
 };
 
 export default cardService;

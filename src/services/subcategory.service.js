@@ -1,3 +1,4 @@
+import transactionTypes from 'constants/transactionTypes';
 import authHeader from 'helpers/authHeader';
 import handleResponse from 'helpers/handleResponse';
 
@@ -8,10 +9,9 @@ function createSubcategory({ category, costing, name, transactionType, handleErr
     .post(
       '/subcategory',
       {
-        transaction_type: transactionType,
         category,
         name,
-        costing,
+        costing: transactionType === transactionTypes.EXPENSE ? costing : null,
       },
       {
         headers: authHeader(),
@@ -38,15 +38,13 @@ function listSubcategory({ transactionType, categoryName, handleError }) {
     .catch(handleError);
 }
 
-function updateSubcategory({ transactionType, category, name, newName, costing, handleError }) {
+function updateSubcategory({ id, name, costing, handleError }) {
   return api
     .put(
       '/subcategory',
       {
-        transaction_type: transactionType,
-        category,
+        id,
         name,
-        newName,
         costing,
       },
       {

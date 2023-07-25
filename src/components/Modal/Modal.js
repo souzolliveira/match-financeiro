@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import Icon from 'components/Icon/Icon';
+import Icon from 'components/Icon';
 
 import styles from './Modal.module.scss';
 

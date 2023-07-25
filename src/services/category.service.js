@@ -33,14 +33,13 @@ function listCategory({ transactionType, handleError }) {
     .catch(handleError);
 }
 
-function updateCategory({ name, newName, transactionType, handleError }) {
+function updateCategory({ id, name, handleError }) {
   return api
     .put(
       '/category',
       {
-        transaction_type: transactionType,
+        id,
         name,
-        newName,
       },
       {
         headers: authHeader(),

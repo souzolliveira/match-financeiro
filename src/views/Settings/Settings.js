@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
-import Fill from 'components/Fill/Fill';
-import Icon from 'components/Icon/Icon';
+import Fill from 'components/Fill';
+import Icon from 'components/Icon';
 
 import styles from './Settings.module.scss';
 
@@ -23,11 +23,20 @@ const Settings = () => {
       <Fill />
       <div className={styles.settings__container}>
         <div className={styles.settings__options}>
-          <Link to='/categories' className={styles.settings__option}>
-            {t('CATEGORIES')}
-          </Link>
           <Link to='/cards' className={styles.settings__option}>
             {t('CARDS')}
+          </Link>
+          <Link to='/incomes' className={styles.settings__option}>
+            {t('INCOMES')}
+          </Link>
+          <Link to='/expenses' className={styles.settings__option}>
+            {t('EXPENSES')}
+          </Link>
+          <Link to='/investiments' className={styles.settings__option}>
+            {t('INVESTIMENTS')}
+          </Link>
+          <Link to='/budgets' className={styles.settings__option}>
+            {t('BUDGETS')}
           </Link>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
-import Button from 'components/Button/Button';
+import Button from 'components/Button';
 
 import styles from './NotFound.module.scss';
 

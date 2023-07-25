@@ -6,7 +6,7 @@ import bindBalanceColor from 'helpers/bindBalanceColor';
 import convertToString from 'helpers/convertToString';
 import { useTransactions } from 'hooks/useTransactions';
 
-import Icon from 'components/Icon/Icon';
+import Icon from 'components/Icon';
 
 import Filters from '../Filters/Filters';
 

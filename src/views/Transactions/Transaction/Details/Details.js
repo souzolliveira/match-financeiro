@@ -17,11 +17,11 @@ import useTime from 'hooks/useTime';
 import { useTransactions } from 'hooks/useTransactions';
 import transactionService from 'services/transaction.service';
 
-import Button from 'components/Button/Button';
-import Fill from 'components/Fill/Fill';
-import Icon from 'components/Icon/Icon';
-import Input from 'components/Input/Input';
-import Select from 'components/Select/Select';
+import Button from 'components/Button';
+import Fill from 'components/Fill';
+import Icon from 'components/Icon';
+import Input from 'components/Input';
+import Select from 'components/Select';
 
 import styles from './Details.module.scss';
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
@@ -6,19 +7,20 @@ import useDate from 'hooks/useDate';
 import useTime from 'hooks/useTime';
 import { useTransactions } from 'hooks/useTransactions';
 
-import Icon from 'components/Icon/Icon';
+import Button from 'components/Button';
+import Icon from 'components/Icon';
 
-import Add from './Add/Add';
 import Balance from './Balance/Balance';
 import Transaction from './Transaction/Transaction';
 
 import styles from './Transactions.module.scss';
 
 const Transactions = ({ isHome }) => {
-  const { t } = useTranslation();
-  const { transactions, lastUpdate, filters, setIsHome } = useTransactions();
-  const { formatDateFromAPIToFront } = useDate();
   const { bindHour } = useTime();
+  const { filters, lastUpdate, setIsHome, transactions } = useTransactions();
+  const { formatDateFromAPIToFront } = useDate();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const renderTransactions = () => {
     if (isHome) return transactions?.slice(0, 3);
@@ -64,7 +66,11 @@ const Transactions = ({ isHome }) => {
           </div>
         )}
       </div>
-      {!isHome && <Add />}
+      {!isHome && (
+        <Button type='button' kind='primary' className={styles.transactions__add} onClick={() => navigate('/add')}>
+          <Icon name='plus' width={24} height={24} fill='var(--gold-lightest)' />
+        </Button>
+      )}
     </div>
   );
 };

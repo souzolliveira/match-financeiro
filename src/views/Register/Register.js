@@ -8,8 +8,8 @@ import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import registerService from 'services/register.service';
 
-import Button from 'components/Button/Button';
-import Input from 'components/Input/Input';
+import Button from 'components/Button';
+import Input from 'components/Input';
 
 import Logo from 'assets/logo_main.png';
 

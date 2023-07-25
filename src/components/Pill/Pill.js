@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Icon from 'components/Icon/Icon';
+import Icon from 'components/Icon';
 
 import styles from './Pill.module.scss';
 

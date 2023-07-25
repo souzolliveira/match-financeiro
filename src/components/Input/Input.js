@@ -22,6 +22,7 @@ const Input = ({
   onKeyUp,
   disabled,
   readOnly,
+  required,
 }) => {
   return (
     <input
@@ -44,6 +45,7 @@ const Input = ({
       style={width ? { width } : null}
       disabled={disabled}
       readOnly={readOnly}
+      required={required}
     />
   );
 };

@@ -13,8 +13,8 @@ import handleParams from 'helpers/handleParams';
 import useDate from 'hooks/useDate';
 import { useTransactions } from 'hooks/useTransactions';
 
-import Button from 'components/Button/Button';
-import Select from 'components/Select/Select';
+import Button from 'components/Button';
+import Select from 'components/Select';
 
 import AppliedFilters from '../AppliedFilters/AppliedFilters';
 

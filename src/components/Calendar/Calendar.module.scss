@@ -1,0 +1,19 @@
+.calendar {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-small);
+  justify-content: center;
+  width: 100%;
+
+  > div {
+    width: 100% !important;
+  }
+
+  .calendar__label {
+    color: var(--gold-darker);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-sm);
+    white-space: nowrap;
+  }
+}

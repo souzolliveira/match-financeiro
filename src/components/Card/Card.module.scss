@@ -1,0 +1,15 @@
+.card {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-small);
+  justify-content: center;
+  width: 100%;
+
+  .card__label {
+    color: var(--gold-darker);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-sm);
+    white-space: nowrap;
+  }
+}

@@ -8,10 +8,10 @@ import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import cardService from 'services/card.service';
 
-import Button from 'components/Button/Button';
-import Input from 'components/Input/Input';
-import Modal from 'components/Modal/Modal';
-import Select from 'components/Select/Select';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import Modal from 'components/Modal';
+import Select from 'components/Select';
 
 import styles from './NewCard.module.scss';
 
@@ -29,7 +29,7 @@ const NewCard = ({ isNewCardModalVisible, setIsNewCardModalVisible, newCard, set
   const handleCreateCard = () => {
     setIsLoading(true);
     cardService
-      .createCard({ ...newCard, handleError })
+      .create({ ...newCard, handleError })
       .then(async () => {
         addToast({
           content: t('CARDS.NEW.SUCCESS'),

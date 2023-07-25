@@ -8,8 +8,8 @@ import { useLoader } from 'hooks/useLoader';
 import { useNotification } from 'hooks/useNotification';
 import cardService from 'services/card.service';
 
-import Fill from 'components/Fill/Fill';
-import Icon from 'components/Icon/Icon';
+import Fill from 'components/Fill';
+import Icon from 'components/Icon';
 
 import EditCard from './EditCard/EditCard';
 import NewCard from './NewCard/NewCard';
@@ -40,7 +40,7 @@ const Card = () => {
   const fetchCards = async () => {
     setIsLoading(true);
     await cardService
-      .getCards({ handleError })
+      .list({ handleError })
       .then(data => data.data)
       .then(data => setCards(data))
       .catch(() => {

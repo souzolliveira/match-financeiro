@@ -7,6 +7,7 @@ import filterTypes from 'constants/filterTypes';
 import groupByTypes from 'constants/groupByTypes';
 import convertToFloat from 'helpers/convertToFloat';
 import handleParams from 'helpers/handleParams';
+import assetService from 'services/asset.service';
 import cardService from 'services/card.service';
 import categoryService from 'services/category.service';
 import subcategoryService from 'services/subcategory.service';
@@ -29,11 +30,16 @@ const TransactionsProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
+  const [assets, setAssets] = useState([]);
   const [cards, setCards] = useState([]);
   const [balance, setBalance] = useState(0);
   const [incomes, setIncomes] = useState(0);
   const [expenses, setExpenses] = useState(0);
+  const [expensesFixed, setExpensesFixed] = useState(0);
+  const [expensesVariable, setExpensesVariable] = useState(0);
   const [investiments, setInvestiments] = useState(0);
+  const [redemptions, setRedemptions] = useState(0);
+  const [dividends, setDividends] = useState(0);
   const [lastUpdate, setLastUpdate] = useState('');
 
   const defaultFilters = {
@@ -48,7 +54,6 @@ const TransactionsProvider = ({ children }) => {
   const [intermediateFilters, setIntermediateFilters] = useState({ ...defaultFilters });
 
   const [isHome, setIsHome] = useState(false);
-  const [isAddTransactionFormOpened, setIsAddTransactionFormOpened] = useState(false);
   const [isFiltersTabOpened, setIsFiltersTabOpened] = useState(false);
 
   const fetchTransactions = async params => {
@@ -58,9 +63,13 @@ const TransactionsProvider = ({ children }) => {
       .then(data => {
         setTransactions(data.data);
         setBalance(convertToFloat(data.balance));
-        setIncomes(convertToFloat(data.income));
-        setExpenses(convertToFloat(data.expense));
-        setInvestiments(convertToFloat(data.investiment));
+        setIncomes(convertToFloat(data.incomes));
+        setExpenses(convertToFloat(data.expenses));
+        setExpensesFixed(convertToFloat(data.expenses_fixed));
+        setExpensesVariable(convertToFloat(data.expenses_variable));
+        setInvestiments(convertToFloat(data.investiments));
+        setRedemptions(convertToFloat(data.redemptions));
+        setDividends(convertToFloat(data.dividends));
       })
       .catch(() => {
         addToast({
@@ -114,10 +123,30 @@ const TransactionsProvider = ({ children }) => {
       });
   };
 
+  const fetchAssets = async () => {
+    setIsLoading(true);
+    await assetService
+      .list({
+        handleError,
+      })
+      .then(data => {
+        setAssets(data);
+      })
+      .catch(() => {
+        addToast({
+          content: t('ASSETS.FETCH.ERROR'),
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   const fetchCards = async () => {
     setIsLoading(true);
     await cardService
-      .getCards({ handleError })
+      .list({ handleError })
       .then(data => data.data)
       .then(data => setCards(data))
       .catch(() => {
@@ -136,6 +165,7 @@ const TransactionsProvider = ({ children }) => {
     fetchCategories();
     fetchSubcategories();
     fetchCards();
+    fetchAssets();
 
     return () => {
       setFilters({ ...defaultFilters });
@@ -143,6 +173,7 @@ const TransactionsProvider = ({ children }) => {
       setTransactions([]);
       setCategories([]);
       setSubcategories([]);
+      setAssets([]);
       setCards([]);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -216,12 +247,15 @@ const TransactionsProvider = ({ children }) => {
         fetchCategories,
         fetchSubcategories,
         fetchCards,
+        fetchAssets,
         transactions,
         setTransactions,
         categories,
         setCategories,
         subcategories,
         setSubcategories,
+        assets,
+        setAssets,
         cards,
         setCards,
         balance,
@@ -230,8 +264,14 @@ const TransactionsProvider = ({ children }) => {
         setIncomes,
         expenses,
         setExpenses,
+        expensesFixed,
+        expensesVariable,
         investiments,
         setInvestiments,
+        redemptions,
+        setRedemptions,
+        dividends,
+        setDividends,
         lastUpdate,
         setLastUpdate,
         filters,
@@ -241,8 +281,6 @@ const TransactionsProvider = ({ children }) => {
         setIsHome,
         isFiltersTabOpened,
         setIsFiltersTabOpened,
-        isAddTransactionFormOpened,
-        setIsAddTransactionFormOpened,
         onRemoveFilter,
         onClearFilters,
       }}

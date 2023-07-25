@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { useNotification } from 'hooks/useNotification';
 
-import Button from 'components/Button/Button';
+import Button from 'components/Button';
 import Icon from 'components/Icon/Icon';
-import Input from 'components/Input/Input';
+import Input from 'components/Input';
 
 import styles from './NewCategoryFromTemplate.module.scss';
 

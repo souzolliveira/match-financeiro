@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from 'hooks/useAuth';
 import { useNotification } from 'hooks/useNotification';
 
-import Button from 'components/Button/Button';
-import Input from 'components/Input/Input';
+import Button from 'components/Button';
+import Input from 'components/Input';
 
 import Logo from 'assets/logo_main.png';
 
