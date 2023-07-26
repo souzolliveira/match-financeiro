@@ -1,11 +1,6 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const {
-  listAssetsModel,
-  createAssetModel,
-  editAssetModel,
-  deleteAssetModel,
-} = require("./model");
-const { getUserBySessionGuid } = require("../user/model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { listAssetsModel, createAssetModel, editAssetModel, deleteAssetModel } = require('./model');
+const { getUserBySessionGuid } = require('../user/model');
 
 exports.listAssetsController = async (req, res) => {
   const { session_guid } = req.headers;
@@ -25,9 +20,7 @@ exports.listAssetsController = async (req, res) => {
     res.status(code).send({ code, message, data });
     return;
   } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -53,9 +46,7 @@ exports.createAssetController = async (req, res) => {
     res.status(code).send({ code, message, data });
     return;
   } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -81,9 +72,7 @@ exports.editAssetController = async (req, res) => {
     res.status(code).send({ code, message, data });
     return;
   } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -107,9 +96,7 @@ exports.deleteAssetController = async (req, res) => {
     res.status(code).send({ code, message });
     return;
   } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };

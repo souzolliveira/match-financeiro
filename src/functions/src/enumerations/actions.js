@@ -1,4 +1,4 @@
 exports.actions = {
-  SYSTEM: "SYSTEM",
-  USER: "USER",
+  SYSTEM: 'SYSTEM',
+  USER: 'USER',
 };

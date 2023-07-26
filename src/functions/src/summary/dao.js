@@ -1,4 +1,4 @@
-const db = require("../config/database");
+const db = require('../config/database');
 
 exports.selectSummaryDAO = async ({ asset, user_id }) => {
   const response = await db.query(
@@ -31,19 +31,13 @@ exports.selectSummaryDAO = async ({ asset, user_id }) => {
         categories_fk = categories.id
       WHERE
         users_fk = $1
-        ${asset ? `and assets_fk = ${asset}` : ""}
+        ${asset ? `and assets_fk = ${asset}` : ''}
     `,
     [user_id]
   );
 };
 
-exports.insertSummaryDAO = async ({
-  asset,
-  quantity,
-  average_price,
-  total,
-  last_update,
-}) => {
+exports.insertSummaryDAO = async ({ asset, quantity, average_price, total, last_update }) => {
   const response = db.query(
     `INSERT INTO summary
       (
@@ -59,13 +53,7 @@ exports.insertSummaryDAO = async ({
   return response;
 };
 
-exports.updateSummaryDAO = async ({
-  asset,
-  quantity,
-  average_price,
-  total,
-  last_update,
-}) => {
+exports.updateSummaryDAO = async ({ asset, quantity, average_price, total, last_update }) => {
   const response = db.query(
     `UPDATE cards
     SET quantity = $1,

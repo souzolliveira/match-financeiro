@@ -1,10 +1,10 @@
 exports.cardTypes = {
-  DEBT: "DEBT",
-  CREDIT: "CREDIT",
-  BOTH: "BOTH",
+  DEBT: 'DEBT',
+  CREDIT: 'CREDIT',
+  BOTH: 'BOTH',
 };
 
 exports.cardStatus = {
-  ACTIVE: "ACTIVE",
-  INACTIVE: "INACTIVE",
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
 };

@@ -1,4 +1,4 @@
 exports.costing_types = {
-  FIXED: "FIXED",
-  VARIABLE: "VARIABLE",
+  FIXED: 'FIXED',
+  VARIABLE: 'VARIABLE',
 };

@@ -1,12 +1,6 @@
-const db = require("../config/database");
+const db = require('../config/database');
 
-exports.selectSubcategoryDAO = async ({
-  id,
-  category,
-  costing,
-  name,
-  user_id,
-}) => {
+exports.selectSubcategoryDAO = async ({ id, category, costing, name, user_id }) => {
   const response = await db.query(
     `
       SELECT
@@ -24,11 +18,11 @@ exports.selectSubcategoryDAO = async ({
         categories.id = subcategories.categories_fk
       WHERE
         categories.users_fk = ${user_id}
-      ${id ? `and subcategories.id = ${id}` : ""}
-      ${costing ? `and subcategories.costing = '${costing}'` : ""}
-      ${category ? `and categories_fk = ${category}` : ""}
-      ${name ? `and subcategories.name = '${name}'` : ""}`,
-    []
+      ${id ? `and subcategories.id = ${id}` : ''}
+      ${costing ? `and subcategories.costing = '${costing}'` : ''}
+      ${category ? `and categories_fk = ${category}` : ''}
+      ${name ? `and subcategories.name = '${name}'` : ''}`,
+      []
   );
   return response;
 };
@@ -39,12 +33,12 @@ exports.insertSubcategoryDAO = async ({ category, costing, name }) => {
       subcategories (
         categories_fk,
         name
-        ${costing ? ", costing" : ""}
+        ${costing ? ', costing' : ''}
       )
       VALUES (
         $1,
         $2
-        ${costing ? `, '${costing}'` : ""}
+        ${costing ? `, '${costing}'` : ''}
       )
       RETURNING id`,
     [category, name]
@@ -59,7 +53,7 @@ exports.updateSubcategoryDAO = async ({ id, name, costing }) => {
         subcategories
       SET 
         name = $1
-        ${costing ? `, costing = '${costing}'` : ""}
+        ${costing ? `, costing = '${costing}'` : ''}
       WHERE id = $2
     `,
     [name, id]
@@ -68,8 +62,6 @@ exports.updateSubcategoryDAO = async ({ id, name, costing }) => {
 };
 
 exports.deleteSubcategoryDAO = async ({ id }) => {
-  const response = await db.query("DELETE FROM subcategories WHERE id = $1", [
-    id,
-  ]);
+  const response = await db.query('DELETE FROM subcategories WHERE id = $1', [id]);
   return response;
 };

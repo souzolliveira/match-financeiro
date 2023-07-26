@@ -1,21 +1,13 @@
-const db = require("../config/database");
-const { group_by_types } = require("../enumerations/group_by");
+const db = require('../config/database');
+const { group_by_types } = require('../enumerations/group_by');
 
-exports.listDividendsDAO = async ({
-  start_date,
-  end_date,
-  category,
-  subcategory,
-  asset,
-  group_by,
-  user_id,
-}) => {
+exports.listDividendsDAO = async ({ start_date, end_date, category, subcategory, asset, group_by, user_id }) => {
   const response = await db.query(
     `
     SELECT
       ${
-        !group_by
-          ? `dividends.id as id,
+        !group_by ?
+          `dividends.id as id,
             categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
@@ -25,35 +17,35 @@ exports.listDividendsDAO = async ({
             dividends.value as value,
             dividends.dividend_date as dividend_date,
             dividends.observation as observation,
-            dividends.date as date`
-          : ""
+            dividends.date as date` :
+          ''
       }
       ${
-        group_by === group_by_types.CATEGORY
-          ? `categories.id as category_id,
+        group_by === group_by_types.CATEGORY ?
+          `categories.id as category_id,
             categories.name as category_name,
-            sum(dividends.value) as value`
-          : ""
+            sum(dividends.value) as value` :
+          ''
       }
       ${
-        group_by === group_by_types.SUBCATEGORY
-          ? `categories.id as category_id,
+        group_by === group_by_types.SUBCATEGORY ?
+          `categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
             subcategories.name as subcategory_name,
-            sum(dividends.value) as value`
-          : ""
+            sum(dividends.value) as value` :
+          ''
       }
       ${
-        group_by === group_by_types.ASSET
-          ? `categories.id as category_id,
+        group_by === group_by_types.ASSET ?
+          `categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
             subcategories.name as subcategory_name,
             assets.id as asset_id,
             assets.name as asset_name,
-            sum(dividends.value) as value`
-          : ""
+            sum(dividends.value) as value` :
+          ''
       }
     FROM dividends
     JOIN assets
@@ -63,45 +55,37 @@ exports.listDividendsDAO = async ({
     JOIN categories
       ON subcategories.categories_fk = categories.id
     WHERE categories.users_fk = ${user_id} 
+      ${start_date ? `and dividends.dividend_date >= '${`${start_date} 00:00:00`}'` : ''}
+      ${end_date ? `and dividends.dividend_date <= '${`${end_date} 23:59:59`}'` : ''}
+      ${category ? `and subcategories.categories_fk = '${category}'` : ''}
+      ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ''}
+      ${asset ? `and dividends.assets_fk = '${asset}'` : ''}
       ${
-        start_date
-          ? `and dividends.dividend_date >= '${`${start_date} 00:00:00`}'`
-          : ""
-      }
-      ${
-        end_date
-          ? `and dividends.dividend_date <= '${`${end_date} 23:59:59`}'`
-          : ""
-      }
-      ${category ? `and subcategories.categories_fk = '${category}'` : ""}
-      ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ""}
-      ${asset ? `and dividends.assets_fk = '${asset}'` : ""}
-      ${
-        group_by === group_by_types.CATEGORY
-          ? `GROUP BY 
+        group_by === group_by_types.CATEGORY ?
+          `GROUP BY 
             category_id,
-            category_name`
-          : ""
+            category_name` :
+          ''
       }
       ${
-        group_by === group_by_types.SUBCATEGORY
-          ? `GROUP BY 
+        group_by === group_by_types.SUBCATEGORY ?
+          `GROUP BY 
             category_id,
             category_name,
             subcategory_id,
-            subcategory_name`
-          : ""
+            subcategory_name` :
+          ''
       }
       ${
-        group_by === group_by_types.ASSET
-          ? `GROUP BY 
+        group_by === group_by_types.ASSET ?
+          `GROUP BY 
             category_id,
             category_name,
             subcategory_id,
             subcategory_name
             asset_id,
-            asset_name`
-          : ""
+            asset_name` :
+          ''
       }
     ORDER BY dividend_date DESC
   `,
@@ -110,13 +94,7 @@ exports.listDividendsDAO = async ({
   return response;
 };
 
-exports.createDividendDAO = async ({
-  asset,
-  value,
-  dividend_date,
-  observation,
-  date,
-}) => {
+exports.createDividendDAO = async ({ asset, value, dividend_date, observation, date }) => {
   const response = await db.query(
     `
       INSERT INTO dividends

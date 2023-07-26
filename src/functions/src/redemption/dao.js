@@ -1,21 +1,13 @@
-const db = require("../config/database");
-const { group_by_types } = require("../enumerations/group_by");
+const db = require('../config/database');
+const { group_by_types } = require('../enumerations/group_by');
 
-exports.listRedemptionsDAO = async ({
-  start_date,
-  end_date,
-  category,
-  subcategory,
-  asset,
-  group_by,
-  user_id,
-}) => {
+exports.listRedemptionsDAO = async ({ start_date, end_date, category, subcategory, asset, group_by, user_id }) => {
   const response = await db.query(
     `
     SELECT
       ${
-        !group_by
-          ? `redemptions.id as id,
+        !group_by ?
+          `redemptions.id as id,
             categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
@@ -28,12 +20,12 @@ exports.listRedemptionsDAO = async ({
             redemptions.result as result,
             redemptions.redemption_date as redemption_date,
             redemptions.observation as observation,
-            redemptions.date as date`
-          : ""
+            redemptions.date as date` :
+          ''
       }
       ${
-        group_by === group_by_types.ASSET
-          ? `categories.id as category_id,
+        group_by === group_by_types.ASSET ?
+          `categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
             subcategories.name as subcategory_name,
@@ -42,8 +34,8 @@ exports.listRedemptionsDAO = async ({
             sum(redemptions.total) as total,
             sum(redeptions.result) as result
             sum(redemptions.quantity) as quantity,
-            sum(redemptions.unitary_value * redemptions.quantity) as unitary_value`
-          : ""
+            sum(redemptions.unitary_value * redemptions.quantity) as unitary_value` :
+          ''
       }
     FROM redemptions
     JOIN assets
@@ -53,22 +45,14 @@ exports.listRedemptionsDAO = async ({
     JOIN categories
       ON subcategories.categories_fk = categories.id
     WHERE categories.users_fk = ${user_id} 
+      ${start_date ? `and redemptions.redemption_date >= '${`${start_date} 00:00:00`}'` : ''}
+      ${end_date ? `and redemptions.redemption_date <= '${`${end_date} 23:59:59`}'` : ''}
+      ${category ? `and subcategories.categories_fk = '${category}'` : ''}
+      ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ''}
+      ${asset ? `and redemptions.assets_fk = '${asset}'` : ''}
       ${
-        start_date
-          ? `and redemptions.redemption_date >= '${`${start_date} 00:00:00`}'`
-          : ""
-      }
-      ${
-        end_date
-          ? `and redemptions.redemption_date <= '${`${end_date} 23:59:59`}'`
-          : ""
-      }
-      ${category ? `and subcategories.categories_fk = '${category}'` : ""}
-      ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ""}
-      ${asset ? `and redemptions.assets_fk = '${asset}'` : ""}
-      ${
-        group_by === group_by_types.ASSET
-          ? `GROUP BY 
+        group_by === group_by_types.ASSET ?
+          `GROUP BY 
             category_id,
             category_name,
             subcategory_id,
@@ -78,8 +62,8 @@ exports.listRedemptionsDAO = async ({
             total,
             result,
             quantity,
-            unitary_value`
-          : ""
+            unitary_value` :
+          ''
       }
     ORDER BY redemption_date DESC
   `,
@@ -88,16 +72,7 @@ exports.listRedemptionsDAO = async ({
   return response;
 };
 
-exports.insertRedemptionDAO = async ({
-  asset,
-  quantity,
-  unitary_value,
-  total,
-  result,
-  redemption_date,
-  observation,
-  date,
-}) => {
+exports.insertRedemptionDAO = async ({ asset, quantity, unitary_value, total, result, redemption_date, observation, date }) => {
   const response = await db.query(
     `
         INSERT INTO redemptions
@@ -113,16 +88,7 @@ exports.insertRedemptionDAO = async ({
           )
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       `,
-    [
-      asset,
-      quantity,
-      unitary_value,
-      total,
-      result,
-      redemption_date,
-      observation,
-      date,
-    ]
+    [asset, quantity, unitary_value, total, result, redemption_date, observation, date]
   );
   return response;
 };

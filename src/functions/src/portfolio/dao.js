@@ -1,4 +1,4 @@
-const db = require("../config/database");
+const db = require('../config/database');
 
 exports.createPortfolioDAO = async ({ asset, value, updated_at }) => {
   const response = await db.query(

@@ -1,15 +1,13 @@
-const router = require("express-promise-router")();
-const investimentController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/investiments", investimentController.listInvestimentsController);
+const investimentController = require('./controller');
 
-router.post("/investiment", investimentController.createInvestimentController);
+router.get('/investiments', investimentController.listInvestimentsController);
 
-router.put("/investiment", investimentController.editInvestimentController);
+router.post('/investiment', investimentController.createInvestimentController);
 
-router.delete(
-  "/investiment",
-  investimentController.deleteInvestimentController
-);
+router.put('/investiment', investimentController.editInvestimentController);
+
+router.delete('/investiment', investimentController.deleteInvestimentController);
 
 module.exports = router;

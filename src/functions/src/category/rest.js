@@ -1,17 +1,15 @@
-const router = require("express-promise-router")();
-const categoryController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/category", categoryController.listCategoryController);
+const categoryController = require('./controller');
 
-router.get(
-  "/category/:transaction_type",
-  categoryController.listCategoryController
-);
+router.get('/category', categoryController.listCategoryController);
 
-router.post("/category", categoryController.createCategoryController);
+router.get('/category/:transaction_type', categoryController.listCategoryController);
 
-router.put("/category", categoryController.editCategoryController);
+router.post('/category', categoryController.createCategoryController);
 
-router.delete("/category", categoryController.deleteCategoryController);
+router.put('/category', categoryController.editCategoryController);
+
+router.delete('/category', categoryController.deleteCategoryController);
 
 module.exports = router;

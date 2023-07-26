@@ -1,9 +1,9 @@
-const { selectEmailAndPasswordDAO } = require("./dao");
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { token_types } = require("../enumerations/tokens.");
-const { convertStringToMD5 } = require("../helpers/md5");
-const { generateUUID } = require("../helpers/uuid");
-const { createTokenModel, removeTokenModel } = require("../token/model");
+const { selectEmailAndPasswordDAO } = require('./dao');
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { token_types } = require('../enumerations/tokens.');
+const { convertStringToMD5 } = require('../helpers/md5');
+const { generateUUID } = require('../helpers/uuid');
+const { createTokenModel, removeTokenModel } = require('../token/model');
 
 exports.signInModel = async ({ email, password }) => {
   let code = httpCode.ERROR;
@@ -15,7 +15,7 @@ exports.signInModel = async ({ email, password }) => {
   });
   if (selectUserByEmailAndPassword.rows.length === 0) {
     code = httpCode.UNAUTHORIZED;
-    message = "Usuário e/ou senha incorretos";
+    message = 'Usuário e/ou senha incorretos';
   } else if (selectUserByEmailAndPassword.rows.length === 1) {
     const session_guid = await generateUUID();
     const createToken = await createTokenModel({
@@ -25,7 +25,7 @@ exports.signInModel = async ({ email, password }) => {
     });
     if (createToken) {
       code = httpCode.OK;
-      message = "Autenticação feita com sucesso";
+      message = 'Autenticação feita com sucesso';
       return { code, message, session_guid };
     }
   }

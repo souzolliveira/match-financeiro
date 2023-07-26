@@ -1,9 +1,8 @@
-const db = require("../config/database");
+const db = require('../config/database');
 
 exports.selectAssetsDAO = async ({ id, user_id }) => {
   const response = await db.query(
-    `
-      SELECT
+    `SELECT
         assets.id as asset_id,
         assets.name as asset_name,
         assets.quantifiable as quantifiable,
@@ -23,7 +22,7 @@ exports.selectAssetsDAO = async ({ id, user_id }) => {
         categories.id = subcategories.categories_fk
       WHERE
         categories.users_fk = $1
-        ${id ? `and assets.id = ${id}` : ""}
+        ${id ? `and assets.id = ${id}` : ''}
       `,
     [user_id]
   );
@@ -47,10 +46,11 @@ exports.selectAssetByNameDAO = async ({ name, quantifiable, subcategory }) => {
 };
 
 exports.insertAssetDAO = async ({ name, quantifiable, subcategory }) => {
-  const response = await db.query(
-    "INSERT INTO assets (name, quantifiable, subcategories_fk) VALUES ($1, $2, $3)",
-    [name, quantifiable, subcategory]
-  );
+  const response = await db.query('INSERT INTO assets (name, quantifiable, subcategories_fk) VALUES ($1, $2, $3)', [
+    name,
+    quantifiable,
+    subcategory,
+  ]);
   return response;
 };
 

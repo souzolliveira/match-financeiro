@@ -1,5 +1,5 @@
 exports.plans = {
-  BASIC: "BASIC",
-  PREMIUM: "PREMIUM",
-  ADMIN: "ADMIN",
+  BASIC: 'BASIC',
+  PREMIUM: 'PREMIUM',
+  ADMIN: 'ADMIN',
 };

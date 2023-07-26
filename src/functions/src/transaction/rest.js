@@ -1,11 +1,9 @@
-const router = require("express-promise-router")();
-const transactionController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/transactions", transactionController.listTransactionsController);
+const transactionController = require('./controller');
 
-router.get(
-  "/transactions/last-update",
-  transactionController.lastUpdateController
-);
+router.get('/transactions', transactionController.listTransactionsController);
+
+router.get('/transactions/last-update', transactionController.lastUpdateController);
 
 module.exports = router;

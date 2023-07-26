@@ -1,4 +1,4 @@
-const db = require("../config/database");
+const db = require('../config/database');
 
 exports.createToken = async (req, res) => {
   res.status(204).send({});

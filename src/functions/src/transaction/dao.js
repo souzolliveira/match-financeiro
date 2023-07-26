@@ -1,15 +1,7 @@
-const db = require("../config/database");
-const { transaction_types } = require("../enumerations/transactions");
+const db = require('../config/database');
+const { transaction_types } = require('../enumerations/transactions');
 
-exports.listTransactionsDAO = async ({
-  start_date,
-  end_date,
-  group_by,
-  category = null,
-  subcategory = null,
-  asset = null,
-  user_id,
-}) => {
+exports.listTransactionsDAO = async ({ start_date, end_date, group_by, category = null, subcategory = null, asset = null, user_id }) => {
   const response = await db.query(
     `
       SELECT
@@ -42,18 +34,10 @@ exports.listTransactionsDAO = async ({
       JOIN categories
         ON subcategories.categories_fk = categories.id
       WHERE categories.users_fk = ${user_id} 
-        ${
-          start_date
-            ? `and incomes.income_date >= '${`${start_date} 00:00:00`}'`
-            : ""
-        }
-        ${
-          end_date
-            ? `and incomes.income_date <= '${`${end_date} 23:59:59`}'`
-            : ""
-        }
-        ${category ? `and subcategories.categories_fk = '${category}'` : ""}
-        ${subcategory ? `and incomes.subcategories_fk = '${subcategory}'` : ""}
+        ${start_date ? `and incomes.income_date >= '${`${start_date} 00:00:00`}'` : ''}
+        ${end_date ? `and incomes.income_date <= '${`${end_date} 23:59:59`}'` : ''}
+        ${category ? `and subcategories.categories_fk = '${category}'` : ''}
+        ${subcategory ? `and incomes.subcategories_fk = '${subcategory}'` : ''}
 
       UNION
 
@@ -89,18 +73,10 @@ exports.listTransactionsDAO = async ({
       JOIN categories
         ON subcategories.categories_fk = categories.id
       WHERE categories.users_fk = ${user_id} 
-        ${
-          start_date
-            ? `and expenses.expense_date >= '${`${start_date} 00:00:00`}'`
-            : ""
-        }
-        ${
-          end_date
-            ? `and expenses.expense_date <= '${`${end_date} 23:59:59`}'`
-            : ""
-        }
-        ${category ? `and subcategories.categories_fk = '${category}'` : ""}
-        ${subcategory ? `and expenses.subcategories_fk = '${subcategory}'` : ""}
+        ${start_date ? `and expenses.expense_date >= '${`${start_date} 00:00:00`}'` : ''}
+        ${end_date ? `and expenses.expense_date <= '${`${end_date} 23:59:59`}'` : ''}
+        ${category ? `and subcategories.categories_fk = '${category}'` : ''}
+        ${subcategory ? `and expenses.subcategories_fk = '${subcategory}'` : ''}
 
       UNION
 
@@ -136,19 +112,11 @@ exports.listTransactionsDAO = async ({
       JOIN categories
         ON subcategories.categories_fk = categories.id
       WHERE categories.users_fk = ${user_id} 
-        ${
-          start_date
-            ? `and investiments.investiment_date >= '${`${start_date} 00:00:00`}'`
-            : ""
-        }
-        ${
-          end_date
-            ? `and investiments.investiment_date <= '${`${end_date} 23:59:59`}'`
-            : ""
-        }
-        ${category ? `and subcategories.categories_fk = '${category}'` : ""}
-        ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ""}
-        ${asset ? `and investiments.assets_fk = '${asset}'` : ""}
+        ${start_date ? `and investiments.investiment_date >= '${`${start_date} 00:00:00`}'` : ''}
+        ${end_date ? `and investiments.investiment_date <= '${`${end_date} 23:59:59`}'` : ''}
+        ${category ? `and subcategories.categories_fk = '${category}'` : ''}
+        ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ''}
+        ${asset ? `and investiments.assets_fk = '${asset}'` : ''}
 
       UNION
 
@@ -184,19 +152,11 @@ exports.listTransactionsDAO = async ({
       JOIN categories
         ON subcategories.categories_fk = categories.id
       WHERE categories.users_fk = ${user_id} 
-        ${
-          start_date
-            ? `and redemptions.redemption_date >= '${`${start_date} 00:00:00`}'`
-            : ""
-        }
-        ${
-          end_date
-            ? `and redemptions.redemption_date <= '${`${end_date} 23:59:59`}'`
-            : ""
-        }
-        ${category ? `and subcategories.categories_fk = '${category}'` : ""}
-        ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ""}
-        ${asset ? `and redemptions.assets_fk = '${asset}'` : ""}
+        ${start_date ? `and redemptions.redemption_date >= '${`${start_date} 00:00:00`}'` : ''}
+        ${end_date ? `and redemptions.redemption_date <= '${`${end_date} 23:59:59`}'` : ''}
+        ${category ? `and subcategories.categories_fk = '${category}'` : ''}
+        ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ''}
+        ${asset ? `and redemptions.assets_fk = '${asset}'` : ''}
 
       UNION
 
@@ -232,19 +192,11 @@ exports.listTransactionsDAO = async ({
       JOIN categories
         ON subcategories.categories_fk = categories.id
       WHERE categories.users_fk = ${user_id} 
-        ${
-          start_date
-            ? `and dividends.dividend_date >= '${`${start_date} 00:00:00`}'`
-            : ""
-        }
-        ${
-          end_date
-            ? `and dividends.dividend_date <= '${`${end_date} 23:59:59`}'`
-            : ""
-        }
-        ${category ? `and subcategories.categories_fk = '${category}'` : ""}
-        ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ""}
-        ${asset ? `and dividends.assets_fk = '${asset}'` : ""}
+        ${start_date ? `and dividends.dividend_date >= '${`${start_date} 00:00:00`}'` : ''}
+        ${end_date ? `and dividends.dividend_date <= '${`${end_date} 23:59:59`}'` : ''}
+        ${category ? `and subcategories.categories_fk = '${category}'` : ''}
+        ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ''}
+        ${asset ? `and dividends.assets_fk = '${asset}'` : ''}
       
         ORDER BY transaction_date DESC
     `,

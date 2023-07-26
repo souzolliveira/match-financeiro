@@ -1,25 +1,17 @@
-const router = require("express-promise-router")();
-const subcategoryController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/subcategory", subcategoryController.listSubcategoryController);
+const subcategoryController = require('./controller');
 
-router.get(
-  "/subcategory/:transaction_type",
-  subcategoryController.listSubcategoryController
-);
+router.get('/subcategory', subcategoryController.listSubcategoryController);
 
-router.get(
-  "/subcategory/:transaction_type/:category_name",
-  subcategoryController.listSubcategoryController
-);
+router.get('/subcategory/:transaction_type', subcategoryController.listSubcategoryController);
 
-router.post("/subcategory", subcategoryController.createSubcategoryController);
+router.get('/subcategory/:transaction_type/:category_name', subcategoryController.listSubcategoryController);
 
-router.put("/subcategory", subcategoryController.editSubcategoryController);
+router.post('/subcategory', subcategoryController.createSubcategoryController);
 
-router.delete(
-  "/subcategory",
-  subcategoryController.deleteSubcategoryController
-);
+router.put('/subcategory', subcategoryController.editSubcategoryController);
+
+router.delete('/subcategory', subcategoryController.deleteSubcategoryController);
 
 module.exports = router;

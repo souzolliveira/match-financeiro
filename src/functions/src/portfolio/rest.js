@@ -1,12 +1,13 @@
-const router = require("express-promise-router")();
-const portfolioController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/portfolios", portfolioController.listPortfoliosController);
+const portfolioController = require('./controller');
 
-router.post("/portfolio", portfolioController.createPortfolioController);
+router.get('/portfolios', portfolioController.listPortfoliosController);
 
-router.put("/portfolio", portfolioController.editPortfolioController);
+router.post('/portfolio', portfolioController.createPortfolioController);
 
-router.delete("/portfolio", portfolioController.deletePortfolioController);
+router.put('/portfolio', portfolioController.editPortfolioController);
+
+router.delete('/portfolio', portfolioController.deletePortfolioController);
 
 module.exports = router;

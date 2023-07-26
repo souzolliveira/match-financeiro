@@ -1,6 +1,7 @@
-const router = require("express-promise-router")();
-const tokenController = require("./controller");
+const router = require('express-promise-router')();
 
-router.post("/token/confirm", tokenController.confirmToken);
+const tokenController = require('./controller');
+
+router.post('/token/confirm', tokenController.confirmToken);
 
 module.exports = router;

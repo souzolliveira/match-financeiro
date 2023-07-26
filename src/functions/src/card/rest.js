@@ -1,12 +1,13 @@
-const router = require("express-promise-router")();
-const cardController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/cards", cardController.listCardsController);
+const cardController = require('./controller');
 
-router.post("/card", cardController.createCardController);
+router.get('/cards', cardController.listCardsController);
 
-router.put("/card", cardController.editCardController);
+router.post('/card', cardController.createCardController);
 
-router.delete("/card", cardController.deleteCardController);
+router.put('/card', cardController.editCardController);
+
+router.delete('/card', cardController.deleteCardController);
 
 module.exports = router;

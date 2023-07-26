@@ -1,12 +1,13 @@
-const router = require("express-promise-router")();
-const userController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/user", userController.getUserController);
+const userController = require('./controller');
 
-router.post("/register", userController.createUserController);
+router.get('/user', userController.getUserController);
 
-router.put("/user", userController.editUserController);
+router.post('/register', userController.createUserController);
 
-router.delete("/user", userController.deleteUserController);
+router.put('/user', userController.editUserController);
+
+router.delete('/user', userController.deleteUserController);
 
 module.exports = router;

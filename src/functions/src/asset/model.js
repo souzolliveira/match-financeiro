@@ -1,17 +1,11 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { quantifiable_types } = require("../enumerations/assets");
-const {
-  selectAssetsDAO,
-  selectAssetByNameDAO,
-  insertAssetDAO,
-  updateAssetDAO,
-  deleteAssetDAO,
-} = require("./dao");
-const { listInvestimentsModel } = require("../investiment/model");
-const { listRedemptionsModel } = require("../redemption/model");
-const { listDividendsModel } = require("../dividend/model");
-const { listSummaryModel } = require("../summary/model");
-const { listPortfolioModel } = require("../portfolio/model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { quantifiable_types } = require('../enumerations/assets');
+const { selectAssetsDAO, selectAssetByNameDAO, insertAssetDAO, updateAssetDAO, deleteAssetDAO } = require('./dao');
+const { listInvestimentsModel } = require('../investiment/model');
+const { listRedemptionsModel } = require('../redemption/model');
+const { listDividendsModel } = require('../dividend/model');
+const { listSummaryModel } = require('../summary/model');
+const { listPortfolioModel } = require('../portfolio/model');
 
 exports.listAssetsModel = async ({ user_id }) => {
   let code = httpCode.ERROR;
@@ -20,14 +14,12 @@ exports.listAssetsModel = async ({ user_id }) => {
   const assets = await selectAssetsDAO({ user_id });
   if (assets?.rowCount > 0) {
     code = httpCode.OK;
-    message = "Ativos retornados com sucesso";
-    const response = assets?.rows?.map((row) => {
+    message = 'Ativos retornados com sucesso';
+    const response = assets?.rows?.map(row => {
       return {
         id: row.asset_id,
         name: row.asset_name,
-        quantifiable: row.quantifiable
-          ? quantifiable_types.QUANTIFIABLE
-          : quantifiable_types.NOT_QUANTIFIABLE,
+        quantifiable: row.quantifiable ? quantifiable_types.QUANTIFIABLE : quantifiable_types.NOT_QUANTIFIABLE,
         subcategory_id: row.subcategory_id,
         subcategory_name: row.subcategory_name,
         category_id: row.category_id,
@@ -46,19 +38,19 @@ exports.createAssetModel = async ({ name, subcategory, quantifiable }) => {
 
   if (!name) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o nome do ativo";
+    message = 'É necessário informar o nome do ativo';
     return { code, message };
   }
 
   if (!subcategory) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar uma subcategoria válida para o ativo";
+    message = 'É necessário informar uma subcategoria válida para o ativo';
     return { code, message };
   }
 
   if (!quantifiable) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar se o ativo é quantizável";
+    message = 'É necessário informar se o ativo é quantizável';
     return { code, message };
   }
 
@@ -69,8 +61,7 @@ exports.createAssetModel = async ({ name, subcategory, quantifiable }) => {
   });
   if (verifyAssetName?.rowCount > 0) {
     code = httpCode.BAD_REQUEST;
-    message =
-      "Já existe um ativo cadastrado nessa subcategoria com o nome informado";
+    message = 'Já existe um ativo cadastrado nessa subcategoria com o nome informado';
     return { code, message };
   }
 
@@ -81,7 +72,7 @@ exports.createAssetModel = async ({ name, subcategory, quantifiable }) => {
   });
   if (createAsset) {
     code = httpCode.CREATED;
-    message = "Ativo adicionado com sucesso";
+    message = 'Ativo adicionado com sucesso';
     return { code, message };
   }
 
@@ -95,25 +86,25 @@ exports.editAssetModel = async ({ id, name, quantifiable, subcategory }) => {
 
   if (!id) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o id do ativo";
+    message = 'É necessário informar o id do ativo';
     return { code, message };
   }
 
   if (!name) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o nome do ativo";
+    message = 'É necessário informar o nome do ativo';
     return { code, message };
   }
 
   if (!quantifiable) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar se o ativo é quantizável";
+    message = 'É necessário informar se o ativo é quantizável';
     return { code, message };
   }
 
   if (!subcategory) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar uma subcategoria válida para o ativo";
+    message = 'É necessário informar uma subcategoria válida para o ativo';
     return { code, message };
   }
 
@@ -125,8 +116,7 @@ exports.editAssetModel = async ({ id, name, quantifiable, subcategory }) => {
   });
   if (verifyEditedAssetName?.Count > 0) {
     code = httpCode.BAD_REQUEST;
-    message =
-      "Já existe um ativo cadastrado nessa subcategoria com o nome informado";
+    message = 'Já existe um ativo cadastrado nessa subcategoria com o nome informado';
     return { code, message };
   }
 
@@ -137,7 +127,7 @@ exports.editAssetModel = async ({ id, name, quantifiable, subcategory }) => {
   });
   if (updateAsset) {
     code = httpCode.OK;
-    message = "Ativo editado com sucesso!";
+    message = 'Ativo editado com sucesso!';
   }
 
   return { code, message };
@@ -150,7 +140,7 @@ exports.deleteAssetModel = async ({ id }) => {
 
   if (!id) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o ativo";
+    message = 'É necessário informar o ativo';
     return { code, message };
   }
 
@@ -158,21 +148,15 @@ exports.deleteAssetModel = async ({ id }) => {
   const verifyRedemptions = await listRedemptionsModel({ user_id });
   const verifyDividends = await listDividendsModel({ user_id });
   const verifySummary = await listSummaryModel({ user_id });
-  if (
-    verifyInvestiments?.rowCount > 0 ||
-    verifyRedemptions?.rowCount > 0 ||
-    verifyDividends?.rowCount > 0 ||
-    verifySummary?.rowCount > 0
-  ) {
+  if (verifyInvestiments?.rowCount > 0 || verifyRedemptions?.rowCount > 0 || verifyDividends?.rowCount > 0 || verifySummary?.rowCount > 0) {
     code = httpCode.BAD_REQUEST;
-    message =
-      "Não é possível apagar o ativo, pois existem transações vinculadas a ele";
+    message = 'Não é possível apagar o ativo, pois existem transações vinculadas a ele';
     return { code, message };
   }
   const verifyPortfolio = await listPortfolioModel({ user_id });
   if (verifyPortfolio?.rowCount > 0) {
     code = httpCode.BAD_REQUEST;
-    message = "Não é possível apagar o ativo, pois ele está em seu portfólio";
+    message = 'Não é possível apagar o ativo, pois ele está em seu portfólio';
     return { code, message };
   }
 

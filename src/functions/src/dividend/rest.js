@@ -1,12 +1,13 @@
-const router = require("express-promise-router")();
-const dividendController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/dividends", dividendController.listDividendsController);
+const dividendController = require('./controller');
 
-router.post("/dividend", dividendController.createDividendController);
+router.get('/dividends', dividendController.listDividendsController);
 
-router.put("/dividend", dividendController.editDividendController);
+router.post('/dividend', dividendController.createDividendController);
 
-router.delete("/dividend", dividendController.deleteDividendController);
+router.put('/dividend', dividendController.editDividendController);
+
+router.delete('/dividend', dividendController.deleteDividendController);
 
 module.exports = router;

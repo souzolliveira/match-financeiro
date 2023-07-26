@@ -1,12 +1,13 @@
-const router = require("express-promise-router")();
-const redemptionController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/redemptions", redemptionController.listRedemptionsController);
+const redemptionController = require('./controller');
 
-router.post("/redemption", redemptionController.createRedemptionController);
+router.get('/redemptions', redemptionController.listRedemptionsController);
 
-router.put("/redemption", redemptionController.editRedemptionController);
+router.post('/redemption', redemptionController.createRedemptionController);
 
-router.delete("/redemption", redemptionController.deleteRedemptionController);
+router.put('/redemption', redemptionController.editRedemptionController);
+
+router.delete('/redemption', redemptionController.deleteRedemptionController);
 
 module.exports = router;

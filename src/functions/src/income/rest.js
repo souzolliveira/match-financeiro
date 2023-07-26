@@ -1,12 +1,13 @@
-const router = require("express-promise-router")();
-const incomeController = require("./controller");
+const router = require('express-promise-router')();
 
-router.get("/incomes", incomeController.listIncomesController);
+const incomeController = require('./controller');
 
-router.post("/income", incomeController.createIncomeController);
+router.get('/incomes', incomeController.listIncomesController);
 
-router.put("/income", incomeController.editIncomeController);
+router.post('/income', incomeController.createIncomeController);
 
-router.delete("/income", incomeController.deleteIncomeController);
+router.put('/income', incomeController.editIncomeController);
+
+router.delete('/income', incomeController.deleteIncomeController);
 
 module.exports = router;

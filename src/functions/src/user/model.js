@@ -1,3 +1,5 @@
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { convertStringToMD5 } = require('../helpers/md5');
 const {
   selectUserByEmailDAO,
   insertUserDAO,
@@ -5,9 +7,7 @@ const {
   selectUserByIdDAO,
   updateUserDAO,
   updateEmailConfirmationDAO,
-} = require("./dao");
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { convertStringToMD5 } = require("../helpers/md5");
+} = require('./dao');
 
 exports.createUserModel = async ({ name, email, password }) => {
   let code = httpCode.ERROR;
@@ -16,18 +16,18 @@ exports.createUserModel = async ({ name, email, password }) => {
   const verifyEmail = await selectUserByEmailDAO({ email });
   if (!verifyEmail) {
     code = httpCode.BAD_REQUEST;
-    message = "Já existe um cadastro com o email informado";
+    message = 'Já existe um cadastro com o email informado';
     return { code, message };
   }
 
   if (!name) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o nome";
+    message = 'É necessário informar o nome';
     return { code, message };
   }
   if (!email) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o email";
+    message = 'É necessário informar o email';
     return { code, message };
   }
 
@@ -38,7 +38,7 @@ exports.createUserModel = async ({ name, email, password }) => {
   });
   if (createUser) {
     code = httpCode.CREATED;
-    message = "Cadastro efetuado com sucesso!";
+    message = 'Cadastro efetuado com sucesso!';
     return { code, message };
   }
 
@@ -52,7 +52,7 @@ exports.getUserModel = async ({ user_id }) => {
   const user = await selectUserByIdDAO({ user_id });
   if (user) {
     code = httpCode.OK;
-    message = "Usuário retornado com sucesso";
+    message = 'Usuário retornado com sucesso';
     return { code, message, data: user };
   }
 
@@ -65,12 +65,12 @@ exports.editUserModel = async ({ user_id, name, email }) => {
 
   if (!name) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o nome";
+    message = 'É necessário informar o nome';
     return { code, message };
   }
   if (!email) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o email";
+    message = 'É necessário informar o email';
     return { code, message };
   }
 
@@ -86,7 +86,7 @@ exports.editUserModel = async ({ user_id, name, email }) => {
   });
   if (updateUser) {
     code = httpCode.CREATED;
-    message = "Atualização efetuada com sucesso!";
+    message = 'Atualização efetuada com sucesso!';
     return { code, message };
   }
   return { code, message };
