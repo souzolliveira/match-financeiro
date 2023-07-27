@@ -1,11 +1,6 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const {
-  createSubcategoryModel,
-  listSubcategoryModel,
-  editSubcategoryModel,
-  deleteSubcategoryModel,
-} = require("./model");
-const { getUserBySessionGuid } = require("../user/model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { createSubcategoryModel, listSubcategoryModel, editSubcategoryModel, deleteSubcategoryModel } = require('./model');
 
 exports.listSubcategoryController = async (req, res) => {
   const { category_name, transaction_type } = req.params;
@@ -25,10 +20,8 @@ exports.listSubcategoryController = async (req, res) => {
       user_id,
     });
     res.status(code).send({ code, message, data });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 
@@ -52,10 +45,8 @@ exports.createSubcategoryController = async (req, res) => {
       user_id,
     });
     res.status(code).send({ code, message, id });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 
@@ -80,10 +71,8 @@ exports.editSubcategoryController = async (req, res) => {
     });
     res.status(code).send({ code, message });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -107,10 +96,8 @@ exports.deleteSubcategoryController = async (req, res) => {
     });
     res.status(code).send({ code, message });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };

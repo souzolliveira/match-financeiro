@@ -15,7 +15,7 @@ const Subcategories = ({ category, subcategory, setSubcategory }) => {
 
   const [isNewSubcategoryModalVisible, setIsNewSubcategoryModalVisible] = useState(false);
 
-  const selectedCategory = categories?.filter(cat => cat.id === parseInt(category, 10))?.[0] || {};
+  const selectedCategory = categories?.filter(cat => cat.id === parseInt(category, 10))?[0] || {};
 
   return (
     <div className={styles.subcategories}>

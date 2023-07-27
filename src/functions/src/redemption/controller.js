@@ -1,11 +1,10 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { getUserBySessionGuid } = require("../user/model");
-const { createRedemptionsModel, listRedemptionsModel } = require("./model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { listRedemptionsModel, createRedemptionModel } = require('./model');
 
 exports.listRedemptionsController = async (req, res) => {
   const { session_guid } = req.headers;
-  const { start_date, end_date, category, subcategory, asset, group_by } =
-    req.query;
+  const { start_date, end_date, category, subcategory, asset, group_by } = req.query;
   const { user_id } = await getUserBySessionGuid({ session_guid });
 
   if (!user_id) {
@@ -27,25 +26,15 @@ exports.listRedemptionsController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
 
 exports.createRedemptionController = async (req, res) => {
   const { session_guid } = req.headers;
-  const {
-    asset,
-    quantity,
-    unitary_value,
-    total,
-    result,
-    investiment_date,
-    observation,
-  } = req.body;
+  const { asset, quantity, unitary_value, total, result, investiment_date, observation } = req.body;
 
   const { user_id } = await getUserBySessionGuid({ session_guid });
 
@@ -68,10 +57,8 @@ exports.createRedemptionController = async (req, res) => {
       user_id,
     });
     res.status(code).send({ code, message });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 

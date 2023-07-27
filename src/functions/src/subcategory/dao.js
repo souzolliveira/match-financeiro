@@ -22,7 +22,7 @@ exports.selectSubcategoryDAO = async ({ id, category, costing, name, user_id }) 
       ${costing ? `and subcategories.costing = '${costing}'` : ''}
       ${category ? `and categories_fk = ${category}` : ''}
       ${name ? `and subcategories.name = '${name}'` : ''}`,
-      []
+    []
   );
   return response;
 };

@@ -1,11 +1,6 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const {
-  listCardsModel,
-  createCardModel,
-  editCardsModel,
-  deleteCardModel,
-} = require("./model");
-const { getUserBySessionGuid } = require("../user/model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { listCardsModel, createCardModel, editCardsModel, deleteCardModel } = require('./model');
 
 exports.listCardsController = async (req, res) => {
   const { session_guid } = req.headers;
@@ -24,10 +19,8 @@ exports.listCardsController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -54,10 +47,8 @@ exports.createCardController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -82,10 +73,8 @@ exports.editCardController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -109,10 +98,8 @@ exports.deleteCardController = async (req, res) => {
     });
     res.status(code).send({ code, message });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };

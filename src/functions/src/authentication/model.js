@@ -1,9 +1,9 @@
-const { selectEmailAndPasswordDAO } = require('./dao');
 const { httpCode, httpMessage } = require('../enumerations/httpResponse');
 const { token_types } = require('../enumerations/tokens.');
 const { convertStringToMD5 } = require('../helpers/md5');
 const { generateUUID } = require('../helpers/uuid');
 const { createTokenModel, removeTokenModel } = require('../token/model');
+const { selectEmailAndPasswordDAO } = require('./dao');
 
 exports.signInModel = async ({ email, password }) => {
   let code = httpCode.ERROR;
@@ -21,7 +21,7 @@ exports.signInModel = async ({ email, password }) => {
     const createToken = await createTokenModel({
       token: session_guid,
       token_type: token_types.AUTH,
-      user_id: selectUserByEmailAndPassword?.rows?.[0]?.id,
+      user_id: selectUserByEmailAndPassword.rows[0].id,
     });
     if (createToken) {
       code = httpCode.OK;
@@ -33,8 +33,8 @@ exports.signInModel = async ({ email, password }) => {
 };
 
 exports.signOutModel = async ({ user_id, session_guid }) => {
-  let code = httpCode.ERROR;
-  let message = httpMessage.ERROR;
+  const code = httpCode.ERROR;
+  const message = httpMessage.ERROR;
 
   try {
     const removeToken = await removeTokenModel({
@@ -42,9 +42,9 @@ exports.signOutModel = async ({ user_id, session_guid }) => {
       token_type: token_types.AUTH,
       user_id,
     });
-    if (removeToken?.rowCount > 0) return { code: httpCode.NO_CONTENT };
+    if (removeToken.rowCount > 0) return { code: httpCode.NO_CONTENT };
     return { code, message };
-  } catch {
+  } catch (error) {
     return { code, message };
   }
 };

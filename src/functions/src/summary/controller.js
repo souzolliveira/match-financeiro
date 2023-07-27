@@ -1,6 +1,6 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { getUserBySessionGuid } = require("../user/model");
-const { createSummaryModel } = require("./model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { createSummaryModel } = require('./model');
 
 exports.listSummaryController = async (req, res) => {
   const { session_guid } = req.headers;
@@ -38,10 +38,8 @@ exports.createSummaryController = async (req, res) => {
       user_id,
     });
     res.status(code).send({ code, message });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 

@@ -6,7 +6,7 @@ exports.now = () => {
   return moment(date).subtract(offset, 'minutes');
 };
 
-exports.timezone = (dt) => {
+exports.timezone = dt => {
   const date = new Date(dt);
   const offset = date.getTimezoneOffset();
   return moment(date).subtract(offset, 'minutes');

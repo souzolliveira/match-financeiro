@@ -1,6 +1,6 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { getUserBySessionGuid } = require("../user/model");
-const { createPortfolioModel } = require("./model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { createPortfolioModel } = require('./model');
 
 exports.listPortfoliosController = async (req, res) => {
   const { session_guid } = req.headers;
@@ -14,8 +14,8 @@ exports.listPortfoliosController = async (req, res) => {
     return;
   }
 
-  try {
-  } catch {}
+  // try {
+  // } catch (error) {}
 };
 
 exports.createPortfolioController = async (req, res) => {
@@ -38,10 +38,8 @@ exports.createPortfolioController = async (req, res) => {
       user_id,
     });
     res.status(code).send({ code, message });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 

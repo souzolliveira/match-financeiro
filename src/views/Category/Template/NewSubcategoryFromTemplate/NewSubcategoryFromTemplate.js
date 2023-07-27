@@ -39,7 +39,7 @@ const NewSubcategoryFromTemplate = ({ template, setTemplate, transactionType, ca
   };
 
   const handleCreateSubcategory = subcategory => {
-    if (subcategory in template?.[transactionType]?.[category]) {
+    if (subcategory in template?[transactionType]?[category]) {
       addToast({
         content: t('SUBCATEGORIES.DIFFERENT.NAME'),
         type: 'danger',

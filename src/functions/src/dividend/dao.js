@@ -6,8 +6,8 @@ exports.listDividendsDAO = async ({ start_date, end_date, category, subcategory,
     `
     SELECT
       ${
-        !group_by ?
-          `dividends.id as id,
+        !group_by
+          ? `dividends.id as id,
             categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
@@ -17,35 +17,35 @@ exports.listDividendsDAO = async ({ start_date, end_date, category, subcategory,
             dividends.value as value,
             dividends.dividend_date as dividend_date,
             dividends.observation as observation,
-            dividends.date as date` :
-          ''
+            dividends.date as date`
+          : ''
       }
       ${
-        group_by === group_by_types.CATEGORY ?
-          `categories.id as category_id,
+        group_by === group_by_types.CATEGORY
+          ? `categories.id as category_id,
             categories.name as category_name,
-            sum(dividends.value) as value` :
-          ''
+            sum(dividends.value) as value`
+          : ''
       }
       ${
-        group_by === group_by_types.SUBCATEGORY ?
-          `categories.id as category_id,
+        group_by === group_by_types.SUBCATEGORY
+          ? `categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
             subcategories.name as subcategory_name,
-            sum(dividends.value) as value` :
-          ''
+            sum(dividends.value) as value`
+          : ''
       }
       ${
-        group_by === group_by_types.ASSET ?
-          `categories.id as category_id,
+        group_by === group_by_types.ASSET
+          ? `categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
             subcategories.name as subcategory_name,
             assets.id as asset_id,
             assets.name as asset_name,
-            sum(dividends.value) as value` :
-          ''
+            sum(dividends.value) as value`
+          : ''
       }
     FROM dividends
     JOIN assets
@@ -61,31 +61,31 @@ exports.listDividendsDAO = async ({ start_date, end_date, category, subcategory,
       ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ''}
       ${asset ? `and dividends.assets_fk = '${asset}'` : ''}
       ${
-        group_by === group_by_types.CATEGORY ?
-          `GROUP BY 
+        group_by === group_by_types.CATEGORY
+          ? `GROUP BY 
             category_id,
-            category_name` :
-          ''
+            category_name`
+          : ''
       }
       ${
-        group_by === group_by_types.SUBCATEGORY ?
-          `GROUP BY 
+        group_by === group_by_types.SUBCATEGORY
+          ? `GROUP BY 
             category_id,
             category_name,
             subcategory_id,
-            subcategory_name` :
-          ''
+            subcategory_name`
+          : ''
       }
       ${
-        group_by === group_by_types.ASSET ?
-          `GROUP BY 
+        group_by === group_by_types.ASSET
+          ? `GROUP BY 
             category_id,
             category_name,
             subcategory_id,
             subcategory_name
             asset_id,
-            asset_name` :
-          ''
+            asset_name`
+          : ''
       }
     ORDER BY dividend_date DESC
   `,

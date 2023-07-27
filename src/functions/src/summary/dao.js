@@ -35,6 +35,7 @@ exports.selectSummaryDAO = async ({ asset, user_id }) => {
     `,
     [user_id]
   );
+  return response;
 };
 
 exports.insertSummaryDAO = async ({ asset, quantity, average_price, total, last_update }) => {

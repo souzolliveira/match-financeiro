@@ -39,16 +39,7 @@ function createTransaction({
     .catch(handleError);
 }
 
-function updateTransaction({
-  transaction,
-  transactionType,
-  categoryName,
-  subcategoryName,
-  transactionDate,
-  transactionValue,
-  transactionObservation,
-  handleError,
-}) {
+function updateTransaction({ transaction, transactionType, categoryName, subcategoryName, transactionDate, transactionValue, transactionObservation, handleError }) {
   return api
     .put(
       '/transaction',
@@ -80,7 +71,7 @@ function deleteTransaction({ transactionId, handleError }) {
 
 function listTransactions({ params, handleError }) {
   return api
-    .get(`/transactions?${params ?? ''}`, {
+    .get(`/transactions?${params || ''}`, {
       headers: authHeader(),
     })
     .then(handleResponse)

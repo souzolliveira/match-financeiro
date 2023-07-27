@@ -1,6 +1,6 @@
 const { httpCode, httpMessage } = require('../enumerations/httpResponse');
-const { signInModel, signOutModel } = require('./model');
 const { getUserBySessionGuid } = require('../user/model');
+const { signInModel, signOutModel } = require('./model');
 
 exports.signInController = async (req, res) => {
   const { email, password } = req.body;
@@ -15,7 +15,7 @@ exports.signInController = async (req, res) => {
     } else {
       res.status(code).send({ code, message });
     }
-  } catch {
+  } catch (error) {
     res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
@@ -37,7 +37,7 @@ exports.signOutController = async (req, res) => {
       session_guid,
     });
     res.status(code).send({});
-  } catch {
+  } catch (error) {
     res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };

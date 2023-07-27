@@ -1,13 +1,7 @@
+/* eslint-disable prettier/prettier */
 const { httpCode, httpMessage } = require('../enumerations/httpResponse');
 const { convertStringToMD5 } = require('../helpers/md5');
-const {
-  selectUserByEmailDAO,
-  insertUserDAO,
-  selectUserBySessionGuidDAO,
-  selectUserByIdDAO,
-  updateUserDAO,
-  updateEmailConfirmationDAO,
-} = require('./dao');
+const { selectUserByEmailDAO, insertUserDAO, selectUserBySessionGuidDAO, selectUserByIdDAO, updateUserDAO, updateEmailConfirmationDAO } = require('./dao');
 
 exports.createUserModel = async ({ name, email, password }) => {
   let code = httpCode.ERROR;
@@ -45,6 +39,20 @@ exports.createUserModel = async ({ name, email, password }) => {
   return { code, message };
 };
 
+const getUserModel = async ({ user_id }) => {
+  let code = httpCode.ERROR;
+  let message = httpMessage.ERROR;
+
+  const user = await selectUserByIdDAO({ user_id });
+  if (user) {
+    code = httpCode.OK;
+    message = 'Usuário retornado com sucesso';
+    return { code, message, data: user };
+  }
+
+  return { code, message };
+};
+
 exports.getUserModel = async ({ user_id }) => {
   let code = httpCode.ERROR;
   let message = httpMessage.ERROR;
@@ -74,7 +82,7 @@ exports.editUserModel = async ({ user_id, name, email }) => {
     return { code, message };
   }
 
-  const user = (await this.getUserModel({ user_id })).data;
+  const user = (await getUserModel({ user_id })).data;
   if (email !== user.email) {
     await updateEmailConfirmationDAO({ user_id, email_confirmation: false });
   }

@@ -1,5 +1,5 @@
 const md5 = require('md5');
 
-exports.convertStringToMD5 = async (string) => {
-  return md5(string);
+exports.convertStringToMD5 = async text => {
+  return md5(text);
 };

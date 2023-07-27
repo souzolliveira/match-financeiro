@@ -6,8 +6,8 @@ exports.listRedemptionsDAO = async ({ start_date, end_date, category, subcategor
     `
     SELECT
       ${
-        !group_by ?
-          `redemptions.id as id,
+        !group_by
+          ? `redemptions.id as id,
             categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
@@ -20,12 +20,12 @@ exports.listRedemptionsDAO = async ({ start_date, end_date, category, subcategor
             redemptions.result as result,
             redemptions.redemption_date as redemption_date,
             redemptions.observation as observation,
-            redemptions.date as date` :
-          ''
+            redemptions.date as date`
+          : ''
       }
       ${
-        group_by === group_by_types.ASSET ?
-          `categories.id as category_id,
+        group_by === group_by_types.ASSET
+          ? `categories.id as category_id,
             categories.name as category_name,
             subcategories.id as subcategory_id,
             subcategories.name as subcategory_name,
@@ -34,8 +34,8 @@ exports.listRedemptionsDAO = async ({ start_date, end_date, category, subcategor
             sum(redemptions.total) as total,
             sum(redeptions.result) as result
             sum(redemptions.quantity) as quantity,
-            sum(redemptions.unitary_value * redemptions.quantity) as unitary_value` :
-          ''
+            sum(redemptions.unitary_value * redemptions.quantity) as unitary_value`
+          : ''
       }
     FROM redemptions
     JOIN assets
@@ -51,8 +51,8 @@ exports.listRedemptionsDAO = async ({ start_date, end_date, category, subcategor
       ${subcategory ? `and assets.subcategories_fk = '${subcategory}'` : ''}
       ${asset ? `and redemptions.assets_fk = '${asset}'` : ''}
       ${
-        group_by === group_by_types.ASSET ?
-          `GROUP BY 
+        group_by === group_by_types.ASSET
+          ? `GROUP BY 
             category_id,
             category_name,
             subcategory_id,
@@ -62,8 +62,8 @@ exports.listRedemptionsDAO = async ({ start_date, end_date, category, subcategor
             total,
             result,
             quantity,
-            unitary_value` :
-          ''
+            unitary_value`
+          : ''
       }
     ORDER BY redemption_date DESC
   `,

@@ -34,7 +34,7 @@ const NewCategoryFromTemplate = ({ template, setTemplate, transactionType }) => 
   };
 
   const handleCreateCategory = category => {
-    if (category in template?.[transactionType]) {
+    if (category in template?[transactionType]) {
       addToast({
         content: t('CATEGORIES.DIFFERENT.NAME'),
         type: 'danger',

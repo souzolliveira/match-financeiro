@@ -34,7 +34,7 @@ const Details = ({ transaction, setShowDetails }) => {
   const { t } = useTranslation();
   const { categories, subcategories, fetchTransactions } = useTransactions();
 
-  const transactionDefault = { ...transaction, transaction_date: transaction?.transaction_date?.split('T')?.[0] };
+  const transactionDefault = { ...transaction, transaction_date: transaction?.transaction_date?.split('T')?[0] };
 
   const [isEditing, setIsEditing] = useState(false);
   const [transactionIntermediate, setTransactionIntermediate] = useState(transactionDefault);

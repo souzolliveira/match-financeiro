@@ -1,21 +1,21 @@
-const { httpCode, httpMessage } = require('../enumerations/httpResponse');
-const { quantifiable_types } = require('../enumerations/assets');
-const { selectAssetsDAO, selectAssetByNameDAO, insertAssetDAO, updateAssetDAO, deleteAssetDAO } = require('./dao');
-const { listInvestimentsModel } = require('../investiment/model');
-const { listRedemptionsModel } = require('../redemption/model');
 const { listDividendsModel } = require('../dividend/model');
-const { listSummaryModel } = require('../summary/model');
+const { quantifiable_types } = require('../enumerations/assets');
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { listInvestimentsModel } = require('../investiment/model');
 const { listPortfolioModel } = require('../portfolio/model');
+const { listRedemptionsModel } = require('../redemption/model');
+const { listSummaryModel } = require('../summary/model');
+const { selectAssetsDAO, selectAssetByNameDAO, insertAssetDAO, updateAssetDAO, deleteAssetDAO } = require('./dao');
 
 exports.listAssetsModel = async ({ user_id }) => {
   let code = httpCode.ERROR;
   let message = httpMessage.ERROR;
 
   const assets = await selectAssetsDAO({ user_id });
-  if (assets?.rowCount > 0) {
+  if (assets.rowCount > 0) {
     code = httpCode.OK;
     message = 'Ativos retornados com sucesso';
-    const response = assets?.rows?.map(row => {
+    const response = assets.rows.map(row => {
       return {
         id: row.asset_id,
         name: row.asset_name,
@@ -59,7 +59,7 @@ exports.createAssetModel = async ({ name, subcategory, quantifiable }) => {
     quantifiable,
     subcategory,
   });
-  if (verifyAssetName?.rowCount > 0) {
+  if (verifyAssetName.rowCount > 0) {
     code = httpCode.BAD_REQUEST;
     message = 'Já existe um ativo cadastrado nessa subcategoria com o nome informado';
     return { code, message };
@@ -80,7 +80,7 @@ exports.createAssetModel = async ({ name, subcategory, quantifiable }) => {
 };
 
 // TODO
-exports.editAssetModel = async ({ id, name, quantifiable, subcategory }) => {
+exports.editAssetModel = async ({ id, name, quantifiable, subcategory, user_id }) => {
   let code = httpCode.ERROR;
   let message = httpMessage.ERROR;
 
@@ -114,7 +114,7 @@ exports.editAssetModel = async ({ id, name, quantifiable, subcategory }) => {
     quantifiable,
     subcategory,
   });
-  if (verifyEditedAssetName?.Count > 0) {
+  if (verifyEditedAssetName.Count > 0) {
     code = httpCode.BAD_REQUEST;
     message = 'Já existe um ativo cadastrado nessa subcategoria com o nome informado';
     return { code, message };
@@ -134,7 +134,7 @@ exports.editAssetModel = async ({ id, name, quantifiable, subcategory }) => {
 };
 
 // TODO
-exports.deleteAssetModel = async ({ id }) => {
+exports.deleteAssetModel = async ({ id, user_id }) => {
   let code = httpCode.ERROR;
   let message = httpMessage.ERROR;
 
@@ -148,13 +148,13 @@ exports.deleteAssetModel = async ({ id }) => {
   const verifyRedemptions = await listRedemptionsModel({ user_id });
   const verifyDividends = await listDividendsModel({ user_id });
   const verifySummary = await listSummaryModel({ user_id });
-  if (verifyInvestiments?.rowCount > 0 || verifyRedemptions?.rowCount > 0 || verifyDividends?.rowCount > 0 || verifySummary?.rowCount > 0) {
+  if (verifyInvestiments.rowCount > 0 || verifyRedemptions.rowCount > 0 || verifyDividends.rowCount > 0 || verifySummary.rowCount > 0) {
     code = httpCode.BAD_REQUEST;
     message = 'Não é possível apagar o ativo, pois existem transações vinculadas a ele';
     return { code, message };
   }
   const verifyPortfolio = await listPortfolioModel({ user_id });
-  if (verifyPortfolio?.rowCount > 0) {
+  if (verifyPortfolio.rowCount > 0) {
     code = httpCode.BAD_REQUEST;
     message = 'Não é possível apagar o ativo, pois ele está em seu portfólio';
     return { code, message };
@@ -166,7 +166,6 @@ exports.deleteAssetModel = async ({ id }) => {
   if (deleteAsset.rowCount > 0) {
     code = httpCode.NO_CONTENT;
     return { code };
-  } else {
-    return { code, message };
   }
+  return { code, message };
 };

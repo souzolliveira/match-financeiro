@@ -1,6 +1,6 @@
 const { httpCode, httpMessage } = require('../enumerations/httpResponse');
-const { listAssetsModel, createAssetModel, editAssetModel, deleteAssetModel } = require('./model');
 const { getUserBySessionGuid } = require('../user/model');
+const { listAssetsModel, createAssetModel, editAssetModel, deleteAssetModel } = require('./model');
 
 exports.listAssetsController = async (req, res) => {
   const { session_guid } = req.headers;
@@ -19,7 +19,7 @@ exports.listAssetsController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
+  } catch (error) {
     res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
@@ -45,7 +45,7 @@ exports.createAssetController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
+  } catch (error) {
     res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
@@ -68,10 +68,11 @@ exports.editAssetController = async (req, res) => {
       id,
       name,
       subcategory,
+      user_id,
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
+  } catch (error) {
     res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
@@ -92,10 +93,11 @@ exports.deleteAssetController = async (req, res) => {
   try {
     const { code, message } = await deleteAssetModel({
       id,
+      user_id,
     });
     res.status(code).send({ code, message });
     return;
-  } catch {
+  } catch (error) {
     res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }

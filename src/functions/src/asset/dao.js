@@ -46,11 +46,7 @@ exports.selectAssetByNameDAO = async ({ name, quantifiable, subcategory }) => {
 };
 
 exports.insertAssetDAO = async ({ name, quantifiable, subcategory }) => {
-  const response = await db.query('INSERT INTO assets (name, quantifiable, subcategories_fk) VALUES ($1, $2, $3)', [
-    name,
-    quantifiable,
-    subcategory,
-  ]);
+  const response = await db.query('INSERT INTO assets (name, quantifiable, subcategories_fk) VALUES ($1, $2, $3)', [name, quantifiable, subcategory]);
   return response;
 };
 

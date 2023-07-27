@@ -1,6 +1,6 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { listTransactionsModel, lastUpdateModel } = require("./model");
-const { getUserBySessionGuid } = require("../user/model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { listTransactionsModel, lastUpdateModel } = require('./model');
 
 exports.listTransactionsController = async (req, res) => {
   const { session_guid } = req.headers;
@@ -15,19 +15,7 @@ exports.listTransactionsController = async (req, res) => {
   }
 
   try {
-    const {
-      code,
-      message,
-      data,
-      balance,
-      incomes,
-      expenses,
-      expenses_fixed,
-      expenses_variable,
-      investiments,
-      redemptions,
-      dividends,
-    } = await listTransactionsModel({
+    const { code, message, data, balance, incomes, expenses, expenses_fixed, expenses_variable, investiments, redemptions, dividends } = await listTransactionsModel({
       start_date: startDate,
       end_date: endDate,
       group_by: groupBy,
@@ -47,10 +35,8 @@ exports.listTransactionsController = async (req, res) => {
       dividends,
     });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -72,10 +58,8 @@ exports.lastUpdateController = async (req, res) => {
     });
     res.status(code).send({ code, message, date });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };

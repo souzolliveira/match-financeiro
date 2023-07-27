@@ -1,10 +1,10 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { getUserBySessionGuid } = require("../user/model");
-const { createDividendModel, listDividendsModel } = require("./model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { createDividendModel, listDividendsModel } = require('./model');
 
 exports.listDividendsController = async (req, res) => {
   const { session_guid } = req.headers;
-  const { start_date, end_date, category, subcategory, group_by } = req.query;
+  const { start_date, end_date, category, subcategory, asset, group_by } = req.query;
   const { user_id } = await getUserBySessionGuid({ session_guid });
 
   if (!user_id) {
@@ -26,10 +26,8 @@ exports.listDividendsController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -56,10 +54,8 @@ exports.createDividendController = async (req, res) => {
       user_id,
     });
     res.status(code).send({ code, message });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 

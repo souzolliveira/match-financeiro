@@ -6,8 +6,8 @@ exports.listIncomesDAO = async ({ start_date, end_date, category, subcategory, g
     `
       SELECT
         ${
-          !group_by ?
-            `incomes.id as id,
+          !group_by
+            ? `incomes.id as id,
               categories.id as category_id,
               categories.name as category_name,
               subcategories.id as subcategory_id,
@@ -15,24 +15,24 @@ exports.listIncomesDAO = async ({ start_date, end_date, category, subcategory, g
               incomes.value as value,
               incomes.income_date as income_date,
               incomes.observation as observation,
-              incomes.date as date` :
-            ''
+              incomes.date as date`
+            : ''
         }
         ${
-          group_by === group_by_types.CATEGORY ?
-            `categories.id as category_id,
+          group_by === group_by_types.CATEGORY
+            ? `categories.id as category_id,
               categories.name as category_name,
-              sum(incomes.value) as value` :
-            ''
+              sum(incomes.value) as value`
+            : ''
         }
         ${
-          group_by === group_by_types.SUBCATEGORY ?
-            `categories.id as category_id,
+          group_by === group_by_types.SUBCATEGORY
+            ? `categories.id as category_id,
               categories.name as category_name,
               subcategories.id as subcategory_id,
               subcategories.name as subcategory_name,
-              sum(incomes.value) as value` :
-            ''
+              sum(incomes.value) as value`
+            : ''
         }
       FROM incomes
       JOIN subcategories
@@ -45,20 +45,20 @@ exports.listIncomesDAO = async ({ start_date, end_date, category, subcategory, g
         ${category ? `and subcategories.categories_fk = '${category}'` : ''}
         ${subcategory ? `and incomes.subcategories_fk = '${subcategory}'` : ''}
         ${
-          group_by === group_by_types.CATEGORY ?
-            `GROUP BY 
+          group_by === group_by_types.CATEGORY
+            ? `GROUP BY 
               category_id,
-              category_name` :
-            ''
+              category_name`
+            : ''
         }
         ${
-          group_by === group_by_types.CATEGORY ?
-            `GROUP BY
+          group_by === group_by_types.CATEGORY
+            ? `GROUP BY
               category_id,
               category_name,
               subcategory_id,
-              subcategory_name` :
-            ''
+              subcategory_name`
+            : ''
         }
       ORDER BY income_date DESC
     `,

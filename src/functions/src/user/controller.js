@@ -1,10 +1,5 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const {
-  createUserModel,
-  getUserModel,
-  getUserBySessionGuid,
-  editUserModel,
-} = require("./model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { createUserModel, getUserModel, getUserBySessionGuid, editUserModel } = require('./model');
 
 exports.getUserController = async (req, res) => {
   const { session_guid } = req.headers;
@@ -23,10 +18,8 @@ exports.getUserController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
@@ -41,10 +34,8 @@ exports.createUserController = async (req, res) => {
       password,
     });
     res.status(code).send({ code, message });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 
@@ -68,10 +59,8 @@ exports.editUserController = async (req, res) => {
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };

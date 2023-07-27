@@ -1,23 +1,18 @@
-const {
-  selectCategoryDAO,
-  insertCategoryDAO,
-  updateCategoryDAO,
-  deleteCategoryDAO,
-} = require("./dao");
-const { selectSubcategoryDAO } = require("../subcategory/dao");
-const { listTransactionsDAO } = require("../transaction/dao");
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { transaction_types } = require("../enumerations/transactions");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { transaction_types } = require('../enumerations/transactions');
+const { selectSubcategoryDAO } = require('../subcategory/dao');
+const { listTransactionsDAO } = require('../transaction/dao');
+const { selectCategoryDAO, insertCategoryDAO, updateCategoryDAO, deleteCategoryDAO } = require('./dao');
 
 exports.listCategoryModel = async ({ transaction_type, user_id }) => {
   let code = httpCode.ERROR;
-  let message = httpMessage.ERROR;
+  const message = httpMessage.ERROR;
   let data = [];
 
   const listCategory = await selectCategoryDAO({ transaction_type, user_id });
   if (listCategory) {
     code = httpCode.OK;
-    data = listCategory.rows?.map((row) => {
+    data = listCategory.rows.map(row => {
       return {
         id: row.id,
         transaction_type: row.transaction_type,
@@ -33,10 +28,11 @@ exports.listCategoryModel = async ({ transaction_type, user_id }) => {
 exports.createCategoryModel = async ({ transaction_type, name, user_id }) => {
   let code = httpCode.ERROR;
   let message = httpMessage.ERROR;
+  let id = null;
 
   if (!name) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o nome da categoria";
+    message = 'É necessário informar o nome da categoria';
     return { code, message };
   }
 
@@ -48,9 +44,7 @@ exports.createCategoryModel = async ({ transaction_type, name, user_id }) => {
 
   if (!transaction_types[transaction_type]) {
     code = httpCode.BAD_REQUEST;
-    message = `Valor inválido para Tipo de Transação: ${transaction_type}. Valores permitidos: ${Object.keys(
-      transaction_types
-    )}`;
+    message = `Valor inválido para Tipo de Transação: ${transaction_type}. Valores permitidos: ${Object.keys(transaction_types)}`;
     return { code, message };
   }
 
@@ -73,7 +67,7 @@ exports.createCategoryModel = async ({ transaction_type, name, user_id }) => {
   if (createCategory) {
     code = httpCode.CREATED;
     message = `Categoria ${name.toUpperCase()} criada com sucesso!`;
-    id = createCategory?.rows?.[0]?.id;
+    id = createCategory.rows[0].id;
     return { code, message, id };
   }
 
@@ -86,13 +80,13 @@ exports.editCategoryModel = async ({ id, name, user_id }) => {
 
   if (!name) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o nome da categoria";
+    message = 'É necessário informar o nome da categoria';
     return { code, message };
   }
 
   if (!id) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o id da categoria";
+    message = 'É necessário informar o id da categoria';
     return { code, message };
   }
 
@@ -102,12 +96,12 @@ exports.editCategoryModel = async ({ id, name, user_id }) => {
   });
   if (verifyCategory.rowCount === 0) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar um id de categoria válido";
+    message = 'É necessário informar um id de categoria válido';
     return { code, message };
   }
 
   const verifyCategoryName = await selectCategoryDAO({
-    transaction_type: verifyCategory?.rows?.[0]?.transaction_type,
+    transaction_type: verifyCategory.rows[0].transaction_type,
     name,
     user_id,
   });
@@ -136,7 +130,7 @@ exports.deleteCategoryModel = async ({ id, user_id }) => {
 
   if (!id) {
     code = httpCode.BAD_REQUEST;
-    message = "É necessário informar o id da categoria";
+    message = 'É necessário informar o id da categoria';
     return { code, message };
   }
   const verifyCategory = await selectCategoryDAO({

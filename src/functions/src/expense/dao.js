@@ -1,13 +1,13 @@
 const db = require('../config/database');
 const { group_by_types } = require('../enumerations/group_by');
 
-exports.listExpensesDAO = async ({ start_date, end_date, payment, category, subcategory, card, group_by }) => {
+exports.listExpensesDAO = async ({ start_date, end_date, payment, category, subcategory, card, group_by, user_id }) => {
   const response = await db.query(
     `
       SELECT
         ${
-          !group_by ?
-            `expenses.id as id,
+          !group_by
+            ? `expenses.id as id,
               categories.id as category_id,
               categories.name as category_name,
               subcategories.id as subcategory_id,
@@ -22,36 +22,36 @@ exports.listExpensesDAO = async ({ start_date, end_date, payment, category, subc
               expenses.expense_root as expense_root,
               expenses.expense_date as expense_date,
               expenses.observation as observation,
-              expenses.date as date` :
-            ''
+              expenses.date as date`
+            : ''
         }
         ${
-          group_by === group_by_types.CATEGORY ?
-            `categories.id as category_id,
+          group_by === group_by_types.CATEGORY
+            ? `categories.id as category_id,
               categories.name as category_name,
-              sum(expenses.value) as value` :
-            ''
+              sum(expenses.value) as value`
+            : ''
         }
         ${
-          group_by === group_by_types.SUBCATEGORY ?
-            `categories.id as category_id,
+          group_by === group_by_types.SUBCATEGORY
+            ? `categories.id as category_id,
               categories.name as category_name,
               subcategories.id as subcategory_id,
               subcategories.name as subcategory_name,
-              sum(expenses.value) as value` :
-            ''
+              sum(expenses.value) as value`
+            : ''
         }
         ${
-          group_by === group_by_types.PAYMENT ?
-            `expenses.payment as payment,
-              sum(expenses.value) as value` :
-            ''
+          group_by === group_by_types.PAYMENT
+            ? `expenses.payment as payment,
+              sum(expenses.value) as value`
+            : ''
         }
         ${
-          group_by === group_by_types.COSTING ?
-            `subcategories.costing as costing,
-              sum(expenses.value) as value` :
-            ''
+          group_by === group_by_types.COSTING
+            ? `subcategories.costing as costing,
+              sum(expenses.value) as value`
+            : ''
         }
       FROM cards
       FULL JOIN expenses
@@ -68,20 +68,20 @@ exports.listExpensesDAO = async ({ start_date, end_date, payment, category, subc
         ${payment ? `and expenses.payment = '${payment}'` : ''}
         ${card ? `and expenses.cards_fk = '${card}'` : ''}
         ${
-          group_by === group_by_types.CATEGORY ?
-            `GROUP BY 
+          group_by === group_by_types.CATEGORY
+            ? `GROUP BY 
               category_id,
-              category_name` :
-            ''
+              category_name`
+            : ''
         }
         ${
-          group_by === group_by_types.SUBCATEGORY ?
-            `GROUP BY 
+          group_by === group_by_types.SUBCATEGORY
+            ? `GROUP BY 
               category_id,
               category_name,
               subcategory_id,
-              subcategory_name` :
-            ''
+              subcategory_name`
+            : ''
         }
         ${group_by === group_by_types.PAYMENT ? `GROUP BY payment` : ''}
         ${group_by === group_by_types.COSTING ? `GROUP BY costing` : ''}
@@ -92,18 +92,7 @@ exports.listExpensesDAO = async ({ start_date, end_date, payment, category, subc
   return response;
 };
 
-exports.insertExpenseDAO = async ({
-  subcategory,
-  expense_date,
-  value,
-  payment,
-  installments,
-  installment,
-  card_id,
-  expense_root,
-  observation,
-  date,
-}) => {
+exports.insertExpenseDAO = async ({ subcategory, expense_date, value, payment, installments, installment, card_id, expense_root, observation, date }) => {
   const response = await db.query(
     `
       INSERT INTO expenses

@@ -1,18 +1,10 @@
-const { httpCode, httpMessage } = require("../enumerations/httpResponse");
-const { getUserBySessionGuid } = require("../user/model");
-const { createExpenseModel } = require("./model");
+const { httpCode, httpMessage } = require('../enumerations/httpResponse');
+const { getUserBySessionGuid } = require('../user/model');
+const { createExpenseModel, listExpensesModel } = require('./model');
 
 exports.listExpensesController = async (req, res) => {
   const { session_guid } = req.headers;
-  const {
-    start_date,
-    end_date,
-    payment,
-    category,
-    subcategory,
-    card,
-    group_by,
-  } = req.query;
+  const { start_date, end_date, payment, category, subcategory, card, group_by } = req.query;
   const { user_id } = await getUserBySessionGuid({ session_guid });
 
   if (!user_id) {
@@ -31,40 +23,20 @@ exports.listExpensesController = async (req, res) => {
       subcategory,
       card,
       group_by,
+      user_id,
     });
     res.status(code).send({ code, message, data });
     return;
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
     return;
   }
 };
 
 exports.createExpenseController = async (req, res) => {
   const { session_guid } = req.headers;
-  const {
-    subcategory,
-    value,
-    payment,
-    card,
-    installments,
-    expense_date,
-    observation,
-  } = req.body;
+  const { subcategory, value, payment, card, installments, expense_date, observation } = req.body;
   const { user_id } = await getUserBySessionGuid({ session_guid });
-
-  console.log(
-    "entrou",
-    subcategory,
-    value,
-    payment,
-    card,
-    installments,
-    expense_date,
-    observation
-  );
 
   if (!user_id) {
     const code = httpCode.UNAUTHORIZED;
@@ -85,10 +57,8 @@ exports.createExpenseController = async (req, res) => {
       user_id,
     });
     res.status(code).send({ code, message });
-  } catch {
-    res
-      .status(httpCode.ERROR)
-      .send({ code: httpCode.ERROR, message: httpMessage.ERROR });
+  } catch (error) {
+    res.status(httpCode.ERROR).send({ code: httpCode.ERROR, message: httpMessage.ERROR });
   }
 };
 
@@ -104,8 +74,8 @@ exports.editExpenseController = async (req, res) => {
     return;
   }
 
-  try {
-  } catch {}
+  // try {
+  // } catch (error) {}
 };
 
 exports.deleteExpenseController = async (req, res) => {
@@ -120,6 +90,6 @@ exports.deleteExpenseController = async (req, res) => {
     return;
   }
 
-  try {
-  } catch {}
+  // try {
+  // } catch (error) {}
 };
