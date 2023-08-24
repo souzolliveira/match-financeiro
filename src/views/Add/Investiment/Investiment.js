@@ -95,12 +95,7 @@ const Investiment = () => {
       <div className={styles.investiment__form}>
         {/* todo: acumulado */}
         <Calendar date={date} setDate={setDate} />
-        <Categories
-          category={category}
-          setCategory={setCategory}
-          setSubcategory={setSubcategory}
-          transactionType={transactionTypes.INVESTIMENT}
-        />
+        <Categories category={category} setCategory={setCategory} setSubcategory={setSubcategory} transactionType={transactionTypes.INVESTIMENT} />
         <Subcategories category={category} subcategory={subcategory} setSubcategory={setSubcategory} />
         <Value value={total} setValue={setTotal} />
         <Observation observation={observation} setObservation={setObservation} />

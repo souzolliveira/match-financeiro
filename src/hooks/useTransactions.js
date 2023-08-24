@@ -186,19 +186,13 @@ const TransactionsProvider = ({ children }) => {
         ...state,
         [key]: '',
         category: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY ? '' : filters.category,
-        subcategory:
-          key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY
-            ? ''
-            : filters.subcategory,
+        subcategory: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY ? '' : filters.subcategory,
       }));
       setIntermediateFilters(state => ({
         ...state,
         [key]: '',
         category: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY ? '' : filters.category,
-        subcategory:
-          key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY
-            ? ''
-            : filters.subcategory,
+        subcategory: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY ? '' : filters.subcategory,
       }));
       fetchTransactions(
         handleParams(
@@ -206,10 +200,7 @@ const TransactionsProvider = ({ children }) => {
             ...filters,
             [key]: '',
             category: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY ? '' : filters.category,
-            subcategory:
-              key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY
-                ? ''
-                : filters.subcategory,
+            subcategory: key === filterTypes.TRANSACTION_TYPE || key === filterTypes.CATEGORY || key === filterTypes.SUBCATEGORY ? '' : filters.subcategory,
           },
           formatDateFromFrontToAPI
         )

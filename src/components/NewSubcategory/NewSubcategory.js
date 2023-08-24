@@ -72,14 +72,7 @@ const NewSubcategory = ({
   };
 
   return (
-    <Modal
-      canClose
-      onClose={() => handleModalClose()}
-      title={t(`SUBCATEGORIES.NEW`)}
-      top={null}
-      visible={isNewSubcategoryModalVisible}
-      width='300px'
-    >
+    <Modal canClose onClose={() => handleModalClose()} title={t(`SUBCATEGORIES.NEW`)} top={null} visible={isNewSubcategoryModalVisible} width='300px'>
       <form className={styles.modal__content} onSubmit={e => handleSave(e)}>
         <div className={styles.modal__body}>
           <div className={styles.modal__inputGroup}>
@@ -98,12 +91,7 @@ const NewSubcategory = ({
           {category.transaction_type === transactionTypes.EXPENSE && (
             <div className={styles.modal__inputGroup}>
               <span className={styles.modal__label}>{t('SUBCATEGORIES.COSTING')}</span>
-              <Select
-                className={styles.modal__input}
-                onChange={e => setCosting(e.target.value)}
-                value={costing}
-                required={category.transaction_type === transactionTypes.EXPENSE}
-              >
+              <Select className={styles.modal__input} onChange={e => setCosting(e.target.value)} value={costing} required={category.transaction_type === transactionTypes.EXPENSE}>
                 <option value='' disabled>
                   {t('SELECT')}
                 </option>

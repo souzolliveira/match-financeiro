@@ -17,15 +17,7 @@ const Observation = ({ observation, setObservation }) => {
     <div className={styles.observation}>
       <span className={styles.observation__label}>{t('OBSERVATION.LABEL')}</span>
       <div className={styles.observation__container}>
-        <Input
-          className={styles.observation__input}
-          id='observation'
-          name='observation'
-          type='text'
-          value={observation}
-          onChange={e => handleChange(e)}
-          required
-        />
+        <Input className={styles.observation__input} id='observation' name='observation' type='text' value={observation} onChange={e => handleChange(e)} required />
       </div>
     </div>
   );

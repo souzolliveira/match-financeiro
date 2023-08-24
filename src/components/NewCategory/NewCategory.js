@@ -56,14 +56,7 @@ const NewCategory = ({ isNewCategoryModalVisible, setIsNewCategoryModalVisible, 
   };
 
   return (
-    <Modal
-      canClose
-      onClose={() => handleModalClose()}
-      title={t(`CATEGORIES.NEW`)}
-      top={null}
-      visible={isNewCategoryModalVisible}
-      width='300px'
-    >
+    <Modal canClose onClose={() => handleModalClose()} title={t(`CATEGORIES.NEW`)} top={null} visible={isNewCategoryModalVisible} width='300px'>
       <form className={styles.modal__content} onSubmit={e => handleCreateCategory(e)}>
         <div className={styles.modal__body}>
           <div className={styles.modal__inputGroup}>

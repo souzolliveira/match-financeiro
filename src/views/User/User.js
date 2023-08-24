@@ -124,11 +124,7 @@ const User = () => {
             {email && (
               <div className={styles.user__emailContainer} tooltipflow='bottom' tooltip={t('CONFIRM.EMAIL.REQUIREMENT')}>
                 <span className={styles.user__email}>{email}</span>
-                <button
-                  type='button'
-                  className={styles.user__emailConfirmation}
-                  style={{ backgroundColor: isEmailConfirmed ? 'var(--color-success)' : 'var(--color-danger)' }}
-                >
+                <button type='button' className={styles.user__emailConfirmation} style={{ backgroundColor: isEmailConfirmed ? 'var(--color-success)' : 'var(--color-danger)' }}>
                   <Icon name={bindConfirmationIcon(isEmailConfirmed)} width={16} height={16} fill='white' />
                 </button>
               </div>

@@ -16,13 +16,7 @@ import Select from 'components/Select';
 
 import styles from './EditSubcategory.module.scss';
 
-const EditSubcategory = ({
-  isEditSubcategoryModalVisible,
-  setIsEditSubcategoryModalVisible,
-  subcategory,
-  setSubcategory,
-  fetchSubcategories,
-}) => {
+const EditSubcategory = ({ isEditSubcategoryModalVisible, setIsEditSubcategoryModalVisible, subcategory, setSubcategory, fetchSubcategories }) => {
   const { addToast } = useNotification();
   const { handleError } = useAuth();
   const { isLoading, setIsLoading } = useLoader();
@@ -75,14 +69,7 @@ const EditSubcategory = ({
   };
 
   return (
-    <Modal
-      canClose
-      onClose={() => handleModalClose()}
-      title={t(`SUBCATEGORIES.EDIT`)}
-      top={null}
-      visible={isEditSubcategoryModalVisible}
-      width='300px'
-    >
+    <Modal canClose onClose={() => handleModalClose()} title={t(`SUBCATEGORIES.EDIT`)} top={null} visible={isEditSubcategoryModalVisible} width='300px'>
       <form className={styles.modal__content} onSubmit={e => handleSave(e)}>
         <div className={styles.modal__body}>
           {subcategory.transaction_type === transactionTypes.EXPENSE && (

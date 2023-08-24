@@ -99,12 +99,7 @@ const Expense = () => {
       <div className={styles.expense__form}>
         {/* todo: acumulado */}
         <Calendar date={date} setDate={setDate} />
-        <Categories
-          category={category}
-          setCategory={setCategory}
-          setSubcategory={setSubcategory}
-          transactionType={transactionTypes.EXPENSE}
-        />
+        <Categories category={category} setCategory={setCategory} setSubcategory={setSubcategory} transactionType={transactionTypes.EXPENSE} />
         <Subcategories category={category} subcategory={subcategory} setSubcategory={setSubcategory} />
         <Value value={value} setValue={setValue} />
         <Payment payment={payment} setPayment={setPayment} setCard={setCard} setInstallments={setInstallments} />

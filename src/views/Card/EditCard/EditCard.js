@@ -73,27 +73,11 @@ const EditCard = ({ isEditCardModalVisible, setIsEditCardModalVisible, card, def
           </div>
           <div className={styles.modal__inputGroup}>
             <span className={styles.modal__label}>{t('CARDS.EXPIRATION')}</span>
-            <Input
-              name='expirationDay'
-              type='number'
-              min={1}
-              max={30}
-              className={styles.modal__input}
-              onChange={e => handleChange(e)}
-              value={editedCard.expirationDay}
-            />
+            <Input name='expirationDay' type='number' min={1} max={30} className={styles.modal__input} onChange={e => handleChange(e)} value={editedCard.expirationDay} />
           </div>
           <div className={styles.modal__inputGroup}>
             <span className={styles.modal__label}>{t('CARDS.PAYMENT')}</span>
-            <Input
-              name='paymentDay'
-              type='number'
-              min={1}
-              max={30}
-              className={styles.modal__input}
-              onChange={e => handleChange(e)}
-              value={editedCard.paymentDay}
-            />
+            <Input name='paymentDay' type='number' min={1} max={30} className={styles.modal__input} onChange={e => handleChange(e)} value={editedCard.paymentDay} />
           </div>
           <div className={styles.modal__inputGroup}>
             <span className={styles.modal__label}>{t('CARDS.TYPE')}</span>

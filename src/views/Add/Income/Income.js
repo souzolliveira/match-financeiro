@@ -86,12 +86,7 @@ const Income = () => {
       <div className={styles.income__form}>
         {/* todo: acumulado */}
         <Calendar date={date} setDate={setDate} />
-        <Categories
-          category={category}
-          setCategory={setCategory}
-          setSubcategory={setSubcategory}
-          transactionType={transactionTypes.INCOME}
-        />
+        <Categories category={category} setCategory={setCategory} setSubcategory={setSubcategory} transactionType={transactionTypes.INCOME} />
         <Subcategories category={category} subcategory={subcategory} setSubcategory={setSubcategory} />
         <Value value={value} setValue={setValue} />
         <Observation observation={observation} setObservation={setObservation} />

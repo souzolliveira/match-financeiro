@@ -28,7 +28,7 @@ const App = () => {
   if (!componentMounted) return <div />;
 
   return (
-    <Router basename='/'>
+    <Router basename='/app'>
       <NotificationProvider>
         <LoaderProvider>
           <AuthProvider>

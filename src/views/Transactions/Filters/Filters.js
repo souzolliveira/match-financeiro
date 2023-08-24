@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useState } from 'react';
 import 'react-dates/initialize';
-import { SingleDatePicker, isInclusivelyBeforeDay } from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 import { useTranslation } from 'react-i18next';
@@ -23,8 +23,7 @@ import styles from './Filters.module.scss';
 const Filters = () => {
   const { formatDateInFiltersInput, getDateFormat, formatDateFromFrontToAPI } = useDate();
   const { t } = useTranslation();
-  const { categories, subcategories, setFilters, intermediateFilters, setIntermediateFilters, fetchTransactions, setIsFiltersTabOpened } =
-    useTransactions();
+  const { categories, subcategories, setFilters, intermediateFilters, setIntermediateFilters, fetchTransactions, setIsFiltersTabOpened } = useTransactions();
 
   const [focusedStartDate, setFocusedStartDate] = useState(false);
   const [focusedEndDate, setFocusedEndDate] = useState(false);

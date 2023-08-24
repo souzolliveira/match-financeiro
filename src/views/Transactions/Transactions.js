@@ -37,9 +37,7 @@ const Transactions = ({ isHome }) => {
       <div className={styles.transactions__header}>
         <h3 className={styles.transactions__title}>{t('TRANSACTIONS')}</h3>
         {transactions.length > 0 && (
-          <span className={styles.transactions__lastupdate}>
-            {t('TRANSACTIONS.LAST.UPDATE', { date: formatDateFromAPIToFront(lastUpdate), time: bindHour(lastUpdate) })}
-          </span>
+          <span className={styles.transactions__lastupdate}>{t('TRANSACTIONS.LAST.UPDATE', { date: formatDateFromAPIToFront(lastUpdate), time: bindHour(lastUpdate) })}</span>
         )}
       </div>
       <div className={styles.transactions__container}>

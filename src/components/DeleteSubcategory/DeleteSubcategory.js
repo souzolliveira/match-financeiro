@@ -14,14 +14,7 @@ import Modal from 'components/Modal';
 
 import styles from './DeleteSubcategory.module.scss';
 
-const DeleteSubcategory = ({
-  isDeleteSubcategoryModalVisible,
-  setIsDeleteSubcategoryModalVisible,
-  transactions,
-  subcategory,
-  setSubcategory,
-  fetchSubcategories,
-}) => {
+const DeleteSubcategory = ({ isDeleteSubcategoryModalVisible, setIsDeleteSubcategoryModalVisible, transactions, subcategory, setSubcategory, fetchSubcategories }) => {
   const { addToast } = useNotification();
   const { formatDateFromFrontToAPI } = useDate();
   const { handleError } = useAuth();
@@ -73,14 +66,7 @@ const DeleteSubcategory = ({
   };
 
   return (
-    <Modal
-      canClose
-      onClose={() => handleModalClose()}
-      title={t(`SUBCATEGORIES.DELETE`)}
-      top={null}
-      visible={isDeleteSubcategoryModalVisible}
-      width='300px'
-    >
+    <Modal canClose onClose={() => handleModalClose()} title={t(`SUBCATEGORIES.DELETE`)} top={null} visible={isDeleteSubcategoryModalVisible} width='300px'>
       <div className={styles.modal__content}>
         <div className={styles.modal__body}>
           <span className={styles.modal__label}>

@@ -53,14 +53,7 @@ const RemoveCard = ({ isRemoveCardModalVisible, setIsRemoveCardModalVisible, car
   };
 
   return (
-    <Modal
-      canClose
-      onClose={() => handleModalClose()}
-      title={t('CARDS.REMOVE')}
-      top={null}
-      visible={isRemoveCardModalVisible}
-      width='300px'
-    >
+    <Modal canClose onClose={() => handleModalClose()} title={t('CARDS.REMOVE')} top={null} visible={isRemoveCardModalVisible} width='300px'>
       <div className={styles.modal__content}>
         <div className={styles.modal__body}>
           <span className={styles.modal__text}>{t('CARDS.REMOVE.CONFIRM', { card: removeCard?.name })}</span>

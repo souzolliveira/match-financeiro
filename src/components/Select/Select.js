@@ -6,15 +6,7 @@ const Select = ({ name, defaultValue, value, className, children, onChange, disa
   const classes = [styles.select, className].join(' ');
 
   return (
-    <select
-      name={name}
-      value={value || ''}
-      defaultValue={defaultValue}
-      className={classes}
-      onChange={onChange}
-      disabled={disabled}
-      required={required}
-    >
+    <select name={name} value={value || ''} defaultValue={defaultValue} className={classes} onChange={onChange} disabled={disabled} required={required}>
       {children}
     </select>
   );

@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import bindPaymentIcon from 'helpers/bindPaymentIcon';
 import bindTransactionTypeIcon from 'helpers/bindTransactionTypeIcon';
 import bindTransactionTypeIconColor from 'helpers/bindTransactionTypeIconColor';
-import convertToFloat from 'helpers/convertToFloat';
 import convertToString from 'helpers/convertToString';
 import useDate from 'hooks/useDate';
 
@@ -45,12 +44,7 @@ const Transaction = ({ transaction, disabled }) => {
         tabIndex={0}
       >
         <div className={styles.transaction__type}>
-          <Icon
-            name={bindTransactionTypeIcon(transaction.transaction_type)}
-            width={24}
-            height={24}
-            fill={bindTransactionTypeIconColor(transaction.transaction_type)}
-          />
+          <Icon name={bindTransactionTypeIcon(transaction.transaction_type)} width={24} height={24} fill={bindTransactionTypeIconColor(transaction.transaction_type)} />
         </div>
         <div className={styles.transaction__infos}>
           <div className={styles.transaction__header}>
@@ -58,9 +52,7 @@ const Transaction = ({ transaction, disabled }) => {
             <Icon name={bindPaymentIcon(transaction.payment)} width={24} height={24} fill='var(--gold-darker)' />
           </div>
           <div className={styles.transaction__main}>
-            <span className={styles.transaction__value}>
-              R$ {convertToString(transaction?.value) || convertToString(transaction?.total)}
-            </span>
+            <span className={styles.transaction__value}>R$ {convertToString(transaction?.value) || convertToString(transaction?.total)}</span>
             <span className={styles.transaction__date}>{formatDateFromAPIToFront(transaction.transaction_date)}</span>
           </div>
         </div>

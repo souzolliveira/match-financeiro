@@ -63,8 +63,8 @@ const Template = ({ fetchCategories, fetchSubcategories }) => {
       Object.keys(template[transactionType]).forEach(async category => {
         const subcategories = [];
         Object.keys(template[transactionType][category]).forEach(async subcategory => {
-          if (template?[transactionType]?[category]?[subcategory].value) {
-            subcategories.push({ name: subcategory, costing: template?[transactionType]?[category]?[subcategory].costing });
+          if (template?.[transactionType]?.[category]?.[subcategory]?.value) {
+            subcategories.push({ name: subcategory, costing: template?.[transactionType]?.[category]?.[subcategory]?.costing });
           }
         });
         if (subcategories.length > 0) {
@@ -107,8 +107,7 @@ const Template = ({ fetchCategories, fetchSubcategories }) => {
           ...template[transactionType][category],
           [subcategory]: {
             ...template[transactionType][category][subcategory],
-            costing:
-              template[transactionType][category][subcategory].costing === costingTypes.FIXED ? costingTypes.VARIABLE : costingTypes.FIXED,
+            costing: template?.[transactionType]?.[category]?.[subcategory]?.costing === costingTypes.FIXED ? costingTypes.VARIABLE : costingTypes.FIXED,
           },
         },
       },

@@ -15,17 +15,7 @@ import Select from 'components/Select';
 
 import styles from './NewAsset.module.scss';
 
-const NewAsset = ({
-  isNewAssetModalVisible,
-  setIsNewAssetModalVisible,
-  category,
-  setCategory,
-  categories,
-  subcategory,
-  setSubcategory,
-  subcategories,
-  fetchAssets,
-}) => {
+const NewAsset = ({ isNewAssetModalVisible, setIsNewAssetModalVisible, category, setCategory, categories, subcategory, setSubcategory, subcategories, fetchAssets }) => {
   const { addToast } = useNotification();
   const { handleError } = useAuth();
   const { isLoading, setIsLoading } = useLoader();

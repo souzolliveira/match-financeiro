@@ -89,9 +89,7 @@ const List = ({
                               <span className={styles.list__subcategoryTitleLabel}>{t('SUBCATEGORY')}</span>
                               <span className={styles.list__subcategoryTitleValue}>{subcategory.subcategory_name}</span>
                               {transactionType === transactionTypes.EXPENSE && (
-                                <span className={styles.list__subcategoryTitleLabel}>
-                                  {t(`SUBCATEGORIES.COSTING.${costingTypes[subcategory.costing]}`)}
-                                </span>
+                                <span className={styles.list__subcategoryTitleLabel}>{t(`SUBCATEGORIES.COSTING.${costingTypes[subcategory.costing]}`)}</span>
                               )}
                             </div>
                             <Fill />

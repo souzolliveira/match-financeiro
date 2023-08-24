@@ -93,11 +93,7 @@ const Expenses = () => {
           />
         </div>
       )}
-      <NewCategory
-        isNewCategoryModalVisible={isNewCategoryModalVisible}
-        setIsNewCategoryModalVisible={setIsNewCategoryModalVisible}
-        transactionType={transactionTypes.EXPENSE}
-      />
+      <NewCategory isNewCategoryModalVisible={isNewCategoryModalVisible} setIsNewCategoryModalVisible={setIsNewCategoryModalVisible} transactionType={transactionTypes.EXPENSE} />
       <EditCategory
         isEditCategoryModalVisible={isEditCategoryModalVisible}
         setIsEditCategoryModalVisible={setIsEditCategoryModalVisible}

@@ -34,7 +34,7 @@ const Details = ({ transaction, setShowDetails }) => {
   const { t } = useTranslation();
   const { categories, subcategories, fetchTransactions } = useTransactions();
 
-  const transactionDefault = { ...transaction, transaction_date: transaction?.transaction_date?.split('T')?[0] };
+  const transactionDefault = { ...transaction, transaction_date: transaction?.transaction_date?.split('T')?.[0] };
 
   const [isEditing, setIsEditing] = useState(false);
   const [transactionIntermediate, setTransactionIntermediate] = useState(transactionDefault);
@@ -147,12 +147,7 @@ const Details = ({ transaction, setShowDetails }) => {
             `}
           </span>
           <div className={styles.details__transactionType}>
-            <Icon
-              name={bindTransactionTypeIcon(transaction.transaction_type)}
-              width={48}
-              height={48}
-              fill={bindTransactionTypeIconColor(transaction.transaction_type)}
-            />
+            <Icon name={bindTransactionTypeIcon(transaction.transaction_type)} width={48} height={48} fill={bindTransactionTypeIconColor(transaction.transaction_type)} />
           </div>
           <Select
             className={styles.details__transactionTypeSelect}
@@ -312,12 +307,7 @@ const Details = ({ transaction, setShowDetails }) => {
           `}
         </span>
         <div className={styles.details__transactionType}>
-          <Icon
-            name={bindTransactionTypeIcon(transaction.transaction_type)}
-            width={48}
-            height={48}
-            fill={bindTransactionTypeIconColor(transaction.transaction_type)}
-          />
+          <Icon name={bindTransactionTypeIcon(transaction.transaction_type)} width={48} height={48} fill={bindTransactionTypeIconColor(transaction.transaction_type)} />
         </div>
         <span className={styles.details__transactionTypeValue}>{t(`TRANSACTION_TYPE.${transaction.transaction_type}`)}</span>
         <div className={styles.details__category}>

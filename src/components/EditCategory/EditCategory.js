@@ -64,14 +64,7 @@ const EditCategory = ({ isEditCategoryModalVisible, setIsEditCategoryModalVisibl
   };
 
   return (
-    <Modal
-      canClose
-      onClose={() => handleModalClose()}
-      title={t(`CATEGORIES.EDIT`)}
-      top={null}
-      visible={isEditCategoryModalVisible}
-      width='300px'
-    >
+    <Modal canClose onClose={() => handleModalClose()} title={t(`CATEGORIES.EDIT`)} top={null} visible={isEditCategoryModalVisible} width='300px'>
       <form className={styles.modal__content} onSubmit={e => handleSave(e)}>
         <div className={styles.modal__body}>
           <span className={styles.modal__label}>{t('CATEGORIES.EDIT.DESCRIPTION')}</span>

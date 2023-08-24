@@ -1,17 +1,9 @@
 /* eslint-disable import-helpers/order-imports */
+const path = require('path');
 const cors = require('cors');
 const express = require('express');
-const admin = require('firebase-admin');
-const functions = require('firebase-functions');
-const { initializeApp } = require('firebase');
-const firebaseConfig = require('./firebase.config');
-const serviceAccount = require('./service-account-key.json');
-
-const app = express();
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-initializeApp(firebaseConfig);
+const application = express();
+const port = process.env.PORT || 3000;
 
 const assetRest = require('./src/asset/rest');
 const authRest = require('./src/authentication/rest');
@@ -28,24 +20,36 @@ const tokenRest = require('./src/token/rest');
 const transactionRest = require('./src/transaction/rest');
 const userRest = require('./src/user/rest');
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.json({ type: 'application/vnd.api+json' }));
-app.use(cors());
+application.set('etag', 'strong')
 
-app.use(ping);
-app.use('/api', assetRest);
-app.use('/api', authRest);
-app.use('/api', cardRest);
-app.use('/api', categoryRest);
-app.use('/api', expenseRest);
-app.use('/api', incomeRest);
-app.use('/api', investimentRest);
-app.use('/api', redemptionRest);
-app.use('/api', subcategoryRest);
-app.use('/api', summaryRest);
-app.use('/api', tokenRest);
-app.use('/api', transactionRest);
-app.use('/api', userRest);
+application.use(express.static(path.join(__dirname, '..', 'build')));
 
-exports.app = functions.https.onRequest(app);
+application.get('/app*', (req, res) => {
+ res.sendFile(path.join(__dirname, '..', 'build', 'index.html'))
+})
+
+application.use(express.urlencoded({ extended: true }));
+application.use(express.json());
+application.use(express.json({ type: 'application/vnd.api+json' }));
+application.use(cors());
+
+application.use(ping);
+application.use('/api', assetRest);
+application.use('/api', authRest);
+application.use('/api', cardRest);
+application.use('/api', categoryRest);
+application.use('/api', expenseRest);
+application.use('/api', incomeRest);
+application.use('/api', investimentRest);
+application.use('/api', redemptionRest);
+application.use('/api', subcategoryRest);
+application.use('/api', summaryRest);
+application.use('/api', tokenRest);
+application.use('/api', transactionRest);
+application.use('/api', userRest);
+application.use('*', (req, res) => res.redirect('/app/notfound'))
+
+application.listen(port, () => {
+  console.log('Aplicação executando na porta', port);
+});
+

@@ -60,14 +60,7 @@ const Toast = ({ id, content, type, timeout, removeToast }) => {
   } else className.push(styles.default); // default style
 
   return (
-    <div
-      data-testid={`Toast_${type}`}
-      className={className.join(' ')}
-      ref={toastRef}
-      onFocus={resetTimeout}
-      onMouseOver={resetTimeout}
-      onMouseLeave={restartTimeout}
-    >
+    <div data-testid={`Toast_${type}`} className={className.join(' ')} ref={toastRef} onFocus={resetTimeout} onMouseOver={resetTimeout} onMouseLeave={restartTimeout}>
       <div className={styles.icon}>
         <img src={icon} alt='' />
       </div>

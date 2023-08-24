@@ -3,7 +3,7 @@
   "description": "Servidor do Match Financeiro",
   "scripts": {
     "lint": "eslint .",
-    "start": "npm run shell"
+    "start": "nodemon index.js"
   },
   "engines": {
     "node": "18"

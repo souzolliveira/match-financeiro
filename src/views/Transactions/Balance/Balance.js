@@ -20,14 +20,7 @@ const Balance = () => {
   const header = useRef(null);
 
   const handleClickOutside = event => {
-    if (
-      isFiltersTabOpened &&
-      nav.current &&
-      !nav.current.contains(event.target) &&
-      header.current &&
-      !header.current.contains(event.target)
-    )
-      setIsFiltersTabOpened(false);
+    if (isFiltersTabOpened && nav.current && !nav.current.contains(event.target) && header.current && !header.current.contains(event.target)) setIsFiltersTabOpened(false);
   };
 
   useEffect(() => {
@@ -53,13 +46,7 @@ const Balance = () => {
       >
         <span className={styles.balance__label}>{t('TRANSACTIONS.BALANCE')}</span>
         <span className={`${styles.balance__value} ${bindBalanceColor(balance, styles)}`}>R$ {convertToString(balance)}</span>
-        <Icon
-          name='chevron-top'
-          width={24}
-          height={24}
-          fill='var(--gold-darker)'
-          className={`${styles.balance__icon} ${isFiltersTabOpened ? styles.balance__nav__active : ''}`}
-        />
+        <Icon name='chevron-top' width={24} height={24} fill='var(--gold-darker)' className={`${styles.balance__icon} ${isFiltersTabOpened ? styles.balance__nav__active : ''}`} />
       </div>
       <div className={`${styles.balance__nav} ${isFiltersTabOpened ? styles.balance__nav__active : ''}`} ref={nav}>
         <div className={styles.balance__results}>
