@@ -1,4 +1,0 @@
-exports.quantifiable_types = {
-  QUANTIFIABLE: 'QUANTIFIABLE',
-  NOT_QUANTIFIABLE: 'NOT_QUANTIFIABLE',
-};
