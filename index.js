@@ -20,14 +20,6 @@ const tokenRest = require('./src/token/rest');
 const transactionRest = require('./src/transaction/rest');
 const userRest = require('./src/user/rest');
 
-application.set('etag', 'strong')
-
-application.use(express.static(path.join(__dirname, '..', 'build')));
-
-application.get('/app*', (req, res) => {
- res.sendFile(path.join(__dirname, '..', 'build', 'index.html'))
-})
-
 application.use(express.urlencoded({ extended: true }));
 application.use(express.json());
 application.use(express.json({ type: 'application/vnd.api+json' }));
