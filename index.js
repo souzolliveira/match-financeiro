@@ -1,5 +1,3 @@
-/* eslint-disable import-helpers/order-imports */
-const path = require('path');
 const cors = require('cors');
 const express = require('express');
 const application = express();
@@ -25,7 +23,7 @@ application.use(express.json());
 application.use(express.json({ type: 'application/vnd.api+json' }));
 application.use(cors());
 
-application.use(ping);
+// application.use(ping);
 application.use('/api', assetRest);
 application.use('/api', authRest);
 application.use('/api', cardRest);
@@ -38,7 +36,7 @@ application.use('/api', subcategoryRest);
 application.use('/api', summaryRest);
 application.use('/api', tokenRest);
 application.use('/api', transactionRest);
-application.use('/api', userRest);
+// application.use('/api', userRest);
 application.use('*', (req, res) => res.redirect('/app/notfound'))
 
 application.listen(port, () => {
