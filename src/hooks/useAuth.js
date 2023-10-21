@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         const statusGroup = String(error?.response?.status).charAt(0);
         if (!(statusGroup === '2' || statusGroup === '3'))
-          if ([401].indexOf(error?.response?.status) !== -1) {
+          if (error?.response?.status?.includes(401)) {
             localStorage.removeItem('@match-financeiro:session');
             setData(null);
           }
